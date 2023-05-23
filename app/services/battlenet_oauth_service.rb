@@ -9,57 +9,51 @@ class BattlenetOauthService
         if access_token == nil
             puts "TOKEN VUOTO COGLIONE---------"
             return nil
-        else
-            ids = []
-            teams = []
-            url = URI.parse("https://us.api.blizzard.com/owl/v1/owl2")
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = (url.scheme == "https")
-            
-            request = Net::HTTP::Get.new(url.path)
-            
-            request['Authorization'] = "Bearer #{access_token}"
+        end
 
-            response = http.request(request)
+        ids = []; teams = []
+        url = URI.parse("https://us.api.blizzard.com/owl/v1/owl2")
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = (url.scheme == "https")
 
-            if response.code != "404"
-                return []
-            else
-                begin
-                    body = JSON.parse(response.body)
-                    players = body["players"]
-                    players.each do |id, carattPlayer|
-                        ids.push(id.to_i)
-                        teams.push(body["players"][id]["teams"][0]["id"].to_i)
-                    end
+        request = Net::HTTP::Get.new(url.path)
+        request['Authorization'] = "Bearer #{access_token}"
+        response = http.request(request)
 
-                    body["teams"].keys.each do |id|
-                        body["teams"][id]["roster"].each do |giocatore|
-                            ids.push(giocatore.to_i)
-                        end
-                    end
+        return [] if response.code != "404"
 
-                    body["matches"].keys.each do |partita|
-                        body["matches"][partita]["teams"].keys.each do |id|
-                            teams.push(id.to_i)
-                        end
-                        body["matches"][partita]["players"].each do |id|
-                            ids.push(id.to_i)
-                        end
-                    end
+        begin
+            body = JSON.parse(response.body)
+            players = body["players"]
+            players.each do |id, carattPlayer|
+                ids.push(id.to_i)
+                teams.push(body["players"][id]["teams"][0]["id"].to_i)
+            end
 
-                    ids = ids.uniq
-                    ids = ids.sort
-                    teams = teams.uniq
-                    teams = teams.sort
-
-                    ris = [ids, teams]
-
-                    return ris
-                rescue
-                    return []
+            body["teams"].keys.each do |id|
+                body["teams"][id]["roster"].each do |giocatore|
+                    ids.push(giocatore.to_i)
                 end
             end
+
+            body["matches"].keys.each do |partita|
+                body["matches"][partita]["teams"].keys.each do |id|
+                    teams.push(id.to_i)
+                end
+                body["matches"][partita]["players"].each do |id|
+                    ids.push(id.to_i)
+                end
+            end
+
+            ids = ids.uniq
+            ids = ids.sort
+            teams = teams.uniq
+            teams = teams.sort
+
+            ris = [ids, teams]
+            return ris
+        rescue
+            return []
         end
     end
 
