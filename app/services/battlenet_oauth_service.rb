@@ -58,148 +58,129 @@ class BattlenetOauthService
 
 
     def self.ottieniIdDaTeam(access_token, id)
-        if access_token == nil
-            return nil
-        else
-            ids = []
-            url = URI.parse("https://us.api.blizzard.com/owl/v1/teams/#{id}")
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = (url.scheme == "https")
-            
-            request = Net::HTTP::Get.new(url.path)
-            
-            request['Authorization'] = "Bearer #{access_token}"
+        return nil if access_token == nil
 
-            response = http.request(request)
+        ids = []
+        url = URI.parse("https://us.api.blizzard.com/owl/v1/teams/#{id}")
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = (url.scheme == "https")
             
-            begin
-                body = JSON.parse(response.body)
-                body["roster"].each do |giocatore|
-                    ids.push(giocatore.to_i)
-                end
-            rescue JSON::ParserError => e
-                return ids
+        request = Net::HTTP::Get.new(url.path)
+            
+        request['Authorization'] = "Bearer #{access_token}"
+
+        response = http.request(request)
+            
+        begin
+            body = JSON.parse(response.body)
+            body["roster"].each do |giocatore|
+                ids.push(giocatore.to_i)
             end
-            ids = ids.uniq
-            ids = ids.sort
+        rescue JSON::ParserError => e
             return ids
         end
+        ids = ids.uniq
+        ids = ids.sort
+        return ids
     end
 
 
     def self.infoId(access_token, id)
-        if access_token == nil
-            return nil
-        else
-            url = URI.parse("https://us.api.blizzard.com/owl/v1/players/#{id}")
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = (url.scheme == "https")
+        return nil if access_token == nil
+
+        url = URI.parse("https://us.api.blizzard.com/owl/v1/players/#{id}")
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = (url.scheme == "https")
             
-            request = Net::HTTP::Get.new(url.path)
+        request = Net::HTTP::Get.new(url.path)
             
-            request['Authorization'] = "Bearer #{access_token}"
+        request['Authorization'] = "Bearer #{access_token}"
 
-            response = http.request(request)
-            puts response
-            if(response.code == "404")
-                return nil
-            else
-                begin
-                    body = JSON.parse(response.body)
-                    if Stat.exists?(id: id)
-                        userFromDB = Stat.find_by(id: id)
+        response = http.request(request)
+        puts response
+        return nil if response.code == "404"
 
-                        body["stats"].keys.each do |colonna|
-                            userFromDB[colonna] = body["stats"][colonna]
-                        end
-                        userFromDB.save
-                    else
-                        user = Stat.new
-                        user.id = id
-                        user.number = body["number"]
-                        user.preferredSlot = body["preferredSlot"]
-                        user.givenName = body["givenName"]
-                        user.name = body["name"]
-                        user.familyName = body["familyName"]
-                        user.role = body["role"]
-                        user.headshotUrl = body["headshotUrl"]
+        begin
+            body = JSON.parse(response.body)
+            if Stat.exists?(id: id)
+                userFromDB = Stat.find_by(id: id)
 
-                        body["stats"].keys.each do |colonna|
-                            user[colonna] = body["stats"][colonna]
-                        end
-                        @colonne.each do |elem|
-                            if user[elem] == nil
-                                if elem != "eroe"
-                                    user[elem] = 0
-                                else
-                                    user[elem] = ""
-                                end
-                            end
-                        end
-                        user.save
-                    end
-                rescue
-                    puts "errore"
+                body["stats"].keys.each do |colonna|
+                    userFromDB[colonna] = body["stats"][colonna]
                 end
+                userFromDB.save
+            else
+                user = Stat.new
+                user.id = id
+                user.number = body["number"]
+                user.preferredSlot = body["preferredSlot"]
+                user.givenName = body["givenName"]
+                user.name = body["name"]
+                user.familyName = body["familyName"]
+                user.role = body["role"]
+                user.headshotUrl = body["headshotUrl"]
+
+                body["stats"].keys.each do |colonna|
+                    user[colonna] = body["stats"][colonna]
+                end
+                @colonne.each do |elem|
+                    next if user[elem] != nil
+                    
+                    elem != "eroe" ? user[elem] = 0 : user[elem] = ""
+                end
+                user.save
             end
+        rescue
+            puts "errore"
         end
     end
 
     def self.infoEroiId(access_token, id)
-        if access_token == nil
-            return nil
-        else
-            url = URI.parse("https://us.api.blizzard.com/owl/v1/players/#{id}")
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = (url.scheme == "https")
-            
-            request = Net::HTTP::Get.new(url.path)
-            
-            request['Authorization'] = "Bearer #{access_token}"
 
-            response = http.request(request)
-            if(response.code == "404")
-                return nil
-            else
-                begin
-                    body = JSON.parse(response.body)
-                    body["heroes"].keys.each do |eroe|
-                        if Stat.exists?(id: id, eroe: eroe)
-                            userFromDB = Stat.find_by(id: id, eroe: eroe)
-                            body["heroes"][eroe].keys.each do |colonna|
-                                userFromDB[colonna] = body["heroes"][eroe][colonna]
-                            end
-                            userFromDB.save
-                        else
-                            user = Stat.new
-                            user.id = id
-                            user.number = body["number"]
-                            user.preferredSlot = body["preferredSlot"]
-                            user.givenName = body["givenName"]
-                            user.name = body["name"]
-                            user.familyName = body["familyName"]
-                            user.role = body["role"]
-                            user.headshotUrl = body["headshotUrl"]
+        return nil if access_token == nil
+        
+        url = URI.parse("https://us.api.blizzard.com/owl/v1/players/#{id}")
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = (url.scheme == "https")
+            
+        request = Net::HTTP::Get.new(url.path)
+            
+        request['Authorization'] = "Bearer #{access_token}"
+        response = http.request(request)
 
-                            body["stats"].keys.each do |colonna|
-                                user[colonna] = body["heroes"][eroe][colonna]
-                            end
-                            @colonne.each do |elem|
-                                if user[elem] == nil
-                                    if elem != "eroe"
-                                        user[elem] = 0
-                                    else
-                                        user[elem] = eroe
-                                    end
-                                end
-                            end
-                            user.save
-                        end
+        return nil if response.code == "404"
+
+        begin
+            body = JSON.parse(response.body)
+            body["heroes"].keys.each do |eroe|
+                if Stat.exists?(id: id, eroe: eroe)
+                    userFromDB = Stat.find_by(id: id, eroe: eroe)
+                    body["heroes"][eroe].keys.each do |colonna|
+                        userFromDB[colonna] = body["heroes"][eroe][colonna]
                     end
-                rescue
-                    puts "errore"
+                    userFromDB.save
+                else
+                    user = Stat.new
+                    user.id = id
+                    user.number = body["number"]
+                    user.preferredSlot = body["preferredSlot"]
+                    user.givenName = body["givenName"]
+                    user.name = body["name"]
+                    user.familyName = body["familyName"]
+                    user.role = body["role"]
+                    user.headshotUrl = body["headshotUrl"]
+                    body["stats"].keys.each do |colonna|
+                        user[colonna] = body["heroes"][eroe][colonna]
+                    end
+                    @colonne.each do |elem|
+                        next if user[elem] != nil
+                        elem != "erore" ? user[elem] = 0 : user[elem] = eroe
+                    end
+                    user.save
                 end
             end
+        rescue
+            puts "errore"
         end
     end
 end
