@@ -120,6 +120,8 @@ GEM
     minitest (5.18.0)
     msgpack (1.7.1)
     multi_xml (0.6.0)
+    net-http (0.3.2)
+      uri
     net-imap (0.3.4)
       date
       net-protocol
@@ -237,6 +239,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.12.1)
     version_gem (1.1.2)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -272,6 +275,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  net-http
   omniauth
   omniauth-bnet (~> 2.0)
   omniauth-rails_csrf_protection
