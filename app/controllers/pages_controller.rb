@@ -20,15 +20,15 @@ class PagesController < ApplicationController
 '''
 
     ids = []
-    for i in 0..300
+    for i in 800...4000
       ids.push(i)
     end
     volte = 0
     ids.each do |id|
       if volte < ids.size
-        puts "#{id}/#{ids.size}"
+        puts "#{volte}/#{ids.size}"
         BattlenetOauthService.infoId(session[:access_token], id)
-        BattlenetOauthService.infoEroiId(session[:access_token], id)
+        #BattlenetOauthService.infoEroiId(session[:access_token], id)
       end
       volte = volte + 1
     end
