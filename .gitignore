@@ -1,2 +1,11 @@
+# Temp or database stuff
 tmp/**
 log/**
+db/*
+
+# Stuff
+.browserslistrc
+.gitattributes
+.ruby-version
+config/master.key
+node_modules/*
