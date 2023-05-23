@@ -1,0 +1,199 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Number</th>
+      <th>Preferredslot</th>
+      <th>Givenname</th>
+      <th>Name</th>
+      <th>Familyname</th>
+      <th>Role</th>
+      <th>Headshoturl</th>
+      <th>Eroe</th>
+      <th>Abilitydamagedone</th>
+      <th>Accretionkills</th>
+      <th>Amplificationmatrixassists</th>
+      <th>Barragekills</th>
+      <th>Bioticgrenadekills</th>
+      <th>Blizzardkills</th>
+      <th>Bobkills</th>
+      <th>Carnagekills</th>
+      <th>Chainhooksattempted</th>
+      <th>Chargedshotkills</th>
+      <th>Coalescensehealing</th>
+      <th>Concussionminekills</th>
+      <th>Criticalhits</th>
+      <th>Damageamplified</th>
+      <th>Damageblockedsojurn</th>
+      <th>Damagediscordorb</th>
+      <th>Damagetaken</th>
+      <th>Deadeyekills</th>
+      <th>Deathblossomkills</th>
+      <th>Deaths</th>
+      <th>Dragonbladekills</th>
+      <th>Dragonstrikekills</th>
+      <th>Earthshatterkills</th>
+      <th>Earthshatterstuns</th>
+      <th>Eliminations</th>
+      <th>Enemieschainhooked</th>
+      <th>Enemiesempd</th>
+      <th>Enemiesfrozen</th>
+      <th>Enemieshacked</th>
+      <th>Enemiesslept</th>
+      <th>Energymax</th>
+      <th>Finalblows</th>
+      <th>Focusingbeamkills</th>
+      <th>Graviticfluxkills</th>
+      <th>Gravitonsurgekills</th>
+      <th>Healingdone</th>
+      <th>Helixrocketkills</th>
+      <th>Herodamagedone</th>
+      <th>Immortalityfielddeathsprevented</th>
+      <th>Inspireuptime</th>
+      <th>Jaggedbladekills</th>
+      <th>Javelindamage</th>
+      <th>Jumppackkills</th>
+      <th>Kitsunerushassists</th>
+      <th>Knockbackkills</th>
+      <th>Kunaikills</th>
+      <th>Lifetimeenergyaccumulation</th>
+      <th>Meteorstrikekills</th>
+      <th>Moltencorekills</th>
+      <th>Negativeeffectscleansed</th>
+      <th>Overclockkills</th>
+      <th>Overhealthprovided</th>
+      <th>Piledriverkills</th>
+      <th>Playersknockedback</th>
+      <th>Playersresurrected</th>
+      <th>Playersteleported</th>
+      <th>Primalragekills</th>
+      <th>Pulsebombkills</th>
+      <th>Pulsebombsattached</th>
+      <th>Riptirekills</th>
+      <th>Rocketdirecthits</th>
+      <th>Scopedcriticalhitkills</th>
+      <th>Scopedcriticalhits</th>
+      <th>Scopedhits</th>
+      <th>Selfdestructkills</th>
+      <th>Shotshit</th>
+      <th>Solokills</th>
+      <th>Stickybombskills</th>
+      <th>Stormarrowkills</th>
+      <th>Tacticalvisorkills</th>
+      <th>Terrasurgekills</th>
+      <th>Timeplayed</th>
+      <th>Timespentonfire</th>
+      <th>Turretkills</th>
+      <th>Ultimatesnegated</th>
+      <th>Ultsearned</th>
+      <th>Ultsused</th>
+      <th>Wholehogkills</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stats.each do |stat| %>
+      <tr>
+        <td><%= stat.id %></td>
+        <td><%= stat.number %></td>
+        <td><%= stat.preferredSlot %></td>
+        <td><%= stat.givenName %></td>
+        <td><%= stat.name %></td>
+        <td><%= stat.familyName %></td>
+        <td><%= stat.role %></td>
+        <td><%= stat.headshotUrl %></td>
+        <td><%= stat.eroe %></td>
+        <td><%= stat.abilityDamageDone %></td>
+        <td><%= stat.accretionKills %></td>
+        <td><%= stat.amplificationMatrixAssists %></td>
+        <td><%= stat.barrageKills %></td>
+        <td><%= stat.bioticGrenadeKills %></td>
+        <td><%= stat.blizzardKills %></td>
+        <td><%= stat.bobKills %></td>
+        <td><%= stat.carnageKills %></td>
+        <td><%= stat.chainHooksAttempted %></td>
+        <td><%= stat.chargedShotKills %></td>
+        <td><%= stat.coalescenseHealing %></td>
+        <td><%= stat.concussionMineKills %></td>
+        <td><%= stat.criticalHits %></td>
+        <td><%= stat.damageAmplified %></td>
+        <td><%= stat.damageBlockedSojurn %></td>
+        <td><%= stat.damageDiscordOrb %></td>
+        <td><%= stat.damageTaken %></td>
+        <td><%= stat.deadeyeKills %></td>
+        <td><%= stat.deathBlossomKills %></td>
+        <td><%= stat.deaths %></td>
+        <td><%= stat.dragonbladeKills %></td>
+        <td><%= stat.dragonstrikeKills %></td>
+        <td><%= stat.earthshatterKills %></td>
+        <td><%= stat.earthshatterStuns %></td>
+        <td><%= stat.eliminations %></td>
+        <td><%= stat.enemiesChainHooked %></td>
+        <td><%= stat.enemiesEMPd %></td>
+        <td><%= stat.enemiesFrozen %></td>
+        <td><%= stat.enemiesHacked %></td>
+        <td><%= stat.enemiesSlept %></td>
+        <td><%= stat.energyMax %></td>
+        <td><%= stat.finalBlows %></td>
+        <td><%= stat.focusingBeamKills %></td>
+        <td><%= stat.graviticFluxKills %></td>
+        <td><%= stat.gravitonSurgeKills %></td>
+        <td><%= stat.healingDone %></td>
+        <td><%= stat.helixRocketKills %></td>
+        <td><%= stat.heroDamageDone %></td>
+        <td><%= stat.immortalityFieldDeathsPrevented %></td>
+        <td><%= stat.inspireUptime %></td>
+        <td><%= stat.jaggedBladeKills %></td>
+        <td><%= stat.javelinDamage %></td>
+        <td><%= stat.jumpPackKills %></td>
+        <td><%= stat.kitsuneRushAssists %></td>
+        <td><%= stat.knockbackKills %></td>
+        <td><%= stat.kunaiKills %></td>
+        <td><%= stat.lifetimeEnergyAccumulation %></td>
+        <td><%= stat.meteorStrikeKills %></td>
+        <td><%= stat.moltenCoreKills %></td>
+        <td><%= stat.negativeEffectsCleansed %></td>
+        <td><%= stat.overclockKills %></td>
+        <td><%= stat.overhealthProvided %></td>
+        <td><%= stat.piledriverKills %></td>
+        <td><%= stat.playersKnockedBack %></td>
+        <td><%= stat.playersResurrected %></td>
+        <td><%= stat.playersTeleported %></td>
+        <td><%= stat.primalRageKills %></td>
+        <td><%= stat.pulseBombKills %></td>
+        <td><%= stat.pulseBombsAttached %></td>
+        <td><%= stat.ripTireKills %></td>
+        <td><%= stat.rocketDirectHits %></td>
+        <td><%= stat.scopedCriticalHitKills %></td>
+        <td><%= stat.scopedCriticalHits %></td>
+        <td><%= stat.scopedHits %></td>
+        <td><%= stat.selfdestructKills %></td>
+        <td><%= stat.shotsHit %></td>
+        <td><%= stat.soloKills %></td>
+        <td><%= stat.stickyBombsKills %></td>
+        <td><%= stat.stormArrowKills %></td>
+        <td><%= stat.tacticalVisorKills %></td>
+        <td><%= stat.terraSurgeKills %></td>
+        <td><%= stat.timePlayed %></td>
+        <td><%= stat.timeSpentOnFire %></td>
+        <td><%= stat.turretKills %></td>
+        <td><%= stat.ultimatesNegated %></td>
+        <td><%= stat.ultsEarned %></td>
+        <td><%= stat.ultsUsed %></td>
+        <td><%= stat.wholeHogKills %></td>
+        <td><%= link_to 'Show', stat %></td>
+        <td><%= link_to 'Edit', edit_stat_path(stat) %></td>
+        <td><%= link_to 'Destroy', stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stat', new_stat_path %>

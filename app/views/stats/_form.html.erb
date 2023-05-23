@@ -1,0 +1,452 @@
+<%= form_with(model: stat) do |form| %>
+  <% if stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stat.errors.count, "error") %> prohibited this stat from being saved:</h2>
+
+      <ul>
+        <% stat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id %>
+    <%= form.number_field :id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :preferredSlot %>
+    <%= form.number_field :preferredSlot %>
+  </div>
+
+  <div class="field">
+    <%= form.label :givenName %>
+    <%= form.text_field :givenName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :familyName %>
+    <%= form.text_field :familyName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.text_field :role %>
+  </div>
+
+  <div class="field">
+    <%= form.label :headshotUrl %>
+    <%= form.text_field :headshotUrl %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eroe %>
+    <%= form.text_field :eroe %>
+  </div>
+
+  <div class="field">
+    <%= form.label :abilityDamageDone %>
+    <%= form.number_field :abilityDamageDone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :accretionKills %>
+    <%= form.number_field :accretionKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amplificationMatrixAssists %>
+    <%= form.number_field :amplificationMatrixAssists %>
+  </div>
+
+  <div class="field">
+    <%= form.label :barrageKills %>
+    <%= form.number_field :barrageKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bioticGrenadeKills %>
+    <%= form.number_field :bioticGrenadeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blizzardKills %>
+    <%= form.number_field :blizzardKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bobKills %>
+    <%= form.number_field :bobKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :carnageKills %>
+    <%= form.number_field :carnageKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :chainHooksAttempted %>
+    <%= form.number_field :chainHooksAttempted %>
+  </div>
+
+  <div class="field">
+    <%= form.label :chargedShotKills %>
+    <%= form.number_field :chargedShotKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :coalescenseHealing %>
+    <%= form.number_field :coalescenseHealing %>
+  </div>
+
+  <div class="field">
+    <%= form.label :concussionMineKills %>
+    <%= form.number_field :concussionMineKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :criticalHits %>
+    <%= form.number_field :criticalHits %>
+  </div>
+
+  <div class="field">
+    <%= form.label :damageAmplified %>
+    <%= form.number_field :damageAmplified %>
+  </div>
+
+  <div class="field">
+    <%= form.label :damageBlockedSojurn %>
+    <%= form.number_field :damageBlockedSojurn %>
+  </div>
+
+  <div class="field">
+    <%= form.label :damageDiscordOrb %>
+    <%= form.number_field :damageDiscordOrb %>
+  </div>
+
+  <div class="field">
+    <%= form.label :damageTaken %>
+    <%= form.number_field :damageTaken %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadeyeKills %>
+    <%= form.number_field :deadeyeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deathBlossomKills %>
+    <%= form.number_field :deathBlossomKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deaths %>
+    <%= form.number_field :deaths %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dragonbladeKills %>
+    <%= form.number_field :dragonbladeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dragonstrikeKills %>
+    <%= form.number_field :dragonstrikeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :earthshatterKills %>
+    <%= form.number_field :earthshatterKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :earthshatterStuns %>
+    <%= form.number_field :earthshatterStuns %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eliminations %>
+    <%= form.number_field :eliminations %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enemiesChainHooked %>
+    <%= form.number_field :enemiesChainHooked %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enemiesEMPd %>
+    <%= form.number_field :enemiesEMPd %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enemiesFrozen %>
+    <%= form.number_field :enemiesFrozen %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enemiesHacked %>
+    <%= form.number_field :enemiesHacked %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enemiesSlept %>
+    <%= form.number_field :enemiesSlept %>
+  </div>
+
+  <div class="field">
+    <%= form.label :energyMax %>
+    <%= form.number_field :energyMax %>
+  </div>
+
+  <div class="field">
+    <%= form.label :finalBlows %>
+    <%= form.number_field :finalBlows %>
+  </div>
+
+  <div class="field">
+    <%= form.label :focusingBeamKills %>
+    <%= form.number_field :focusingBeamKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :graviticFluxKills %>
+    <%= form.number_field :graviticFluxKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gravitonSurgeKills %>
+    <%= form.number_field :gravitonSurgeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :healingDone %>
+    <%= form.number_field :healingDone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :helixRocketKills %>
+    <%= form.number_field :helixRocketKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :heroDamageDone %>
+    <%= form.number_field :heroDamageDone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :immortalityFieldDeathsPrevented %>
+    <%= form.number_field :immortalityFieldDeathsPrevented %>
+  </div>
+
+  <div class="field">
+    <%= form.label :inspireUptime %>
+    <%= form.number_field :inspireUptime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jaggedBladeKills %>
+    <%= form.number_field :jaggedBladeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :javelinDamage %>
+    <%= form.number_field :javelinDamage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jumpPackKills %>
+    <%= form.number_field :jumpPackKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :kitsuneRushAssists %>
+    <%= form.number_field :kitsuneRushAssists %>
+  </div>
+
+  <div class="field">
+    <%= form.label :knockbackKills %>
+    <%= form.number_field :knockbackKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :kunaiKills %>
+    <%= form.number_field :kunaiKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lifetimeEnergyAccumulation %>
+    <%= form.number_field :lifetimeEnergyAccumulation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :meteorStrikeKills %>
+    <%= form.number_field :meteorStrikeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :moltenCoreKills %>
+    <%= form.number_field :moltenCoreKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :negativeEffectsCleansed %>
+    <%= form.number_field :negativeEffectsCleansed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :overclockKills %>
+    <%= form.number_field :overclockKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :overhealthProvided %>
+    <%= form.number_field :overhealthProvided %>
+  </div>
+
+  <div class="field">
+    <%= form.label :piledriverKills %>
+    <%= form.number_field :piledriverKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :playersKnockedBack %>
+    <%= form.number_field :playersKnockedBack %>
+  </div>
+
+  <div class="field">
+    <%= form.label :playersResurrected %>
+    <%= form.number_field :playersResurrected %>
+  </div>
+
+  <div class="field">
+    <%= form.label :playersTeleported %>
+    <%= form.number_field :playersTeleported %>
+  </div>
+
+  <div class="field">
+    <%= form.label :primalRageKills %>
+    <%= form.number_field :primalRageKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pulseBombKills %>
+    <%= form.number_field :pulseBombKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pulseBombsAttached %>
+    <%= form.number_field :pulseBombsAttached %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ripTireKills %>
+    <%= form.number_field :ripTireKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rocketDirectHits %>
+    <%= form.number_field :rocketDirectHits %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scopedCriticalHitKills %>
+    <%= form.number_field :scopedCriticalHitKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scopedCriticalHits %>
+    <%= form.number_field :scopedCriticalHits %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scopedHits %>
+    <%= form.number_field :scopedHits %>
+  </div>
+
+  <div class="field">
+    <%= form.label :selfdestructKills %>
+    <%= form.number_field :selfdestructKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shotsHit %>
+    <%= form.number_field :shotsHit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :soloKills %>
+    <%= form.number_field :soloKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stickyBombsKills %>
+    <%= form.number_field :stickyBombsKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stormArrowKills %>
+    <%= form.number_field :stormArrowKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tacticalVisorKills %>
+    <%= form.number_field :tacticalVisorKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :terraSurgeKills %>
+    <%= form.number_field :terraSurgeKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timePlayed %>
+    <%= form.number_field :timePlayed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timeSpentOnFire %>
+    <%= form.number_field :timeSpentOnFire %>
+  </div>
+
+  <div class="field">
+    <%= form.label :turretKills %>
+    <%= form.number_field :turretKills %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ultimatesNegated %>
+    <%= form.number_field :ultimatesNegated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ultsEarned %>
+    <%= form.number_field :ultsEarned %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ultsUsed %>
+    <%= form.number_field :ultsUsed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wholeHogKills %>
+    <%= form.number_field :wholeHogKills %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
