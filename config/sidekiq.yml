@@ -1,0 +1,10 @@
+development:
+  url: 'redis://127.0.0.1:6379/0'
+  concurrency: 16
+  queues:
+    - default
+    - mailers
+    - low
+  verbose: true
+  pidfile: tmp/pids/sidekiq.pid
+  logfile: log/sidekiq.log

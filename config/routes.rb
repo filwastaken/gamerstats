@@ -13,4 +13,9 @@ Rails.application.routes.draw do
   #get '/auth/failure' => 'session#fail'
   #get '/session/destroy' => 'session#destroy'
   #get '/session/create' => 'session#create'
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+
 end
