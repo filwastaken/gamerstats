@@ -3,7 +3,7 @@ class StatsController < ApplicationController
 
   # GET /stats or /stats.json
   def index
-    #Stat.delete_all #DA ELIMINARE
+    Stat.delete_all #DA ELIMINARE
     @stats = Stat.all
   end
 
@@ -66,6 +66,6 @@ class StatsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stat_params
-      params.require(:stat).permit(:id, :number, :preferredSlot, :givenName, :name, :familyName, :role, :headshotUrl, :eroe, :abilityDamageDone, :accretionKills, :amplificationMatrixAssists, :barrageKills, :bioticGrenadeKills, :blizzardKills, :bobKills, :carnageKills, :chainHooksAttempted, :chargedShotKills, :coalescenseHealing, :concussionMineKills, :criticalHits, :damageAmplified, :damageBlockedSojurn, :damageDiscordOrb, :damageTaken, :deadeyeKills, :deathBlossomKills, :deaths, :dragonbladeKills, :dragonstrikeKills, :earthshatterKills, :earthshatterStuns, :eliminations, :enemiesChainHooked, :enemiesEMPd, :enemiesFrozen, :enemiesHacked, :enemiesSlept, :energyMax, :finalBlows, :focusingBeamKills, :graviticFluxKills, :gravitonSurgeKills, :healingDone, :helixRocketKills, :heroDamageDone, :immortalityFieldDeathsPrevented, :inspireUptime, :jaggedBladeKills, :javelinDamage, :jumpPackKills, :kitsuneRushAssists, :knockbackKills, :kunaiKills, :lifetimeEnergyAccumulation, :meteorStrikeKills, :moltenCoreKills, :negativeEffectsCleansed, :overclockKills, :overhealthProvided, :piledriverKills, :playersKnockedBack, :playersResurrected, :playersTeleported, :primalRageKills, :pulseBombKills, :pulseBombsAttached, :ripTireKills, :rocketDirectHits, :scopedCriticalHitKills, :scopedCriticalHits, :scopedHits, :selfdestructKills, :shotsHit, :soloKills, :stickyBombsKills, :stormArrowKills, :tacticalVisorKills, :terraSurgeKills, :timePlayed, :timeSpentOnFire, :turretKills, :ultimatesNegated, :ultsEarned, :ultsUsed, :wholeHogKills)
+      params.require(:stat).permit(:id, :region, :realm, :displayName, :clanName, :clanTag, :profilePath, :primaryRace, :terranWins, :protossWins, :zergWins, :highest1v1Rank, :highestTeamRank, :seasonTotalGames, :careerTotalGames, :level, :levelTerran, :totalLevelXPTerran, :currentLevelXPTerran, :levelZerg, :totalLevelXPZerg, :currentLevelXPZerg, :levelProtoss, :totalLevelXPProtoss, :currentLevelXPProtoss, :seasonId, :seasonNumber, :seasonYear, :totalGamesThisSeason, :wins1vs1, :games1vs1, :wins2vs2, :games2vs2, :wins3vs3, :games3vs3, :wins4vs4, :games4vs4, :winsArchon, :gamesArchon, :totalPointsAchievements)
     end
 end
