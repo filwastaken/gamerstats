@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_17_165618) do
+ActiveRecord::Schema.define(version: 2023_06_21_151554) do
+
+  create_table "teams", force: :cascade do |t|
+    t.string "nome_team"
+    t.string "giocatore1"
+    t.string "giocatore2"
+    t.string "giocatore3"
+    t.string "giocatore4"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

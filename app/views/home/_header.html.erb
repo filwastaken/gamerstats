@@ -14,18 +14,23 @@
             <li class="nav-item">
                 <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link"%>    
             </li>
-            <li style="color:white; padding-left: 380px" class="navbar-brand " >Ciao <%=current_user.role%></li>
+            <li class="nav-item">
+                <%= link_to 'Personal', personstats_path, class:"nav-link"%>    
+            </li>
+            <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.role%></li>
             <% if current_user.user? %>
                 <li class="nav-item">
                     <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "abbonato"), method: :patch do |f| %>
                         <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:200px"%>
                     <% end %>
                 </li>
+                
                 <li class="nav-item">
                     <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeader"), method: :patch do |f| %>
                         <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
                     <% end %>
                 </li>
+                
             <% end %>
             <% if current_user.teamLeader? %>
                 <li class="nav-item">

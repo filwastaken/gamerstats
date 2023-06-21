@@ -1,0 +1,113 @@
+<% if user_signed_in?%>
+    <% if current_user.user? || current_user.teamLeader? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+    <% end %>
+    <% if current_user.teamLeader? ||  current_user.teamLeaderAbbonato? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE TEAM
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nome TEAM</th>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.teamLeaderAbbonato? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% end %>
+<% end %>

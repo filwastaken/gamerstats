@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_team: MyString
+  giocatore1: MyString
+  giocatore2: MyString
+  giocatore3: MyString
+  giocatore4: MyString
+
+two:
+  nome_team: MyString
+  giocatore1: MyString
+  giocatore2: MyString
+  giocatore3: MyString
+  giocatore4: MyString

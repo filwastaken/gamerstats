@@ -2,6 +2,9 @@ class HomeController < ApplicationController
   def index
   end
 
+  def personstats
+  end
+  
   def update_role
     @user = User.find(params[:id])
     @user.role = params[:role]

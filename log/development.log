@@ -1626,3 +1626,746 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 34ms (Views: 31.4ms | ActiveRecord: 0.0ms | Allocations: 2339)
 
 
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTeams (20230621143302)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "teams" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome_team" varchar, "giocatore" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230621143302"]]
+  [1m[36mTRANSACTION (20.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTeams (20230621151554)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "teams" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome_team" varchar, "giocatore1" varchar, "giocatore2" varchar, "giocatore3" varchar, "giocatore4" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTeams (20230621151554)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "teams" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "nome_team" varchar, "giocatore1" varchar, "giocatore2" varchar, "giocatore3" varchar, "giocatore4" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230621151554"]]
+  [1m[36mTRANSACTION (11.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:55:52 +0200
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 29.3ms | Allocations: 9982)
+  Rendered layout layouts/application.html.erb (Duration: 29.7ms | Allocations: 10051)
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 0.9ms | Allocations: 14438)
+
+
+  
+ActionView::Template::Error (undefined method `destroy_team_path' for #<ActionView::Base:0x00000000009e70>
+Did you mean?  destroy_session_path):
+    24:         <td><%= team.giocatore4 %></td>
+    25:         <td><%= link_to 'Show', team %></td>
+    26:         <td><%= link_to 'Edit', edit_team_path(team) %></td>
+    27:         <td><%= link_to 'Destroy', destroy_team_path(team), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    28:       </tr>
+    29:     <% end %>
+    30:   </tbody>
+  
+app/views/teams/index.html.erb:27
+app/views/teams/index.html.erb:18
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:56:13 +0200
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 27.3ms | Allocations: 5366)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 14.6ms | Allocations: 6765)
+  Rendered layout layouts/application.html.erb (Duration: 68.4ms | Allocations: 22871)
+Completed 200 OK in 83ms (Views: 69.6ms | ActiveRecord: 1.6ms | Allocations: 25824)
+
+
+Started GET "/teams/1" for 127.0.0.1 at 2023-06-21 17:56:16 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 2.9ms | Allocations: 354)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.8ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 19.7ms | Allocations: 3431)
+Completed 200 OK in 32ms (Views: 20.3ms | ActiveRecord: 0.4ms | Allocations: 4642)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:56:19 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 10.9ms | Allocations: 1028)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 5.2ms | Allocations: 1499)
+  Rendered layout layouts/application.html.erb (Duration: 22.5ms | Allocations: 4107)
+Completed 200 OK in 26ms (Views: 24.0ms | ActiveRecord: 0.3ms | Allocations: 4517)
+
+
+Started GET "/teams/2" for 127.0.0.1 at 2023-06-21 17:56:46 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 124)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.4ms | Allocations: 1500)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | Allocations: 3195)
+Completed 200 OK in 17ms (Views: 12.8ms | ActiveRecord: 0.5ms | Allocations: 4152)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:57:40 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/teams/index.html.erb:18
+  [1m[36mTeam Load (0.4ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 24.1ms | Allocations: 5362)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 18.6ms | Allocations: 5460)
+  Rendered layout layouts/application.html.erb (Duration: 46.5ms | Allocations: 12403)
+Completed 200 OK in 49ms (Views: 47.7ms | ActiveRecord: 3.2ms | Allocations: 13202)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:57:42 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1024)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 7.5ms | Allocations: 1499)
+  Rendered layout layouts/application.html.erb (Duration: 15.1ms | Allocations: 4094)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 0.3ms | Allocations: 4502)
+
+
+Started GET "/teams/2" for 127.0.0.1 at 2023-06-21 17:57:43 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 125)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 9.0ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | Allocations: 3194)
+Completed 200 OK in 20ms (Views: 15.0ms | ActiveRecord: 0.4ms | Allocations: 4283)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:57:45 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1016)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.0ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 4083)
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.3ms | Allocations: 4480)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 17:58:12 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:58:37 +0200
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.4ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 26.7ms | Allocations: 5367)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 15.1ms | Allocations: 6765)
+  Rendered layout layouts/application.html.erb (Duration: 59.6ms | Allocations: 16654)
+Completed 200 OK in 75ms (Views: 62.4ms | ActiveRecord: 2.8ms | Allocations: 20526)
+
+
+Started GET "/teams/1" for 127.0.0.1 at 2023-06-21 17:58:38 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 2.3ms | Allocations: 354)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 8.3ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 3432)
+Completed 200 OK in 30ms (Views: 21.7ms | ActiveRecord: 0.5ms | Allocations: 4665)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 17:58:40 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 6.9ms | Allocations: 1028)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.2ms | Allocations: 1499)
+  Rendered layout layouts/application.html.erb (Duration: 26.0ms | Allocations: 4098)
+Completed 200 OK in 29ms (Views: 26.5ms | ActiveRecord: 0.2ms | Allocations: 4507)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 17:58:54 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:00:08 +0200
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 25.4ms | Allocations: 5785)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 17.4ms | Allocations: 6765)
+  Rendered layout layouts/application.html.erb (Duration: 54.6ms | Allocations: 17063)
+Completed 200 OK in 67ms (Views: 57.0ms | ActiveRecord: 1.6ms | Allocations: 20527)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:00:09 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (1.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 14.5ms | Allocations: 1021)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.6ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 32.9ms | Allocations: 4089)
+Completed 200 OK in 37ms (Views: 33.4ms | ActiveRecord: 1.4ms | Allocations: 4487)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 18:00:14 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:00:18 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 1140)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 9.3ms | Allocations: 1601)
+  Rendered layout layouts/application.html.erb (Duration: 18.8ms | Allocations: 4446)
+Completed 200 OK in 21ms (Views: 19.3ms | ActiveRecord: 0.7ms | Allocations: 4945)
+
+
+Started GET "/teams/2/destroy" for 127.0.0.1 at 2023-06-21 18:00:20 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/2/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:00:22 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 5.0ms | Allocations: 1015)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.6ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 19.3ms | Allocations: 4082)
+Completed 200 OK in 21ms (Views: 19.8ms | ActiveRecord: 0.4ms | Allocations: 4480)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 18:01:44 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:01:46 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 1015)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.7ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 19.1ms | Allocations: 4096)
+Completed 200 OK in 21ms (Views: 19.8ms | ActiveRecord: 0.4ms | Allocations: 4494)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 18:01:52 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:02:46 +0200
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 24.0ms | Allocations: 6092)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 15.0ms | Allocations: 6765)
+  Rendered layout layouts/application.html.erb (Duration: 52.7ms | Allocations: 17350)
+Completed 200 OK in 66ms (Views: 53.2ms | ActiveRecord: 3.4ms | Allocations: 21400)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:02:47 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 11.0ms | Allocations: 1021)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 9.0ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 27.2ms | Allocations: 4089)
+Completed 200 OK in 30ms (Views: 29.1ms | ActiveRecord: 0.4ms | Allocations: 4487)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 18:02:48 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:02:53 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1140)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.7ms | Allocations: 1601)
+  Rendered layout layouts/application.html.erb (Duration: 18.6ms | Allocations: 4446)
+Completed 200 OK in 20ms (Views: 19.0ms | ActiveRecord: 0.4ms | Allocations: 4945)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:05:12 +0200
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 19.3ms | Allocations: 5366)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 19.0ms | Allocations: 6765)
+  Rendered layout layouts/application.html.erb (Duration: 50.7ms | Allocations: 16570)
+Completed 200 OK in 63ms (Views: 52.3ms | ActiveRecord: 2.1ms | Allocations: 19524)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 18:05:14 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/teams/1/destroy"):
+  
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:06:18 +0200
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 22.8ms | Allocations: 5366)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 17.2ms | Allocations: 6765)
+  Rendered layout layouts/application.html.erb (Duration: 49.6ms | Allocations: 16570)
+Completed 200 OK in 63ms (Views: 51.6ms | ActiveRecord: 3.1ms | Allocations: 20307)
+
+
+Started GET "/teams/1/destroy" for 127.0.0.1 at 2023-06-21 18:06:20 +0200
+Processing by TeamsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTeam Load (1.0ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+ciao
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/teams_controller.rb:54:in `destroy'
+  [1m[36mTeam Destroy (1.5ms)[0m  [1m[31mDELETE FROM "teams" WHERE "teams"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/teams_controller.rb:54:in `destroy'
+  [1m[36mTRANSACTION (16.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/teams_controller.rb:54:in `destroy'
+Redirected to http://127.0.0.1:3000/teams
+Completed 302 Found in 53ms (ActiveRecord: 19.6ms | Allocations: 4851)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:06:20 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 6.6ms | Allocations: 873)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.5ms | Allocations: 1498)
+  Rendered layouts/_alerts.html.erb (Duration: 1.4ms | Allocations: 132)
+  Rendered layout layouts/application.html.erb (Duration: 32.9ms | Allocations: 4267)
+Completed 200 OK in 36ms (Views: 33.7ms | ActiveRecord: 0.2ms | Allocations: 4675)
+
+
+Started GET "/teams/2" for 127.0.0.1 at 2023-06-21 18:06:42 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 1.1ms | Allocations: 356)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 7.7ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 13.5ms | Allocations: 3447)
+Completed 200 OK in 20ms (Views: 14.4ms | ActiveRecord: 0.5ms | Allocations: 4522)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:06:44 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 878)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 14.4ms | Allocations: 1499)
+  Rendered layout layouts/application.html.erb (Duration: 31.3ms | Allocations: 3948)
+Completed 200 OK in 33ms (Views: 31.8ms | ActiveRecord: 0.4ms | Allocations: 4357)
+
+
+Started GET "/teams/2/edit" for 127.0.0.1 at 2023-06-21 18:06:45 +0200
+Processing by TeamsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/edit.html.erb within layouts/application
+  Rendered teams/_form.html.erb (Duration: 10.4ms | Allocations: 4432)
+  Rendered teams/edit.html.erb within layouts/application (Duration: 12.3ms | Allocations: 4838)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.9ms | Allocations: 1506)
+  Rendered layout layouts/application.html.erb (Duration: 19.6ms | Allocations: 7939)
+Completed 200 OK in 24ms (Views: 20.3ms | ActiveRecord: 0.4ms | Allocations: 9028)
+
+
+Started PATCH "/teams/2" for 127.0.0.1 at 2023-06-21 18:06:49 +0200
+Processing by TeamsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "team"=>{"nome_team"=>"Gino", "giocatore1"=>"paoli", "giocatore2"=>"fili", "giocatore3"=>"FILI ", "giocatore4"=>"noemi"}, "commit"=>"Update Team", "id"=>"2"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/teams_controller.rb:41:in `block in update'
+  [1m[36mTeam Update (0.7ms)[0m  [1m[33mUPDATE "teams" SET "giocatore4" = ?, "updated_at" = ? WHERE "teams"."id" = ?[0m  [["giocatore4", "noemi"], ["updated_at", "2023-06-21 16:06:49.919946"], ["id", 2]]
+  ↳ app/controllers/teams_controller.rb:41:in `block in update'
+  [1m[36mTRANSACTION (18.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/teams_controller.rb:41:in `block in update'
+Redirected to http://127.0.0.1:3000/teams/2
+Completed 302 Found in 42ms (ActiveRecord: 19.2ms | Allocations: 5297)
+
+
+Started GET "/teams/2" for 127.0.0.1 at 2023-06-21 18:06:49 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 127)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.5ms | Allocations: 1499)
+  Rendered layouts/_alerts.html.erb (Duration: 0.2ms | Allocations: 41)
+  Rendered layout layouts/application.html.erb (Duration: 11.2ms | Allocations: 3293)
+Completed 200 OK in 15ms (Views: 11.9ms | ActiveRecord: 0.4ms | Allocations: 4242)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:06:51 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 868)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 9.1ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 18.1ms | Allocations: 3935)
+Completed 200 OK in 20ms (Views: 18.6ms | ActiveRecord: 0.5ms | Allocations: 4332)
+
+
+Started GET "/teams/2/destroy" for 127.0.0.1 at 2023-06-21 18:06:59 +0200
+Processing by TeamsController#destroy as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:65:in `set_team'
+ciao
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/teams_controller.rb:54:in `destroy'
+  [1m[36mTeam Destroy (0.9ms)[0m  [1m[31mDELETE FROM "teams" WHERE "teams"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/teams_controller.rb:54:in `destroy'
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/teams_controller.rb:54:in `destroy'
+Redirected to http://127.0.0.1:3000/teams
+Completed 302 Found in 26ms (ActiveRecord: 11.9ms | Allocations: 4618)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:06:59 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 718)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 3.4ms | Allocations: 1498)
+  Rendered layouts/_alerts.html.erb (Duration: 0.1ms | Allocations: 41)
+  Rendered layout layouts/application.html.erb (Duration: 10.7ms | Allocations: 3882)
+Completed 200 OK in 15ms (Views: 11.1ms | ActiveRecord: 0.3ms | Allocations: 4287)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:09:07 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/teams/index.html.erb:18
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 8.3ms | Allocations: 1735)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 18.5ms | Allocations: 6361)
+  Rendered layout layouts/application.html.erb (Duration: 33.0ms | Allocations: 10022)
+Completed 200 OK in 36ms (Views: 34.8ms | ActiveRecord: 1.7ms | Allocations: 11454)
+
+
+Started GET "/teams/new" for 127.0.0.1 at 2023-06-21 18:09:08 +0200
+Processing by TeamsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/new.html.erb within layouts/application
+  Rendered teams/_form.html.erb (Duration: 3.5ms | Allocations: 2011)
+  Rendered teams/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 2363)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.4ms | Allocations: 1504)
+  Rendered layout layouts/application.html.erb (Duration: 25.7ms | Allocations: 5460)
+Completed 200 OK in 40ms (Views: 28.2ms | ActiveRecord: 0.9ms | Allocations: 9305)
+
+
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:09:16 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "team"=>{"nome_team"=>"Gino", "giocatore1"=>"paoli", "giocatore2"=>"fili", "giocatore3"=>"FILI ", "giocatore4"=>"noemi"}, "commit"=>"Create Team"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/teams_controller.rb:28:in `block in create'
+  [1m[36mTeam Create (0.6ms)[0m  [1m[32mINSERT INTO "teams" ("nome_team", "giocatore1", "giocatore2", "giocatore3", "giocatore4", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["nome_team", "Gino"], ["giocatore1", "paoli"], ["giocatore2", "fili"], ["giocatore3", "FILI "], ["giocatore4", "noemi"], ["created_at", "2023-06-21 16:09:16.616891"], ["updated_at", "2023-06-21 16:09:16.616891"]]
+  ↳ app/controllers/teams_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (15.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/teams_controller.rb:28:in `block in create'
+Redirected to http://127.0.0.1:3000/teams/3
+Completed 302 Found in 28ms (ActiveRecord: 15.7ms | Allocations: 4602)
+
+
+Started GET "/teams/3" for 127.0.0.1 at 2023-06-21 18:09:16 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:64:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 349)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.4ms | Allocations: 1505)
+  Rendered layouts/_alerts.html.erb (Duration: 0.5ms | Allocations: 128)
+  Rendered layout layouts/application.html.erb (Duration: 9.3ms | Allocations: 3742)
+Completed 200 OK in 17ms (Views: 9.8ms | ActiveRecord: 0.4ms | Allocations: 4962)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:09:18 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 880)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.1ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 3957)
+Completed 200 OK in 14ms (Views: 12.6ms | ActiveRecord: 0.4ms | Allocations: 4355)
+
+
+Started GET "/teams/3" for 127.0.0.1 at 2023-06-21 18:09:20 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:64:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 125)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 5.8ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 18.1ms | Allocations: 3192)
+Completed 200 OK in 23ms (Views: 19.0ms | ActiveRecord: 0.4ms | Allocations: 4131)
+
+
+Started GET "/teams/3" for 127.0.0.1 at 2023-06-21 18:10:58 +0200
+Processing by TeamsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams" WHERE "teams"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/teams_controller.rb:64:in `set_team'
+  Rendering layout layouts/application.html.erb
+  Rendering teams/show.html.erb within layouts/application
+  Rendered teams/show.html.erb within layouts/application (Duration: 3.9ms | Allocations: 344)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 7.2ms | Allocations: 2152)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 4422)
+Completed 200 OK in 24ms (Views: 19.2ms | ActiveRecord: 0.4ms | Allocations: 6200)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:10:59 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  Rendered teams/index.html.erb within layouts/application (Duration: 11.9ms | Allocations: 4336)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | Allocations: 4401)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms | Allocations: 4910)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <p id="notice"><%= notice %></p>
+
+<h1>Teams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome team</th>
+      <th>Giocatore1</th>
+      <th>Giocatore2</th>
+      <th>Giocatore3</th>
+      <th>Giocatore4</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.nome_team %></td>
+        <td><%= team.giocatore1 %></td>
+        <td><%= team.giocatore2 %></td>
+        <td><%= team.giocatore3 %></td>
+        <td><%= team.giocatore4 %></td>
+        <td><%= link_to 'Show', team %></td>
+        <td><%= link_to 'Edit', edit_team_path(team) %></td>
+        <td><%= link_to 'Destroy', data: { confirm: 'Are you sure?' }, destroy_team_path(team), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Team', new_team_path %>
+
+):
+1:    <p id="notice"><%= notice %></p>
+2:    
+3:    <h1>Teams</h1>
+4:    
+5:    <table>
+6:      <thead>
+7:        <tr>
+8:          <th>Nome team</th>
+9:          <th>Giocatore1</th>
+10:          <th>Giocatore2</th>
+11:          <th>Giocatore3</th>
+12:          <th>Giocatore4</th>
+13:          <th colspan="3"></th>
+14:        </tr>
+15:      </thead>
+16:    
+17:      <tbody>
+18:        <% @teams.each do |team| %>
+19:          <tr>
+20:            <td><%= team.nome_team %></td>
+21:            <td><%= team.giocatore1 %></td>
+22:            <td><%= team.giocatore2 %></td>
+23:            <td><%= team.giocatore3 %></td>
+24:            <td><%= team.giocatore4 %></td>
+25:            <td><%= link_to 'Show', team %></td>
+26:            <td><%= link_to 'Edit', edit_team_path(team) %></td>
+27:            <td><%= link_to 'Destroy', data: { confirm: 'Are you sure?' }, destroy_team_path(team), method: :delete %></td>
+28:          </tr>
+29:        <% end %>
+30:      </tbody>
+31:    </table>
+32:    
+33:    <br>
+34:    
+35:    <%= link_to 'New Team', new_team_path %>
+  
+app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
+app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
+app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
+app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
+app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
+app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
