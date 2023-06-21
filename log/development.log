@@ -2369,3 +2369,1788 @@ app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
 app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
 app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
 app/views/teams/index.html.erb:27: syntax error, unexpected ',', expecting =>
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:22:09 +0200
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 18.8ms | Allocations: 5233)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 13.4ms | Allocations: 6746)
+  Rendered layout layouts/application.html.erb (Duration: 41.4ms | Allocations: 16418)
+Completed 200 OK in 53ms (Views: 42.6ms | ActiveRecord: 1.4ms | Allocations: 19791)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:22:13 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 161)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 9.9ms | Allocations: 1536)
+  Rendered layout layouts/application.html.erb (Duration: 17.5ms | Allocations: 3282)
+Completed 200 OK in 26ms (Views: 23.3ms | ActiveRecord: 0.1ms | Allocations: 4307)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:22:15 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 7.4ms | Allocations: 1439)
+  Rendered home/_header.html.erb (Duration: 2.0ms | Allocations: 622)
+  Rendered layout layouts/application.html.erb (Duration: 16.1ms | Allocations: 3641)
+Completed 200 OK in 22ms (Views: 16.7ms | ActiveRecord: 0.2ms | Allocations: 4152)
+
+
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:22:17 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 701)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: team
+Did you mean?  authenticity_token
+               controller
+               action):
+  
+app/controllers/teams_controller.rb:69:in `team_params'
+app/controllers/teams_controller.rb:25:in `create'
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:23:42 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 751)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: team
+Did you mean?  authenticity_token
+               controller
+               action):
+  
+app/controllers/teams_controller.rb:69:in `team_params'
+app/controllers/teams_controller.rb:25:in `create'
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:23:43 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.8ms | Allocations: 2576)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | Allocations: 2640)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.2ms | Allocations: 3883)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    54:                     </tbody>
+    55:                 </table>
+    56:                 <br>
+    57:                 <div class="form-label"> <%= button_to "I miei teams", team_path, class:"btn btn-dark"%></div>
+    58:             </div>
+    59:         </div>
+    60:     <% end %>
+  
+app/views/home/personstats.html.erb:57
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:23:45 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 11.1ms | Allocations: 2220)
+  Rendered layout layouts/application.html.erb (Duration: 17.2ms | Allocations: 4443)
+Completed 200 OK in 19ms (Views: 18.1ms | ActiveRecord: 0.1ms | Allocations: 4963)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:23:47 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.9ms | Allocations: 2106)
+  Rendered layout layouts/application.html.erb (Duration: 6.4ms | Allocations: 2170)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.2ms | Allocations: 2524)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    54:                     </tbody>
+    55:                 </table>
+    56:                 <br>
+    57:                 <div class="form-label"> <%= button_to "I miei teams", team_path, class:"btn btn-dark"%></div>
+    58:             </div>
+    59:         </div>
+    60:     <% end %>
+  
+app/views/home/personstats.html.erb:57
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:24:29 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 6.3ms | Allocations: 1448)
+  Rendered home/_header.html.erb (Duration: 1.9ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 13.7ms | Allocations: 4668)
+Completed 200 OK in 18ms (Views: 16.1ms | ActiveRecord: 0.3ms | Allocations: 5892)
+
+
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:24:32 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms | Allocations: 678)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: team
+Did you mean?  authenticity_token
+               controller
+               action):
+  
+app/controllers/teams_controller.rb:69:in `team_params'
+app/controllers/teams_controller.rb:25:in `create'
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:24:34 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.6ms | Allocations: 1120)
+  Rendered home/_header.html.erb (Duration: 5.6ms | Allocations: 616)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | Allocations: 3329)
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.2ms | Allocations: 3711)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:24:42 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 5.6ms | Allocations: 1157)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.2ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 19.0ms | Allocations: 4234)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.4ms | Allocations: 5236)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:25:34 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 5.4ms | Allocations: 2179)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | Allocations: 4288)
+Completed 200 OK in 18ms (Views: 16.6ms | ActiveRecord: 0.1ms | Allocations: 5527)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:25:36 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 8.2ms | Allocations: 1431)
+  Rendered home/_header.html.erb (Duration: 1.0ms | Allocations: 622)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | Allocations: 3633)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.2ms | Allocations: 4144)
+
+
+Started POST "/teams/new" for 127.0.0.1 at 2023-06-21 18:25:39 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/teams/new"):
+  
+Started POST "/teams/new" for 127.0.0.1 at 2023-06-21 18:26:26 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/teams/new"):
+  
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:26:28 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 8.5ms | Allocations: 1428)
+  Rendered home/_header.html.erb (Duration: 1.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 15.1ms | Allocations: 4647)
+Completed 200 OK in 20ms (Views: 17.8ms | ActiveRecord: 0.2ms | Allocations: 5864)
+
+
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:26:30 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 678)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: team
+Did you mean?  authenticity_token
+               controller
+               action):
+  
+app/controllers/teams_controller.rb:69:in `team_params'
+app/controllers/teams_controller.rb:25:in `create'
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:26:35 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 1150)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.3ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | Allocations: 4241)
+Completed 200 OK in 19ms (Views: 17.0ms | ActiveRecord: 0.3ms | Allocations: 5243)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:26:41 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 14.2ms | Allocations: 1522)
+  Rendered layout layouts/application.html.erb (Duration: 19.6ms | Allocations: 3278)
+Completed 200 OK in 22ms (Views: 20.8ms | ActiveRecord: 0.1ms | Allocations: 3782)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:26:42 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.6ms | Allocations: 1121)
+  Rendered home/_header.html.erb (Duration: 0.9ms | Allocations: 616)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 3315)
+Completed 200 OK in 18ms (Views: 16.7ms | ActiveRecord: 0.5ms | Allocations: 3696)
+
+
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:26:48 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 678)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: team
+Did you mean?  authenticity_token
+               controller
+               action):
+  
+app/controllers/teams_controller.rb:69:in `team_params'
+app/controllers/teams_controller.rb:25:in `create'
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:28:37 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 16.3ms | Allocations: 5522)
+  Rendered layout layouts/application.html.erb (Duration: 16.7ms | Allocations: 5586)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.5ms | Allocations: 6776)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `index_path' for #<ActionView::Base:0x0000000000cbc0>
+Did you mean?  video_path):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= button_to "I miei teams", index_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:28:38 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.9ms | Allocations: 1150)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.7ms | Allocations: 2152)
+  Rendered layout layouts/application.html.erb (Duration: 16.8ms | Allocations: 5242)
+Completed 200 OK in 21ms (Views: 18.5ms | ActiveRecord: 0.2ms | Allocations: 6244)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:28:40 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.1ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 871)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 3.1ms | Allocations: 1498)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 3939)
+Completed 200 OK in 18ms (Views: 16.7ms | ActiveRecord: 0.3ms | Allocations: 4337)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:28:42 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 158)
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.9ms | Allocations: 1522)
+  Rendered layout layouts/application.html.erb (Duration: 11.9ms | Allocations: 3264)
+Completed 200 OK in 15ms (Views: 10.8ms | ActiveRecord: 3.0ms | Allocations: 3767)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:28:44 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 14.6ms | Allocations: 5225)
+  Rendered layout layouts/application.html.erb (Duration: 15.1ms | Allocations: 5289)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.2ms | Allocations: 5643)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `index_path' for #<ActionView::Base:0x0000000000d188>
+Did you mean?  video_path):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= button_to "I miei teams", index_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:29:25 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 24.6ms | Allocations: 5574)
+  Rendered layout layouts/application.html.erb (Duration: 25.1ms | Allocations: 5638)
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.1ms | Allocations: 6828)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `teams_index_path' for #<ActionView::Base:0x0000000000d4f8>
+Did you mean?  home_index_path):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= button_to "I miei teams", teams_index_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:29:57 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 23.8ms | Allocations: 5331)
+  Rendered layout layouts/application.html.erb (Duration: 24.7ms | Allocations: 5395)
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.2ms | Allocations: 6585)
+
+
+  
+ActionView::Template::Error (undefined method `teams_index_path' for #<ActionView::Base:0x0000000000d980>
+Did you mean?  home_index_path):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= button_to "I miei teams", teams_index_path(), class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:30:09 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.2ms | Allocations: 1429)
+  Rendered home/_header.html.erb (Duration: 2.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 4648)
+Completed 200 OK in 23ms (Views: 20.9ms | ActiveRecord: 0.2ms | Allocations: 5866)
+
+
+Started POST "/teams" for 127.0.0.1 at 2023-06-21 18:30:11 +0200
+Processing by TeamsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 678)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: team
+Did you mean?  authenticity_token
+               controller
+               action):
+  
+app/controllers/teams_controller.rb:69:in `team_params'
+app/controllers/teams_controller.rb:25:in `create'
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:32:03 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 8.6ms | Allocations: 2384)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 2448)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.4ms | Allocations: 3638)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"edit", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  edit_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= button_to "I miei teams", edit_team_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:32:04 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 8.8ms | Allocations: 2164)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | Allocations: 4273)
+Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 0.1ms | Allocations: 4784)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:32:05 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 6.2ms | Allocations: 2079)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 2143)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.2ms | Allocations: 2497)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"edit", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  edit_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= button_to "I miei teams", edit_team_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:33:16 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 6.2ms | Allocations: 2164)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | Allocations: 4273)
+Completed 200 OK in 18ms (Views: 16.1ms | ActiveRecord: 0.1ms | Allocations: 5490)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:33:18 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1283)
+  Rendered home/_header.html.erb (Duration: 0.9ms | Allocations: 621)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | Allocations: 3487)
+Completed 200 OK in 14ms (Views: 12.0ms | ActiveRecord: 0.5ms | Allocations: 3998)
+
+
+Started GET "/teams/new" for 127.0.0.1 at 2023-06-21 18:33:20 +0200
+Processing by TeamsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/new.html.erb within layouts/application
+  Rendered teams/_form.html.erb (Duration: 14.2ms | Allocations: 7329)
+  Rendered teams/new.html.erb within layouts/application (Duration: 15.9ms | Allocations: 7683)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 4.5ms | Allocations: 1508)
+  Rendered layout layouts/application.html.erb (Duration: 25.0ms | Allocations: 10771)
+Completed 200 OK in 29ms (Views: 27.7ms | ActiveRecord: 0.1ms | Allocations: 11786)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:33:36 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (8.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 15.0ms | Allocations: 2409)
+  Rendered layout layouts/application.html.erb (Duration: 15.5ms | Allocations: 2473)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 8.1ms | Allocations: 3657)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"><%= link_to 'New Team', team_path %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:33:46 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 14.1ms | Allocations: 1281)
+  Rendered home/_header.html.erb (Duration: 6.1ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 30.7ms | Allocations: 4523)
+Completed 200 OK in 36ms (Views: 33.8ms | ActiveRecord: 0.2ms | Allocations: 5740)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:33:48 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.2ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 6.1ms | Allocations: 1151)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 3.6ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 14.8ms | Allocations: 4228)
+Completed 200 OK in 19ms (Views: 17.0ms | ActiveRecord: 0.3ms | Allocations: 5230)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:37:45 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 5.9ms | Allocations: 1151)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 7.1ms | Allocations: 2152)
+  Rendered layout layouts/application.html.erb (Duration: 18.7ms | Allocations: 5228)
+Completed 200 OK in 23ms (Views: 21.4ms | ActiveRecord: 0.4ms | Allocations: 6459)
+
+
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:37:46 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 5.9ms | Allocations: 1522)
+  Rendered layout layouts/application.html.erb (Duration: 16.4ms | Allocations: 3264)
+Completed 200 OK in 21ms (Views: 19.2ms | ActiveRecord: 0.1ms | Allocations: 4234)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:37:47 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  Rendered home/personstats.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1333)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 1398)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 1883)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <% if user_signed_in?%>
+    <% if current_user.user? || current_user.teamLeader? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+    <% end %>
+    <% if current_user.teamLeader? ||  current_user.teamLeaderAbbonato? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE TEAM
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nome TEAM</th>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="form-label"> <%= button_to "I miei teams" class:"btn btn-dark" , link_to 'i tuoi team', team_path %> </div>
+    <% end %>
+    <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.teamLeaderAbbonato? %>
+        <div class="card text-center">
+            <div class="card-header">
+                STATISTICHE PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <thead>
+                        <tr>
+                        <th scope="col">STATISTICA 1</th>
+                        <th scope="col">STATISTICA 2</th>
+                        <th scope="col">STATISTICA 3</th>
+                        <th scope="col">STATISTICA 4</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light">
+                        <th scope="row">1</th>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% end %>
+<% end %>
+):
+1:    <% if user_signed_in?%>
+2:        <% if current_user.user? || current_user.teamLeader? %>
+3:            <div class="card text-center">
+4:                <div class="card-header">
+5:                    STATISTICHE PERSONALI
+6:                </div>
+7:                <div class="card-body">
+8:                    <table class="table table-dark table-striped-columns">
+9:                        <thead>
+10:                            <tr>
+11:                            <th scope="col">STATISTICA 1</th>
+12:                            <th scope="col">STATISTICA 2</th>
+13:                            <th scope="col">STATISTICA 3</th>
+14:                            <th scope="col">STATISTICA 4</th>
+15:                            </tr>
+16:                        </thead>
+17:                        <tbody class="table-group-divider">
+18:                            <tr class="table-light">
+19:                            <th scope="row">1</th>
+20:                            <td>2</td>
+21:                            <td>3</td>
+22:                            <td>4</td>
+23:                            </tr>
+24:                        </tbody>
+25:                    </table>
+26:                </div>
+27:            </div>
+28:            <br>
+29:        <% end %>
+30:        <% if current_user.teamLeader? ||  current_user.teamLeaderAbbonato? %>
+31:            <div class="card text-center">
+32:                <div class="card-header">
+33:                    STATISTICHE TEAM
+34:                </div>
+35:                <div class="card-body">
+36:                    <table class="table table-dark table-striped-columns">
+37:                        <thead>
+38:                            <tr>
+39:                            <th scope="col">Nome TEAM</th>
+40:                            <th scope="col">STATISTICA 1</th>
+41:                            <th scope="col">STATISTICA 2</th>
+42:                            <th scope="col">STATISTICA 3</th>
+43:                            <th scope="col">STATISTICA 4</th>
+44:                            </tr>
+45:                        </thead>
+46:                        <tbody class="table-group-divider">
+47:                            <tr class="table-light">
+48:                            <th scope="row">1</th>
+49:                            <td>2</td>
+50:                            <td>3</td>
+51:                            <td>4</td>
+52:                            <td>5</td>
+53:                            </tr>
+54:                        </tbody>
+55:                    </table>
+56:                </div>
+57:            </div>
+58:            <br>
+59:            <div class="form-label"> <%= button_to "I miei teams" class:"btn btn-dark" , link_to 'i tuoi team', team_path %> </div>
+60:        <% end %>
+61:        <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+62:            <div class="card text-center">
+63:                <div class="card-header">
+64:                    STATISTICHE PERSONALI
+65:                </div>
+66:                <div class="card-body">
+67:                    <table class="table table-dark table-striped-columns">
+68:                        <thead>
+69:                            <tr>
+70:                            <th scope="col">STATISTICA 1</th>
+71:                            <th scope="col">STATISTICA 2</th>
+72:                            <th scope="col">STATISTICA 3</th>
+73:                            <th scope="col">STATISTICA 4</th>
+74:                            </tr>
+75:                        </thead>
+76:                        <tbody class="table-group-divider">
+77:                            <tr class="table-light">
+78:                            <th scope="row">1</th>
+79:                            <td>2</td>
+80:                            <td>3</td>
+81:                            <td>4</td>
+82:                            </tr>
+83:                        </tbody>
+84:                    </table>
+85:                </div>
+86:            </div>
+87:        <% end %>
+88:        <% if current_user.teamLeaderAbbonato? %>
+89:            <div class="card text-center">
+90:                <div class="card-header">
+91:                    STATISTICHE PERSONALI
+92:                </div>
+93:                <div class="card-body">
+94:                    <table class="table table-dark table-striped-columns">
+95:                        <thead>
+96:                            <tr>
+97:                            <th scope="col">STATISTICA 1</th>
+98:                            <th scope="col">STATISTICA 2</th>
+99:                            <th scope="col">STATISTICA 3</th>
+100:                            <th scope="col">STATISTICA 4</th>
+101:                            </tr>
+102:                        </thead>
+103:                        <tbody class="table-group-divider">
+104:                            <tr class="table-light">
+105:                            <th scope="row">1</th>
+106:                            <td>2</td>
+107:                            <td>3</td>
+108:                            <td>4</td>
+109:                            </tr>
+110:                        </tbody>
+111:                    </table>
+112:                </div>
+113:            </div>
+114:        <% end %>
+115:    <% end %>
+  
+app/views/home/personstats.html.erb:59: syntax error, unexpected `class', expecting ')'
+app/views/home/personstats.html.erb:59: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/home/personstats.html.erb:59: syntax error, unexpected `class', expecting ')'
+app/views/home/personstats.html.erb:59: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/home/personstats.html.erb:59: syntax error, unexpected `class', expecting ')'
+app/views/home/personstats.html.erb:59: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/home/personstats.html.erb:59: syntax error, unexpected `class', expecting ')'
+app/views/home/personstats.html.erb:59: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/home/personstats.html.erb:59: syntax error, unexpected `class', expecting ')'
+app/views/home/personstats.html.erb:59: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+app/views/home/personstats.html.erb:59: syntax error, unexpected `class', expecting ')'
+app/views/home/personstats.html.erb:59: syntax error, unexpected ',', expecting '.' or &. or :: or '['
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:38:21 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.9ms | Allocations: 2411)
+  Rendered layout layouts/application.html.erb (Duration: 11.3ms | Allocations: 2475)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.2ms | Allocations: 3678)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:38:28 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 158)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 11.8ms | Allocations: 2164)
+  Rendered layout layouts/application.html.erb (Duration: 16.6ms | Allocations: 4273)
+Completed 200 OK in 18ms (Views: 17.2ms | ActiveRecord: 0.1ms | Allocations: 4784)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:38:29 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.7ms | Allocations: 2106)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 2170)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.2ms | Allocations: 2524)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path, class:"btn btn-dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:38:44 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 11.8ms | Allocations: 2411)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 2475)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.2ms | Allocations: 3665)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path, class:"dark"%></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:40:29 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 9.8ms | Allocations: 2410)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 2474)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.2ms | Allocations: 3664)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path, class:"nav-link" %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:41:11 +0200
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 492)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 15.8ms | Allocations: 7083)
+  Rendered layout layouts/application.html.erb (Duration: 73.5ms | Allocations: 12107)
+Completed 200 OK in 91ms (Views: 77.9ms | ActiveRecord: 0.8ms | Allocations: 15158)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:41:14 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 19.4ms | Allocations: 2740)
+  Rendered layout layouts/application.html.erb (Duration: 19.9ms | Allocations: 2805)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.3ms | Allocations: 3300)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path, class:"nav-link" %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:41:36 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 9.2ms | Allocations: 2593)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 2658)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.2ms | Allocations: 3949)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:41:37 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 158)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 11.0ms | Allocations: 2223)
+  Rendered layout layouts/application.html.erb (Duration: 17.7ms | Allocations: 4453)
+Completed 200 OK in 20ms (Views: 18.4ms | ActiveRecord: 0.2ms | Allocations: 4980)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:41:39 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.8ms | Allocations: 2106)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 2170)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.2ms | Allocations: 2524)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:42:26 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 7.4ms | Allocations: 2408)
+  Rendered layout layouts/application.html.erb (Duration: 9.5ms | Allocations: 2481)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.4ms | Allocations: 3684)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/" for 127.0.0.1 at 2023-06-21 18:42:27 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 158)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 10.6ms | Allocations: 2164)
+  Rendered layout layouts/application.html.erb (Duration: 16.5ms | Allocations: 4273)
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 0.2ms | Allocations: 4784)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:42:29 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 9.7ms | Allocations: 2106)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 2170)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.2ms | Allocations: 2524)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <div class="form-label"> <%= link_to 'i tuoi team', team_path %></div>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:43:02 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 6.8ms | Allocations: 2423)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | Allocations: 2488)
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.1ms | Allocations: 3685)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"show", :controller=>"teams"}, missing required keys: [:id]
+Did you mean?  team_url
+               teams_url
+               teams_path
+               new_team_url):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <%= link_to 'i tuoi team', team_path %>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:43:22 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.5ms | Allocations: 1281)
+  Rendered home/_header.html.erb (Duration: 4.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 20.7ms | Allocations: 4501)
+Completed 200 OK in 24ms (Views: 23.0ms | ActiveRecord: 0.2ms | Allocations: 5719)
+
+
+Started GET "/teams" for 127.0.0.1 at 2023-06-21 18:43:23 +0200
+Processing by TeamsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering teams/index.html.erb within layouts/application
+  [1m[36mTeam Load (0.3ms)[0m  [1m[34mSELECT "teams".* FROM "teams"[0m
+  ↳ app/views/teams/index.html.erb:18
+  Rendered teams/index.html.erb within layouts/application (Duration: 11.9ms | Allocations: 4882)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/_header.html.erb:9
+  Rendered home/_header.html.erb (Duration: 5.6ms | Allocations: 1505)
+  Rendered layout layouts/application.html.erb (Duration: 20.8ms | Allocations: 7959)
+Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 1.0ms | Allocations: 9192)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:43:25 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.9ms | Allocations: 983)
+  Rendered home/_header.html.erb (Duration: 1.1ms | Allocations: 621)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | Allocations: 3187)
+Completed 200 OK in 15ms (Views: 14.3ms | ActiveRecord: 0.2ms | Allocations: 3568)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:44:26 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1284)
+  Rendered home/_header.html.erb (Duration: 2.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 19.4ms | Allocations: 4489)
+Completed 200 OK in 24ms (Views: 21.9ms | ActiveRecord: 0.2ms | Allocations: 5700)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:44:42 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 7.8ms | Allocations: 1283)
+  Rendered home/_header.html.erb (Duration: 1.9ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.4ms | Allocations: 4488)
+Completed 200 OK in 22ms (Views: 19.7ms | ActiveRecord: 0.2ms | Allocations: 5699)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:45:23 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.3ms | Allocations: 1283)
+  Rendered home/_header.html.erb (Duration: 2.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 4488)
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 0.2ms | Allocations: 5699)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:45:36 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.9ms | Allocations: 1283)
+  Rendered home/_header.html.erb (Duration: 3.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 19.4ms | Allocations: 4488)
+Completed 200 OK in 24ms (Views: 22.2ms | ActiveRecord: 0.5ms | Allocations: 5699)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:46:00 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 15.1ms | Allocations: 3397)
+  Rendered layout layouts/application.html.erb (Duration: 15.5ms | Allocations: 3461)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.3ms | Allocations: 4645)
+
+
+  
+ActionView::Template::Error (undefined method `stringify_keys' for "color:white;":String):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <button type="button" class="btn btn-dark"><%= link_to 'i tuoi team', teams_path, style="color:white;" %></button>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:47:51 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 12.9ms | Allocations: 1295)
+  Rendered home/_header.html.erb (Duration: 4.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 4515)
+Completed 200 OK in 34ms (Views: 26.8ms | ActiveRecord: 0.2ms | Allocations: 5745)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:48:08 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.7ms | Allocations: 1294)
+  Rendered home/_header.html.erb (Duration: 2.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 19.1ms | Allocations: 4499)
+Completed 200 OK in 22ms (Views: 21.1ms | ActiveRecord: 0.2ms | Allocations: 5710)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:49:14 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 6.0ms | Allocations: 1296)
+  Rendered home/_header.html.erb (Duration: 3.6ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 23.9ms | Allocations: 4501)
+Completed 200 OK in 29ms (Views: 27.5ms | ActiveRecord: 0.2ms | Allocations: 5734)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:49:53 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 19.6ms | Allocations: 3389)
+  Rendered layout layouts/application.html.erb (Duration: 20.2ms | Allocations: 3453)
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 0.2ms | Allocations: 4637)
+
+
+  
+ActionView::Template::Error (undefined method `stringify_keys' for "color:white;":String):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <button type="button" class="btn btn-dark"><%= link_to 'i tuoi team', teams_path, style="color:white;" %></button>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:50:06 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 12.8ms | Allocations: 3389)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | Allocations: 3453)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.5ms | Allocations: 4643)
+
+
+  
+ActionView::Template::Error (undefined method `stringify_keys' for "color:white":String):
+    56:             </div>
+    57:         </div>
+    58:         <br>
+    59:         <button type="button" class="btn btn-dark"><%= link_to 'i tuoi team', teams_path, style="color:white" %></button>
+    60:     <% end %>
+    61:     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+    62:         <div class="card text-center">
+  
+app/views/home/personstats.html.erb:59
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:51:00 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.1ms | Allocations: 1282)
+  Rendered home/_header.html.erb (Duration: 2.3ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 18.1ms | Allocations: 4502)
+Completed 200 OK in 22ms (Views: 20.6ms | ActiveRecord: 0.2ms | Allocations: 5719)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:52:57 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1296)
+  Rendered home/_header.html.erb (Duration: 4.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 20.7ms | Allocations: 4501)
+Completed 200 OK in 25ms (Views: 23.4ms | ActiveRecord: 0.2ms | Allocations: 5712)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:53:46 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 16.1ms | Allocations: 1295)
+  Rendered home/_header.html.erb (Duration: 3.4ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 25.7ms | Allocations: 4518)
+Completed 200 OK in 30ms (Views: 28.2ms | ActiveRecord: 0.2ms | Allocations: 5730)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:54:06 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1295)
+  Rendered home/_header.html.erb (Duration: 2.5ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 4500)
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.3ms | Allocations: 5717)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:54:47 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.0ms | Allocations: 1296)
+  Rendered home/_header.html.erb (Duration: 3.5ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 18.2ms | Allocations: 4501)
+Completed 200 OK in 23ms (Views: 20.2ms | ActiveRecord: 0.6ms | Allocations: 5725)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:55:21 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 14.7ms | Allocations: 1296)
+  Rendered home/_header.html.erb (Duration: 7.1ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 31.0ms | Allocations: 4501)
+Completed 200 OK in 35ms (Views: 33.5ms | ActiveRecord: 0.2ms | Allocations: 5712)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:56:11 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.3ms | Allocations: 1296)
+  Rendered home/_header.html.erb (Duration: 2.2ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 18.8ms | Allocations: 4523)
+Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.2ms | Allocations: 5734)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:56:33 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 8.2ms | Allocations: 1296)
+  Rendered home/_header.html.erb (Duration: 2.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 16.5ms | Allocations: 4501)
+Completed 200 OK in 22ms (Views: 20.1ms | ActiveRecord: 0.1ms | Allocations: 5712)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:56:57 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.8ms | Allocations: 988)
+  Rendered home/_header.html.erb (Duration: 1.0ms | Allocations: 616)
+  Rendered layout layouts/application.html.erb (Duration: 12.0ms | Allocations: 3184)
+Completed 200 OK in 18ms (Views: 16.9ms | ActiveRecord: 0.2ms | Allocations: 3587)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:57:02 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.8ms | Allocations: 1297)
+  Rendered home/_header.html.erb (Duration: 2.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 14.8ms | Allocations: 4502)
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 0.1ms | Allocations: 5714)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 18:58:16 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 9.4ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 4.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 21.2ms | Allocations: 4528)
+Completed 200 OK in 25ms (Views: 23.6ms | ActiveRecord: 0.2ms | Allocations: 5745)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:02:04 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 8.8ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 3.3ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 18.1ms | Allocations: 4513)
+Completed 200 OK in 22ms (Views: 20.1ms | ActiveRecord: 0.2ms | Allocations: 5724)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:02:19 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.2ms | Allocations: 1313)
+  Rendered home/_header.html.erb (Duration: 2.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 16.9ms | Allocations: 4533)
+Completed 200 OK in 22ms (Views: 19.8ms | ActiveRecord: 0.2ms | Allocations: 5751)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:02:21 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.0ms | Allocations: 998)
+  Rendered home/_header.html.erb (Duration: 4.6ms | Allocations: 616)
+  Rendered layout layouts/application.html.erb (Duration: 15.7ms | Allocations: 3194)
+Completed 200 OK in 18ms (Views: 16.6ms | ActiveRecord: 0.2ms | Allocations: 3575)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:02:42 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.6ms | Allocations: 1307)
+  Rendered home/_header.html.erb (Duration: 3.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 20.5ms | Allocations: 4512)
+Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.2ms | Allocations: 5729)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:03:08 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 6.6ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 1.9ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 13.7ms | Allocations: 4535)
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 0.2ms | Allocations: 5746)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:03:28 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 15.6ms | Allocations: 1307)
+  Rendered home/_header.html.erb (Duration: 8.3ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 33.1ms | Allocations: 4512)
+Completed 200 OK in 37ms (Views: 35.2ms | ActiveRecord: 0.2ms | Allocations: 5723)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:04:55 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 11.3ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 3.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 21.5ms | Allocations: 4513)
+Completed 200 OK in 25ms (Views: 23.5ms | ActiveRecord: 0.2ms | Allocations: 5724)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:05:33 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.7ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 1.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 4513)
+Completed 200 OK in 20ms (Views: 18.7ms | ActiveRecord: 0.3ms | Allocations: 5724)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:06:07 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.4ms | Allocations: 1309)
+  Rendered home/_header.html.erb (Duration: 2.3ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.7ms | Allocations: 4514)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.2ms | Allocations: 5726)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:08:44 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.7ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 3.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 21.5ms | Allocations: 4528)
+Completed 200 OK in 26ms (Views: 23.9ms | ActiveRecord: 0.2ms | Allocations: 5745)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:10:09 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 10.9ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 1.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.6ms | Allocations: 4513)
+Completed 200 OK in 23ms (Views: 20.3ms | ActiveRecord: 0.1ms | Allocations: 5746)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:11:20 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.6ms | Allocations: 1313)
+  Rendered home/_header.html.erb (Duration: 3.3ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.5ms | Allocations: 4533)
+Completed 200 OK in 22ms (Views: 20.2ms | ActiveRecord: 0.3ms | Allocations: 5751)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:11:51 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 9.3ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 2.1ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 4513)
+Completed 200 OK in 21ms (Views: 19.4ms | ActiveRecord: 0.2ms | Allocations: 5724)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:12:06 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.6ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 1.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | Allocations: 4513)
+Completed 200 OK in 20ms (Views: 19.1ms | ActiveRecord: 0.2ms | Allocations: 5730)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:12:27 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 12.3ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 3.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 21.2ms | Allocations: 4513)
+Completed 200 OK in 25ms (Views: 23.6ms | ActiveRecord: 0.2ms | Allocations: 5724)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:13:00 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 9.8ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 1.9ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.6ms | Allocations: 4535)
+Completed 200 OK in 21ms (Views: 19.6ms | ActiveRecord: 0.2ms | Allocations: 5746)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:13:45 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.7ms | Allocations: 1308)
+  Rendered home/_header.html.erb (Duration: 1.5ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 17.4ms | Allocations: 4513)
+Completed 200 OK in 21ms (Views: 19.5ms | ActiveRecord: 0.2ms | Allocations: 5724)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:14:11 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 5.1ms | Allocations: 1295)
+  Rendered home/_header.html.erb (Duration: 7.2ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 24.0ms | Allocations: 4500)
+Completed 200 OK in 34ms (Views: 32.6ms | ActiveRecord: 0.2ms | Allocations: 5711)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:15:47 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 11.7ms | Allocations: 1309)
+  Rendered home/_header.html.erb (Duration: 2.7ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 20.0ms | Allocations: 4514)
+Completed 200 OK in 25ms (Views: 21.7ms | ActiveRecord: 1.2ms | Allocations: 5726)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:20:21 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 12.2ms | Allocations: 1322)
+  Rendered home/_header.html.erb (Duration: 3.0ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 22.9ms | Allocations: 4542)
+Completed 200 OK in 28ms (Views: 25.9ms | ActiveRecord: 0.2ms | Allocations: 5759)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:20:24 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 4.7ms | Allocations: 1008)
+  Rendered home/_header.html.erb (Duration: 2.2ms | Allocations: 616)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 3209)
+Completed 200 OK in 19ms (Views: 18.1ms | ActiveRecord: 0.3ms | Allocations: 3591)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:20:55 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 12.2ms | Allocations: 1325)
+  Rendered home/_header.html.erb (Duration: 5.2ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 22.9ms | Allocations: 4545)
+Completed 200 OK in 26ms (Views: 24.9ms | ActiveRecord: 0.2ms | Allocations: 5763)
+
+
+Started GET "/personstats" for 127.0.0.1 at 2023-06-21 19:21:21 +0200
+Processing by HomeController#personstats as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/personstats.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/home/personstats.html.erb:1
+  Rendered home/personstats.html.erb within layouts/application (Duration: 6.3ms | Allocations: 1320)
+  Rendered home/_header.html.erb (Duration: 3.8ms | Allocations: 1270)
+  Rendered layout layouts/application.html.erb (Duration: 24.6ms | Allocations: 4525)
+Completed 200 OK in 30ms (Views: 27.3ms | ActiveRecord: 0.2ms | Allocations: 5736)
+
+
