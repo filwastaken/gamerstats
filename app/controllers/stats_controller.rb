@@ -3,7 +3,7 @@ class StatsController < ApplicationController
 
   # GET /stats or /stats.json
   def index
-    Stat.delete_all #DA ELIMINARE
+    #Stat.delete_all #DA ELIMINARE
     @stats = Stat.all
   end
 
