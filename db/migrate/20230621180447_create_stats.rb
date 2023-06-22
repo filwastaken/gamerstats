@@ -12,8 +12,8 @@ class CreateStats < ActiveRecord::Migration[6.1]
       t.integer :terranWins
       t.integer :protossWins
       t.integer :zergWins
-      t.integer :highest1v1Rank
-      t.integer :highestTeamRank
+      t.string :highest1v1Rank
+      t.string :highestTeamRank
       t.integer :seasonTotalGames
       t.integer :careerTotalGames
       t.integer :level

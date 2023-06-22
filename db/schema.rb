@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_21_155227) do
+ActiveRecord::Schema.define(version: 2023_06_21_180447) do
 
   create_table "stats", id: false, force: :cascade do |t|
     t.integer "id"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2023_06_21_155227) do
     t.integer "terranWins"
     t.integer "protossWins"
     t.integer "zergWins"
-    t.integer "highest1v1Rank"
-    t.integer "highestTeamRank"
+    t.string "highest1v1Rank"
+    t.string "highestTeamRank"
     t.integer "seasonTotalGames"
     t.integer "careerTotalGames"
     t.integer "level"

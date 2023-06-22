@@ -34,7 +34,7 @@ class BattlenetOauthService
                         userFromDB.realm = body["realm"]
                     end
 
-                    if(body["displayName"] != nil)
+                    if(body["displayName"] != "")
                         userFromDB.displayName = body["displayName"]
                     end
 
@@ -45,7 +45,7 @@ class BattlenetOauthService
                     if(body["clanTag"] != "")
                         userFromDB.clanTag = body["clanTag"]
                     end
-                    if(body["profilePath"] != nil)
+                    if(body["profilePath"] != "")
                         userFromDB.profilePath = body["profilePath"]
                     end
 
@@ -196,7 +196,7 @@ class BattlenetOauthService
                         user.realm = 0
                     end
     
-                    if(body["displayName"] != nil)
+                    if(body["displayName"] != "")
                         user.displayName = body["displayName"]
                     else
                         user.displayName = "-"
@@ -213,13 +213,13 @@ class BattlenetOauthService
                     else
                         user.clanTag = "-"
                     end
-                    if(body["profilePath"] != nil)
+                    if(body["profilePath"] != "")
                         user.profilePath = body["profilePath"]
                     else
                         user.profilePath = "-"
                     end
     
-                    if(body["career"]["primaryRace"] != nil)
+                    if(body["career"]["primaryRace"] != "")
                         user.primaryRace = body["career"]["primaryRace"]
                     else
                         user.primaryRace = "-"
@@ -455,7 +455,7 @@ class BattlenetOauthService
                     user.profilePath = "-"
                 end
 
-                if(body["career"]["primaryRace"] != nil)
+                if(body["career"]["primaryRace"] != "")
                     user.primaryRace = body["career"]["primaryRace"]
                 else
                     user.primaryRace = "-"
@@ -478,7 +478,7 @@ class BattlenetOauthService
                 else
                     user.zergWins = 0
                 end
-                
+
                 if(body["career"]["highest1v1Rank"] != nil) 
                     user.highest1v1Rank = body["career"]["highest1v1Rank"]
                 else
@@ -694,7 +694,10 @@ class BattlenetOauthService
 =end
 end
 
-#rails g scaffold Stats id:integer region:integer realm:integer displayName:string clanName:string clanTag:string profilePath:string primaryRace:string terranWins:integer protossWins:integer zergWins:integer highest1v1Rank:integer highestTeamRank:integer seasonTotalGames:integer careerTotalGames:integer level:integer levelTerran:integer totalLevelXPTerran:integer currentLevelXPTerran:integer levelZerg:integer totalLevelXPZerg:integer currentLevelXPZerg:integer levelProtoss:integer totalLevelXPProtoss:integer currentLevelXPProtoss:integer seasonId:integer seasonNumber:integer seasonYear:integer totalGamesThisSeason:integer wins1vs1:integer games1vs1:integer wins2vs2:integer games2vs2:integer wins3vs3:integer games3vs3:integer wins4vs4:integer games4vs4:integer winsArchon:integer gamesArchon:integer totalPointsAchievements:integer
+#rails g scaffold Stats id:integer region:integer realm:integer displayName:string clanName:string clanTag:string profilePath:string primaryRace:string terranWins:integer protossWins:integer zergWins:integer highest1v1Rank:string highestTeamRank:string seasonTotalGames:integer careerTotalGames:integer level:integer levelTerran:integer totalLevelXPTerran:integer currentLevelXPTerran:integer levelZerg:integer totalLevelXPZerg:integer currentLevelXPZerg:integer levelProtoss:integer totalLevelXPProtoss:integer currentLevelXPProtoss:integer seasonId:integer seasonNumber:integer seasonYear:integer totalGamesThisSeason:integer wins1vs1:integer games1vs1:integer wins2vs2:integer games2vs2:integer wins3vs3:integer games3vs3:integer wins4vs4:integer games4vs4:integer winsArchon:integer gamesArchon:integer totalPointsAchievements:integer
+
+#Stat.delete_all #DA ELIMINARE
+#create_table :stats, id: false, force: :cascade do |t|
 
 '''
 id:integer
@@ -708,8 +711,8 @@ primaryRace:string
 terranWins:integer
 protossWins:integer
 zergWins:integer
-highest1v1Rank:integer
-highestTeamRank:integer
+highest1v1Rank:string
+highestTeamRank:string
 seasonTotalGames:integer
 careerTotalGames:integer
 level:integer
