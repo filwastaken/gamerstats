@@ -12,8 +12,8 @@ one:
   terranWins: 1
   protossWins: 1
   zergWins: 1
-  highest1v1Rank: 1
-  highestTeamRank: 1
+  highest1v1Rank: MyString
+  highestTeamRank: MyString
   seasonTotalGames: 1
   careerTotalGames: 1
   level: 1
@@ -54,8 +54,8 @@ two:
   terranWins: 1
   protossWins: 1
   zergWins: 1
-  highest1v1Rank: 1
-  highestTeamRank: 1
+  highest1v1Rank: MyString
+  highestTeamRank: MyString
   seasonTotalGames: 1
   careerTotalGames: 1
   level: 1

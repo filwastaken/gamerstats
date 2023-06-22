@@ -12,8 +12,8 @@ class PagesController < ApplicationController
     Sidekiq::RetrySet.new.clear
     Sidekiq::ScheduledSet.new.clear
     Sidekiq::DeadSet.new.clear
-
-    a = 0
+=begin
+    a = 12600
     interval = 100
     BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
     a = a + interval
@@ -29,19 +29,16 @@ class PagesController < ApplicationController
     a = a + interval
     BackgroundJob.perform_async(session[:access_token], a, a+interval, "7")
     a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "8")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "9")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "10")  #1000
-
+    BackgroundJob.perform_async(session[:access_token], a, a+interval, "8") #11000
+=end
 
   
     #puts "//////////////////"
 
-      #valori = Stat.pluck(:id) # Estrae tutti i valori della colonna dal database
+    #valori = Stat.pluck(:id) # Estrae tutti i valori della colonna dal database
     #risultato = valori.map { |valore| "\"#{valore}\"" }.join(",") # Formatta i valori nel formato richiesto
     #puts risultato
+    
     #puts "//////////////////"
   end
 end

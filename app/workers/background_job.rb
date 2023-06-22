@@ -7,7 +7,7 @@ class BackgroundJob
       realmIds = ["1","2"]
   
       for profileId in min..max
-        puts "#{profileId}      thread: #{thread}"
+        puts "#{profileId}      thread: #{thread}      #{profileId} / #{max}"
         regionIds.each do |region|
           realmIds.each do |realm|
             res = BattlenetOauthService.ottieniInfoProfilo(access_token, region, realm, profileId)
