@@ -12,31 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :nome_team %>
-    <%= form.text_field :nome_team %>
+    <%= form.label :nome_team, class:"form-label" %>
+    <%= form.text_field :nome_team, class:"form-control", style:"max-width: 400px;" %>
   </div>
 
   <div class="field">
-    <%= form.label :giocatore1 %>
-    <%= form.text_field :giocatore1 %>
+    <%= form.label :giocatore1, class:"form-label" %>
+    <%= form.text_field :giocatore1, class:"form-control", style:"max-width: 400px;" %>
   </div>
 
   <div class="field">
-    <%= form.label :giocatore2 %>
-    <%= form.text_field :giocatore2 %>
+    <%= form.label :giocatore2, class:"form-label" %>
+    <%= form.text_field :giocatore2, class:"form-control", style:"max-width: 400px;" %>
   </div>
 
   <div class="field">
-    <%= form.label :giocatore3 %>
-    <%= form.text_field :giocatore3 %>
+    <%= form.label :giocatore3, class:"form-label" %>
+    <%= form.text_field :giocatore3, class:"form-control", style:"max-width: 400px;" %>
   </div>
 
   <div class="field">
-    <%= form.label :giocatore4 %>
-    <%= form.text_field :giocatore4 %>
+    <%= form.label :giocatore4, class:"form-label" %>
+    <%= form.text_field :giocatore4, class:"form-control", style:"max-width: 400px;" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="container" style="display: flex; justify-content: center;">
+    <div class="actions">
+      <%= form.submit "submit", class:"btn btn-dark"%>
+    </div>
   </div>
 <% end %>

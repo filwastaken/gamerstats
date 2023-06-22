@@ -6,24 +6,24 @@
 </p>
 
 <p>
-  <strong>Giocatore1:</strong>
+  <strong>Giocatore 1:</strong>
   <%= @team.giocatore1 %>
 </p>
 
 <p>
-  <strong>Giocatore2:</strong>
+  <strong>Giocatore 2:</strong>
   <%= @team.giocatore2 %>
 </p>
 
 <p>
-  <strong>Giocatore3:</strong>
+  <strong>Giocatore 3:</strong>
   <%= @team.giocatore3 %>
 </p>
 
 <p>
-  <strong>Giocatore4:</strong>
+  <strong>Giocatore 4:</strong>
   <%= @team.giocatore4 %>
 </p>
-
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<br>
+<%= link_to 'Edit', edit_team_path(@team), class:"link-body-emphasis link-offset-2" %> |
+<%= link_to 'Back', teams_path, class:"link-body-emphasis link-offset-2" %>

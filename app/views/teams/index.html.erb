@@ -2,29 +2,29 @@
 
 <h1>Teams</h1>
 
-<table>
+<table class="table table-dark table-striped-columns">
   <thead>
     <tr>
-      <th>Nome team</th>
-      <th>Giocatore1</th>
-      <th>Giocatore2</th>
-      <th>Giocatore3</th>
-      <th>Giocatore4</th>
-      <th colspan="3"></th>
+      <th scope="col">Nome team</th>
+      <th scope="col">Giocatore 1</th>
+      <th scope="col">Giocatore 2</th>
+      <th scope="col">Giocatore 3</th>
+      <th scope="col">Giocatore 4</th>
+      <th colspan="3" scope="col">Azioni</th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="table-group-divider">
     <% @teams.each do |team| %>
-      <tr>
+      <tr class="table-light">
         <td><%= team.nome_team %></td>
         <td><%= team.giocatore1 %></td>
         <td><%= team.giocatore2 %></td>
         <td><%= team.giocatore3 %></td>
         <td><%= team.giocatore4 %></td>
-        <td><%= link_to 'Show', team %></td>
-        <td><%= link_to 'Edit', edit_team_path(team) %></td>
-        <td><%= link_to 'Destroy', destroy_team_path(team), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', team, class:"link-success link-offset-2" %></td>
+        <td><%= link_to 'Edit', edit_team_path(team), class:"link-warning link-offset-2" %></td>
+        <td><%= link_to 'Destroy', destroy_team_path(team), method: :delete, data: { confirm: 'Are you sure?' }, class:"link-danger link-offset-2" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Team', new_team_path %>
+<%= link_to 'New Team', new_team_path, class:"link-body-emphasis link-offset-2" %>

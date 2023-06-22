@@ -56,7 +56,9 @@
             </div>
         </div>
         <br>
-        <button type="button" class="btn " style="width:30vw; justify:center; background-color: #4682b4; "><%= link_to 'i tuoi team', teams_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
+        <div class="container" style="display: flex; justify-content: center;">
+            <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to 'i tuoi team', teams_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
+        </div>
     <% end %>
     <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
         <div class="card text-center">

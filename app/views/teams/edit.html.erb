@@ -1,6 +1,11 @@
-<h1>Editing Team</h1>
 
-<%= render 'form', team: @team %>
+<h1 style="text-align:center;">Editing Team</h1>
+<br>
+<div class="container" style="display: flex; justify-content: center;">
+    <%= render 'form', team: @team %>
+</div>
+<div class="container" style="display: flex; justify-content: center;">
+    <%= link_to 'Show', @team, class:"link-body-emphasis link-offset-2" %> |    
+    <%= link_to 'Back', teams_path, class:"link-body-emphasis link-offset-2" %>
+</div>
 
-<%= link_to 'Show', @team %> |
-<%= link_to 'Back', teams_path %>

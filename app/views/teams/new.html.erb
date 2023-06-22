@@ -1,5 +1,7 @@
-<h1>New Team</h1>
-
-<%= render 'form', team: @team %>
-
-<%= link_to 'Back', teams_path %>
+<h1 style="text-align:center;">New Team</h1><br>
+<div class="container" style="display: flex; justify-content: center;">
+    <%= render 'form', team: @team %>
+</div>
+<div class="container" style="display: flex; justify-content: center;">
+    <%= link_to 'Back', teams_path, class:"link-body-emphasis link-offset-2" %>
+</div>
