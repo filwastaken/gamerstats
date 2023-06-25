@@ -17,8 +17,9 @@
   </div>
 
   <div class="field">
-    <%= form.label :"giocatore 1", class:"form-label" %>
-    <%= form.text_field :giocatore1, class:"form-control", style:"max-width: 400px;" %>
+    <%= form.label :"Team Leader", class:"form-label" %>
+    <!--<%= form.text_field :giocatore1, class:"form-control", style:"max-width: 400px;" %>-->
+      <%= form.text_field :giocatore1, value: current_user.email, class:"form-control", readonly: true, style:"max-width: 400px;" %>
   </div>
 
   <div class="field">
