@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th scope="col">Nome team</th>
-      <th scope="col">TeamLeader</th>
+      <th scope="col">Team Leader</th>
       <th scope="col">Giocatore 2</th>
       <th scope="col">Giocatore 3</th>
       <th scope="col">Giocatore 4</th>
@@ -16,16 +16,18 @@
 
   <tbody class="table-group-divider">
     <% @teams.each do |team| %>
-      <tr class="table-light">
-        <td><%= team.nome_team %></td>
-        <td><%= team.giocatore1 %></td>
-        <td><%= team.giocatore2 %></td>
-        <td><%= team.giocatore3 %></td>
-        <td><%= team.giocatore4 %></td>
-        <td><%= link_to 'Show', team, class:"link-success link-offset-2" %></td>
-        <td><%= link_to 'Edit', edit_team_path(team), class:"link-warning link-offset-2" %></td>
-        <td><%= link_to 'Destroy', destroy_team_path(team), method: :delete, data: { confirm: 'Are you sure?' }, class:"link-danger link-offset-2" %></td>
-      </tr>
+      <% if current_user.playerid == team.giocatore1 %>
+        <tr class="table-light">
+          <td><%= team.nome_team %></td>
+          <td><%= team.giocatore1 %></td>
+          <td><%= team.giocatore2 %></td>
+          <td><%= team.giocatore3 %></td>
+          <td><%= team.giocatore4 %></td>
+          <td><%= link_to 'Show', team, class:"link-success link-offset-2" %></td>
+          <td><%= link_to 'Edit', edit_team_path(team), class:"link-warning link-offset-2" %></td>
+          <td><%= link_to 'Destroy', destroy_team_path(team), method: :delete, data: { confirm: 'Are you sure?' }, class:"link-danger link-offset-2" %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
