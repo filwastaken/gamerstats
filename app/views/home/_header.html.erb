@@ -1,3 +1,9 @@
+<%
+    puts "----------------------"
+    puts current_user
+    puts "----------------------"
+%>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <%= link_to 'GamerStats', root_path, class:"navbar-brand"%>
@@ -6,7 +12,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <% if user_signed_in?%>
+                <% if user_signed_in? || session[:user] != nil %>
                     <li class="nav-item">
                         <!--<%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-link"%>-->   
                         <%= link_to 'Logout', destroy_user_session_path, method: :get, class:"nav-link link-light"%>

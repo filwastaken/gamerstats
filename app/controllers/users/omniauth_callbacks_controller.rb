@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "securerandom"
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
@@ -10,24 +11,36 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def bnet
-    access_token =  auth["credentials"]["token"]
-    battletag = auth["info"]["battletag"]
+    auth = request.env['omniauth.auth']
     uid = auth["uid"]
-    user = User.from_omniauth(auth)
+    battletag = auth['info']['battletag']
+    @user = User.from_omniauth(auth)
 
-    if user.present?
-      sign_out_all_scopes
-      session[:access_token] = access_token
-      session[:battletag] = battletag
-      session[:uid] = uid
-      session[:user] = user
+    if @user.present?
+      session[:user] = @user
+      sign_in_and_redirect @user, event: :authentication
       flash[:success] = t'devise.omniauth.callbacks.success', kind: 'Bnet'
-      sign_in_and_redirect user, event: :authentication
     else
+      session['devise.battle_net_data'] = request.env['omniauth.auth']
+      redirect_to new_user_registration_path
       flash[:alert] = t'devise.omniauth.callbacks.failure', kind: 'Bnet', reason: "#{auth.info.email} is not authorized."
-      redirect_to new:user_session_path
     end
-    
+
+    if !User.exists?(uid: uid)
+      newuser = User.create!(
+        email:"#{uid}.placeholder@placeholder.com",
+        password:"#{SecureRandom.alphanumeric(16)}",
+        created_at:Time.now,
+        updated_at:Time.now,
+        uid:uid,
+        role:0,
+        provider:'bnet'
+      )
+    else
+      newuser = User.find_by(uid: uid)
+    end
+
+    sign_in(newuser, scope: :user)
   end
 
   # More info at:

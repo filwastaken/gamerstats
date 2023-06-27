@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
   resources :stats
   resources :teams
-  devise_for :users, controllers: {
-    registrations: 'user/registrations',
-    session: 'user/session',
-    omniauth_callbacks: 'users/omniauth_callbacks'
-  }
+
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   
   get '/teams/:id/destroy', to: 'teams#destroy', as: 'destroy_team'
  
