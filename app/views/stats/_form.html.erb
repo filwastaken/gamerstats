@@ -1,0 +1,217 @@
+<%= form_with(model: stat) do |form| %>
+  <% if stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stat.errors.count, "error") %> prohibited this stat from being saved:</h2>
+
+      <ul>
+        <% stat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id %>
+    <%= form.number_field :id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :region %>
+    <%= form.number_field :region %>
+  </div>
+
+  <div class="field">
+    <%= form.label :realm %>
+    <%= form.number_field :realm %>
+  </div>
+
+  <div class="field">
+    <%= form.label :displayName %>
+    <%= form.text_field :displayName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clanName %>
+    <%= form.text_field :clanName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clanTag %>
+    <%= form.text_field :clanTag %>
+  </div>
+
+  <div class="field">
+    <%= form.label :profilePath %>
+    <%= form.text_field :profilePath %>
+  </div>
+
+  <div class="field">
+    <%= form.label :primaryRace %>
+    <%= form.text_field :primaryRace %>
+  </div>
+
+  <div class="field">
+    <%= form.label :terranWins %>
+    <%= form.number_field :terranWins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :protossWins %>
+    <%= form.number_field :protossWins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zergWins %>
+    <%= form.number_field :zergWins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :highest1v1Rank %>
+    <%= form.text_field :highest1v1Rank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :highestTeamRank %>
+    <%= form.text_field :highestTeamRank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonTotalGames %>
+    <%= form.number_field :seasonTotalGames %>
+  </div>
+
+  <div class="field">
+    <%= form.label :careerTotalGames %>
+    <%= form.number_field :careerTotalGames %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.number_field :level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :levelTerran %>
+    <%= form.number_field :levelTerran %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalLevelXPTerran %>
+    <%= form.number_field :totalLevelXPTerran %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentLevelXPTerran %>
+    <%= form.number_field :currentLevelXPTerran %>
+  </div>
+
+  <div class="field">
+    <%= form.label :levelZerg %>
+    <%= form.number_field :levelZerg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalLevelXPZerg %>
+    <%= form.number_field :totalLevelXPZerg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentLevelXPZerg %>
+    <%= form.number_field :currentLevelXPZerg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :levelProtoss %>
+    <%= form.number_field :levelProtoss %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalLevelXPProtoss %>
+    <%= form.number_field :totalLevelXPProtoss %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentLevelXPProtoss %>
+    <%= form.number_field :currentLevelXPProtoss %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonId %>
+    <%= form.number_field :seasonId %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonNumber %>
+    <%= form.number_field :seasonNumber %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonYear %>
+    <%= form.number_field :seasonYear %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalGamesThisSeason %>
+    <%= form.number_field :totalGamesThisSeason %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins1vs1 %>
+    <%= form.number_field :wins1vs1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games1vs1 %>
+    <%= form.number_field :games1vs1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins2vs2 %>
+    <%= form.number_field :wins2vs2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games2vs2 %>
+    <%= form.number_field :games2vs2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins3vs3 %>
+    <%= form.number_field :wins3vs3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games3vs3 %>
+    <%= form.number_field :games3vs3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins4vs4 %>
+    <%= form.number_field :wins4vs4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games4vs4 %>
+    <%= form.number_field :games4vs4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :winsArchon %>
+    <%= form.number_field :winsArchon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gamesArchon %>
+    <%= form.number_field :gamesArchon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalPointsAchievements %>
+    <%= form.number_field :totalPointsAchievements %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

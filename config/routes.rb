@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  resources :stats
   resources :teams
-  devise_for :users
-  
+  devise_for :users, controllers: {
+    registrations: 'user/registrations',
+    session: 'user/session',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
   
   get '/teams/:id/destroy', to: 'teams#destroy', as: 'destroy_team'
  
@@ -17,5 +21,14 @@ Rails.application.routes.draw do
   
   get '/personstats', to: 'home#personstats'
   root 'home#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  #get '/auth/:provider/callback', to: 'session#create'
+  #get '/auth/failure' => 'session#fail'
+  #get '/session/destroy' => 'session#destroy'
+  #get '/session/create' => 'session#create'
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+
 end
