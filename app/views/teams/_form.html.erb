@@ -19,7 +19,7 @@
   <div class="field">
     <%= form.label :"Team Leader", class:"form-label" %>
     <!--<%= form.text_field :giocatore1, class:"form-control", style:"max-width: 400px;" %>-->
-      <%= form.text_field :giocatore1, value: current_user.playerid, class:"form-control", readonly: true, style:"max-width: 400px;" %>
+      <%= form.text_field :giocatore1, value: current_user.uid, class:"form-control", readonly: true, style:"max-width: 400px;" %>
   </div>
 
   <div class="field">
