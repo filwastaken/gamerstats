@@ -1,0 +1,13 @@
+
+<h1 style="text-align:center;">Editing Team</h1>
+<br>
+<div class="container" style="background-color: #ffffffc8; padding-top:12px; padding-bottom:12px; width:30vw;">
+    <div class="container" style="display: flex; justify-content: center;">
+        <%= render 'form', team: @team %>
+    </div>
+    <div class="container" style="display: flex; justify-content: center;">
+        <%= link_to 'Show', @team, class:"link-body-emphasis link-offset-2" %> &nbsp &nbsp | &nbsp &nbsp
+        <%= link_to 'Back', teams_path, class:"link-body-emphasis link-offset-2" %>
+    </div>
+</div>
+
