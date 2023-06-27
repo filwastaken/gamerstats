@@ -1,0 +1,24 @@
+#!/bin/bash
+redis-server 1>/dev/null &
+T1=${!}
+sleep 0.5
+echo "redis started"
+bundle exec sidekiq 1>./log/sidekiq.log &
+T2=${!}
+sleep 0.5
+echo "sidekiq started"
+rails s 1>/dev/null &
+T3=${!}
+sleep 0.5
+echo "rails started"
+printf "##### Server Ready ####\n### Click 'enter' to close it #####\n"
+read var
+kill ${T3}
+wait ${T3}
+echo "rails closed"
+kill ${T2}
+wait ${T2}
+echo "sidekiq closed"
+kill ${T1}
+wait ${T1}
+echo "redis closed"

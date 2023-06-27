@@ -1,0 +1,28 @@
+2023-06-21T14:32:26.742Z pid=10469 tid=9o5 INFO: Booting Sidekiq 6.5.8 with Sidekiq::RedisConnection::RedisAdapter options {:url=>"redis://127.0.0.1:6379/0"}
+2023-06-21T14:32:26.918Z pid=10469 tid=9o5 INFO: Booted Rails 6.1.7.3 application in development environment
+2023-06-21T14:32:26.918Z pid=10469 tid=9o5 INFO: Running in ruby 2.7.2p137 (2020-10-01 revision 5445e04352) [x86_64-linux]
+2023-06-21T14:32:26.918Z pid=10469 tid=9o5 INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2023-06-21T14:32:26.918Z pid=10469 tid=9o5 INFO: Upgrade to Sidekiq Pro for more features and support: https://sidekiq.org
+2023-06-21T14:32:26.922Z pid=10469 tid=9o5 DEBUG: Client Middleware: 
+2023-06-21T14:32:26.922Z pid=10469 tid=9o5 DEBUG: Server Middleware: 
+2023-06-21T14:32:26.922Z pid=10469 tid=9o5 DEBUG: Sidekiq
+2023-06-21T14:32:26.931Z pid=10469 tid=j59 class=BackgroundJob jid=f559707d1ed88f01f738d482 INFO: start
+//////////////////
+2023-06-21T14:32:33.190Z pid=10469 tid=j3x class=BackgroundJob jid=06cdcdb61978fa863fd40b9c INFO: start
+2023-06-21T14:32:33.191Z pid=10469 tid=j2h class=BackgroundJob jid=0039057d34203045682ab7f7 INFO: start
+//////////////////
+//////////////////
+//////////////////
+2023-06-21T14:32:33.192Z pid=10469 tid=j2h class=BackgroundJob jid=0039057d34203045682ab7f7 elapsed=0.002 INFO: done
+2023-06-21T14:33:04.773Z pid=10469 tid=9o5 DEBUG: Got TERM signal
+2023-06-21T14:33:04.774Z pid=10469 tid=9o5 INFO: Shutting down
+2023-06-21T14:33:04.774Z pid=10469 tid=9o5 INFO: Terminating quiet threads
+2023-06-21T14:33:04.774Z pid=10469 tid=j1t INFO: Scheduler exiting...
+2023-06-21T14:33:05.275Z pid=10469 tid=9o5 INFO: Pausing to allow jobs to finish...
+2023-06-21T14:33:29.313Z pid=10469 tid=9o5 WARN: Terminating 2 busy threads
+2023-06-21T14:33:29.314Z pid=10469 tid=9o5 DEBUG: Jobs still in progress [#<struct Sidekiq::BasicFetch::UnitOfWork queue="queue:default", job="{\"retry\":true,\"queue\":\"default\",\"args\":[\"USrMfFHHtvKa1FQJ59ifKjtGPbXVjWILcO\",4365361,4365461],\"class\":\"BackgroundJob\",\"jid\":\"f559707d1ed88f01f738d482\",\"created_at\":1687357888.5075233,\"enqueued_at\":1687357888.5076077}", config=Sidekiq>, #<struct Sidekiq::BasicFetch::UnitOfWork queue="queue:default", job="{\"retry\":true,\"queue\":\"default\",\"args\":[\"USrMfFHHtvKa1FQJ59ifKjtGPbXVjWILcO\",4365361,4365461],\"class\":\"BackgroundJob\",\"jid\":\"06cdcdb61978fa863fd40b9c\",\"created_at\":1687357953.1897826,\"enqueued_at\":1687357953.1898613}", config=Sidekiq>]
+2023-06-21T14:33:29.314Z pid=10469 tid=9o5 DEBUG: Re-queueing terminated jobs
+2023-06-21T14:33:29.315Z pid=10469 tid=9o5 INFO: Pushed 2 jobs back to Redis
+2023-06-21T14:33:29.320Z pid=10469 tid=j3x class=BackgroundJob jid=06cdcdb61978fa863fd40b9c elapsed=56.131 INFO: fail
+2023-06-21T14:33:29.321Z pid=10469 tid=j59 class=BackgroundJob jid=f559707d1ed88f01f738d482 elapsed=62.39 INFO: fail
+2023-06-21T14:33:29.819Z pid=10469 tid=9o5 INFO: Bye!
