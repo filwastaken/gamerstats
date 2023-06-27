@@ -12,6 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2023_06_21_180447) do
 
+  create_table "teams", force: :cascade do |t|
+    t.string "nome_team"
+    t.string "giocatore1"
+    t.string "giocatore2"
+    t.string "giocatore3"
+    t.string "giocatore4"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "stats", id: false, force: :cascade do |t|
     t.integer "id"
     t.integer "region"
@@ -72,5 +82,4 @@ ActiveRecord::Schema.define(version: 2023_06_21_180447) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end

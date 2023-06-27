@@ -1,0 +1,46 @@
+<%= form_with(model: team) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+        <% team.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nome_team, class:"form-label" %>
+    <%= form.text_field :nome_team, class:"form-control", style:"max-width: 400px;" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :"Team Leader", class:"form-label" %>
+    <!--<%= form.text_field :giocatore1, class:"form-control", style:"max-width: 400px;" %>-->
+      <%= form.text_field :giocatore1, value: current_user.playerid, class:"form-control", readonly: true, style:"max-width: 400px;" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :"giocatore 2", class:"form-label" %>
+    <%= form.text_field :giocatore2, class:"form-control", style:"max-width: 400px;" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :"giocatore 3", class:"form-label" %>
+    <%= form.text_field :giocatore3, class:"form-control", style:"max-width: 400px;" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :"giocatore 4", class:"form-label" %>
+    <%= form.text_field :giocatore4, class:"form-control", style:"max-width: 400px;" %>
+  </div>
+  <br>
+  
+  <div class="container" style="display: flex; justify-content: center;">
+    <div class="actions">
+      <%= form.submit "submit", class:"btn btn-dark"%>
+    </div>
+  </div>
+<% end %>

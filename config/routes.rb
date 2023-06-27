@@ -1,13 +1,26 @@
 Rails.application.routes.draw do
   resources :stats
+  resources :teams
   devise_for :users, controllers: {
     registrations: 'user/registrations',
     session: 'user/session',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  get '/teams/:id/destroy', to: 'teams#destroy', as: 'destroy_team'
+ 
+  devise_scope :user do  
+    get '/users/sign_out' => 'devise/sessions#destroy'     
+  end
 
-  root 'pages#home'
+  resources :home do
+    member do
+      patch :update_role
+    end
+  end
+  
+  get '/personstats', to: 'home#personstats'
+  root 'home#index'
   
   #get '/auth/:provider/callback', to: 'session#create'
   #get '/auth/failure' => 'session#fail'
