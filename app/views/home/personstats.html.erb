@@ -276,8 +276,8 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <%
-                                    if(Stat.find_by(uid: 1315) != nil)
-                                        wl_ratio_base = Stat.find_by(uid: 1315).wlRatio
+                                    if(Stat.find_by(uid: session[:uid]) != nil)
+                                        wl_ratio_base = Stat.find_by(uid: session[:uid]).wlRatio
                                         closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(8)
                                         lista_utenti = closest_values.pluck(:displayName, :wlRatio)
                                         lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
