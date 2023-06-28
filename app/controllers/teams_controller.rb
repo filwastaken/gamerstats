@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_team, only: %i[ show edit update destroy abbandona ]
 
   # GET /teams or /teams.json
   def index
@@ -41,6 +41,19 @@ class TeamsController < ApplicationController
       if @team.update(team_params)
         format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # abbandona
+  def abbandona
+    respond_to do |format|
+      if @team.update(team_params)
+        format.html { redirect_to  personstats_url, notice: "Team was successfully updated." }
+        format.json { render :show, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
