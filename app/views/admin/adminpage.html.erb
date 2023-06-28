@@ -15,13 +15,15 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <tr class="table-light">
-          <th scope="row">1</th>
-          <td>2</td>
-          <td>3</td>
-          <td> <button> Click Me! :) </button> </td>
-          <td> <button> Click Me! :) </button> </td>
-        </tr>
+        <% @savedusers.each do |user| %>
+          <tr class="table-light">
+            <th scope="row"> <%= user.uid %> </th>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td> <button> Click Me! :) </button> </td> <!-- TODO: Regala abbonamento -->
+            <td> <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
@@ -41,22 +43,22 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <tr class="table-light">
-          <th scope="row">1</th>
-          <td>
-            <div style="display: flex; flex-direction: column; flex-wrap: wrap">
-              <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around"> 
-                <a> Utente 1 </a>
-                <a> Utente 2 </a>
+        <% @savedteams.each do |team| %>
+          <tr class="table-light">
+            <th scope="row"> <%= team.nome_team %> </th>
+            <td>
+              <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center">
+                <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
+                  <a> <%= team.giocatore1 %> </a> <a> <%= team.giocatore3 %> </a>
+                </div>
+                <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
+                  <a> <%= team.giocatore2 %> </a> <a> <%= team.giocatore4 %> </a>
+                </div>
               </div>
-              <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around"> 
-                <a> Utente 3 </a>
-                <a> Utente 4 </a>
-              </div>
-            </div>
-          </td>
-          <td> <button> Click Me! :) </button> </td>
-        </tr>
+            </td>
+            <td> <div class="form-label"> <%= button_to "Delete team", delete_team_admin_path(id: team.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

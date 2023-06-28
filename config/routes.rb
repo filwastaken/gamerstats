@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  
+  # devide routes
   devise_for :admins
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  
+  # resources routes
   resources :stats
   resources :teams
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   
   get '/teams/:id/destroy', to: 'teams#destroy', as: 'destroy_team'
  
@@ -22,7 +26,11 @@ Rails.application.routes.draw do
   end
   
   get '/personstats', to: 'home#personstats'
+
+  # Admin routes
   get '/adminpage', to: 'admin#adminpage'
+  delete '/adminpage/:id/delete_team', to: 'admin#delete_team', as: 'delete_team_admin'
+  delete '/adminpage/:id/delete_user', to: 'admin#delete_user', as: 'delete_user_admin'
 
   root 'home#index'
   
