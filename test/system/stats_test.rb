@@ -28,7 +28,6 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Gamesarchon", with: @stat.gamesArchon
     fill_in "Highest1v1rank", with: @stat.highest1v1Rank
     fill_in "Highestteamrank", with: @stat.highestTeamRank
-    fill_in "Id", with: @stat.id
     fill_in "Level", with: @stat.level
     fill_in "Levelprotoss", with: @stat.levelProtoss
     fill_in "Levelterran", with: @stat.levelTerran
@@ -48,6 +47,7 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Totallevelxpterran", with: @stat.totalLevelXPTerran
     fill_in "Totallevelxpzerg", with: @stat.totalLevelXPZerg
     fill_in "Totalpointsachievements", with: @stat.totalPointsAchievements
+    fill_in "Uid", with: @stat.uid
     fill_in "Wins1vs1", with: @stat.wins1vs1
     fill_in "Wins2vs2", with: @stat.wins2vs2
     fill_in "Wins3vs3", with: @stat.wins3vs3
@@ -78,7 +78,6 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Gamesarchon", with: @stat.gamesArchon
     fill_in "Highest1v1rank", with: @stat.highest1v1Rank
     fill_in "Highestteamrank", with: @stat.highestTeamRank
-    fill_in "Id", with: @stat.id
     fill_in "Level", with: @stat.level
     fill_in "Levelprotoss", with: @stat.levelProtoss
     fill_in "Levelterran", with: @stat.levelTerran
@@ -98,6 +97,7 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Totallevelxpterran", with: @stat.totalLevelXPTerran
     fill_in "Totallevelxpzerg", with: @stat.totalLevelXPZerg
     fill_in "Totalpointsachievements", with: @stat.totalPointsAchievements
+    fill_in "Uid", with: @stat.uid
     fill_in "Wins1vs1", with: @stat.wins1vs1
     fill_in "Wins2vs2", with: @stat.wins2vs2
     fill_in "Wins3vs3", with: @stat.wins3vs3

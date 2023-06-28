@@ -3,7 +3,7 @@ class BackgroundJob
   
     def perform(access_token, min, max, thread)
       puts "//////////////////"
-      regionIds = ["1","2","3","5"]
+      regionIds = ["2"]
       realmIds = ["1","2"]
   
       for profileId in min..max

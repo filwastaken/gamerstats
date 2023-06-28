@@ -12,8 +12,8 @@ class HomeController < ApplicationController
     Sidekiq::ScheduledSet.new.clear
     Sidekiq::DeadSet.new.clear
 =begin
-    a = 80
-    interval = 1
+    a = 800
+    interval = 50
     BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
     a = a + interval
     BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
