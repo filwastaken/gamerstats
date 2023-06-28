@@ -18,7 +18,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.present?
       session[:user] = @user
-      puts auth["credentials"]["token"]
       session[:access_token] = auth["credentials"]["token"]
       sign_in_and_redirect @user, event: :authentication
       flash[:success] = t'devise.omniauth.callbacks.success', kind: 'Bnet'

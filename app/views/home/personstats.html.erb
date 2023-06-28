@@ -146,8 +146,8 @@
                         <th scope="col">Achievements</th>
                         </tr>
                     </thead>
-                    <% BackgroundJob.perform_async(session[:access_token], session[:uid], session[:uid], "1") %>
-                    <% statistiche = Stat.find_by(id: session[:uid]) %>
+                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
+                    <% statistiche = Stat.find_by(uid: session[:uid]) %>
                     <% if statistiche!= nil%>
                         <tbody class="table-group-divider">
                             <tr class="table-light">
@@ -156,8 +156,8 @@
                             <td><%= statistiche.highest1v1Rank %></td>
                             <td><%= statistiche.terranWins %></td>
                             <td><%= statistiche.totalLevelXPTerran %></td>
-                            <td><%= statistiche.protosWins %></td>
-                            <td><%= statistiche.totalLevelXPProtos %></td>
+                            <td><%= statistiche.protossWins %></td>
+                            <td><%= statistiche.totalLevelXPProtoss %></td>
                             <td><%= statistiche.zergWins %></td>
                             <td><%= statistiche.totalLevelXPZerg %></td>
                             <td><%= statistiche.totalPointsAchievements %></td>
