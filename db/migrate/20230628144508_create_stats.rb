@@ -5,17 +5,13 @@ class CreateStats < ActiveRecord::Migration[6.1]
       t.integer :region
       t.integer :realm
       t.string :displayName
-      t.string :clanName
-      t.string :clanTag
-      t.string :profilePath
-      t.string :primaryRace
       t.integer :terranWins
       t.integer :protossWins
       t.integer :zergWins
-      t.string :highest1v1Rank
-      t.string :highestTeamRank
-      t.integer :seasonTotalGames
       t.integer :careerTotalGames
+      t.integer :totalWins
+      t.integer :totalLosses
+      t.float :wlRatio
       t.integer :level
       t.integer :levelTerran
       t.integer :totalLevelXPTerran
@@ -26,10 +22,6 @@ class CreateStats < ActiveRecord::Migration[6.1]
       t.integer :levelProtoss
       t.integer :totalLevelXPProtoss
       t.integer :currentLevelXPProtoss
-      t.integer :seasonId
-      t.integer :seasonNumber
-      t.integer :seasonYear
-      t.integer :totalGamesThisSeason
       t.integer :wins1vs1
       t.integer :games1vs1
       t.integer :wins2vs2
@@ -41,6 +33,17 @@ class CreateStats < ActiveRecord::Migration[6.1]
       t.integer :winsArchon
       t.integer :gamesArchon
       t.integer :totalPointsAchievements
+      t.string :highest1v1Rank
+      t.string :highestTeamRank
+      t.string :clanName
+      t.string :clanTag
+      t.string :profilePath
+      t.string :primaryRace
+      t.integer :seasonId
+      t.integer :seasonNumber
+      t.integer :seasonYear
+      t.integer :seasonTotalGames
+      t.integer :totalGamesThisSeason
 
       t.timestamps
     end

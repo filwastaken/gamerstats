@@ -60,15 +60,40 @@
                             <table class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">STATISTICA 1</th>
-                                    <th scope="col">STATISTICA 2</th>
+                                    <th scope="col">Nickname</th>
+                                    <th scope="col">Rapporto W/L</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                <%
+                                    if(Stat.find_by(uid: session[:uid]) != nil)
+                                        wl_ratio_base = Stat.find_by(uid: session[:uid]).wlRatio
+                                        closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(5)
+                                        lista_utenti = closest_values.pluck(:displayName, :wlRatio)
+                                        lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
+                                    else
+                                        lista_utenti = []
+                                    end
+                                %>
+                                
                                     <tr class="table-light">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    </tr>
+                                    <% if lista_utenti.length != 0 %>
+                                        <% lista_utenti.each do |nome, wl| %>
+                                            <tr class="table-light">
+                                                <td><%= nome %></td>
+                                                <td><%= wl %></td>
+                                            </tr>
+                                        <% end %>
+                                    <%else%>
+                                        <tr class="table-light">
+                                            <td>
+                                                null
+                                            </td>
+                                            <td>
+                                                null
+                                            </td>
+                                        </tr>
+                                    <%end%>
                                 </tbody>
                             </table>
                         </div>
@@ -247,15 +272,36 @@
                                     <tr>
                                     <th scope="col">STATISTICA 1</th>
                                     <th scope="col">STATISTICA 2</th>
-                                    <th scope="col">STATISTICA 3</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    <tr class="table-light">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    </tr>
+                                <%
+                                    if(Stat.find_by(uid: 1315) != nil)
+                                        wl_ratio_base = Stat.find_by(uid: 1315).wlRatio
+                                        closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(8)
+                                        lista_utenti = closest_values.pluck(:displayName, :wlRatio)
+                                        lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
+                                    else
+                                        lista_utenti = []
+                                    end
+                                %>
+                                <% if lista_utenti.length != 0 %>
+                                        <% lista_utenti.each do |nome, wl| %>
+                                            <tr class="table-light">
+                                                <td><%= nome %></td>
+                                                <td><%= wl %></td>
+                                            </tr>
+                                        <% end %>
+                                    <%else%>
+                                        <tr class="table-light">
+                                            <td>
+                                                null
+                                            </td>
+                                            <td>
+                                                null
+                                            </td>
+                                        </tr>
+                                    <%end%>
                                 </tbody>
                             </table>
                         </div>

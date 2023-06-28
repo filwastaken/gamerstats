@@ -46,13 +46,16 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Totallevelxpprotoss", with: @stat.totalLevelXPProtoss
     fill_in "Totallevelxpterran", with: @stat.totalLevelXPTerran
     fill_in "Totallevelxpzerg", with: @stat.totalLevelXPZerg
+    fill_in "Totallosses", with: @stat.totalLosses
     fill_in "Totalpointsachievements", with: @stat.totalPointsAchievements
+    fill_in "Totalwins", with: @stat.totalWins
     fill_in "Uid", with: @stat.uid
     fill_in "Wins1vs1", with: @stat.wins1vs1
     fill_in "Wins2vs2", with: @stat.wins2vs2
     fill_in "Wins3vs3", with: @stat.wins3vs3
     fill_in "Wins4vs4", with: @stat.wins4vs4
     fill_in "Winsarchon", with: @stat.winsArchon
+    fill_in "Wlratio", with: @stat.wlRatio
     fill_in "Zergwins", with: @stat.zergWins
     click_on "Create Stat"
 
@@ -96,13 +99,16 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Totallevelxpprotoss", with: @stat.totalLevelXPProtoss
     fill_in "Totallevelxpterran", with: @stat.totalLevelXPTerran
     fill_in "Totallevelxpzerg", with: @stat.totalLevelXPZerg
+    fill_in "Totallosses", with: @stat.totalLosses
     fill_in "Totalpointsachievements", with: @stat.totalPointsAchievements
+    fill_in "Totalwins", with: @stat.totalWins
     fill_in "Uid", with: @stat.uid
     fill_in "Wins1vs1", with: @stat.wins1vs1
     fill_in "Wins2vs2", with: @stat.wins2vs2
     fill_in "Wins3vs3", with: @stat.wins3vs3
     fill_in "Wins4vs4", with: @stat.wins4vs4
     fill_in "Winsarchon", with: @stat.winsArchon
+    fill_in "Wlratio", with: @stat.wlRatio
     fill_in "Zergwins", with: @stat.zergWins
     click_on "Update Stat"
 

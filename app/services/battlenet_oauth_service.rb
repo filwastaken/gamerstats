@@ -12,7 +12,7 @@ class BattlenetOauthService
             regionIds = [tupla.region]
             realmIds = [tupla.realm]
         else    
-            regionIds = ["2"]
+            regionIds = ["1","2"]
             realmIds = ["1","2"]
         end
 
@@ -26,13 +26,16 @@ class BattlenetOauthService
                 request["Authorization"] = "Bearer #{access_token}"
                 response = http.request(request)
         
+
                 if(response.code == "200")
                     begin
                         body = JSON.parse(response.body)
 
                         if Stat.exists?(uid: profileId)
-
                             userFromDB = Stat.find_by(uid: profileId)
+                            
+                            totalwins = 0
+                            careertotalgames = 0
                            
                             if(body["displayName"] != "")
                                 userFromDB.displayName = body["displayName"]
@@ -56,14 +59,17 @@ class BattlenetOauthService
                             
                             if(body["career"]["terranWins"] != nil)
                                 userFromDB.terranWins = body["career"]["terranWins"]
+                                totalwins = totalwins + body["career"]["terranWins"]
                             end
                             
                             if(body["career"]["protossWins"] != nil)
                                 userFromDB.protossWins = body["career"]["protossWins"]
+                                totalwins = totalwins + body["career"]["protossWins"]
                             end
                             
                             if(body["career"]["zergWins"] != nil)
                                 userFromDB.zergWins = body["career"]["zergWins"]
+                                totalwins = totalwins + body["career"]["zergWins"]
                             end
                             
                             if(body["career"]["highest1v1Rank"] != nil) 
@@ -80,6 +86,7 @@ class BattlenetOauthService
                             
                             if(body["career"]["careerTotalGames"] != nil)
                                 userFromDB.careerTotalGames = body["career"]["careerTotalGames"]
+                                careertotalgames = body["career"]["careerTotalGames"]
                             end
         
                             if(body["swarmLevels"]["level"] != nil)
@@ -140,6 +147,7 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][0]["wins"] != nil)
                                 userFromDB.wins1vs1 = body["season"]["stats"][0]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][0]["wins"]
                             end
                             
                             if(body["season"]["stats"][0]["games"] != nil)
@@ -148,6 +156,7 @@ class BattlenetOauthService
         
                             if(body["season"]["stats"][1]["wins"] != nil)
                                 userFromDB.wins2vs2 = body["season"]["stats"][1]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][1]["wins"]
                             end
         
                             if(body["season"]["stats"][1]["games"] != nil)
@@ -156,6 +165,7 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][2]["wins"] != nil)
                                 userFromDB.wins3vs3 = body["season"]["stats"][2]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][2]["wins"]
                             end
                             
                             if(body["season"]["stats"][2]["games"] != nil)
@@ -164,6 +174,7 @@ class BattlenetOauthService
         
                             if(body["season"]["stats"][3]["wins"] != nil)
                                 userFromDB.wins4vs4 = body["season"]["stats"][3]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][3]["wins"]
                             end
                             
                             if(body["season"]["stats"][3]["games"] != nil)
@@ -172,6 +183,7 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][4]["wins"] != nil)
                                 userFromDB.winsArchon = body["season"]["stats"][4]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][4]["wins"]
                             end
                             
                             if(body["season"]["stats"][4]["games"] != nil)
@@ -182,21 +194,38 @@ class BattlenetOauthService
                                 userFromDB.totalPointsAchievements = body["achievements"]["points"]["totalPoints"]
                             end
 
+                            userFromDB.totalWins = totalwins
+                            userFromDB.totalLosses = careertotalgames - totalwins
+                            
+                            totallosses = careertotalgames - totalwins
+
+                            if (careertotalgames - totalwins) == 0
+                                userFromDB.wlRatio = 0.0
+                            else
+                                userFromDB.wlRatio = (totalwins.to_f / totallosses.to_f)
+                            end
+
                             userFromDB.save
+
                             return []
 
                         else
+
                             user = Stat.new
 
+                            totalwins = 0
+                            careertotalgames = 0
+
                             user.uid = profileId
-                            user.region = region
+
+                            user.region = region                            
             
                             if(body["career"]["primaryRace"] != nil) 
                                 user.realm = body["realm"]
                             else
                                 user.realm = 0
                             end
-            
+
                             if(body["displayName"] != nil)
                                 user.displayName = body["displayName"]
                             else
@@ -225,25 +254,28 @@ class BattlenetOauthService
                             else
                                 user.primaryRace = "-"
                             end
-                            
+
                             if(body["career"]["terranWins"] != nil)
                                 user.terranWins = body["career"]["terranWins"]
+                                totalwins = totalwins + body["career"]["terranWins"]
                             else
                                 user.terranWins = 0
                             end
                             
                             if(body["career"]["protossWins"] != nil)
                                 user.protossWins = body["career"]["protossWins"]
+                                totalwins = totalwins + body["career"]["protossWins"]
                             else
                                 user.protossWins = 0
                             end
                             
                             if(body["career"]["zergWins"] != nil)
                                 user.zergWins = body["career"]["zergWins"]
+                                totalwins = totalwins + body["career"]["zergWins"]
                             else
                                 user.zergWins = 0
                             end
-            
+                            
                             if(body["career"]["highest1v1Rank"] != nil) 
                                 user.highest1v1Rank = body["career"]["highest1v1Rank"]
                             else
@@ -264,6 +296,7 @@ class BattlenetOauthService
                             
                             if(body["career"]["careerTotalGames"] != nil)
                                 user.careerTotalGames = body["career"]["careerTotalGames"]
+                                careertotalgames = body["career"]["careerTotalGames"]
                             else
                                 user.careerTotalGames = 0
                             end
@@ -279,7 +312,7 @@ class BattlenetOauthService
                             else
                                 user.levelTerran = 0
                             end
-                            
+
                             if(body["swarmLevels"]["terran"]["totalLevelXP"] != nil)
                                 user.totalLevelXPTerran = body["swarmLevels"]["terran"]["totalLevelXP"]
                             else
@@ -354,6 +387,7 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][0]["wins"] != nil)
                                 user.wins1vs1 = body["season"]["stats"][0]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][0]["wins"]
                             else
                                 user.wins1vs1 = 0
                             end
@@ -366,6 +400,7 @@ class BattlenetOauthService
             
                             if(body["season"]["stats"][1]["wins"] != nil)
                                 user.wins2vs2 = body["season"]["stats"][1]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][1]["wins"]
                             else
                                 user.wins2vs2 = 0
                             end
@@ -378,6 +413,7 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][2]["wins"] != nil)
                                 user.wins3vs3 = body["season"]["stats"][2]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][2]["wins"]
                             else
                                 user.wins3vs3 = 0
                             end
@@ -390,6 +426,7 @@ class BattlenetOauthService
             
                             if(body["season"]["stats"][3]["wins"] != nil)
                                 user.wins4vs4 = body["season"]["stats"][3]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][3]["wins"]
                             else
                                 user.wins4vs4 = 0
                             end
@@ -402,6 +439,7 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][4]["wins"] != nil)
                                 user.winsArchon = body["season"]["stats"][4]["wins"]
+                                totalwins = totalwins + body["season"]["stats"][4]["wins"]
                             else
                                 user.winsArchon = 0
                             end
@@ -418,7 +456,20 @@ class BattlenetOauthService
                                 user.totalPointsAchievements = 0
                             end
 
+                            user.totalWins = totalwins
+
+                            user.totalLosses = careertotalgames - totalwins
+                            
+                            totallosses = careertotalgames - totalwins
+
+                            if (careertotalgames - totalwins) == 0
+                                user.wlRatio = 0.0
+                            else
+                                user.wlRatio = (totalwins.to_f / totallosses.to_f)
+                            end
+
                             user.save
+                            
                             return []
                         end
                     rescue
@@ -432,8 +483,7 @@ end
 
     
 
-#rails g scaffold Stats uid:integer region:integer realm:integer displayName:string clanName:string clanTag:string profilePath:string primaryRace:string terranWins:integer protossWins:integer zergWins:integer highest1v1Rank:string highestTeamRank:string seasonTotalGames:integer careerTotalGames:integer level:integer levelTerran:integer totalLevelXPTerran:integer currentLevelXPTerran:integer levelZerg:integer totalLevelXPZerg:integer currentLevelXPZerg:integer levelProtoss:integer totalLevelXPProtoss:integer currentLevelXPProtoss:integer seasonId:integer seasonNumber:integer seasonYear:integer totalGamesThisSeason:integer wins1vs1:integer games1vs1:integer wins2vs2:integer games2vs2:integer wins3vs3:integer games3vs3:integer wins4vs4:integer games4vs4:integer winsArchon:integer gamesArchon:integer totalPointsAchievements:integer
-
+#rails g scaffold Stats uid:integer region:integer realm:integer displayName:string terranWins:integer protossWins:integer zergWins:integer careerTotalGames:integer totalWins:integer totalLosses:integer wlRatio:float level:integer levelTerran:integer totalLevelXPTerran:integer currentLevelXPTerran:integer levelZerg:integer totalLevelXPZerg:integer currentLevelXPZerg:integer levelProtoss:integer totalLevelXPProtoss:integer currentLevelXPProtoss:integer wins1vs1:integer games1vs1:integer wins2vs2:integer games2vs2:integer wins3vs3:integer games3vs3:integer wins4vs4:integer games4vs4:integer winsArchon:integer gamesArchon:integer totalPointsAchievements:integer highest1v1Rank:string highestTeamRank:string clanName:string clanTag:string profilePath:string primaryRace:string seasonId:integer seasonNumber:integer seasonYear:integer seasonTotalGames:integer totalGamesThisSeason:integer
 '''
 uid:integer
 region:integer
@@ -450,6 +500,9 @@ highest1v1Rank:string
 highestTeamRank:string
 seasonTotalGames:integer
 careerTotalGames:integer
+totalWins:integer
+totalLosses:integer
+wlRatio:float
 level:integer
 levelTerran:integer
 totalLevelXPTerran:integer
@@ -492,6 +545,9 @@ user.highest1v1Rank = 0
 user.highestTeamRank = 0
 user.seasonTotalGames = 0
 user.careerTotalGames = 0
+user.totalWins = 0
+user.totalLosses = 0
+user.wlRatio = 0.0
 user.level = 0
 user.levelTerran = 0
 user.totalLevelXPTerran = 0
@@ -517,4 +573,18 @@ user.games4vs4 = 0
 user.winsArchon = 0
 user.gamesArchon = 0
 user.totalPointsAchievements = 0
+'''
+'''
+terranWins
+protossWins
+zergWins
+careerTotalGames
+totalWins
+totalLosses
+WLRatio
+wins1vs1
+wins2vs2
+wins3vs3
+wins4vs4
+winsArchon
 '''
