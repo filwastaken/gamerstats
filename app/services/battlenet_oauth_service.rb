@@ -9,8 +9,8 @@ class BattlenetOauthService
         if access_token == nil
             return nil
         end
-        #puts "#{regionId} #{realmId} #{profileId}"
 
+        #puts "#{regionId} #{realmId} #{profileId}"
         url = URI.parse("https://us.api.blizzard.com/sc2/legacy/profile/#{regionId}/#{realmId}/#{profileId}")
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = (url.scheme == "https")
@@ -18,6 +18,7 @@ class BattlenetOauthService
         request = Net::HTTP::Get.new(url.path)
         request["Authorization"] = "Bearer #{access_token}"
         response = http.request(request)
+
 
         return [] if response.code == "404"
 
