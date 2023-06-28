@@ -3,17 +3,16 @@ class BackgroundJob
   
     def perform(access_token, min, max, thread)
       puts "//////////////////"
-      regionIds = ["2"]
-      realmIds = ["1","2"]
-  
+      min.each do |profileId|
+        puts "#{profileId}      thread: #{thread}"
+        BattlenetOauthService.ottieniProfilo(access_token, profileId)
+      end
+=begin
       for profileId in min..max
         puts "#{profileId}      thread: #{thread}      #{profileId} / #{max}"
-        regionIds.each do |region|
-          realmIds.each do |realm|
-            BattlenetOauthService.ottieniProfilo(access_token, profileId)
-          end
-        end
+        BattlenetOauthService.ottieniProfilo(access_token, profileId)
       end
+=end
       puts "//////////////////"
     end
 end
