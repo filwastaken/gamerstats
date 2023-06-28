@@ -6,7 +6,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <% if user_signed_in? || session[:user] != nil %>
+                <% puts "-------" %>
+                <% puts user_signed_in? %>
+                <% puts "-------" %>
+                
+                <% puts "-------" %>
+                <% puts admin_signed_in? %>
+                <% puts "-------" %>
+
+                <% if user_signed_in?%>
                     <li class="nav-item">
                         <!--<%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-link"%>-->   
                         <%= link_to 'Logout', destroy_user_session_path, method: :get, class:"nav-link link-light"%>
@@ -18,35 +26,48 @@
                         <%= link_to 'Personal', personstats_path, class:"nav-link link-light"%>    
                     </li>
                     <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.role%></li>
-                    <% if current_user.user? %>
-                        <li class="nav-item">
-                            <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "abbonato"), method: :patch do |f| %>
-                                <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:200px"%>
-                            <% end %>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeader"), method: :patch do |f| %>
-                                <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
-                            <% end %>
-                        </li>
-                        
-                    <% end %>
-                    <% if current_user.teamLeader? %>
-                        <li class="nav-item">
-                            <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeaderAbbonato"), method: :patch do |f| %>
-                                <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
-                            <% end %>
-                        </li>
-                    <% end %>
-                    <% if current_user.abbonato? %>
-                        <li class="nav-item">
-                            <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeaderAbbonato"), method: :patch do |f| %>
-                                <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
-                            <% end %>
-                        </li>
-                    <% end %>
                     
+                    <% if user_signed_in? %>
+                        <% if current_user.user? %>
+                            <li class="nav-item">
+                                <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "abbonato"), method: :patch do |f| %>
+                                    <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:200px"%>
+                                <% end %>
+                            </li>
+
+                            <li class="nav-item">
+                                <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeader"), method: :patch do |f| %>
+                                    <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
+                                <% end %>
+                            </li>
+
+                        <% end %>
+                        <% if current_user.teamLeader? %>
+                            <li class="nav-item">
+                                <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeaderAbbonato"), method: :patch do |f| %>
+                                    <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
+                                <% end %>
+                            </li>
+                        <% end %>
+                        <% if current_user.abbonato? %>
+                            <li class="nav-item">
+                                <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeaderAbbonato"), method: :patch do |f| %>
+                                    <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
+                                <% end %>
+                            </li>
+                        <% end %>
+                    <% end %>
+                <% elsif admin_signed_in? %>
+                    <li class="nav-item">
+                        <%= link_to 'Logout', destroy_admin_session_path, method: :get, class:"nav-link link-light"%>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to 'Edit Profile', edit_admin_registration_path, class:"nav-link link-light"%>    
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to 'Personal', personstats_path, class:"nav-link link-light"%>    
+                    </li>
+                    <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_admin.full_name%> </li>
                 <% else %>
                     <li class="nav-item">
                         <%= link_to 'Registrati', new_user_registration_path, class:"nav-link link-light"%>   
@@ -55,7 +76,7 @@
                         <a class="btn btn-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Login </a>
                         <ul class="dropdown-menu">
                             <li> <%= link_to 'Login utente', new_user_session_path, class:"dropdown-item"%> </li>
-                            <li><a class="dropdown-item" href="#">Login Amministratore</a></li>
+                            <li> <%= link_to 'Login amministratore', new_admin_session_path, class:"dropdown-item"%> </li>
                         </ul>
                     </div>
                 <% end %>
