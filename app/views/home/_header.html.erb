@@ -64,10 +64,10 @@
                     <li class="nav-item">
                         <%= link_to 'Edit Profile', edit_admin_registration_path, class:"nav-link link-light"%>    
                     </li>
-                    <li class="nav-item">
-                        <%= link_to 'Personal', personstats_path, class:"nav-link link-light"%>    
-                    </li>
                     <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_admin.full_name%> </li>
+                    <li class="nav-item">
+                        <%= link_to 'Placeholder (Account)', adminpage_path, class:"nav-link link-light"%>    
+                    </li>
                 <% else %>
                     <li class="nav-item">
                         <%= link_to 'Registrati', new_user_registration_path, class:"nav-link link-light"%>   

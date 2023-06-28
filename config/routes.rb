@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   end
   
   get '/personstats', to: 'home#personstats'
+  get '/adminpage', to: 'admin#adminpage'
+
   root 'home#index'
   
   #get '/auth/:provider/callback', to: 'session#create'
