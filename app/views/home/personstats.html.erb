@@ -108,15 +108,40 @@
                             <table class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">STATISTICA 1</th>
-                                    <th scope="col">STATISTICA 2</th>
+                                    <th scope="col">Nickname</th>
+                                    <th scope="col">Rapporto W/L</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                    <%
+                                        if(TeamStat.all.length != 0)
+                                            closest_values = TeamStat.order("wlratio").limit(3)
+                                            lista_gruppi = closest_values.pluck(:team_id, :wlratio)
+                                        else
+                                            lista_gruppi = []
+                                        end
+                                    %>
                                     <tr class="table-light">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    </tr>
+                                    <% if lista_gruppi.length != 0 %>
+                                        <% lista_gruppi.each do |id, wl| %>
+                                            <%if wl != nil%>
+                                                <% nometeam = Team.find_by(id: id).nome_team%>
+                                                <tr class="table-light">
+                                                    <td><%= nometeam %></td>
+                                                    <td><%= wl %></td>
+                                                </tr>
+                                            <% end %>
+                                        <% end %>
+                                    <%else%>
+                                        <tr class="table-light">
+                                            <td>
+                                                null
+                                            </td>
+                                            <td>
+                                                null
+                                            </td>
+                                        </tr>
+                                    <%end%>
                                 </tbody>
                             </table>
                         </div>
@@ -316,17 +341,40 @@
                             <table class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">STATISTICA 1</th>
-                                    <th scope="col">STATISTICA 2</th>
-                                    <th scope="col">STATISTICA 3</th>
+                                    <th scope="col">Nickname</th>
+                                    <th scope="col">Rapporto W/L</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                    <%
+                                        if(TeamStat.all.length != 0)
+                                            closest_values = TeamStat.order("wlratio").limit(5)
+                                            lista_gruppi = closest_values.pluck(:team_id, :wlratio)
+                                        else
+                                            lista_gruppi = []
+                                        end
+                                    %>
                                     <tr class="table-light">
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    </tr>
+                                    <% if lista_gruppi.length != 0 %>
+                                        <% lista_gruppi.each do |id, wl| %>
+                                            <%if wl != nil%>
+                                                <% nometeam = Team.find_by(id: id).nome_team%>
+                                                <tr class="table-light">
+                                                    <td><%= nometeam %></td>
+                                                    <td><%= wl %></td>
+                                                </tr>
+                                            <% end %>
+                                        <% end %>
+                                    <%else%>
+                                        <tr class="table-light">
+                                            <td>
+                                                null
+                                            </td>
+                                            <td>
+                                                null
+                                            </td>
+                                        </tr>
+                                    <%end%>
                                 </tbody>
                             </table>
                         </div>
@@ -380,18 +428,26 @@
                     </thead>
                     <tbody class="table-group-divider">
                         <% Team.all.each do |team|%>
-                            <%if team.giocatore1 == current_user.uid %>
+                            <%#if team.giocatore1 == current_user.uid %>
                                 <tr class="table-light">
                                 <td><%= team.nome_team %></td>
                                 <% teamStats = TeamStat.find_by(team_id: team.id) %>
-                                <td><%= teamStats.careertotalgames %></td>
-                                <td><%= teamStats.wins1vs1 %></td>
-                                <td><%= teamStats.wins2vs2 %></td>
-                                <td><%= teamStats.wins3vs3 %></td>
-                                <td><%= teamStats.wins4vs4 %></td>
-                                <td><%= teamStats.totalpointsachievements %></td>
+                                <% if teamStats.careertotalgames != nil%>
+                                    <td><%= teamStats.careertotalgames %></td>
+                                    <td><%= teamStats.wins1vs1 %></td>
+                                    <td><%= teamStats.wins2vs2 %></td>
+                                    <td><%= teamStats.wins3vs3 %></td>
+                                    <td><%= teamStats.wins4vs4 %></td>
+                                    <td><%= teamStats.totalpointsachievements %></td>
+                                <%else%>
+                                    <td colspan=10 >
+                                        <div class=container style="background-color:#f8d7da; color:red; ">
+                                            Gli utenti di questo team non hanno un account per il gioco !
+                                        </div>
+                                    </td>
+                                <%end%>
                                 </tr>
-                            <%end%>
+                            <%#end%>
                         <%end%>
                     </tbody>
                 </table>
@@ -428,7 +484,7 @@
                     </thead>
                     <tbody class="table-group-divider">
                         <% Team.all.each do |team|%>
-                            <%if team.giocatore1 == current_user.uid %>
+                            <%#if team.giocatore1 == current_user.uid %>
                                 <tr class="table-light">
                                 <td><%= team.nome_team %></td>
                                 <% teamStats = TeamStat.find_by(team_id: team.id) %>
@@ -451,7 +507,7 @@
                                     </td>
                                 <%end%>
                                 </tr>
-                            <%end%>
+                            <%#end%>
                         <%end%>
                     </tbody>
                 </table>
