@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
   end
 
+  get '/best_teams', to: 'teams#best_teams'
+  get '/worst_teams', to: 'teams#worst_teams'
+
   resources :home do
     member do
       patch :update_role

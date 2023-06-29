@@ -118,6 +118,22 @@ class TeamsController < ApplicationController
     end
   end
 
+  def worst_teams
+    closest_values = TeamStat.order("wlratio").limit(3)
+    teams_data = closest_values.map do |team_stat|
+      { name: team_stat.team.nome_team, wlRatio: team_stat.wlratio }
+    end
+    render json: teams_data
+  end
+
+  def best_teams
+    furthest_values = TeamStat.order("wlratio DESC").limit(3)
+    teams_data = furthest_values.map do |team_stat|
+      { name: team_stat.team.nome_team, wlRatio: team_stat.wlratio }
+    end
+    render json: teams_data
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
