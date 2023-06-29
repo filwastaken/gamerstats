@@ -43,7 +43,9 @@ class CreateStats < ActiveRecord::Migration[6.1]
       t.integer :seasonNumber
       t.integer :seasonYear
       t.integer :seasonTotalGames
-      t.integer :totalGamesThisSeason
+      t.integer :totalWinsThisSeason
+      t.integer :totalLossesThisSeason
+      t.float :wlRatioThisSeason
 
       t.timestamps
     end

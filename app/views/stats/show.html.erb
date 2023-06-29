@@ -211,8 +211,18 @@
 </p>
 
 <p>
-  <strong>Totalgamesthisseason:</strong>
-  <%= @stat.totalGamesThisSeason %>
+  <strong>Totalwinsthisseason:</strong>
+  <%= @stat.totalWinsThisSeason %>
+</p>
+
+<p>
+  <strong>Totallossesthisseason:</strong>
+  <%= @stat.totalLossesThisSeason %>
+</p>
+
+<p>
+  <strong>Wlratiothisseason:</strong>
+  <%= @stat.wlRatioThisSeason %>
 </p>
 
 <%= link_to 'Edit', edit_stat_path(@stat) %> |

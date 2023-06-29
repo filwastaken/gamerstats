@@ -8,22 +8,22 @@
                 <table class="table table-dark table-striped-columns">
                     <thead>
                         <tr>
-                        <th scope="col">Total Games</th>
-                        <th scope="col">wins 1vs1</th>
-                        <th scope="col">wins 2vs2</th>
-                        <th scope="col">wins 3vs3</th>
-                        <th scope="col">wins 4vs4</th>
+                        <th scope="col">Games this season</th>
+                        <th scope="col">Wins 1vs1</th>
+                        <th scope="col">Wins 2vs2</th>
+                        <th scope="col">Wins 3vs3</th>
+                        <th scope="col">Wins 4vs4</th>
                         <th scope="col">Achievements</th>
                         </tr>
                     </thead>
                     <% #BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
                     <% #statistiche = Stat.find_by(uid: session[:uid]) %>
-                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], 1354)%>
-                    <% statistiche = Stat.find_by(uid: 1354) %>
+                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], 1269)%>
+                    <% statistiche = Stat.find_by(uid: 1269) %>
                     <% if statistiche!= nil%>
                         <tbody class="table-group-divider">
                             <tr class="table-light">
-                            <td><%= statistiche.careerTotalGames %></td>
+                            <td><%= statistiche.seasonTotalGames %></td>
                             <td><%= statistiche.wins1vs1 %></td>
                             <td><%= statistiche.wins2vs2 %></td>
                             <td><%= statistiche.wins3vs3 %></td>
@@ -62,7 +62,7 @@
                     <% if statistiche!= nil%>
                         <tbody class="table-group-divider">
                             <tr class="table-light">
-                            <td class="d-flex justify-content-center"><%= pie_chart [['Wins', statistiche.totalWins],['Losses', statistiche.totalLosses]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
+                            <td class="d-flex justify-content-center"><%= pie_chart [['Wins', statistiche.totalWinsThisSeason],['Losses', statistiche.totalLossesThisSeason]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
                             </tr>
                         </tbody>
                     <% else %>
@@ -95,22 +95,22 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <%
-                                    if(Stat.find_by(uid: session[:uid]) != nil)
-                                        wl_ratio_base = Stat.find_by(uid: session[:uid]).wlRatio
-                                        closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(5)
-                                        lista_utenti = closest_values.pluck(:displayName, :wlRatio)
+                                    #if(Stat.find_by(uid: session[:uid]) != nil)
+                                    if(Stat.find_by(uid: 1269) != nil)
+                                        wl_ratio_base = Stat.find_by(uid: 1269).wlRatioThisSeason
+                                        closest_values = Stat.order(Arel.sql("ABS(wlRatioThisSeason - #{wl_ratio_base})")).limit(5)
+                                        lista_utenti = closest_values.pluck(:displayName, :wlRatioThisSeason)
                                         lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
                                     else
                                         lista_utenti = []
                                     end
                                 %>
-                                
                                     <tr class="table-light">
                                     <% if lista_utenti.length != 0 %>
-                                        <% lista_utenti.each do |nome, wl| %>
+                                        <% lista_utenti.each do |nome, wlthisseason| %>
                                             <tr class="table-light">
                                                 <td><%= nome %></td>
-                                                <td><%= wl %></td>
+                                                <td><%= wlthisseason %></td>
                                             </tr>
                                         <% end %>
                                     <%else%>
@@ -225,8 +225,10 @@
                         <th scope="col">Achievements</th>
                         </tr>
                     </thead>
-                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
-                    <% statistiche = Stat.find_by(uid: session[:uid]) %>
+                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
+                    <% #statistiche = Stat.find_by(uid: session[:uid]) %>
+                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], 1354)%>
+                    <% statistiche = Stat.find_by(uid: 1354) %>
                     <% if statistiche!= nil%>
                         <tbody class="table-group-divider">
                             <tr class="table-light">
@@ -312,7 +314,32 @@
                 </table>
             </div>
         </div>
+        
         <br>
+
+        <div class="card text-center" style="background-color: #ffffffb3;">
+            <div class="card-header">
+                GRAFICI PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <% if statistiche!= nil%>
+                        <tbody class="table-group-divider">
+                            <tr class="table-light">
+                            <td class="d-flex justify-content-center"><%= pie_chart [['Wins', statistiche.totalWins],['Losses', statistiche.totalLosses]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
+                            </tr>
+                        </tbody>
+                    <% else %>
+                        <tbody class="table-group-divider">
+                            <tr class="table-light">
+                            <td>Nessun dato da rappresentare</td>
+                            </tr>
+                        </tbody>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+
         <div class="container text-center">
             <div class="row">
                 <div class="col">

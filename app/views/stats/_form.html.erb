@@ -222,8 +222,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :totalGamesThisSeason %>
-    <%= form.number_field :totalGamesThisSeason %>
+    <%= form.label :totalWinsThisSeason %>
+    <%= form.number_field :totalWinsThisSeason %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalLossesThisSeason %>
+    <%= form.number_field :totalLossesThisSeason %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wlRatioThisSeason %>
+    <%= form.text_field :wlRatioThisSeason %>
   </div>
 
   <div class="actions">
