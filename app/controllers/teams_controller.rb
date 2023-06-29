@@ -82,7 +82,7 @@ class TeamsController < ApplicationController
     averages[:gamesarchon] = players_stats.average(:gamesarchon)
     averages[:totalpointsachievements] = players_stats.average(:totalpointsachievements)
     averages[:seasontotalgames] = players_stats.average(:seasontotalgames)
-    averages[:totalgamesthisseason] = players_stats.average(:totalgamesthisseason)
+    averages[:totalgamesthisseason] = players_stats.average(:totalwinsthisseason)
   
     team_stat = TeamStat.new(averages.merge(team: team))
     team_stat.save
