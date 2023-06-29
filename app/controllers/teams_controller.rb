@@ -23,9 +23,18 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
+
+    if Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore2, giocatore3: @team.giocatore3, giocatore4: @team.giocatore4)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to new_team_path
+      return
+    end
+
+
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
       respond_to do |format|
         if @team.save
+          calculate_averages(@team)
           format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
           format.json { render :show, status: :created, location: @team }
         else
@@ -39,12 +48,53 @@ class TeamsController < ApplicationController
     end
   end
 
+  def calculate_averages(team)
+    player_ids = [team.giocatore1, team.giocatore2, team.giocatore3, team.giocatore4]
+    players_stats = Stat.where(uid: player_ids)
+    
+    averages = {}
+    averages[:terranwins] = players_stats.average(:terranwins)
+    averages[:protosswins] = players_stats.average(:protosswins)
+    averages[:zergwins] = players_stats.average(:zergwins)
+    averages[:careertotalgames] = players_stats.average(:careertotalgames)
+    averages[:totalwins] = players_stats.average(:totalwins)
+    averages[:totallosses] = players_stats.average(:totallosses)
+    averages[:wlratio] = players_stats.average(:wlratio)
+    averages[:level] = players_stats.average(:level)
+    averages[:levelterran] = players_stats.average(:levelterran)
+    averages[:totallevelxpterran] = players_stats.average(:totallevelxpterran)
+    averages[:currentlevelxpterran] = players_stats.average(:currentlevelxpterran)
+    averages[:levelzerg] = players_stats.average(:levelzerg)
+    averages[:totallevelxpzerg] = players_stats.average(:totallevelxpzerg)
+    averages[:currentlevelxpzerg] = players_stats.average(:currentlevelxpzerg)
+    averages[:levelprotoss] = players_stats.average(:levelprotoss)
+    averages[:totallevelxpprotoss] = players_stats.average(:totallevelxpprotoss)
+    averages[:currentlevelxpprotoss] = players_stats.average(:currentlevelxpprotoss)
+    averages[:wins1vs1] = players_stats.average(:wins1vs1)
+    averages[:games1vs1] = players_stats.average(:games1vs1)
+    averages[:wins2vs2] = players_stats.average(:wins2vs2)
+    averages[:games2vs2] = players_stats.average(:games2vs2)
+    averages[:wins3vs3] = players_stats.average(:wins3vs3)
+    averages[:games3vs3] = players_stats.average(:games3vs3)
+    averages[:wins4vs4] = players_stats.average(:wins4vs4)
+    averages[:games4vs4] = players_stats.average(:games4vs4)
+    averages[:winsarchon] = players_stats.average(:winsarchon)
+    averages[:gamesarchon] = players_stats.average(:gamesarchon)
+    averages[:totalpointsachievements] = players_stats.average(:totalpointsachievements)
+    averages[:seasontotalgames] = players_stats.average(:seasontotalgames)
+    averages[:totalgamesthisseason] = players_stats.average(:totalgamesthisseason)
+  
+    team_stat = TeamStat.new(averages.merge(team: team))
+    team_stat.save
+  end  
+
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
     @team = Team.new(team_params)
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
       respond_to do |format|
         if @team.update(team_params)
+          calculate_averages(@team)
           format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
           format.json { render :show, status: :ok, location: @team }
         else

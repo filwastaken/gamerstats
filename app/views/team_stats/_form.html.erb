@@ -1,0 +1,177 @@
+<%= form_with(model: team_stat) do |form| %>
+  <% if team_stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team_stat.errors.count, "error") %> prohibited this team_stat from being saved:</h2>
+
+      <ul>
+        <% team_stat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :team_id %>
+    <%= form.text_field :team_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uid %>
+    <%= form.number_field :uid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :terranwins %>
+    <%= form.number_field :terranwins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :protosswins %>
+    <%= form.number_field :protosswins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zergwins %>
+    <%= form.number_field :zergwins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :careertotalgames %>
+    <%= form.number_field :careertotalgames %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalwins %>
+    <%= form.number_field :totalwins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totallosses %>
+    <%= form.number_field :totallosses %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wlratio %>
+    <%= form.text_field :wlratio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.number_field :level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :levelterran %>
+    <%= form.number_field :levelterran %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totallevelxpterran %>
+    <%= form.number_field :totallevelxpterran %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentlevelxpterran %>
+    <%= form.number_field :currentlevelxpterran %>
+  </div>
+
+  <div class="field">
+    <%= form.label :levelzerg %>
+    <%= form.number_field :levelzerg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totallevelxpzerg %>
+    <%= form.number_field :totallevelxpzerg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentlevelxpzerg %>
+    <%= form.number_field :currentlevelxpzerg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :levelprotoss %>
+    <%= form.number_field :levelprotoss %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totallevelxpprotoss %>
+    <%= form.number_field :totallevelxpprotoss %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentlevelxpprotoss %>
+    <%= form.number_field :currentlevelxpprotoss %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins1vs1 %>
+    <%= form.number_field :wins1vs1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games1vs1 %>
+    <%= form.number_field :games1vs1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins2vs2 %>
+    <%= form.number_field :wins2vs2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games2vs2 %>
+    <%= form.number_field :games2vs2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins3vs3 %>
+    <%= form.number_field :wins3vs3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games3vs3 %>
+    <%= form.number_field :games3vs3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wins4vs4 %>
+    <%= form.number_field :wins4vs4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :games4vs4 %>
+    <%= form.number_field :games4vs4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :winsarchon %>
+    <%= form.number_field :winsarchon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gamesarchon %>
+    <%= form.number_field :gamesarchon %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalpointsachievements %>
+    <%= form.number_field :totalpointsachievements %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasontotalgames %>
+    <%= form.number_field :seasontotalgames %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalgamesthisseason %>
+    <%= form.number_field :totalgamesthisseason %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

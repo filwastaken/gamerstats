@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_28_144508) do
+ActiveRecord::Schema.define(version: 2023_06_29_071548) do
 
   create_table "stats", primary_key: "uid", force: :cascade do |t|
     t.integer "region"
@@ -59,6 +59,43 @@ ActiveRecord::Schema.define(version: 2023_06_28_144508) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "team_stats", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "terranwins"
+    t.integer "protosswins"
+    t.integer "zergwins"
+    t.integer "careertotalgames"
+    t.integer "totalwins"
+    t.integer "totallosses"
+    t.float "wlratio"
+    t.integer "level"
+    t.integer "levelterran"
+    t.integer "totallevelxpterran"
+    t.integer "currentlevelxpterran"
+    t.integer "levelzerg"
+    t.integer "totallevelxpzerg"
+    t.integer "currentlevelxpzerg"
+    t.integer "levelprotoss"
+    t.integer "totallevelxpprotoss"
+    t.integer "currentlevelxpprotoss"
+    t.integer "wins1vs1"
+    t.integer "games1vs1"
+    t.integer "wins2vs2"
+    t.integer "games2vs2"
+    t.integer "wins3vs3"
+    t.integer "games3vs3"
+    t.integer "wins4vs4"
+    t.integer "games4vs4"
+    t.integer "winsarchon"
+    t.integer "gamesarchon"
+    t.integer "totalpointsachievements"
+    t.integer "seasontotalgames"
+    t.integer "totalgamesthisseason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_team_stats_on_team_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "nome_team"
     t.string "giocatore1"
@@ -86,4 +123,5 @@ ActiveRecord::Schema.define(version: 2023_06_28_144508) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "team_stats", "teams"
 end
