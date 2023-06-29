@@ -16,8 +16,10 @@
                         <th scope="col">Achievements</th>
                         </tr>
                     </thead>
-                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
-                    <% statistiche = Stat.find_by(uid: session[:uid]) %>
+                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
+                    <% #statistiche = Stat.find_by(uid: session[:uid]) %>
+                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], 1354)%>
+                    <% statistiche = Stat.find_by(uid: 1354) %>
                     <% if statistiche!= nil%>
                         <tbody class="table-group-divider">
                             <tr class="table-light">
@@ -48,7 +50,34 @@
                 </table>
             </div>
         </div>
+
         <br>
+
+        <div class="card text-center" style="background-color: #ffffffb3;">
+            <div class="card-header">
+                GRAFICI PERSONALI
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped-columns">
+                    <% if statistiche!= nil%>
+                        <tbody class="table-group-divider">
+                            <tr class="table-light">
+                            <td class="d-flex justify-content-center"><%= pie_chart [['Wins', statistiche.totalWins],['Losses', statistiche.totalLosses]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
+                            </tr>
+                        </tbody>
+                    <% else %>
+                        <tbody class="table-group-divider">
+                            <tr class="table-light">
+                            <td>Nessun dato da rappresentare</td>
+                            </tr>
+                        </tbody>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+
+        <br>
+
         <div class="container text-center" style="background-color: #ffffff00;">
             <div class="row">
                 <div class="col">
