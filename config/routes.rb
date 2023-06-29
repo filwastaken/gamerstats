@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :team_stats
   resources :stats
   resources :teams
 
