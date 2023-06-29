@@ -30,6 +30,29 @@ class TeamsController < ApplicationController
       return
     end
 
+    giocatori = []
+    if(@team.giocatore1 != nil)
+      giocatori.append(@team.giocatore1)
+    end
+    if(@team.giocatore2 != nil)
+      giocatori.append(@team.giocatore2)
+    end
+    if(@team.giocatore3 != nil)
+      giocatori.append(@team.giocatore3)
+    end
+    if(@team.giocatore4 != nil)
+      giocatori.append(@team.giocatore4)
+    end
+
+    a = giocatori.length
+    b = giocatori.uniq.length
+    
+    if(a != b)
+      flash[:notice] = "Non puoi mettere due volte lo stesso id"
+      redirect_to new_team_path
+      return
+    end
+
 
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
       if(@team.giocatore2!="")
@@ -116,6 +139,30 @@ class TeamsController < ApplicationController
   def update
     @team = Team.new(team_params)
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
+
+      giocatori = []
+      if(@team.giocatore1 != nil)
+        giocatori.append(@team.giocatore1)
+      end
+      if(@team.giocatore2 != nil)
+        giocatori.append(@team.giocatore2)
+      end
+      if(@team.giocatore3 != nil)
+        giocatori.append(@team.giocatore3)
+      end
+      if(@team.giocatore4 != nil)
+        giocatori.append(@team.giocatore4)
+      end
+  
+      a = giocatori.length
+      b = giocatori.uniq.length
+      
+      if(a != b)
+        flash[:notice] = "Non puoi mettere due volte lo stesso id"
+        redirect_to edit_team_path
+        return
+      end
+
       if(@team.giocatore2!="")
         BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
         if(Stat.find_by(uid: @team.giocatore2) == nil)

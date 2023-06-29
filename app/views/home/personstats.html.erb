@@ -1,4 +1,4 @@
-<% id_prova = 1269 %>
+<% id_prova = session[:uid] %>
 <% if user_signed_in? || session[:uid] != nil %>
     <% if current_user.user? || current_user.teamLeader? %>
         <div class="card text-center" style="background-color: #ffffffb3;">
