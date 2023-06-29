@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :team_stats
   resources :stats
+  resources :team_stats
   resources :teams
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

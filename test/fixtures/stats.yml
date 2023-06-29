@@ -43,7 +43,9 @@ one:
   seasonNumber: 1
   seasonYear: 1
   seasonTotalGames: 1
-  totalGamesThisSeason: 1
+  totalWinsThisSeason: 1
+  totalLossesThisSeason: 1
+  wlRatioThisSeason: 1.5
 
 two:
   uid: 1
@@ -88,4 +90,6 @@ two:
   seasonNumber: 1
   seasonYear: 1
   seasonTotalGames: 1
-  totalGamesThisSeason: 1
+  totalWinsThisSeason: 1
+  totalLossesThisSeason: 1
+  wlRatioThisSeason: 1.5
