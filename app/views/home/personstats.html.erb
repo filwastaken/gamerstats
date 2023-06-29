@@ -336,9 +336,13 @@
                     <div class="card text-center" style="background-color: #ffffffb3;">
                         <div class="card-header">
                             CLASSIFICA TEAM
+                            <br>
+                            <br>
+                            <button id="bestTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Migliori Team</button>
+                            <button id="worstTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Peggiori Team</button>
                         </div>
                         <div class="card-body">
-                            <table class="table table-dark table-striped-columns">
+                            <table id="teamTable" class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
                                     <th scope="col">Nickname</th>
@@ -346,35 +350,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    <%
-                                        if(TeamStat.all.length != 0)
-                                            closest_values = TeamStat.order("wlratio").limit(5)
-                                            lista_gruppi = closest_values.pluck(:team_id, :wlratio)
-                                        else
-                                            lista_gruppi = []
-                                        end
-                                    %>
-                                    <tr class="table-light">
-                                    <% if lista_gruppi.length != 0 %>
-                                        <% lista_gruppi.each do |id, wl| %>
-                                            <%if wl != nil%>
-                                                <% nometeam = Team.find_by(id: id).nome_team%>
-                                                <tr class="table-light">
-                                                    <td><%= nometeam %></td>
-                                                    <td><%= wl %></td>
-                                                </tr>
-                                            <% end %>
-                                        <% end %>
-                                    <%else%>
-                                        <tr class="table-light">
-                                            <td>
-                                                null
-                                            </td>
-                                            <td>
-                                                null
-                                            </td>
-                                        </tr>
-                                    <%end%>
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -521,3 +497,52 @@
         
     <% end %>
 <% end %>
+
+<script>
+  document.getElementById("bestTeamsButton").addEventListener("click", function() {
+    fetch('/best_teams')
+      .then(response => response.json())
+      .then(data => updateTeamTable(data));
+  });
+
+  document.getElementById("worstTeamsButton").addEventListener("click", function() {
+    fetch('/worst_teams')
+      .then(response => response.json())
+      .then(data => updateTeamTable(data));
+  });
+
+  function updateTeamTable(data) {
+    const teamTableBody = document.querySelector("#teamTable tbody");
+    teamTableBody.innerHTML = "";
+
+    if (data.length !== 0) {
+      data.forEach(team => {
+        const row = document.createElement("tr");
+        row.classList.add("table-light");
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = team.name;
+        row.appendChild(nameCell);
+
+        const wlCell = document.createElement("td");
+        wlCell.textContent = team.wlRatio;
+        row.appendChild(wlCell);
+
+        teamTableBody.appendChild(row);
+      });
+    } else {
+      const row = document.createElement("tr");
+      row.classList.add("table-light");
+
+      const nullCell1 = document.createElement("td");
+      nullCell1.textContent = "null";
+      row.appendChild(nullCell1);
+
+      const nullCell2 = document.createElement("td");
+      nullCell2.textContent = "null";
+      row.appendChild(nullCell2);
+
+      teamTableBody.appendChild(row);
+    }
+  }
+</script>
