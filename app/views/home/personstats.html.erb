@@ -56,7 +56,7 @@
 
         <div class="card text-center" style="background-color: #ffffffb3;">
             <div class="card-header">
-                GRAFICI PERSONALI
+                WL RATIO
             </div>
             <div class="card-body">
                 <table class="table table-dark table-striped-columns">
@@ -90,8 +90,8 @@
                             <table class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Nickname</th>
-                                    <th scope="col">Rapporto W/L</th>
+                                    <th scope="col">NICKNAME</th>
+                                    <th scope="col">W/L RATIO</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
@@ -139,14 +139,14 @@
                             <table class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Nickname</th>
-                                    <th scope="col">Rapporto W/L</th>
+                                    <th scope="col">TEAM NAME</th>
+                                    <th scope="col">W/L RATIO</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
                                     <%
                                         if(TeamStat.all.length != 0)
-                                            closest_values = TeamStat.order("wlratio").limit(3)
+                                            closest_values = TeamStat.order("wlratio DESC").limit(3)
                                             lista_gruppi = closest_values.pluck(:team_id, :wlratio)
                                         else
                                             lista_gruppi = []
@@ -190,7 +190,7 @@
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
-                            <th scope="col">NOME TEAM</th>
+                            <th scope="col">TEAM NAME</th>
                             <th scope="col" style="width: 25vw">VUOI ABBANDONARE IL TEAM ?</th>
                             </tr>
                         </thead>
@@ -400,8 +400,8 @@
                             <table class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">STATISTICA 1</th>
-                                    <th scope="col">STATISTICA 2</th>
+                                    <th scope="col">NICKNAME</th>
+                                    <th scope="col">WL RATIO</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
@@ -452,8 +452,8 @@
                             <table id="teamTable" class="table table-dark table-striped-columns">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Nickname</th>
-                                    <th scope="col">Rapporto W/L</th>
+                                    <th scope="col">TEAM NAME</th>
+                                    <th scope="col">W/L RATIO</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
@@ -475,7 +475,7 @@
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
-                            <th scope="col">NOME TEAM</th>
+                            <th scope="col">TEAM NAME</th>
                             <th scope="col" style="width: 25vw">VUOI ABBANDONARE IL TEAM ?</th>
                             </tr>
                         </thead>
