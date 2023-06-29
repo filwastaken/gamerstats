@@ -32,6 +32,30 @@ class TeamsController < ApplicationController
 
 
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
+      if(@team.giocatore2!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
+        if(Stat.find_by(uid: @team.giocatore2) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore2} non ha un account nel gioco, inserire un altro id"
+          redirect_to new_team_path
+          return
+        end
+      end
+      if(@team.giocatore3!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore3)
+        if(Stat.find_by(uid: @team.giocatore3) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore3} non ha un account nel gioco, inserire un altro id"
+          redirect_to new_team_path
+          return
+        end
+      end
+      if(@team.giocatore4!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore4)
+        if(Stat.find_by(uid: @team.giocatore4) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore4} non ha un account nel gioco, inserire un altro id"
+          redirect_to new_team_path
+          return
+        end
+      end
       respond_to do |format|
         if @team.save
           calculate_averages(@team)
@@ -92,6 +116,30 @@ class TeamsController < ApplicationController
   def update
     @team = Team.new(team_params)
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
+      if(@team.giocatore2!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
+        if(Stat.find_by(uid: @team.giocatore2) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore2} non ha un account nel gioco, inserire un altro id"
+          redirect_to edit_team_path
+          return
+        end
+      end
+      if(@team.giocatore3!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore3)
+        if(Stat.find_by(uid: @team.giocatore3) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore3} non ha un account nel gioco, inserire un altro id"
+          redirect_to edit_team_path
+          return
+        end
+      end
+      if(@team.giocatore4!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore4)
+        if(Stat.find_by(uid: @team.giocatore4) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore4} non ha un account nel gioco, inserire un altro id"
+          redirect_to edit_team_path
+          return
+        end
+      end
       respond_to do |format|
         if @team.update(team_params)
           calculate_averages(@team)
