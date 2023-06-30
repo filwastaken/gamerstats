@@ -28,13 +28,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    BattlenetOauthService.ottieniProfilo(session[:access_token], params["user"]["uid"])
-    if(Stat.find_by(uid: params["user"]["uid"]) == nil)
-      flash[:notice] = "Non esiste un account con il seguente id: #{params["user"]["uid"]} nel gioco, inserire un altro id"
-      redirect_to edit_user_registration_path
-      return
-    end
-
     super
   end
 
@@ -53,17 +46,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def update_resource(resource, params)
-    if resource.provider == 'bnet'
-      params.delete('current_password')
-      resource.password = params['password']
-
-      resource.update_without_password(params)
-    else
-      puts "------------------------------------------------ciaoooooooooooooooooooooooooooo"
-      puts params
-      puts "------------------------------------------------ciaoooooooooooooooooooooooooooo"
-      resource.update_with_password(params)
-    end
+    resource.update_with_password(params)
   end
 
   # protected

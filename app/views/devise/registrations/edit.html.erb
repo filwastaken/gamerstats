@@ -9,10 +9,6 @@
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;" %>
     </div>
 
-    <div class="field">
-      <%= f.label :uid, class:"form-label" %> <br>
-      <%= f.text_field :uid, autofocus: true, autocomplete: "uid", class:"form-control", style:"max-width: 400px;" %>
-    </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
