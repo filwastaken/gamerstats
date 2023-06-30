@@ -5,5 +5,6 @@ class AddCampiUsers < ActiveRecord::Migration[6.1]
     add_column :users, :full_name, :string
     add_column :users, :avatar_url, :string
     add_column :users, :role, :integer
+    add_column :users, :bell, :boolean
   end
 end

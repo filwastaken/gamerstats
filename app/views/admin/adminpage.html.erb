@@ -20,7 +20,16 @@
             <th scope="row"> <%= user.uid %> </th>
             <td><%= user.email %></td>
             <td><%= user.role %></td>
-            <td> <button> Click Me! :) </button> </td> <!-- TODO: Regala abbonamento -->
+            
+            <!-- Disabling sub gifting if the user is already subbed -->
+            <td> <div class="form-label">
+            <% if user.teamLeader? || user.user? %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger" %>
+            <% else %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger", disabled:true %>
+            <% end %>
+            </div> </td>
+
             <td> <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
           </tr>
         <% end %>
@@ -71,7 +80,7 @@
   <div class="card-body">
     <input type="text-area" style="width: 80%; height: 90%">
   </div>
-  <button> INVIA! </button>
+  <%= button_to "Invia", comunication_admin_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger"%>
 </div>
 
 <button> Blocca temporaneamente il sito </button>

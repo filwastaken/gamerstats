@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   get '/adminpage', to: 'admin#adminpage'
   delete '/adminpage/:id/delete_team', to: 'admin#delete_team', as: 'delete_team_admin'
   delete '/adminpage/:id/delete_user', to: 'admin#delete_user', as: 'delete_user_admin'
+  post '/adminpage/:id/gift', to: 'admin#gift', as: 'gift_admin'
+  post '/adminpage/comunication', to: 'admin#comunication', as: 'comunication_admin'
 
   root 'home#index'
   
