@@ -14,24 +14,22 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env['omniauth.auth']
     battletag = auth['info']['battletag']
     @user = User.from_omniauth(auth)
-
     if @user.present?
       session[:user] = @user
       session[:access_token] = auth["credentials"]["token"]
-      ######
       profilo = {}
       tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], auth["uid"].to_i)
       
       if tmp.length != 0
         profilo = tmp
         session[:uid] = profilo["uid"]
+        BattlenetOauthService.ottieniProfilo(session[:access_token], profilo["uid"])
       else
         profilo["nome"] = "-"
         profilo["idBattlenet"] = auth["uid"].to_i
         profilo["uid"] = -1
         session[:uid] = -1
       end
-      ######
       sign_in_and_redirect @user, event: :authentication
       flash[:success] = t'devise.omniauth.callbacks.success', kind: 'Bnet'
     else
