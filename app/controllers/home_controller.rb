@@ -15,8 +15,10 @@ class HomeController < ApplicationController
     #User.delete_all
     #Stat.delete_all
 
+  
+
     #BattlenetOauthService.ottieniProfilo(session[:access_token], 10548078)
-    #BattlenetOauthService.ottieniProfilo(session[:access_token], 1269)
+    #BattlenetOauthService.ottieniProfilo(session[:access_token], 1)
 
 =begin
     max_id = Stat.order("uid DESC").limit(1)[0].uid

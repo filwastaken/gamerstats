@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   # devise routes
   devise_for :admins
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { 
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
   
   put 'users' => 'user/registrations#update'
 
