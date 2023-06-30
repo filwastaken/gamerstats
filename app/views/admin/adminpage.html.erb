@@ -1,4 +1,3 @@
-<h2> Hi! </h2>
 <div class="card text-center" style="background-color: #ffffffb3;">
   <div class="card-header">
       LISTA UTENTI
@@ -83,4 +82,8 @@
   <%= button_to "Invia", comunication_admin_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger"%>
 </div>
 
-<button> Blocca temporaneamente il sito </button>
+<% if Maintenance.find_by(to: nil).equal? nil %>
+  <%= button_to "Inizia il mantenimento", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
+<% else %>
+  <%= button_to "Interrompi il mantenimento", stop_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
+<% end %>
