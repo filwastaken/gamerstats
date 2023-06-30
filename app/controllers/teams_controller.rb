@@ -30,6 +30,12 @@ class TeamsController < ApplicationController
       return
     end
 
+    if(Team.exists?(nome_team: @team.nome_team))
+      flash[:notice] = "Esiste già un team con lo stesso nome"
+      redirect_to new_team_path
+      return
+    end
+
     giocatori = []
     if(@team.giocatore1 != nil)
       giocatori.append(@team.giocatore1)
@@ -139,6 +145,12 @@ class TeamsController < ApplicationController
   def update
     @team = Team.new(team_params)
     if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
+
+      if(Team.exists?(nome_team: @team.nome_team))
+        flash[:notice] = "Esiste già un team con lo stesso nome"
+        redirect_to new_team_path
+        return
+      end
 
       giocatori = []
       if(@team.giocatore1 != nil)

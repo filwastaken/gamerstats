@@ -1,7 +1,7 @@
 class CreateStats < ActiveRecord::Migration[6.1]
   def change
-    create_table :stats, id: false do |t|
-      t.integer :uid, primary_key: true
+    create_table :stats do |t|
+      t.integer :uid
       t.integer :region
       t.integer :realm
       t.string :displayName

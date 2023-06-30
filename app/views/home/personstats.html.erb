@@ -1,5 +1,6 @@
-<% id_prova = session[:uid] %>
-<% if user_signed_in? || session[:uid] != nil %>
+<% id_prova = current_user.uid %>
+<% #id_prova = 1712 %>
+<% if user_signed_in? || current_user.uid != nil %>
     <% if current_user.user? || current_user.teamLeader? %>
         <div class="card text-center" style="background-color: #ffffffb3;">
             <div class="card-header">
@@ -17,8 +18,8 @@
                         <th scope="col">Achievements</th>
                         </tr>
                     </thead>
-                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
-                    <% #statistiche = Stat.find_by(uid: session[:uid]) %>
+                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
+                    <% #statistiche = Stat.find_by(uid: current_user.uid) %>
                     <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
                     <% statistiche = Stat.find_by(uid: id_prova) %>
                     <% if statistiche!= nil%>
@@ -96,8 +97,8 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <%
-                                    #if(Stat.find_by(uid: session[:uid]) != nil)
-                                        #wl_ratio_base = Stat.find_by(uid: session[:uid]).wlRatioThisSeason
+                                    #if(Stat.find_by(uid: current_user.uid) != nil)
+                                        #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatioThisSeason
                                     if(Stat.find_by(uid: id_prova) != nil)
                                         wl_ratio_base = Stat.find_by(uid: id_prova).wlRatioThisSeason
                                         closest_values = Stat.order(Arel.sql("ABS(wlRatioThisSeason - #{wl_ratio_base})")).limit(5)
@@ -227,8 +228,8 @@
                         <th scope="col">Achievements</th>
                         </tr>
                     </thead>
-                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], session[:uid])%>
-                    <% #statistiche = Stat.find_by(uid: session[:uid]) %>
+                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
+                    <% #statistiche = Stat.find_by(uid: current_user.uid) %>
                     <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
                     <% statistiche = Stat.find_by(uid: id_prova) %>
                     <% if statistiche!= nil%>
@@ -406,8 +407,8 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <%
-                                    #if(Stat.find_by(uid: session[:uid]) != nil)
-                                        #wl_ratio_base = Stat.find_by(uid: session[:uid]).wlRatio
+                                    #if(Stat.find_by(uid: current_user.uid) != nil)
+                                        #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatio
                                     if(Stat.find_by(uid: id_prova) != nil)
                                         wl_ratio_base = Stat.find_by(uid: id_prova).wlRatio
                                         closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(8)
@@ -615,13 +616,12 @@
                             <% if Team.all.length != 0 %>
                                 <% data = {} %>
                                 <% Team.all.each do |team_tmp| %>
-                                    <% if team_tmp.giocatore1 == current_user.uid %>
+                                    <% if team_tmp.giocatore1.to_i == current_user.uid %>
                                         <% data[team_tmp.nome_team] = TeamStat.find_by(team_id: team_tmp.id).wlratio %>   
                                     <% end %>
                                 <% end %>
                                 
                                 <% if data.any? %>
-                                <% puts data%>
                                     <%= column_chart [name: 'wl ratio comparison', data: data] %>
                                 <% else %>
                                     Nessun dato da rappresentare
@@ -629,8 +629,6 @@
                             <% else %>
                                 Nessun dato da rappresentare
                             <% end %>
-
-                            <% # column_chart [{ name: 'career wins', data: { '1vs1' => statistiche.wins1vs1, '2vs2' => statistiche.wins2vs2, '3vs3' => statistiche.wins3vs3, '4vs4' => statistiche.wins4vs4, 'archon' => statistiche.winsArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
                         </div>
                     </div>
                 </div>
