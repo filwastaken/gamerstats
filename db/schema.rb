@@ -12,14 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2023_06_29_222715) do
 
-  create_table "preferitos", force: :cascade do |t|
-    t.string "mitt_id"
-    t.string "nome_dest"
-    t.string "dest_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -32,9 +24,18 @@ ActiveRecord::Schema.define(version: 2023_06_29_222715) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "full_name"
+    t.boolean "bell"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
+  end
+
+  create_table "preferitos", force: :cascade do |t|
+    t.string "mitt_id"
+    t.string "nome_dest"
+    t.string "dest_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "stats", force: :cascade do |t|
@@ -138,15 +139,16 @@ ActiveRecord::Schema.define(version: 2023_06_29_222715) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "uid", default: -1
-    t.integer "battlenetId", default: -1
-    t.string "nickname", default: "-"
-    t.integer "role", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "uid", default: -1
+    t.integer "battlenetId", default: -1
+    t.string "nickname", default: ""
+    t.integer "role", default: 0
+    t.boolean "bell", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
