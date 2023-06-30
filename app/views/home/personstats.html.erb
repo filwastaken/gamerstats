@@ -615,26 +615,26 @@
                         </thead>
                         <tbody class="table-group-divider">
                             <% Team.all.each do |team| %>
-                                <% if current_user.uid == team.giocatore2 || current_user.uid == team.giocatore3 || current_user.uid == team.giocatore4  %>
+                                <% if current_user.uid.to_s == team.giocatore2 || current_user.uid.to_s == team.giocatore3 || current_user.uid.to_s == team.giocatore4  %>
                                     <tr class="table-light">
                                     <td><%= team.nome_team %></td>
                                     <td style="width: 25vw">
                                         <%= form_for @team=team, url: abbandona_team_path(team.id), method: :patch do |f| %>
                                             <%= f.text_field :nome_team, value: team.nome_team, type: :hidden %>
                                             <%= f.text_field :giocatore1, value: team.giocatore1, type: :hidden %>
-                                            <% if current_user.uid == team.giocatore2 %>
+                                            <% if current_user.uid.to_s == team.giocatore2 %>
                                                 <%= f.text_field :giocatore2, value: "", type: :hidden %>
                                                 <%= f.text_field :giocatore3, value: team.giocatore3, type: :hidden %>
                                                 <%= f.text_field :giocatore4, value: team.giocatore4, type: :hidden %>
                                             <% end %>
 
-                                            <% if current_user.uid == team.giocatore3 %>
+                                            <% if current_user.uid.to_s == team.giocatore3 %>
                                                 <%= f.text_field :giocatore2, value: team.giocatore2, type: :hidden %>
                                                 <%= f.text_field :giocatore3, value: "", type: :hidden %>
                                                 <%= f.text_field :giocatore4, value: team.giocatore4, type: :hidden %>
                                             <% end %>
 
-                                            <% if current_user.uid == team.giocatore4 %>
+                                            <% if current_user.uid.to_s == team.giocatore4 %>
                                                 <%= f.text_field :giocatore2, value: team.giocatore2, type: :hidden %>
                                                 <%= f.text_field :giocatore3, value: team.giocatore3, type: :hidden %>
                                                 <%= f.text_field :giocatore4, value: "", type: :hidden %>
