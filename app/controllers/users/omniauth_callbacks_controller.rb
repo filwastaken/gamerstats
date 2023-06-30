@@ -25,7 +25,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session[:uid] = profilo["uid"]
         BattlenetOauthService.ottieniProfilo(session[:access_token], profilo["uid"])
       else
-        profilo["nome"] = "-"
+        profilo["nome"] = ""
         profilo["idBattlenet"] = auth["uid"].to_i
         profilo["uid"] = -1
         session[:uid] = -1
