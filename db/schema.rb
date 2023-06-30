@@ -12,7 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2023_06_29_222715) do
 
-  create_table "stats", force: :cascade do |t|
+  create_table "preferitos", force: :cascade do |t|
+    t.string "mitt_id"
+    t.string "nome_dest"
+    t.string "dest_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stats", id: false, force: :cascade do |t|
     t.integer "uid"
     t.integer "region"
     t.integer "realm"
