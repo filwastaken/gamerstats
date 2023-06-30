@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_team, only: %i[ show edit update destroy abbandona ]
 
   # GET /teams or /teams.json
   def index
@@ -212,6 +212,19 @@ class TeamsController < ApplicationController
     else
       flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
       redirect_to edit_team_path
+    end
+  end
+
+  # abbandona
+  def abbandona
+    respond_to do |format|
+      if @team.update(team_params)
+        format.html { redirect_to  personstats_url, notice: "Team was successfully updated." }
+        format.json { render :show, status: :ok }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
     end
   end
 
