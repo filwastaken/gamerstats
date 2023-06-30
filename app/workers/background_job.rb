@@ -1,39 +1,47 @@
 class BackgroundJob
     include Sidekiq::Worker
   
-    def perform(access_token, min, max, thread)
+    def perform(access_token, min, max, thread, threads, intervallo)
       puts "//////////////////"
-      regionIds = ["1","2","3","5"]
-      realmIds = ["1","2"]
-  
-      for profileId in min..max
-        puts "#{profileId}      thread: #{thread}      #{profileId} / #{max}"
-        regionIds.each do |region|
-          realmIds.each do |realm|
-            res = BattlenetOauthService.ottieniInfoProfilo(access_token, region, realm, profileId)
-          end
-        end
-      end
-      puts "//////////////////"
-    end
 =begin
-      stats = Stat.all
-      id_list = stats.map(&:id)
-      id_list = id_list.uniq
-      id_list = id_list.sort
-      id_slice = id_list.slice(min,max)
-
-      id_slice.each do |profileId|
-        puts profileId
-        regionIds.each do |region|
-          realmIds.each do |realm|
-            res = BattlenetOauthService.ottieniInfoProfilo(access_token, region, realm, profileId)
-          end
-        end
+      min.each do |profileId|
+        puts "#{profileId}      thread: #{thread}"
+        BattlenetOauthService.ottieniProfilo(access_token, profileId)
       end
+=end
+
+      for profileId in min..max
+        puts "#{profileId}      thread: #{thread}      #{profileId} / #{max}    CICLO 1"
+        BattlenetOauthService.ottieniProfilo(access_token, profileId)
+      end
+
       puts "//////////////////"
+      #if(max+intervallo*threads < 2321)
+      SecondJob.perform_async(access_token, max+intervallo*threads, max+intervallo*threads+intervallo, thread, threads, intervallo)
+      #end  
+    end
+end
+
+class SecondJob
+  include Sidekiq::Worker
+
+  def perform(access_token, min, max, thread, threads, intervallo)
+    puts "//////////////////"
+=begin
+    min.each do |profileId|
+      puts "#{profileId}      thread: #{thread}"
+      BattlenetOauthService.ottieniProfilo(access_token, profileId)
     end
 =end
+
+      for profileId in min..max
+        puts "#{profileId}      thread: #{thread}      #{profileId} / #{max}       CICLO 2"
+        BattlenetOauthService.ottieniProfilo(access_token, profileId)
+      end
+
+    #if(max+intervallo*threads < 2321)
+    BackgroundJob.perform_async(access_token, max+intervallo*threads, max+intervallo*threads+intervallo, thread, threads, intervallo)
+    #end
+    puts "//////////////////"
+  end
 end
-  
-#res = BattlenetOauthService.ottieniLadders(access_token, region.to_s, realm.to_s, profileId.to_s)

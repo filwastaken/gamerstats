@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :id %>
-    <%= form.number_field :id %>
+    <%= form.label :uid %>
+    <%= form.number_field :uid %>
   </div>
 
   <div class="field">
@@ -32,26 +32,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :clanName %>
-    <%= form.text_field :clanName %>
-  </div>
-
-  <div class="field">
-    <%= form.label :clanTag %>
-    <%= form.text_field :clanTag %>
-  </div>
-
-  <div class="field">
-    <%= form.label :profilePath %>
-    <%= form.text_field :profilePath %>
-  </div>
-
-  <div class="field">
-    <%= form.label :primaryRace %>
-    <%= form.text_field :primaryRace %>
-  </div>
-
-  <div class="field">
     <%= form.label :terranWins %>
     <%= form.number_field :terranWins %>
   </div>
@@ -67,23 +47,23 @@
   </div>
 
   <div class="field">
-    <%= form.label :highest1v1Rank %>
-    <%= form.text_field :highest1v1Rank %>
-  </div>
-
-  <div class="field">
-    <%= form.label :highestTeamRank %>
-    <%= form.text_field :highestTeamRank %>
-  </div>
-
-  <div class="field">
-    <%= form.label :seasonTotalGames %>
-    <%= form.number_field :seasonTotalGames %>
-  </div>
-
-  <div class="field">
     <%= form.label :careerTotalGames %>
     <%= form.number_field :careerTotalGames %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalWins %>
+    <%= form.number_field :totalWins %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalLosses %>
+    <%= form.number_field :totalLosses %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wlRatio %>
+    <%= form.text_field :wlRatio %>
   </div>
 
   <div class="field">
@@ -134,26 +114,6 @@
   <div class="field">
     <%= form.label :currentLevelXPProtoss %>
     <%= form.number_field :currentLevelXPProtoss %>
-  </div>
-
-  <div class="field">
-    <%= form.label :seasonId %>
-    <%= form.number_field :seasonId %>
-  </div>
-
-  <div class="field">
-    <%= form.label :seasonNumber %>
-    <%= form.number_field :seasonNumber %>
-  </div>
-
-  <div class="field">
-    <%= form.label :seasonYear %>
-    <%= form.number_field :seasonYear %>
-  </div>
-
-  <div class="field">
-    <%= form.label :totalGamesThisSeason %>
-    <%= form.number_field :totalGamesThisSeason %>
   </div>
 
   <div class="field">
@@ -209,6 +169,71 @@
   <div class="field">
     <%= form.label :totalPointsAchievements %>
     <%= form.number_field :totalPointsAchievements %>
+  </div>
+
+  <div class="field">
+    <%= form.label :highest1v1Rank %>
+    <%= form.text_field :highest1v1Rank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :highestTeamRank %>
+    <%= form.text_field :highestTeamRank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clanName %>
+    <%= form.text_field :clanName %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clanTag %>
+    <%= form.text_field :clanTag %>
+  </div>
+
+  <div class="field">
+    <%= form.label :profilePath %>
+    <%= form.text_field :profilePath %>
+  </div>
+
+  <div class="field">
+    <%= form.label :primaryRace %>
+    <%= form.text_field :primaryRace %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonId %>
+    <%= form.number_field :seasonId %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonNumber %>
+    <%= form.number_field :seasonNumber %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonYear %>
+    <%= form.number_field :seasonYear %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seasonTotalGames %>
+    <%= form.number_field :seasonTotalGames %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalWinsThisSeason %>
+    <%= form.number_field :totalWinsThisSeason %>
+  </div>
+
+  <div class="field">
+    <%= form.label :totalLossesThisSeason %>
+    <%= form.number_field :totalLossesThisSeason %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wlRatioThisSeason %>
+    <%= form.text_field :wlRatioThisSeason %>
   </div>
 
   <div class="actions">
