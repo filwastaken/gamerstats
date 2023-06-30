@@ -6,23 +6,109 @@
     <table class="table table-dark table-striped-columns">
       <thead>
         <tr>
-          <th scope="col">STATISTICA 1</th>
-          <th scope="col">STATISTICA 2</th>
-          <th scope="col">STATISTICA 3</th>
-          <th scope="col">STATISTICA 4</th>
+          <% 
+            careertotalgames = Stat.average(:careerTotalGames)
+            wlratio = Stat.average(:wlRatio)
+            level = Stat.average(:level)
+            totalpointsachievements = Stat.average(:totalPointsAchievements)
+
+            totalwins = Stat.average(:totalwins)
+            terranwins = Stat.average(:terranWins)
+            protosswins = Stat.average(:protossWins)
+            zergwins = Stat.average(:zergWins)
+
+            levelterran = Stat.average(:levelTerran)
+            xpterran = Stat.average(:totalLevelXPTerran)
+            levelzerg = Stat.average(:levelZerg)
+            xpzerg = Stat.average(:totalLevelXPZerg)
+            levelprotoss = Stat.average(:levelProtoss)
+            xpprotoss = Stat.average(:totalLevelXPProtoss)
+          
+          %>
+          <th scope="col">Games</th>
+          <th scope="col">Total wins</th>
+          <th scope="col">W/L</th>
+          <th scope="col">Achievements</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
         <tr class="table-light">
-          <th scope="row">1</th>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
+          <td><%= careertotalgames %></td>
+          <td><%= totalwins %></td>
+          <td><%= wlratio %></td>
+          <td><%= totalpointsachievements %></td>
         </tr>
       </tbody>
     </table>
 
-    <br><br><br>
+    <br><br>
+
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+            <table class="table table-dark table-striped-columns">
+                <thead>
+                    <tr>
+                    <th scope="col">Terran wins</th>
+                    <th scope="col">Protoss wins</th>
+                    <th scope="col">Zerg wins</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr class="table-light">
+                    <td><%= terranwins %></td>
+                    <td><%= protosswins %></td>
+                    <td><%= zergwins %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+            <table class="table table-dark table-striped-columns">
+                <thead>
+                    <tr>
+                    <th scope="col">Wins</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr class="table-light">
+                    <td class="d-flex justify-content-center"><%= pie_chart [['Protoss wins', protosswins],['Zerg wins', zergwins],['Terran wins', terranwins]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <table class="table table-dark table-striped-columns">
+        <thead>
+          <tr>
+            <th scope="col">Level</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr class="table-light">
+            <td><%= level %></td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
 
     <div class="container text-center">
       <div class="row">
@@ -30,14 +116,14 @@
           <table class="table table-dark table-striped-columns">
                 <thead>
                     <tr>
-                    <th scope="col">STATISTICA 1</th>
-                    <th scope="col">STATISTICA 2</th>
+                    <th scope="col">Level terran</th>
+                    <th scope="col">XP terran</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     <tr class="table-light">
-                    <th scope="row">1</th>
-                    <td>2</td>
+                    <td><%= levelterran %></td>
+                    <td><%= xpterran %></td>
                     </tr>
                 </tbody>
             </table>
@@ -46,14 +132,65 @@
             <table class="table table-dark table-striped-columns">
                 <thead>
                     <tr>
-                    <th scope="col">STATISTICA 1</th>
-                    <th scope="col">STATISTICA 2</th>
+                    <th scope="col">Level zerg</th>
+                    <th scope="col">XP zerg</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     <tr class="table-light">
-                    <th scope="row">1</th>
-                    <td>2</td>
+                    <td><%= levelzerg %></td>
+                    <td><%= xpzerg %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-dark table-striped-columns">
+                <thead>
+                    <tr>
+                    <th scope="col">Level protoss</th>
+                    <th scope="col">XP protoss</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr class="table-light">
+                    <td><%= levelprotoss %></td>
+                    <td><%= xpprotoss %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+            <table class="table table-dark table-striped-columns">
+                <thead>
+                    <tr>
+                    <th scope="col">Levels</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr class="table-light">
+                    <td><%= pie_chart [['Protoss level', levelprotoss],['Zerg level', levelzerg],['Terran level', levelterran]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-dark table-striped-columns">
+                <thead>
+                    <tr>
+                    <th scope="col">XP</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr class="table-light">
+                    <td><%= pie_chart [['Protoss xp', xpprotoss],['Zerg xp', xpzerg],['Terran xp', xpterran]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
                     </tr>
                 </tbody>
             </table>
@@ -61,3 +198,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -66,4 +66,5 @@ gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-bnet', '~> 2.0'
 gem 'sidekiq', '~> 6.2'
+gem 'chartkick'
 

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Id:</strong>
-  <%= @stat.id %>
+  <strong>Uid:</strong>
+  <%= @stat.uid %>
 </p>
 
 <p>
@@ -21,26 +21,6 @@
 </p>
 
 <p>
-  <strong>Clanname:</strong>
-  <%= @stat.clanName %>
-</p>
-
-<p>
-  <strong>Clantag:</strong>
-  <%= @stat.clanTag %>
-</p>
-
-<p>
-  <strong>Profilepath:</strong>
-  <%= @stat.profilePath %>
-</p>
-
-<p>
-  <strong>Primaryrace:</strong>
-  <%= @stat.primaryRace %>
-</p>
-
-<p>
   <strong>Terranwins:</strong>
   <%= @stat.terranWins %>
 </p>
@@ -56,23 +36,23 @@
 </p>
 
 <p>
-  <strong>Highest1v1rank:</strong>
-  <%= @stat.highest1v1Rank %>
-</p>
-
-<p>
-  <strong>Highestteamrank:</strong>
-  <%= @stat.highestTeamRank %>
-</p>
-
-<p>
-  <strong>Seasontotalgames:</strong>
-  <%= @stat.seasonTotalGames %>
-</p>
-
-<p>
   <strong>Careertotalgames:</strong>
   <%= @stat.careerTotalGames %>
+</p>
+
+<p>
+  <strong>Totalwins:</strong>
+  <%= @stat.totalWins %>
+</p>
+
+<p>
+  <strong>Totallosses:</strong>
+  <%= @stat.totalLosses %>
+</p>
+
+<p>
+  <strong>Wlratio:</strong>
+  <%= @stat.wlRatio %>
 </p>
 
 <p>
@@ -123,26 +103,6 @@
 <p>
   <strong>Currentlevelxpprotoss:</strong>
   <%= @stat.currentLevelXPProtoss %>
-</p>
-
-<p>
-  <strong>Seasonid:</strong>
-  <%= @stat.seasonId %>
-</p>
-
-<p>
-  <strong>Seasonnumber:</strong>
-  <%= @stat.seasonNumber %>
-</p>
-
-<p>
-  <strong>Seasonyear:</strong>
-  <%= @stat.seasonYear %>
-</p>
-
-<p>
-  <strong>Totalgamesthisseason:</strong>
-  <%= @stat.totalGamesThisSeason %>
 </p>
 
 <p>
@@ -198,6 +158,71 @@
 <p>
   <strong>Totalpointsachievements:</strong>
   <%= @stat.totalPointsAchievements %>
+</p>
+
+<p>
+  <strong>Highest1v1rank:</strong>
+  <%= @stat.highest1v1Rank %>
+</p>
+
+<p>
+  <strong>Highestteamrank:</strong>
+  <%= @stat.highestTeamRank %>
+</p>
+
+<p>
+  <strong>Clanname:</strong>
+  <%= @stat.clanName %>
+</p>
+
+<p>
+  <strong>Clantag:</strong>
+  <%= @stat.clanTag %>
+</p>
+
+<p>
+  <strong>Profilepath:</strong>
+  <%= @stat.profilePath %>
+</p>
+
+<p>
+  <strong>Primaryrace:</strong>
+  <%= @stat.primaryRace %>
+</p>
+
+<p>
+  <strong>Seasonid:</strong>
+  <%= @stat.seasonId %>
+</p>
+
+<p>
+  <strong>Seasonnumber:</strong>
+  <%= @stat.seasonNumber %>
+</p>
+
+<p>
+  <strong>Seasonyear:</strong>
+  <%= @stat.seasonYear %>
+</p>
+
+<p>
+  <strong>Seasontotalgames:</strong>
+  <%= @stat.seasonTotalGames %>
+</p>
+
+<p>
+  <strong>Totalwinsthisseason:</strong>
+  <%= @stat.totalWinsThisSeason %>
+</p>
+
+<p>
+  <strong>Totallossesthisseason:</strong>
+  <%= @stat.totalLossesThisSeason %>
+</p>
+
+<p>
+  <strong>Wlratiothisseason:</strong>
+  <%= @stat.wlRatioThisSeason %>
 </p>
 
 <%= link_to 'Edit', edit_stat_path(@stat) %> |

@@ -1,0 +1,14 @@
+<div class="container" style="background-color: #ffffffd8; margin-top:15vh; padding-top:12px; padding-bottom:12px; width:20vw; text-align:center;"> 
+  <p>
+    <strong>Nome</strong>
+    <%= @preferito.nome_dest %>
+  </p>
+
+  <p>
+    <strong>Uid:</strong>
+    <%= @preferito.dest_id %>
+  </p>
+
+  <%= link_to 'Edit', edit_preferito_path(@preferito), class:"link-body-emphasis link-offset-2" %> |
+  <%= link_to 'Back', preferitos_path, class:"link-body-emphasis link-offset-2" %>
+</div>
