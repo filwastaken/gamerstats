@@ -34,6 +34,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
 
       t.timestamps null: false
+
+      # Custom records
+      t.integer :uid, default: -1
+      t.integer :battlenetId, default: -1
+      t.string :nickname, default: ""
+      t.integer :role, default: 0
+      t.boolean :bell, default: false
     end
 
     add_index :users, :email,                unique: true

@@ -1,0 +1,2 @@
+json.extract! team_stat, :id, :team_id, :uid, :terranwins, :protosswins, :zergwins, :careertotalgames, :totalwins, :totallosses, :wlratio, :level, :levelterran, :totallevelxpterran, :currentlevelxpterran, :levelzerg, :totallevelxpzerg, :currentlevelxpzerg, :levelprotoss, :totallevelxpprotoss, :currentlevelxpprotoss, :wins1vs1, :games1vs1, :wins2vs2, :games2vs2, :wins3vs3, :games3vs3, :wins4vs4, :games4vs4, :winsarchon, :gamesarchon, :totalpointsachievements, :seasontotalgames, :totalgamesthisseason, :created_at, :updated_at
+json.url team_stat_url(team_stat, format: :json)
