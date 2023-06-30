@@ -1,3 +1,5 @@
+<%soglia_vittorie = 100%>
+<%soglia_achievements = 10%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <%= link_to 'GamerStats', root_path, class:"navbar-brand"%>
@@ -36,7 +38,7 @@
                         <% achivements = Stat.find_by(uid: current_user.uid).totalPointsAchievements%>
                         <li class="nav-item">
                             <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "abbonato"), method: :patch do |f| %>
-                                <% if achivements >= 100 %>
+                                <% if achivements >= soglia_achievements %>
                                     <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:200px"%>
                                 <% else %>
                                     <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0 ", style:"margin-right:200px", id:"bottoneAbbonati", title:"devi aver accumulato 100 achivements", disabled:true%>
@@ -46,7 +48,7 @@
                         <% wins = Stat.find_by(uid: current_user.uid).totalWins%>
                         <li class="nav-item">
                             <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeader"), method: :patch do |f| %>
-                                <% if wins >= 50 %>
+                                <% if wins >= soglia_vittorie %>
                                     <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
                                 <% else %>
                                     <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0 ", style:"margin-right:10px", id:"bottoneTeamLeader", title:"devi aver accumulato 50 vittorie", disabled:true%>
@@ -59,7 +61,7 @@
                         <% achivements = Stat.find_by(uid: current_user.uid).totalPointsAchievements%>
                         <li class="nav-item">
                             <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "abbonato"), method: :patch do |f| %>
-                                <% if achivements >= 100 %>
+                                <% if achivements >= soglia_achievements %>
                                     <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0", style:"margin-right:200px"%>
                                 <% else %>
                                     <%= f.submit "Abbonati", class: "btn btn-light position-absolute end-0 ", style:"margin-right:200px", id:"bottoneAbbonati", title:"devi aver accumulato 100 achivements", disabled:true%>
@@ -71,7 +73,7 @@
                         <% wins = Stat.find_by(uid: current_user.uid).totalWins%>
                         <li class="nav-item">
                             <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeader"), method: :patch do |f| %>
-                                <% if wins >= 50 %>
+                                <% if wins >= soglia_vittorie %>
                                     <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px"%>
                                 <% else %>
                                     <%= f.submit "Diventa Team Leader", class: "btn btn-light position-absolute end-0", style:"margin-right:10px", id:"bottoneTeamLeader", title:"devi aver accumulato 50 vittorie", disabled:true%>
