@@ -12,12 +12,26 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def bnet
     auth = request.env['omniauth.auth']
-    uid = auth["uid"]
     battletag = auth['info']['battletag']
     @user = User.from_omniauth(auth)
 
     if @user.present?
       session[:user] = @user
+      session[:access_token] = auth["credentials"]["token"]
+      ######
+      profilo = {}
+      tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], auth["uid"].to_i)
+      
+      if tmp.length != 0
+        profilo = tmp
+        session[:uid] = profilo["uid"]
+      else
+        profilo["nome"] = "-"
+        profilo["idBattlenet"] = auth["uid"].to_i
+        profilo["uid"] = -1
+        session[:uid] = -1
+      end
+      ######
       sign_in_and_redirect @user, event: :authentication
       flash[:success] = t'devise.omniauth.callbacks.success', kind: 'Bnet'
     else
@@ -26,18 +40,19 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:alert] = t'devise.omniauth.callbacks.failure', kind: 'Bnet', reason: "#{auth.info.email} is not authorized."
     end
 
-    if !User.exists?(uid: uid)
+    if !User.exists?(uid: profilo["uid"])
       newuser = User.create!(
-        email:"#{uid}.placeholder@placeholder.com",
-        password:"#{SecureRandom.alphanumeric(16)}",
-        created_at:Time.now,
-        updated_at:Time.now,
-        uid:uid,
-        role:0,
-        provider:'bnet'
+        email: "#{profilo["idBattlenet"]}.placeholder@placeholder.com",
+        password: "#{SecureRandom.alphanumeric(16)}",
+        created_at: Time.now,
+        updated_at: Time.now,
+        battlenetId: profilo["idBattlenet"],
+        uid: profilo["uid"],
+        nickname: profilo["nome"],
+        role: 0,
       )
     else
-      newuser = User.find_by(uid: uid)
+      newuser = User.find_by(uid: profilo["uid"])
     end
 
     sign_in(newuser, scope: :user)

@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Team Stats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Uid</th>
+      <th>Terranwins</th>
+      <th>Protosswins</th>
+      <th>Zergwins</th>
+      <th>Careertotalgames</th>
+      <th>Totalwins</th>
+      <th>Totallosses</th>
+      <th>Wlratio</th>
+      <th>Level</th>
+      <th>Levelterran</th>
+      <th>Totallevelxpterran</th>
+      <th>Currentlevelxpterran</th>
+      <th>Levelzerg</th>
+      <th>Totallevelxpzerg</th>
+      <th>Currentlevelxpzerg</th>
+      <th>Levelprotoss</th>
+      <th>Totallevelxpprotoss</th>
+      <th>Currentlevelxpprotoss</th>
+      <th>Wins1vs1</th>
+      <th>Games1vs1</th>
+      <th>Wins2vs2</th>
+      <th>Games2vs2</th>
+      <th>Wins3vs3</th>
+      <th>Games3vs3</th>
+      <th>Wins4vs4</th>
+      <th>Games4vs4</th>
+      <th>Winsarchon</th>
+      <th>Gamesarchon</th>
+      <th>Totalpointsachievements</th>
+      <th>Seasontotalgames</th>
+      <th>Totalgamesthisseason</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team_stats.each do |team_stat| %>
+      <tr>
+        <td><%= team_stat.team_id %></td>
+        <td><%= team_stat.uid %></td>
+        <td><%= team_stat.terranwins %></td>
+        <td><%= team_stat.protosswins %></td>
+        <td><%= team_stat.zergwins %></td>
+        <td><%= team_stat.careertotalgames %></td>
+        <td><%= team_stat.totalwins %></td>
+        <td><%= team_stat.totallosses %></td>
+        <td><%= team_stat.wlratio %></td>
+        <td><%= team_stat.level %></td>
+        <td><%= team_stat.levelterran %></td>
+        <td><%= team_stat.totallevelxpterran %></td>
+        <td><%= team_stat.currentlevelxpterran %></td>
+        <td><%= team_stat.levelzerg %></td>
+        <td><%= team_stat.totallevelxpzerg %></td>
+        <td><%= team_stat.currentlevelxpzerg %></td>
+        <td><%= team_stat.levelprotoss %></td>
+        <td><%= team_stat.totallevelxpprotoss %></td>
+        <td><%= team_stat.currentlevelxpprotoss %></td>
+        <td><%= team_stat.wins1vs1 %></td>
+        <td><%= team_stat.games1vs1 %></td>
+        <td><%= team_stat.wins2vs2 %></td>
+        <td><%= team_stat.games2vs2 %></td>
+        <td><%= team_stat.wins3vs3 %></td>
+        <td><%= team_stat.games3vs3 %></td>
+        <td><%= team_stat.wins4vs4 %></td>
+        <td><%= team_stat.games4vs4 %></td>
+        <td><%= team_stat.winsarchon %></td>
+        <td><%= team_stat.gamesarchon %></td>
+        <td><%= team_stat.totalpointsachievements %></td>
+        <td><%= team_stat.seasontotalgames %></td>
+        <td><%= team_stat.totalgamesthisseason %></td>
+        <td><%= link_to 'Show', team_stat %></td>
+        <td><%= link_to 'Edit', edit_team_stat_path(team_stat) %></td>
+        <td><%= link_to 'Destroy', team_stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Team Stat', new_team_stat_path %>

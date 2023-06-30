@@ -1,21 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
+  uid: 1
   region: 1
   realm: 1
   displayName: MyString
-  clanName: MyString
-  clanTag: MyString
-  profilePath: MyString
-  primaryRace: MyString
   terranWins: 1
   protossWins: 1
   zergWins: 1
-  highest1v1Rank: MyString
-  highestTeamRank: MyString
-  seasonTotalGames: 1
   careerTotalGames: 1
+  totalWins: 1
+  totalLosses: 1
+  wlRatio: 1.5
   level: 1
   levelTerran: 1
   totalLevelXPTerran: 1
@@ -26,10 +22,6 @@ one:
   levelProtoss: 1
   totalLevelXPProtoss: 1
   currentLevelXPProtoss: 1
-  seasonId: 1
-  seasonNumber: 1
-  seasonYear: 1
-  totalGamesThisSeason: 1
   wins1vs1: 1
   games1vs1: 1
   wins2vs2: 1
@@ -41,23 +33,32 @@ one:
   winsArchon: 1
   gamesArchon: 1
   totalPointsAchievements: 1
+  highest1v1Rank: MyString
+  highestTeamRank: MyString
+  clanName: MyString
+  clanTag: MyString
+  profilePath: MyString
+  primaryRace: MyString
+  seasonId: 1
+  seasonNumber: 1
+  seasonYear: 1
+  seasonTotalGames: 1
+  totalWinsThisSeason: 1
+  totalLossesThisSeason: 1
+  wlRatioThisSeason: 1.5
 
 two:
-  id: 1
+  uid: 1
   region: 1
   realm: 1
   displayName: MyString
-  clanName: MyString
-  clanTag: MyString
-  profilePath: MyString
-  primaryRace: MyString
   terranWins: 1
   protossWins: 1
   zergWins: 1
-  highest1v1Rank: MyString
-  highestTeamRank: MyString
-  seasonTotalGames: 1
   careerTotalGames: 1
+  totalWins: 1
+  totalLosses: 1
+  wlRatio: 1.5
   level: 1
   levelTerran: 1
   totalLevelXPTerran: 1
@@ -68,10 +69,6 @@ two:
   levelProtoss: 1
   totalLevelXPProtoss: 1
   currentLevelXPProtoss: 1
-  seasonId: 1
-  seasonNumber: 1
-  seasonYear: 1
-  totalGamesThisSeason: 1
   wins1vs1: 1
   games1vs1: 1
   wins2vs2: 1
@@ -83,3 +80,16 @@ two:
   winsArchon: 1
   gamesArchon: 1
   totalPointsAchievements: 1
+  highest1v1Rank: MyString
+  highestTeamRank: MyString
+  clanName: MyString
+  clanTag: MyString
+  profilePath: MyString
+  primaryRace: MyString
+  seasonId: 1
+  seasonNumber: 1
+  seasonYear: 1
+  seasonTotalGames: 1
+  totalWinsThisSeason: 1
+  totalLossesThisSeason: 1
+  wlRatioThisSeason: 1.5
