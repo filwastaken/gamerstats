@@ -17,5 +17,29 @@ class AdminController < ApplicationController
     redirect_to "/adminpage"
   end
 
-  # // TODO: Regala abbonamento
+  # POST /admin#gift
+  def gift
+    user = User.find(params[:id])
+
+    if user.teamLeader?
+      user.teamLeaderAbbonato!
+    elsif user.user?
+      user.abbonato!
+    end
+
+    redirect_to "/adminpage"
+  end
+  
+  # POST /admin#comunication
+  def comunication
+
+    User.all.each do |users|
+      users.bell = true
+    end
+
+    Admin.all.each do |admin|
+      admin.bell = true
+    end
+
+  end
 end
