@@ -28,7 +28,6 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Gamesarchon", with: @stat.gamesArchon
     fill_in "Highest1v1rank", with: @stat.highest1v1Rank
     fill_in "Highestteamrank", with: @stat.highestTeamRank
-    fill_in "Id", with: @stat.id
     fill_in "Level", with: @stat.level
     fill_in "Levelprotoss", with: @stat.levelProtoss
     fill_in "Levelterran", with: @stat.levelTerran
@@ -43,16 +42,22 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Seasontotalgames", with: @stat.seasonTotalGames
     fill_in "Seasonyear", with: @stat.seasonYear
     fill_in "Terranwins", with: @stat.terranWins
-    fill_in "Totalgamesthisseason", with: @stat.totalGamesThisSeason
     fill_in "Totallevelxpprotoss", with: @stat.totalLevelXPProtoss
     fill_in "Totallevelxpterran", with: @stat.totalLevelXPTerran
     fill_in "Totallevelxpzerg", with: @stat.totalLevelXPZerg
+    fill_in "Totallosses", with: @stat.totalLosses
+    fill_in "Totallossesthisseason", with: @stat.totalLossesThisSeason
     fill_in "Totalpointsachievements", with: @stat.totalPointsAchievements
+    fill_in "Totalwins", with: @stat.totalWins
+    fill_in "Totalwinsthisseason", with: @stat.totalWinsThisSeason
+    fill_in "Uid", with: @stat.uid
     fill_in "Wins1vs1", with: @stat.wins1vs1
     fill_in "Wins2vs2", with: @stat.wins2vs2
     fill_in "Wins3vs3", with: @stat.wins3vs3
     fill_in "Wins4vs4", with: @stat.wins4vs4
     fill_in "Winsarchon", with: @stat.winsArchon
+    fill_in "Wlratio", with: @stat.wlRatio
+    fill_in "Wlratiothisseason", with: @stat.wlRatioThisSeason
     fill_in "Zergwins", with: @stat.zergWins
     click_on "Create Stat"
 
@@ -78,7 +83,6 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Gamesarchon", with: @stat.gamesArchon
     fill_in "Highest1v1rank", with: @stat.highest1v1Rank
     fill_in "Highestteamrank", with: @stat.highestTeamRank
-    fill_in "Id", with: @stat.id
     fill_in "Level", with: @stat.level
     fill_in "Levelprotoss", with: @stat.levelProtoss
     fill_in "Levelterran", with: @stat.levelTerran
@@ -93,16 +97,22 @@ class StatsTest < ApplicationSystemTestCase
     fill_in "Seasontotalgames", with: @stat.seasonTotalGames
     fill_in "Seasonyear", with: @stat.seasonYear
     fill_in "Terranwins", with: @stat.terranWins
-    fill_in "Totalgamesthisseason", with: @stat.totalGamesThisSeason
     fill_in "Totallevelxpprotoss", with: @stat.totalLevelXPProtoss
     fill_in "Totallevelxpterran", with: @stat.totalLevelXPTerran
     fill_in "Totallevelxpzerg", with: @stat.totalLevelXPZerg
+    fill_in "Totallosses", with: @stat.totalLosses
+    fill_in "Totallossesthisseason", with: @stat.totalLossesThisSeason
     fill_in "Totalpointsachievements", with: @stat.totalPointsAchievements
+    fill_in "Totalwins", with: @stat.totalWins
+    fill_in "Totalwinsthisseason", with: @stat.totalWinsThisSeason
+    fill_in "Uid", with: @stat.uid
     fill_in "Wins1vs1", with: @stat.wins1vs1
     fill_in "Wins2vs2", with: @stat.wins2vs2
     fill_in "Wins3vs3", with: @stat.wins3vs3
     fill_in "Wins4vs4", with: @stat.wins4vs4
     fill_in "Winsarchon", with: @stat.winsArchon
+    fill_in "Wlratio", with: @stat.wlRatio
+    fill_in "Wlratiothisseason", with: @stat.wlRatioThisSeason
     fill_in "Zergwins", with: @stat.zergWins
     click_on "Update Stat"
 

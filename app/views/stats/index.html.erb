@@ -5,21 +5,17 @@
 <table>
   <thead>
     <tr>
-      <th>Id</th>
+      <th>Uid</th>
       <th>Region</th>
       <th>Realm</th>
       <th>Displayname</th>
-      <th>Clanname</th>
-      <th>Clantag</th>
-      <th>Profilepath</th>
-      <th>Primaryrace</th>
       <th>Terranwins</th>
       <th>Protosswins</th>
       <th>Zergwins</th>
-      <th>Highest1v1rank</th>
-      <th>Highestteamrank</th>
-      <th>Seasontotalgames</th>
       <th>Careertotalgames</th>
+      <th>Totalwins</th>
+      <th>Totallosses</th>
+      <th>Wlratio</th>
       <th>Level</th>
       <th>Levelterran</th>
       <th>Totallevelxpterran</th>
@@ -30,10 +26,6 @@
       <th>Levelprotoss</th>
       <th>Totallevelxpprotoss</th>
       <th>Currentlevelxpprotoss</th>
-      <th>Seasonid</th>
-      <th>Seasonnumber</th>
-      <th>Seasonyear</th>
-      <th>Totalgamesthisseason</th>
       <th>Wins1vs1</th>
       <th>Games1vs1</th>
       <th>Wins2vs2</th>
@@ -45,6 +37,19 @@
       <th>Winsarchon</th>
       <th>Gamesarchon</th>
       <th>Totalpointsachievements</th>
+      <th>Highest1v1rank</th>
+      <th>Highestteamrank</th>
+      <th>Clanname</th>
+      <th>Clantag</th>
+      <th>Profilepath</th>
+      <th>Primaryrace</th>
+      <th>Seasonid</th>
+      <th>Seasonnumber</th>
+      <th>Seasonyear</th>
+      <th>Seasontotalgames</th>
+      <th>Totalwinsthisseason</th>
+      <th>Totallossesthisseason</th>
+      <th>Wlratiothisseason</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -52,21 +57,17 @@
   <tbody>
     <% @stats.each do |stat| %>
       <tr>
-        <td><%= stat.id %></td>
+        <td><%= stat.uid %></td>
         <td><%= stat.region %></td>
         <td><%= stat.realm %></td>
         <td><%= stat.displayName %></td>
-        <td><%= stat.clanName %></td>
-        <td><%= stat.clanTag %></td>
-        <td><%= stat.profilePath %></td>
-        <td><%= stat.primaryRace %></td>
         <td><%= stat.terranWins %></td>
         <td><%= stat.protossWins %></td>
         <td><%= stat.zergWins %></td>
-        <td><%= stat.highest1v1Rank %></td>
-        <td><%= stat.highestTeamRank %></td>
-        <td><%= stat.seasonTotalGames %></td>
         <td><%= stat.careerTotalGames %></td>
+        <td><%= stat.totalWins %></td>
+        <td><%= stat.totalLosses %></td>
+        <td><%= stat.wlRatio %></td>
         <td><%= stat.level %></td>
         <td><%= stat.levelTerran %></td>
         <td><%= stat.totalLevelXPTerran %></td>
@@ -77,10 +78,6 @@
         <td><%= stat.levelProtoss %></td>
         <td><%= stat.totalLevelXPProtoss %></td>
         <td><%= stat.currentLevelXPProtoss %></td>
-        <td><%= stat.seasonId %></td>
-        <td><%= stat.seasonNumber %></td>
-        <td><%= stat.seasonYear %></td>
-        <td><%= stat.totalGamesThisSeason %></td>
         <td><%= stat.wins1vs1 %></td>
         <td><%= stat.games1vs1 %></td>
         <td><%= stat.wins2vs2 %></td>
@@ -92,6 +89,19 @@
         <td><%= stat.winsArchon %></td>
         <td><%= stat.gamesArchon %></td>
         <td><%= stat.totalPointsAchievements %></td>
+        <td><%= stat.highest1v1Rank %></td>
+        <td><%= stat.highestTeamRank %></td>
+        <td><%= stat.clanName %></td>
+        <td><%= stat.clanTag %></td>
+        <td><%= stat.profilePath %></td>
+        <td><%= stat.primaryRace %></td>
+        <td><%= stat.seasonId %></td>
+        <td><%= stat.seasonNumber %></td>
+        <td><%= stat.seasonYear %></td>
+        <td><%= stat.seasonTotalGames %></td>
+        <td><%= stat.totalWinsThisSeason %></td>
+        <td><%= stat.totalLossesThisSeason %></td>
+        <td><%= stat.wlRatioThisSeason %></td>
         <td><%= link_to 'Show', stat %></td>
         <td><%= link_to 'Edit', edit_stat_path(stat) %></td>
         <td><%= link_to 'Destroy', stat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
