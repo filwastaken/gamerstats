@@ -3,7 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:bnet]
   
-  enum role: { user: 0, teamLeader: 1, amministratore: 2, abbonato: 3, teamLeaderAbbonato: 4 }
+  enum role: { user: 0, teamLeader: 1, abbonato: 2, teamLeaderAbbonato: 3 }
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role

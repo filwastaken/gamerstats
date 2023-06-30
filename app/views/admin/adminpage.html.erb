@@ -1,0 +1,86 @@
+<h2> Hi! </h2>
+<div class="card text-center" style="background-color: #ffffffb3;">
+  <div class="card-header">
+      LISTA UTENTI
+  </div>
+  <div class="card-body">
+    <table class="table table-dark table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col">NICKNAME</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">ABBONAMENTO</th>
+          <th scope="col">REGALA ABBONAMENTO</th>
+          <th scope="col">ELIMINA UTENTE</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @savedusers.each do |user| %>
+          <tr class="table-light">
+            <th scope="row"> <%= user.uid %> </th>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            
+            <!-- Disabling sub gifting if the user is already subbed -->
+            <td> <div class="form-label">
+            <% if user.teamLeader? || user.user? %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger" %>
+            <% else %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger", disabled:true %>
+            <% end %>
+            </div> </td>
+
+            <td> <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card text-center" style="background-color: #ffffffb3;">
+  <div class="card-header">
+      LISTA TEAM
+  </div>
+  <div class="card-body">
+    <table class="table table-dark table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col">NOME TEAM</th>
+          <th scope="col">LISTA COMPONENTI</th>
+          <th scope="col">ELIMINA TEAM</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @savedteams.each do |team| %>
+          <tr class="table-light">
+            <th scope="row"> <%= team.nome_team %> </th>
+            <td>
+              <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center">
+                <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
+                  <a> <%= team.giocatore1 %> </a> <a> <%= team.giocatore3 %> </a>
+                </div>
+                <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
+                  <a> <%= team.giocatore2 %> </a> <a> <%= team.giocatore4 %> </a>
+                </div>
+              </div>
+            </td>
+            <td> <div class="form-label"> <%= button_to "Delete team", delete_team_admin_path(id: team.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card text-center" style="background-color: #ffffffb3;">
+  <div class="card-header">
+      INVIA COMUNICAZIONE
+  </div>
+  <div class="card-body">
+    <input type="text-area" style="width: 80%; height: 90%">
+  </div>
+  <%= button_to "Invia", comunication_admin_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger"%>
+</div>
+
+<button> Blocca temporaneamente il sito </button>
