@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2023_06_29_222715) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "stats", id: false, force: :cascade do |t|
+  create_table "stats", force: :cascade do |t|
     t.integer "uid"
     t.integer "region"
     t.integer "realm"
