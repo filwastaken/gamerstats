@@ -1,23 +1,25 @@
 class AdminController < ApplicationController
-  # GET /admin or /admin.json
+  before_action :authenticate_admin!
+
+  # GET /adminpage or /admin.json
   def adminpage
     @savedusers = User.all
     @savedteams = Team.all
   end
 
-  # DELETE /admin#delete_team
+  # DELETE /adminpage#delete_team
   def delete_team
     Team.find(params[:id]).destroy
-    redirect_to "/adminpage"
+    redirect_to adminpage_path
   end
 
-  # DELETE /admin#delete_user
+  # DELETE /adminpage#delete_user
   def delete_user
     User.find(params[:id]).destroy
-    redirect_to "/adminpage"
+    redirect_to adminpage_path
   end
 
-  # POST /admin#gift
+  # POST /adminpage#gift
   def gift
     user = User.find(params[:id])
 
@@ -27,10 +29,10 @@ class AdminController < ApplicationController
       user.abbonato!
     end
 
-    redirect_to "/adminpage"
+    redirect_to adminpage_path
   end
   
-  # POST /admin#comunication
+  # POST /adminpage#comunication
   def comunication
 
     User.all.each do |users|
@@ -41,5 +43,19 @@ class AdminController < ApplicationController
       admin.bell = true
     end
 
+  end
+
+  # POST /adminpage#start_mainstanace
+  def start_maintenance
+    Maintenance.create!( from: DateTime.now )
+    redirect_to adminpage_path
+  end
+
+  # POST /adminpage#stop_maintanace
+  def stop_maintenance
+    m = Maintenance.find_by(to: nil)
+    m.to = DateTime.now
+    m.save
+    redirect_to adminpage_path
   end
 end
