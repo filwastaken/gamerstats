@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_28_163305) do
+ActiveRecord::Schema.define(version: 2023_06_29_222715) do
+
+  create_table "preferitos", force: :cascade do |t|
+    t.string "mitt_id"
+    t.string "nome_dest"
+    t.string "dest_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,22 +37,18 @@ ActiveRecord::Schema.define(version: 2023_06_28_163305) do
     t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
   end
 
-  create_table "stats", id: false, force: :cascade do |t|
-    t.integer "id"
+  create_table "stats", force: :cascade do |t|
+    t.integer "uid"
     t.integer "region"
     t.integer "realm"
     t.string "displayName"
-    t.string "clanName"
-    t.string "clanTag"
-    t.string "profilePath"
-    t.string "primaryRace"
     t.integer "terranWins"
     t.integer "protossWins"
     t.integer "zergWins"
-    t.string "highest1v1Rank"
-    t.string "highestTeamRank"
-    t.integer "seasonTotalGames"
     t.integer "careerTotalGames"
+    t.integer "totalWins"
+    t.integer "totalLosses"
+    t.float "wlRatio"
     t.integer "level"
     t.integer "levelTerran"
     t.integer "totalLevelXPTerran"
@@ -55,10 +59,6 @@ ActiveRecord::Schema.define(version: 2023_06_28_163305) do
     t.integer "levelProtoss"
     t.integer "totalLevelXPProtoss"
     t.integer "currentLevelXPProtoss"
-    t.integer "seasonId"
-    t.integer "seasonNumber"
-    t.integer "seasonYear"
-    t.integer "totalGamesThisSeason"
     t.integer "wins1vs1"
     t.integer "games1vs1"
     t.integer "wins2vs2"
@@ -70,8 +70,59 @@ ActiveRecord::Schema.define(version: 2023_06_28_163305) do
     t.integer "winsArchon"
     t.integer "gamesArchon"
     t.integer "totalPointsAchievements"
+    t.string "highest1v1Rank"
+    t.string "highestTeamRank"
+    t.string "clanName"
+    t.string "clanTag"
+    t.string "profilePath"
+    t.string "primaryRace"
+    t.integer "seasonId"
+    t.integer "seasonNumber"
+    t.integer "seasonYear"
+    t.integer "seasonTotalGames"
+    t.integer "totalWinsThisSeason"
+    t.integer "totalLossesThisSeason"
+    t.float "wlRatioThisSeason"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "team_stats", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "uid"
+    t.integer "terranwins"
+    t.integer "protosswins"
+    t.integer "zergwins"
+    t.integer "careertotalgames"
+    t.integer "totalwins"
+    t.integer "totallosses"
+    t.float "wlratio"
+    t.integer "level"
+    t.integer "levelterran"
+    t.integer "totallevelxpterran"
+    t.integer "currentlevelxpterran"
+    t.integer "levelzerg"
+    t.integer "totallevelxpzerg"
+    t.integer "currentlevelxpzerg"
+    t.integer "levelprotoss"
+    t.integer "totallevelxpprotoss"
+    t.integer "currentlevelxpprotoss"
+    t.integer "wins1vs1"
+    t.integer "games1vs1"
+    t.integer "wins2vs2"
+    t.integer "games2vs2"
+    t.integer "wins3vs3"
+    t.integer "games3vs3"
+    t.integer "wins4vs4"
+    t.integer "games4vs4"
+    t.integer "winsarchon"
+    t.integer "gamesarchon"
+    t.integer "totalpointsachievements"
+    t.integer "seasontotalgames"
+    t.integer "totalgamesthisseason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_team_stats_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -87,18 +138,18 @@ ActiveRecord::Schema.define(version: 2023_06_28_163305) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.integer "uid", default: -1
+    t.integer "battlenetId", default: -1
+    t.string "nickname", default: "-"
+    t.integer "role", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "uid"
-    t.string "provider"
-    t.string "full_name"
-    t.string "avatar_url"
-    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "team_stats", "teams"
 end

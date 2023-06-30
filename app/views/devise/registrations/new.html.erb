@@ -6,12 +6,12 @@
 
     <div class="field">
       <%= f.label :email, class:"form-label" %><br>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true %>
     </div>
 
     <div class="field">
       <%= f.label :uid, class:"form-label" %> <br>
-      <%= f.text_field :uid, autofocus: true, autocomplete: "uid", class:"form-control", style:"max-width: 400px;" %>
+      <%= f.text_field :uid, autofocus: true, autocomplete: "uid", class:"form-control", style:"max-width: 400px;", required: true %>
     </div>
 
     <div class="field">
@@ -19,18 +19,20 @@
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br/>
-      <%= f.password_field :password, autocomplete: "new-password", class:"form-control", style:"max-width: 400px;" %>
+      <%= f.password_field :password, autocomplete: "new-password", class:"form-control", style:"max-width: 400px;", required: true %>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation, class:"form-label" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", style:"max-width: 400px;" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", style:"max-width: 400px;", required: true %>
     </div>
     <br/>
     <div class="actions">
       <%= f.submit "Sign up", class:"btn btn-dark" %>
     </div>
+    <br>
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Log in", new_session_path(resource_name), class:"link-dark link-offset-3 link-underline-opacity-50 link-underline-opacity-100-hover" %><br />
+    <% end %>
   <% end %>
-  <br>
-  <%= render "devise/shared/links" %>
 </div>

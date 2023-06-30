@@ -16,8 +16,8 @@
 
   <tbody class="table-group-divider">
     <% @teams.each do |team| %>
-      <% if current_user.uid == team.giocatore1 %>
-        <tr class="table-light">
+      <% if current_user.uid.to_s == team.giocatore1 %>
+          <tr class="table-light">
           <td><%= team.nome_team %></td>
           <td><%= team.giocatore1 %></td>
           <td><%= team.giocatore2 %></td>
