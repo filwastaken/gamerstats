@@ -5,8 +5,34 @@ class BattlenetOauthService
 
     colonne = ["id", "realm", "displayName", "clanName", "clanTag", "profilePath", "primaryRace", "terranWins","protossWins","zergWins","highest1v1Rank","highestTeamRank","seasonTotalGames","careerTotalGames","level","levelTerran","totalLevelXPTerran","currentLevelXPTerran","levelZerg","totalLevelXPZerg","currentLevelXPZerg","levelProtoss","totalLevelXPProtoss","currentLevelXPProtoss","seasonId","seasonNumber","seasonYear","totalGamesThisSeason","wins1vs1","games1vs1","wins2vs2","games2vs2","wins3vs3","games3vs3","wins4vs4","games4vs4","winsArchon","gamesArchon","totalPointsAchievements"]
 
-    def self.ottieniProfilo(access_token, profileId)
+    def self.ottieniIdGioco(access_token, accountId)
+        url = URI.parse("https://us.api.blizzard.com/sc2/player/#{accountId}")
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = (url.scheme == "https")
 
+        request = Net::HTTP::Get.new(url.path)
+        request["Authorization"] = "Bearer #{access_token}"
+        response = http.request(request)
+
+        if(response.code == "200")
+            begin
+                ris = {}
+                body = JSON.parse(response.body)
+                ris["nome"] = body[0]["name"]
+                ris["idBattlenet"] = accountId
+                ris["uid"] = body[0]["profileId"].to_i
+                ris["region"] = body[0]["regionId"].to_i
+                ris["realm"] = body[0]["realmId"].to_i
+                return ris
+            rescue
+                return []
+            end
+        else
+            return []
+        end
+    end
+
+    def self.ottieniProfilo(access_token, profileId)
         if Stat.exists?(uid: profileId)   
             tupla = Stat.find_by(uid: profileId)   
             regionIds = [tupla.region]
@@ -16,8 +42,8 @@ class BattlenetOauthService
             realmIds = ["1","2"]
         end
 
-        regionIds.each do |region|
-            realmIds.each do |realm|
+        realmIds.each do |realm|
+            regionIds.each do |region|
                 url = URI.parse("https://us.api.blizzard.com/sc2/legacy/profile/#{region}/#{realm}/#{profileId}")
                 http = Net::HTTP.new(url.host, url.port)
                 http.use_ssl = (url.scheme == "https")
@@ -25,12 +51,10 @@ class BattlenetOauthService
                 request = Net::HTTP::Get.new(url.path)
                 request["Authorization"] = "Bearer #{access_token}"
                 response = http.request(request)
-        
 
                 if(response.code == "200")
                     begin
                         body = JSON.parse(response.body)
-
                         if Stat.exists?(uid: profileId)
                             userFromDB = Stat.find_by(uid: profileId)
                             
@@ -151,7 +175,6 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][0]["wins"] != nil)
                                 userFromDB.wins1vs1 = body["season"]["stats"][0]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][0]["wins"]
                             end
                             
                             if(body["season"]["stats"][0]["games"] != nil)
@@ -160,7 +183,6 @@ class BattlenetOauthService
         
                             if(body["season"]["stats"][1]["wins"] != nil)
                                 userFromDB.wins2vs2 = body["season"]["stats"][1]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][1]["wins"]
                             end
         
                             if(body["season"]["stats"][1]["games"] != nil)
@@ -169,7 +191,6 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][2]["wins"] != nil)
                                 userFromDB.wins3vs3 = body["season"]["stats"][2]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][2]["wins"]
                             end
                             
                             if(body["season"]["stats"][2]["games"] != nil)
@@ -178,7 +199,6 @@ class BattlenetOauthService
         
                             if(body["season"]["stats"][3]["wins"] != nil)
                                 userFromDB.wins4vs4 = body["season"]["stats"][3]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][3]["wins"]
                             end
                             
                             if(body["season"]["stats"][3]["games"] != nil)
@@ -187,7 +207,6 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][4]["wins"] != nil)
                                 userFromDB.winsArchon = body["season"]["stats"][4]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][4]["wins"]
                             end
                             
                             if(body["season"]["stats"][4]["games"] != nil)
@@ -219,6 +238,7 @@ class BattlenetOauthService
                             return []
 
                         else
+                            puts "NON ESISTEEEEEE"
                             user = Stat.new
                             totalwins = 0
                             careertotalgames = 0
@@ -228,7 +248,7 @@ class BattlenetOauthService
                             user.uid = profileId
 
                             user.region = region                            
-            
+                            
                             if(body["career"]["primaryRace"] != nil) 
                                 user.realm = body["realm"]
                             else
@@ -398,7 +418,6 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][0]["wins"] != nil)
                                 user.wins1vs1 = body["season"]["stats"][0]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][0]["wins"]
                             else
                                 user.wins1vs1 = 0
                             end
@@ -411,7 +430,6 @@ class BattlenetOauthService
             
                             if(body["season"]["stats"][1]["wins"] != nil)
                                 user.wins2vs2 = body["season"]["stats"][1]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][1]["wins"]
                             else
                                 user.wins2vs2 = 0
                             end
@@ -424,7 +442,6 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][2]["wins"] != nil)
                                 user.wins3vs3 = body["season"]["stats"][2]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][2]["wins"]
                             else
                                 user.wins3vs3 = 0
                             end
@@ -437,7 +454,6 @@ class BattlenetOauthService
             
                             if(body["season"]["stats"][3]["wins"] != nil)
                                 user.wins4vs4 = body["season"]["stats"][3]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][3]["wins"]
                             else
                                 user.wins4vs4 = 0
                             end
@@ -450,7 +466,6 @@ class BattlenetOauthService
                             
                             if(body["season"]["stats"][4]["wins"] != nil)
                                 user.winsArchon = body["season"]["stats"][4]["wins"]
-                                totalwins = totalwins + body["season"]["stats"][4]["wins"]
                             else
                                 user.winsArchon = 0
                             end
@@ -466,14 +481,17 @@ class BattlenetOauthService
                             else
                                 user.totalPointsAchievements = 0
                             end
+                            
+                            puts "careertotalgames: #{careertotalgames} totalWins: #{totalwins} totalLosses: #{careertotalgames - totalwins}"
+                            puts "seasontotalgames:#{seasontotalgames} totalwinsthisseason: #{totalwinsthisseason} totalLossesThisSeason:#{seasontotalgames - totalwinsthisseason}"
+                            
 
                             user.totalWins = totalwins
-
                             user.totalLosses = careertotalgames - totalwins
-                            user.totalLossesThisSeason = (seasontotalgames - totalwinsthisseason)
+                            user.totalLossesThisSeason = seasontotalgames - totalwinsthisseason
 
                             if (careertotalgames - totalwins) == 0
-                                user.wlRatio = totalWins
+                                user.wlRatio = totalwins
                             else
                                 user.wlRatio = (totalwins.to_f / (careertotalgames - totalwins).to_f)
                             end
