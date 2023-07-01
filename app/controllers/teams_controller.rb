@@ -37,30 +37,30 @@ class TeamsController < ApplicationController
     end
 
     giocatori = []
-    if(@team.giocatore1 != nil)
+    if(@team.giocatore1 != "")
       giocatori.append(@team.giocatore1)
     end
-    if(@team.giocatore2 != nil)
+    if(@team.giocatore2 != "")
       giocatori.append(@team.giocatore2)
     end
-    if(@team.giocatore3 != nil)
+    if(@team.giocatore3 != "")
       giocatori.append(@team.giocatore3)
     end
-    if(@team.giocatore4 != nil)
+    if(@team.giocatore4 != "")
       giocatori.append(@team.giocatore4)
     end
 
-    a = giocatori.length
-    b = giocatori.uniq.length
-    
-    if(a != b)
-      flash[:notice] = "Non puoi mettere due volte lo stesso id"
-      redirect_to new_team_path
-      return
-    end
+    if( @team.giocatore2 != "" || @team.giocatore3 != "" || @team.giocatore4 != "")
+      
+      a = giocatori.length
+      b = giocatori.uniq.length
+      
+      if(a != b)
+        flash[:notice] = "Non puoi mettere due volte lo stesso id"
+        redirect_to new_team_path
+        return
+      end
 
-
-    if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
       if(@team.giocatore2!="")
         BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
         if(Stat.find_by(uid: @team.giocatore2) == nil)
