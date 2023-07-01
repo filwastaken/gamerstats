@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <%= link_to 'Personal', personstats_path, class:"nav-link link-light"%>    
                     </li>
+                    <li class="nav-item">
+                        <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/inbox-2-line.svg', size: '30x30'), view_notification_path, class:"nav-link link-light"%>
+                    </li>
                     <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.nickname%></li>
                     <li class="nav-item position-absolute end-0" style="border: solid 1px white; color: white; padding: 6px; border-radius: 5px; margin-right:390px; min-width:60px">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
@@ -91,10 +94,12 @@
                     <li class="nav-item">
                         <%= link_to 'Edit Profile', edit_admin_registration_path, class:"nav-link link-light"%>    
                     </li>
-                    <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_admin.full_name%> </li>
                     <li class="nav-item">
-                        <!-- TODO: Change placeholder -->
-                        <%= link_to 'Placeholder (Account)', adminpage_path, class:"nav-link link-light"%>    
+                        <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/inbox-2-line.svg', size: '30x30'), view_notification_path, class:"nav-link link-light"%>
+                    </li>
+                    <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_admin.nickname%> </li>
+                    <li class="nav-item">
+                        <%= link_to 'Admin Account', adminpage_path, class:"nav-link link-light"%>    
                     </li>
                 <% else %>
                     <li class="nav-item">

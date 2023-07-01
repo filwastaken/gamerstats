@@ -72,15 +72,41 @@
   </div>
 </div>
 
+<!-- TODO: Continue here -->
 <div class="card text-center" style="background-color: #ffffffb3;">
-  <div class="card-header">
-      INVIA COMUNICAZIONE
-  </div>
-  <div class="card-body">
-    <input type="text-area" style="width: 80%; height: 90%">
-  </div>
-  <%= button_to "Invia", comunication_admin_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger"%>
+  <%= form_for(@notification, url: notification_path(current_admin.id), html: { method: :post }) do |f| %>
+
+    <div class="card-header"> INVIA COMUNICAZIONE </div>
+
+    <div class="card-body">
+      <%= f.label :body %>
+      <%= f.text_area :body, required: true %>
+    </div>
+
+    <div class="card-body">
+      <%= f.label :to %>
+
+      <!-- Creating the queries needed -->
+      <% all_users = User.all %>
+      <% selectedadmins = Admin.where.not(id: current_admin.id) %>
+      <% custom_options = [CustomNotification.new('all', 'All'), CustomNotification.new('admins', 'All Admins')] %>
+      <% merged_collection = all_users + selectedadmins + custom_options %>
+
+      <%= f.collection_select :to, merged_collection, :id, :email %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Invia comunicazione" %>
+    </div>
+  <% end %>
 </div>
+
+
+<!--
+<div class="card text-center" style="background-color: #ffffffb3;">
+  <%# button_to "Invia", comunication_admin_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger"%>
+</div>
+-->
 
 <% if Maintenance.find_by(to: nil).equal? nil %>
   <%= button_to "Inizia il mantenimento", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>

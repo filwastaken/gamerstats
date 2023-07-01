@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   def adminpage
     @savedusers = User.all
     @savedteams = Team.all
+    @notification = Notification.new
   end
 
   # DELETE /adminpage#delete_team
@@ -32,17 +33,45 @@ class AdminController < ApplicationController
     redirect_to adminpage_path
   end
   
-  # POST /adminpage#comunication
-  def comunication
+  # POST /adminpage#notification
+  def notification
+    @notification = Notification.new
+    @notification.body = params[:notification][:body]
+    @notification.from = params[:id]
 
-    User.all.each do |users|
-      users.bell = true
+    if params[:notification][:to] == 'all'
+      @notification.toall!
+    elsif params[:notification][:to] == 'admins'
+      @notification.toadmins!
+    else
+      @notification.to = params[:notification][:to]
     end
 
-    Admin.all.each do |admin|
-      admin.bell = true
-    end
+    @notification.isuser = params[:notification][:isuser]
+    @notification.save
 
+    if @notification.toall?
+      User.all.each do |user|
+        user.bell = true
+        user.save
+      end
+
+      Admin.all.each do |admin|
+        admin.bell = true
+        admin.save
+      end
+    elsif @notification.toadmins?
+      Admin.all.each do |admin|
+        admin.bell = true
+        admin.save
+      end
+    else
+      if @notification.isuser?
+        User.find(@notification.to).bell = true
+      else
+        Admin.find(@notification.to).bell = true
+      end
+    end
   end
 
   # POST /adminpage#start_mainstanace
