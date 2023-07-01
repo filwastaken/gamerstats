@@ -1,3 +1,5 @@
+#clear && bundle exec cucumber
+
 Given("I am logged in as a user with uid {int}") do |uid|
     user = User.find_by(uid: uid.to_i)
     assert_not_nil user, "User with UID #{uid} not found"
@@ -21,6 +23,9 @@ And("I press {string}") do |button|
 end
 
 Then("I should see {string}") do |notice|
-    expect(page).to have_content(notice)
-  end
+    #expect(page).to have_content(notice)
+    elem = find("#alert")
+    puts elem.text
+    assert_equal(notice,elem.text)
+end
   

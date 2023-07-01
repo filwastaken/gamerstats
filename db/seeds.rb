@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+#rails db:seed RAILS_ENV=test
+=begin
 User.create!(
     email: 'pinco.pallino@gmail.com',
     password: '111111',
@@ -17,3 +20,16 @@ User.create!(
     role: 3, 
     bell: FALSE
 )
+
+User.create!(
+    email: '51@gmail.com',
+    password: '111111',
+    created_at: Time.now,
+    updated_at: Time.now,
+    battlenetId: 123456,
+    uid: 51,
+    nickname: 'SCARTA',
+    role: 3, 
+    bell: FALSE
+)
+=end
