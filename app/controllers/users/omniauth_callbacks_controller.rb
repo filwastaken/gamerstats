@@ -2,6 +2,7 @@
 require "securerandom"
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token, only: :bnet
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
   #devise :omniauthable, omniauth_providers: [:bnet]
@@ -79,16 +80,21 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected
 
   def after_omniauth_failure_path_for(_scope)
-    new_user_session_path
+    puts "FAILUREEEEEE #{params.inspect}"
+    session[:authorization_code] = params["code"]
+    #new_user_session_path
+    root_url
   end
 
   def after_sign_in_path_for(resource_or_scope)
+    #puts "SIGN_INNNNNNNNN"
     stored_location_for(resource_or_scope) || root_path
   end 
 
   private 
 
   def auth
+    #puts "AUTHHHHHHHHHHHHHH"
     @auth ||= request.env['omniauth.auth']
   end
 
