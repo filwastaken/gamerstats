@@ -11,8 +11,8 @@
 
     <div class="field">
       <% if user_signed_in? %>
-        <%= f.label :nickname, class:"form-label" %><br />
-        <%= f.text_field :nickname, autofocus: true, class:"form-control", style:"max-width: 400px;" %>
+        <%= f.label :battletag, class: "form-label" %><br />
+        <%= f.text_field :battletag, value: session[:battletag], autofocus: true, class: "form-control", style: "max-width: 400px;", readonly: true %>
       <% elsif admin_signed_in? %>
         <%= f.label :full_name, class:"form-label" %><br />
         <%= f.text_field :full_name, autofocus: true, class:"form-control", style:"max-width: 400px;" %>

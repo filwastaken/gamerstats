@@ -3,12 +3,20 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-    
-    <%= csrf_meta_tags %>
-    
+
     <div class="field">
       <%= f.label :email, class:"form-label" %><br>
-      <%= f.email_field :email, value: "pinco.pallino@gmail.com", autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :battletag, class:"form-label" %><br>
+      <%= f.email_field :battletag, value: session[:battletag], autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true, readonly:true%>
+    </div>
+
+    <div class="field">
+      <%= f.label :battlenetId, class:"form-label" %><br>
+      <%= f.email_field :battlenetId, value: session[:id], autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true, readonly: true %>
     </div>
 
     <div class="field">
@@ -16,12 +24,12 @@
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br/>
-      <%= f.password_field :password, value: "111111", autocomplete: "new-password", class:"form-control", style:"max-width: 400px;", required: true %>
+      <%= f.password_field :password, autocomplete: "new-password", class:"form-control", style:"max-width: 400px;", required: true %>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation, class:"form-label" %><br />
-      <%= f.password_field :password_confirmation, value: "111111", autocomplete: "new-password", class:"form-control", style:"max-width: 400px;", required: true %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", style:"max-width: 400px;", required: true %>
     </div>
     <br/>
     <div class="actions">

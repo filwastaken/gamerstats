@@ -1,6 +1,10 @@
 <% id_prova = current_user.uid %>
 <% #id_prova = 1712 %>
 <% if user_signed_in? || current_user.uid != nil %>
+    <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
+    <% statistiche = Stat.find_by(uid: id_prova) %>
+    <% statisticheTeam = Team.all %>
+    <%puts statisticheTeam.length%>
     <% if current_user.user? || current_user.teamLeader? %>
         <div class="card text-center" style="background-color: #ffffffb3;">
             <div class="card-header">
@@ -20,8 +24,6 @@
                     </thead>
                     <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
                     <% #statistiche = Stat.find_by(uid: current_user.uid) %>
-                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
-                    <% statistiche = Stat.find_by(uid: id_prova) %>
                     <% if statistiche!= nil%>
                         <tbody class="table-group-divider">
                             <tr class="table-light">
@@ -383,8 +385,6 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <%
-                                    #if(Stat.find_by(uid: current_user.uid) != nil)
-                                        #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatio
                                     if(Stat.find_by(uid: id_prova) != nil)
                                         wl_ratio_base = Stat.find_by(uid: id_prova).wlRatio
                                         closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(8)
@@ -467,8 +467,9 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <% Team.all.each do |team|%>
-                            <%#if team.giocatore1 == current_user.uid %>
+                        <%puts "_______________________________  #{statisticheTeam != nil}"%>
+                        <%if statisticheTeam.length != 0%>
+                            <% Team.all.each do |team|%>
                                 <tr class="table-light">
                                 <td><%= team.nome_team %></td>
                                 <% teamStats = TeamStat.find_by(team_id: team.id) %>
@@ -487,7 +488,17 @@
                                     </td>
                                 <%end%>
                                 </tr>
-                            <%#end%>
+                            <%end%>
+                        <%else%>
+                            <tr class="table-light">
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                            </tr>
                         <%end%>
                     </tbody>
                 </table>
@@ -526,8 +537,8 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <% Team.all.each do |team|%>
-                            <%#if team.giocatore1 == current_user.uid %>
+                        <% if statisticheTeam.length != 0%>
+                            <% Team.all.each do |team|%>
                                 <tr class="table-light">
                                 <td><%= team.nome_team %></td>
                                 <% teamStats = TeamStat.find_by(team_id: team.id) %>
@@ -553,7 +564,24 @@
                                     </td>
                                 <%end%>
                                 </tr>
-                            <%#end%>
+                            <%end%>
+                        <%else%>
+                            <tr class="table-light">
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                </tr>
                         <%end%>
                     </tbody>
                 </table>
