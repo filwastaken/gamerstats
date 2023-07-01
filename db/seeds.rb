@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.create!(
+    email: 'pinco.pallino@gmail.com',
+    password: '111111',
+    created_at: Time.now,
+    updated_at: Time.now,
+    battlenetId: 483181335,
+    uid: 10548078,
+    nickname: 'Ninjabippo',
+    role: 3, 
+    bell: FALSE
+)

@@ -7,10 +7,11 @@ class HomeController < ApplicationController
       #2) bundle exec sidekiq su un altro terminale (redis-cli --> flushall)
       #3) rails s su un terzo terminale
 
-    Sidekiq::Queue.all.each(&:clear)
-    Sidekiq::RetrySet.new.clear
-    Sidekiq::ScheduledSet.new.clear
-    Sidekiq::DeadSet.new.clear
+    #Sidekiq::Queue.all.each(&:clear)
+    #Sidekiq::RetrySet.new.clear
+    #Sidekiq::ScheduledSet.new.clear
+    #Sidekiq::DeadSet.new.clear
+
 
     #User.delete_all
     #Stat.delete_all

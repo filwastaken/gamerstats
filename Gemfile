@@ -68,3 +68,10 @@ gem 'omniauth-bnet', '~> 2.0'
 gem 'sidekiq', '~> 6.2'
 gem 'chartkick'
 gem 'httparty'
+
+
+group :test do
+  gem 'cucumber-rails', require:false
+  gem 'database_cleaner'
+  gem 'capybara', '>= 3.26'
+end
