@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   # resources routes
+
+  root 'home#index'
+
   resources :preferitos
   resources :stats
   resources :team_stats
@@ -19,7 +22,7 @@ Rails.application.routes.draw do
   get '/preferitos/:id/destroy', to: 'preferitos#destroy', as: 'destroy_preferitos'
 
   devise_scope :user do  
-    get '/users/sign_out' => 'devise/sessions#destroy'     
+    get '/users/sign_out' => 'devise/sessions#destroy'   
   end
 
   devise_scope :admin do
@@ -45,8 +48,6 @@ Rails.application.routes.draw do
   delete '/adminpage/:id/delete_user', to: 'admin#delete_user', as: 'delete_user_admin'
   post '/adminpage/:id/gift', to: 'admin#gift', as: 'gift_admin'
   post '/adminpage/comunication', to: 'admin#comunication', as: 'comunication_admin'
-
-  root 'home#index'
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

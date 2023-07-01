@@ -11,51 +11,25 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
 
-  def bnet
-    auth = request.env['omniauth.auth']
-    battletag = auth['info']['battletag']
-    @user = User.from_omniauth(auth)
-    if @user.present?
-      session[:user] = @user
-      session[:access_token] = auth["credentials"]["token"]
-      profilo = {}
-      tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], auth["uid"].to_i)
-      
-      if tmp.length != 0
-        profilo = tmp
-        session[:uid] = profilo["uid"]
-        BattlenetOauthService.ottieniProfilo(session[:access_token], profilo["uid"])
-      else
-        profilo["nome"] = ""
-        profilo["idBattlenet"] = auth["uid"].to_i
-        profilo["uid"] = -1
-        session[:uid] = -1
-      end
-      sign_in_and_redirect @user, event: :authentication
-      flash[:success] = t'devise.omniauth.callbacks.success', kind: 'Bnet'
-    else
-      session['devise.battle_net_data'] = request.env['omniauth.auth']
-      redirect_to new_user_registration_path
-      flash[:alert] = t'devise.omniauth.callbacks.failure', kind: 'Bnet', reason: "#{auth.info.email} is not authorized."
-    end
+def bnet
+  auth = request.env['omniauth.auth']
 
-    if !User.exists?(uid: profilo["uid"])
-      newuser = User.create!(
-        email: "#{profilo["idBattlenet"]}.placeholder@placeholder.com",
-        password: "#{SecureRandom.alphanumeric(16)}",
-        created_at: Time.now,
-        updated_at: Time.now,
-        battlenetId: profilo["idBattlenet"],
-        uid: profilo["uid"],
-        nickname: profilo["nome"],
-        role: 0,
-      )
-    else
-      newuser = User.find_by(uid: profilo["uid"])
-    end
+  battletag = auth['info']['battletag']
+  access_token = auth['credentials']['token']
+  battlenetid = auth["uid"]
 
+  session[:battletag] = battletag
+  session[:access_token] = access_token
+  session[:id] = battlenetid
+
+  if User.exists?(battlenetId: battlenetid)
+    newuser = User.find_by(battlenetId: battlenetid)
     sign_in(newuser, scope: :user)
+    redirect_to root_path
+  else
+    redirect_to new_user_registration_path
   end
+end
 
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
@@ -80,21 +54,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected
 
   def after_omniauth_failure_path_for(_scope)
-    puts "FAILUREEEEEE #{params.inspect}"
-    session[:authorization_code] = params["code"]
-    #new_user_session_path
-    root_url
+    new_user_session_path
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    #puts "SIGN_INNNNNNNNN"
     stored_location_for(resource_or_scope) || root_path
   end 
 
   private 
 
   def auth
-    #puts "AUTHHHHHHHHHHHHHH"
     @auth ||= request.env['omniauth.auth']
   end
 
