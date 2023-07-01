@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_30_162346) do
+ActiveRecord::Schema.define(version: 2023_06_30_214324) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2023_06_30_162346) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.string "full_name"
+    t.string "nickname", default: ""
     t.boolean "bell", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 2023_06_30_162346) do
   create_table "maintenances", force: :cascade do |t|
     t.datetime "from", null: false
     t.datetime "to"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "from", null: false
+    t.integer "to", null: false
+    t.boolean "isuser"
+    t.string "body", null: false
+    t.boolean "seen", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "preferitos", force: :cascade do |t|
