@@ -169,27 +169,27 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
-    @team = Team.new(team_params)
-    if( @team.giocatore2!="" || @team.giocatore3!="" || @team.giocatore4!="")
+    @team1 = Team.new(team_params)
+    if( @team1.giocatore2!="" || @team1.giocatore3!="" || @team1.giocatore4!="")
 
-      if(Team.exists?(nome_team: @team.nome_team))
+      if(Team.exists?(nome_team: @team1.nome_team) && @team1.nome_team != @team.nome_team)
         flash[:notice] = "Esiste già un team con lo stesso nome"
-        redirect_to new_team_path
+        redirect_to edit_team_path
         return
       end
 
       giocatori = []
-      if(@team.giocatore1 != nil)
-        giocatori.append(@team.giocatore1)
+      if(@team1.giocatore1 != nil)
+        giocatori.append(@team1.giocatore1)
       end
-      if(@team.giocatore2 != nil)
-        giocatori.append(@team.giocatore2)
+      if(@team1.giocatore2 != nil)
+        giocatori.append(@team1.giocatore2)
       end
-      if(@team.giocatore3 != nil)
-        giocatori.append(@team.giocatore3)
+      if(@team1.giocatore3 != nil)
+        giocatori.append(@team1.giocatore3)
       end
-      if(@team.giocatore4 != nil)
-        giocatori.append(@team.giocatore4)
+      if(@team1.giocatore4 != nil)
+        giocatori.append(@team1.giocatore4)
       end
   
       a = giocatori.length
@@ -201,26 +201,26 @@ class TeamsController < ApplicationController
         return
       end
 
-      if(@team.giocatore2!="")
-        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
-        if(Stat.find_by(uid: @team.giocatore2) == nil)
-          flash[:notice] = "Il giocatore con id #{@team.giocatore2} non ha un account nel gioco, inserire un altro id"
+      if(@team1.giocatore2!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore2)
+        if(Stat.find_by(uid: @team1.giocatore2) == nil)
+          flash[:notice] = "Il giocatore con id #{@team1.giocatore2} non ha un account nel gioco, inserire un altro id"
           redirect_to edit_team_path
           return
         end
       end
-      if(@team.giocatore3!="")
-        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore3)
-        if(Stat.find_by(uid: @team.giocatore3) == nil)
-          flash[:notice] = "Il giocatore con id #{@team.giocatore3} non ha un account nel gioco, inserire un altro id"
+      if(@team1.giocatore3!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore3)
+        if(Stat.find_by(uid: @team1.giocatore3) == nil)
+          flash[:notice] = "Il giocatore con id #{@team1.giocatore3} non ha un account nel gioco, inserire un altro id"
           redirect_to edit_team_path
           return
         end
       end
-      if(@team.giocatore4!="")
-        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore4)
-        if(Stat.find_by(uid: @team.giocatore4) == nil)
-          flash[:notice] = "Il giocatore con id #{@team.giocatore4} non ha un account nel gioco, inserire un altro id"
+      if(@team1.giocatore4!="")
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore4)
+        if(Stat.find_by(uid: @team1.giocatore4) == nil)
+          flash[:notice] = "Il giocatore con id #{@team1.giocatore4} non ha un account nel gioco, inserire un altro id"
           redirect_to edit_team_path
           return
         end
