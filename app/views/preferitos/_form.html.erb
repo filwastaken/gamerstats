@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: preferito) do |form| %>
   <% if preferito.errors.any? %>
     <div id="error_explanation">
@@ -18,12 +20,12 @@
 
   <div class="field">
     <%= form.label :nome, class:"form-label" %>
-    <%= form.text_field :nome_dest, class:"form-control", style:"max-width: 400px;" %>
+    <%= form.text_field :nome_dest, class:"form-control", style:"max-width: 400px;", required: true %>
   </div>
 
   <div class="field">
     <%= form.label :uid, class:"form-label" %>
-    <%= form.text_field :dest_id, class:"form-control", style:"max-width: 400px;" %>
+    <%= form.text_field :dest_id, class:"form-control", style:"max-width: 400px;", required: true %>
   </div>
   <br>
    <div class="container" style="display: flex; justify-content: center;">
