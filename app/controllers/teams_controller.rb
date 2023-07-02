@@ -245,7 +245,7 @@ class TeamsController < ApplicationController
   def abbandona
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to  personstats_url, notice: "Team was successfully updated." }
+        format.html { redirect_to  personstats_url, notice: "Team was successfully abandoned." }
         format.json { render :show, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -46,3 +46,5 @@ Feature: Inserimento di un nuovo Team
     And I fill in "team_giocatore2" with "2"
     And I press "submit"
     Then I should see "Il giocatore con id 2 non ha un account nel gioco, inserire un altro id"
+
+ 

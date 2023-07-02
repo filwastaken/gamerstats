@@ -1,4 +1,4 @@
-Feature: Inserimento di un nuovo Team
+Feature: Inserimento di un nuovo Preferito
 
   Scenario: Inserimento di un nuovo Preferito valido
     Given I am logged in as a user with uid 10548078

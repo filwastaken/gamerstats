@@ -4,7 +4,6 @@
     <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
     <% statistiche = Stat.find_by(uid: id_prova) %>
     <% statisticheTeam = Team.all %>
-    <%puts statisticheTeam.length%>
     <% if current_user.user? || current_user.teamLeader? %>
         <div class="card text-center" style="background-color: #ffffffb3;">
             <div class="card-header">
