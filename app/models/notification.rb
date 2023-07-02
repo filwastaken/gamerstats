@@ -1,3 +1,5 @@
 class Notification < ApplicationRecord
-  enum to: {toall: -1, toadmins: -2}
+  DEFAULT_CASES = { toall: -1, toadmins: -2 }.freeze
+
+  validates :to, presence: true, inclusion: { in: ->(record) { record.class::DEFAULT_CASES.values } }
 end

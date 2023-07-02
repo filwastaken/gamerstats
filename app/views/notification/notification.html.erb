@@ -1,1 +1,18 @@
-<h1> Hi! </h1>
+<% @notification.each do |n| %>
+  
+  <%
+    if current_admin != nil
+      current_admin.bell = false
+      current_admin.save
+    elsif current_user != nil
+      current_user.bell = false
+      current_user.save
+    end
+  %>
+
+  <div style="text-align: center">
+    <a> <%= n.from %> </a>
+    <a> <%= n.to %> </a>
+    <a> <%= n.body %> </a>
+  </div>
+<% end %>

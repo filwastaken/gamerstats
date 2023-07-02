@@ -5,7 +5,6 @@ class CreateNotification < ActiveRecord::Migration[6.1]
       t.integer :to, null: false
       t.boolean :isuser, deafult: false
       t.string :body, null: false
-      t.boolean :seen, default: false
 
       t.timestamps
     end
