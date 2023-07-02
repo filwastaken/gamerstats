@@ -217,20 +217,35 @@ class BattlenetOauthService
                                 userFromDB.totalPointsAchievements = body["achievements"]["points"]["totalPoints"]
                             end
 
-                            userFromDB.totalWins = totalwins
-                            userFromDB.totalLosses = careertotalgames - totalwins
-                            userFromDB.totalLossesThisSeason = (seasontotalgames - totalwinsthisseason)
+                            totalLosses = 0
+                            totalLossesThisSeason = 0
 
-                            if (careertotalgames - totalwins) == 0
-                                userFromDB.wlRatio = totalwins
+                            if((careertotalgames - totalwins) < 0)
+                                totalLosses = 0
                             else
-                                userFromDB.wlRatio = (totalwins.to_f / (careertotalgames - totalwins).to_f)
+                                totalLosses = (careertotalgames - totalwins)
                             end
 
-                            if (seasontotalgames - totalwinsthisseason) == 0
+                            if((seasontotalgames - totalwinsthisseason) < 0)
+                                totalLossesThisSeason = 0
+                            else
+                                totalLossesThisSeason = seasontotalgames - totalwinsthisseason
+                            end
+
+                            userFromDB.totalWins = totalwins
+                            userFromDB.totalLosses = totalLosses
+                            userFromDB.totalLossesThisSeason = totalLossesThisSeason
+
+                            if totalLosses == 0
+                                userFromDB.wlRatio = totalwins
+                            else
+                                userFromDB.wlRatio = (totalwins.to_f / totalLosses.to_f)
+                            end
+
+                            if totalLossesThisSeason == 0
                                 userFromDB.wlRatioThisSeason = totalwinsthisseason
                             else
-                                userFromDB.wlRatioThisSeason = (totalwinsthisseason.to_f / (seasontotalgames - totalwinsthisseason).to_f)
+                                userFromDB.wlRatioThisSeason = (totalwinsthisseason.to_f / totalLossesThisSeason.to_f)
                             end
 
                             userFromDB.save
@@ -238,7 +253,6 @@ class BattlenetOauthService
                             return []
 
                         else
-                            puts "NON ESISTEEEEEE"
                             user = Stat.new
                             totalwins = 0
                             careertotalgames = 0
@@ -481,25 +495,38 @@ class BattlenetOauthService
                             else
                                 user.totalPointsAchievements = 0
                             end
-                            
-                            puts "careertotalgames: #{careertotalgames} totalWins: #{totalwins} totalLosses: #{careertotalgames - totalwins}"
-                            puts "seasontotalgames:#{seasontotalgames} totalwinsthisseason: #{totalwinsthisseason} totalLossesThisSeason:#{seasontotalgames - totalwinsthisseason}"
-                            
+                                                        
 
                             user.totalWins = totalwins
-                            user.totalLosses = careertotalgames - totalwins
-                            user.totalLossesThisSeason = seasontotalgames - totalwinsthisseason
+                            totalLosses = 0
+                            totalLossesThisSeason = 0
 
-                            if (careertotalgames - totalwins) == 0
-                                user.wlRatio = totalwins
+                            if((careertotalgames - totalwins) < 0)
+                                totalLosses = 0
                             else
-                                user.wlRatio = (totalwins.to_f / (careertotalgames - totalwins).to_f)
+                                totalLosses = (careertotalgames - totalwins)
                             end
 
-                            if (seasontotalgames - totalwinsthisseason) == 0
+                            if((seasontotalgames - totalwinsthisseason) < 0)
+                                totalLossesThisSeason = 0
+                            else
+                                totalLossesThisSeason = seasontotalgames - totalwinsthisseason
+                            end
+
+                            user.totalWins = totalwins
+                            user.totalLosses = totalLosses
+                            user.totalLossesThisSeason = totalLossesThisSeason
+
+                            if totalLosses == 0
+                                user.wlRatio = totalwins
+                            else
+                                user.wlRatio = (totalwins.to_f / totalLosses.to_f)
+                            end
+
+                            if totalLossesThisSeason == 0
                                 user.wlRatioThisSeason = totalwinsthisseason
                             else
-                                user.wlRatioThisSeason = (totalwinsthisseason.to_f / (seasontotalgames - totalwinsthisseason).to_f)
+                                user.wlRatioThisSeason = (totalwinsthisseason.to_f / totalLossesThisSeason.to_f)
                             end
 
                             user.save
