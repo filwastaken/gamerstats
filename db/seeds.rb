@@ -191,3 +191,36 @@ TeamStat.create!(
       totalgamesthisseason: 0
 )
 =end
+
+Stat.create!(
+    uid: 151,
+    terranWins: 6,
+    protossWins: 0,
+    zergWins:0,
+    careerTotalGames:5,
+    totalWins:1000,
+    totalLosses:0,
+    wlRatio:6,
+    level:6,
+    levelTerran:5,
+    totalLevelXPTerran:125000,
+    currentLevelXPTerran:10,
+    levelZerg:97,
+    totalLevelXPZerg:04,
+    currentLevelXPZerg:1,
+    levelProtoss:45000,
+    totalLevelXPProtoss:1641,
+    currentLevelXPProtoss:0,
+    wins1vs1:5000,
+    games1vs1:0,
+    wins2vs2:0,
+    games2vs2:0,
+    wins3vs3:0,
+    games3vs3:0,
+    wins4vs4:0,
+    games4vs4:0,
+    winsArchon:0,
+    gamesArchon:0,
+    totalPointsAchievements:10000,
+    seasonTotalGames:5
+)
