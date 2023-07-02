@@ -8,10 +8,10 @@
       <th colspan="3" scope="col"></th>
     </tr>
   </thead>
-
+  
   <tbody class="table-group-divider">
     <% @preferitos.each do |preferito| %>
-      <% if current_user.uid == preferito.mitt_id %>
+      <% if current_user.uid.to_s == preferito.mitt_id %>
         <tr class="table-light">        
           <td><%= preferito.nome_dest %></td>
           <td><%= preferito.dest_id %></td>
