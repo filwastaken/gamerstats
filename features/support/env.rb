@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'capybara/cucumber'
+require 'active_record'
 
 # frozen_string_literal: true
 

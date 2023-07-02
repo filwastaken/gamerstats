@@ -32,4 +32,16 @@ User.create!(
     role: 3, 
     bell: FALSE
 )
+
+User.create!(
+    email: '1@gmail.com',
+    password: '111111',
+    created_at: Time.now,
+    updated_at: Time.now,
+    battlenetId: 123456,
+    uid: 1,
+    nickname: 'SCARTA',
+    role: 3, 
+    bell: FALSE
+)
 =end
