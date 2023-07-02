@@ -25,7 +25,6 @@ end
 Then("I should see {string}") do |notice|
     #expect(page).to have_content(notice)
     elem = find("#alert")
-    puts elem.text
     assert_equal(notice,elem.text)
 end
 
@@ -44,3 +43,8 @@ end
 And("I am on the new preferito page") do 
     visit new_preferito_path
 end
+
+And("I am on the personstats page") do 
+    visit personstats_path
+end
+
