@@ -28,6 +28,26 @@ class TeamsController < ApplicationController
       flash[:notice] = "Esiste già un team con gli stessi giocatori!"
       redirect_to new_team_path
       return
+    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore3, giocatore3: @team.giocatore2, giocatore4: @team.giocatore4)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to new_team_path
+      return
+    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore4, giocatore3: @team.giocatore3, giocatore4: @team.giocatore2)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to new_team_path
+      return
+    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore3, giocatore3: @team.giocatore4, giocatore4: @team.giocatore2)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to new_team_path
+      return
+    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore2, giocatore3: @team.giocatore4, giocatore4: @team.giocatore3)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to new_team_path
+      return
+    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore4, giocatore3: @team.giocatore2, giocatore4: @team.giocatore3)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to new_team_path
+      return
     end
 
     if(Team.exists?(nome_team: @team.nome_team))

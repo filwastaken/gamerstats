@@ -28,4 +28,12 @@ Then("I should see {string}") do |notice|
     puts elem.text
     assert_equal(notice,elem.text)
 end
+
+And("a team exists with giocatore1: {string}, giocatore3: {string}, giocatore2: {string}") do |giocatore1, giocatore3, giocatore2|
+    Team.create!(nome_team: "myTeamX", giocatore1: giocatore1, giocatore2: giocatore2, giocatore3: giocatore3, giocatore4: "")
+end
+
+And ("a team exists with team_nome_team: {string}") do |nome|
+    Team.create!(nome_team: nome, giocatore3: "1", giocatore2: "51")
+end
   
