@@ -38,19 +38,12 @@ class AdminController < ApplicationController
     @notification = Notification.new
     @notification.body = params[:notification][:body]
     @notification.from = params[:id]
-
-    if params[:notification][:to] == 'all'
-      @notification.toall!
-    elsif params[:notification][:to] == 'admins'
-      @notification.toadmins!
-    else
-      @notification.to = params[:notification][:to]
-    end
+    @notification.to = params[:notification][:to]
 
     @notification.isuser = params[:notification][:isuser]
     @notification.save
 
-    if @notification.toall?
+    if @notification.to == Notification::DEFAULT_CASES[:toall]
       User.all.each do |user|
         user.bell = true
         user.save
@@ -60,7 +53,7 @@ class AdminController < ApplicationController
         admin.bell = true
         admin.save
       end
-    elsif @notification.toadmins?
+    elsif @notification.to == Notification::DEFAULT_CASES[:toadmins]
       Admin.all.each do |admin|
         admin.bell = true
         admin.save
@@ -72,6 +65,8 @@ class AdminController < ApplicationController
         Admin.find(@notification.to).bell = true
       end
     end
+
+    redirect_to adminpage_path
   end
 
   # POST /adminpage#start_mainstanace

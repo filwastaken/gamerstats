@@ -89,7 +89,7 @@
       <!-- Creating the queries needed -->
       <% all_users = User.all %>
       <% selectedadmins = Admin.where.not(id: current_admin.id) %>
-      <% custom_options = [CustomNotification.new('all', 'All'), CustomNotification.new('admins', 'All Admins')] %>
+      <% custom_options = [CustomNotification.new(Notification::DEFAULT_CASES[:toall], 'All'), CustomNotification.new(Notification::DEFAULT_CASES[:toadmins], 'All Admins')] %>
       <% merged_collection = all_users + selectedadmins + custom_options %>
 
       <%= f.collection_select :to, merged_collection, :id, :email %>
@@ -100,13 +100,6 @@
     </div>
   <% end %>
 </div>
-
-
-<!--
-<div class="card text-center" style="background-color: #ffffffb3;">
-  <%# button_to "Invia", comunication_admin_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger"%>
-</div>
--->
 
 <% if Maintenance.find_by(to: nil).equal? nil %>
   <%= button_to "Inizia il mantenimento", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>

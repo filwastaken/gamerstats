@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
       if url.present?
         url = URI.parse(url)
 
-        if url.path != '/' && url.path != "/adminpage" && url.path != "/adminpage/stop_maintenance"
-          redirect_to "/"
+        if url.path != '/' && url.path != "/adminpage" && url.path != "/adminpage/stop_maintenance" && url.path != "/admins/sign_in"
+          redirect_to root_path
         end
       end
     end
