@@ -20,6 +20,9 @@ class BattlenetOauthService
         )
     
         response = http.request(request)
+
+        puts response
+
         if response.code == "200"
             body = JSON.parse(response.body)
             access_token = body["access_token"]
@@ -37,6 +40,8 @@ class BattlenetOauthService
         request = Net::HTTP::Get.new(url.path)
         request["Authorization"] = "Bearer #{access_token}"
         response = http.request(request)
+        
+        puts response
 
         if(response.code == "200")
             begin
@@ -75,6 +80,8 @@ class BattlenetOauthService
                 request = Net::HTTP::Get.new(url.path)
                 request["Authorization"] = "Bearer #{access_token}"
                 response = http.request(request)
+
+                puts response
 
                 if(response.code == "200")
                     begin
