@@ -1,732 +1,738 @@
-<% id_prova = current_user.uid %>
-<% #id_prova = 1712 %>
-<% if user_signed_in? || current_user.uid != nil %>
-    <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
-    <% statistiche = Stat.find_by(uid: id_prova) %>
-    <% statisticheTeam = Team.all %>
-    <% if current_user.user? || current_user.teamLeader? %>
-        <div class="card text-center" style="background-color: #ffffffb3;">
-            <div class="card-header">
-                STATISTICHE PERSONALI
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-striped-columns">
-                    <thead>
-                        <tr>
-                        <th scope="col">Games this season</th>
-                        <th scope="col">Wins 1vs1</th>
-                        <th scope="col">Wins 2vs2</th>
-                        <th scope="col">Wins 3vs3</th>
-                        <th scope="col">Wins 4vs4</th>
-                        <th scope="col">Achievements</th>
-                        </tr>
-                    </thead>
-                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
-                    <% #statistiche = Stat.find_by(uid: current_user.uid) %>
-                    <% if statistiche!= nil%>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td><%= statistiche.seasonTotalGames %></td>
-                            <td><%= statistiche.wins1vs1 %></td>
-                            <td><%= statistiche.wins2vs2 %></td>
-                            <td><%= statistiche.wins3vs3 %></td>
-                            <td><%= statistiche.wins4vs4 %></td>
-                            <td><%= statistiche.totalPointsAchievements %></td>
-                            </tr>
-                        </tbody>
-                    <% else %>
-                        <div class="alert alert-danger" role="alert">
-                            L'utente non ha un account per questo gioco
-                            <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            </tr>
-                        </tbody>
-                    <% end %>
-                </table>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="card text-center" style="background-color: #ffffffb3;">
-            <div class="card-header">
-                WL RATIO
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-striped-columns">
-                    <% if statistiche!= nil%>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td class="d-flex justify-content-center"><%= pie_chart [['Wins', statistiche.totalWinsThisSeason],['Losses', statistiche.totalLossesThisSeason]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
-                            </tr>
-                        </tbody>
-                    <% else %>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td>Nessun dato da rappresentare</td>
-                            </tr>
-                        </tbody>
-                    <% end %>
-                </table>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container text-center" style="background-color: #ffffff00;">
-            <div class="row">
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            STATISTICHE UTENTI
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-dark table-striped-columns">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">NICKNAME</th>
-                                    <th scope="col">W/L RATIO</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                <%
-                                    #if(Stat.find_by(uid: current_user.uid) != nil)
-                                        #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatioThisSeason
-                                    if(Stat.find_by(uid: id_prova) != nil)
-                                        wl_ratio_base = Stat.find_by(uid: id_prova).wlRatioThisSeason
-                                        closest_values = Stat.order(Arel.sql("ABS(wlRatioThisSeason - #{wl_ratio_base})")).limit(5)
-                                        lista_utenti = closest_values.pluck(:displayName, :wlRatioThisSeason)
-                                        lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
-                                    else
-                                        lista_utenti = []
-                                    end
-                                %>
-                                    <tr class="table-light">
-                                    <% if lista_utenti.length != 0 %>
-                                        <% lista_utenti.each do |nome, wlthisseason| %>
-                                            <tr class="table-light">
-                                                <td><%= nome %></td>
-                                                <td><%= wlthisseason %></td>
-                                            </tr>
-                                        <% end %>
-                                    <%else%>
-                                        <tr class="table-light">
-                                            <td>
-                                                null
-                                            </td>
-                                            <td>
-                                                null
-                                            </td>
-                                        </tr>
-                                    <%end%>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            CLASSIFICA TEAM
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-dark table-striped-columns">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">TEAM NAME</th>
-                                    <th scope="col">W/L RATIO</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                    <%
-                                        if(TeamStat.all.length != 0)
-                                            closest_values = TeamStat.order("wlratio DESC").limit(3)
-                                            lista_gruppi = closest_values.pluck(:team_id, :wlratio)
-                                        else
-                                            lista_gruppi = []
-                                        end
-                                    %>
-                                    <tr class="table-light">
-                                    <% if lista_gruppi.length != 0 %>
-                                        <% lista_gruppi.each do |id, wl| %>
-                                            <%if wl != nil%>
-                                                <% nometeam = Team.find_by(id: id).nome_team%>
-                                                <tr class="table-light">
-                                                    <td><%= nometeam %></td>
-                                                    <td><%= wl %></td>
-                                                </tr>
-                                            <% end %>
-                                        <% end %>
-                                    <%else%>
-                                        <tr class="table-light">
-                                            <td>
-                                                null
-                                            </td>
-                                            <td>
-                                                null
-                                            </td>
-                                        </tr>
-                                    <%end%>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-    <% end %>
-    <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
-        <div class="card text-center" style="background-color: #ffffffb3;">
-            <div class="card-header">
-                STATISTICHE PERSONALI
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-striped-columns">
-                    <thead>
-                        <tr>
-                        <th scope="col">Total Games</th>
-                        <th scope="col">Season Games</th>
-                        <th scope="col">Highest 1v1 Rank</th>
-                        <th scope="col">Terran wins</th>
-                        <th scope="col">XP Terran</th>
-                        <th scope="col">Protoss wins</th>
-                        <th scope="col">XP Protoss</th>
-                        <th scope="col">Zerg wins</th>
-                        <th scope="col">XP Zerg</th>
-                        <th scope="col">Achievements</th>
-                        </tr>
-                    </thead>
-                    <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
-                    <% #statistiche = Stat.find_by(uid: current_user.uid) %>
-                    <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
-                    <% statistiche = Stat.find_by(uid: id_prova) %>
-                    <% if statistiche!= nil%>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td><%= statistiche.careerTotalGames %></td>
-                            <td><%= statistiche.seasonTotalGames %></td>
-                            <td><%= statistiche.highest1v1Rank %></td>
-                            <td><%= statistiche.terranWins %></td>
-                            <td><%= statistiche.totalLevelXPTerran %></td>
-                            <td><%= statistiche.protossWins %></td>
-                            <td><%= statistiche.totalLevelXPProtoss %></td>
-                            <td><%= statistiche.zergWins %></td>
-                            <td><%= statistiche.totalLevelXPZerg %></td>
-                            <td><%= statistiche.totalPointsAchievements %></td>
-                            </tr>
-                        </tbody>
-                    <% else %>
-                        <div class="alert alert-danger" role="alert">
-                            L'utente non ha un account per questo gioco
-                            <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            </tr>
-                        </tbody>
-                    <% end %>
-                </table>
-                <table class="table table-dark table-striped-columns">
-                    <thead>
-                        <tr>
-                        <th scope="col">Games 1vs1</th>
-                        <th scope="col">Wins 1vs1</th>
-                        <th scope="col">Games 2vs2</th>
-                        <th scope="col">Wins 2vs2</th>
-                        <th scope="col">Games 3vs3</th>
-                        <th scope="col">Wins 3vs3</th>
-                        <th scope="col">Games 4vs4</th>
-                        <th scope="col">Wins 4vs4</th>
-                        <th scope="col">Games Archon</th>
-                        <th scope="col">Wins Archon</th>
-                        </tr>
-                    </thead>
-                    <% if statistiche!= nil%>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td><%= statistiche.games1vs1 %></td>
-                            <td><%= statistiche.wins1vs1 %></td>
-                            <td><%= statistiche.games2vs2 %></td>
-                            <td><%= statistiche.wins2vs2 %></td>
-                            <td><%= statistiche.games3vs3 %></td>
-                            <td><%= statistiche.wins3vs3 %></td>
-                            <td><%= statistiche.games4vs4 %></td>
-                            <td><%= statistiche.wins4vs4 %></td>
-                            <td><%= statistiche.gamesArchon %></td>
-                            <td><%= statistiche.winsArchon %></td>
-                            </tr>
-                        </tbody>
-                    <% else %>
-                        <tbody class="table-group-divider">
-                            <tr class="table-light">
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            <td>null</td>
-                            </tr>
-                        </tbody>
-                    <% end %>
-                </table>
-            </div>
-        </div>
-        
-        <br>
-
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            WL RATIO 
-                        </div>
-                        <div class="card-body">
-                            <% if statistiche != nil %>
-                                <%= pie_chart [['Wins', statistiche.totalWins],['Losses', statistiche.totalLosses]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %> 
-                            <% else %>
-                                Nessun dato da rappresentare  
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            WINS AND LEVEL COMPARISON
-                        </div>
-                        <div class="card-body">
-                            <% if statistiche != nil %>
-                                <%= column_chart [{ name: 'career wins', data: { 'Terran' => statistiche.terranWins, 'Zerg' => statistiche.zergWins, 'Protoss' => statistiche.protossWins } }, { name: 'career level', data: { 'Terran' => statistiche.levelTerran, 'Zerg' => statistiche.levelZerg, 'Protoss' => statistiche.levelProtoss }}], legend: 'bottom', height: '350px', width: '600px', library: { backgroundColor: 'transparent' } %>
-                            <% else %>
-                                Nessun dato da rappresentare  
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                             CAREER WINS 
-                        </div>
-                        <div class="card-body">
-                            <% if statistiche != nil %>
-                                <%= column_chart [{ name: 'career wins', data: { '1vs1' => statistiche.wins1vs1, '2vs2' => statistiche.wins2vs2, '3vs3' => statistiche.wins3vs3, '4vs4' => statistiche.wins4vs4, 'archon' => statistiche.winsArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
-                            <% else %>
-                                Nessun dato da rappresentare  
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            CAREER GAMES
-                        </div>
-                        <div class="card-body">
-                            <% if statistiche != nil %>
-                                <%= column_chart [{ name: 'career games', data: { '1vs1' => statistiche.games1vs1, '2vs2' => statistiche.games2vs2, '3vs3' => statistiche.games3vs3, '4vs4' => statistiche.games4vs4, 'archon' => statistiche.gamesArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
-                            <% else %>
-                                Nessun dato da rappresentare  
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            STATISTICHE UTENTI
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-dark table-striped-columns">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">NICKNAME</th>
-                                    <th scope="col">WL RATIO</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                <%
-                                    if(Stat.find_by(uid: id_prova) != nil)
-                                        wl_ratio_base = Stat.find_by(uid: id_prova).wlRatio
-                                        closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(8)
-                                        lista_utenti = closest_values.pluck(:displayName, :wlRatio)
-                                        lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
-                                    else
-                                        lista_utenti = []
-                                    end
-                                %>
-                                <% if lista_utenti.length != 0 %>
-                                        <% lista_utenti.each do |nome, wl| %>
-                                            <tr class="table-light">
-                                                <td><%= nome %></td>
-                                                <td><%= wl %></td>
-                                            </tr>
-                                        <% end %>
-                                    <%else%>
-                                        <tr class="table-light">
-                                            <td>
-                                                null
-                                            </td>
-                                            <td>
-                                                null
-                                            </td>
-                                        </tr>
-                                    <%end%>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            CLASSIFICA TEAM
-                            <br>
-                            <br>
-                            <button id="bestTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Migliori Team</button>
-                            <button id="worstTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Peggiori Team</button>
-                        </div>
-                        <div class="card-body">
-                            <table id="teamTable" class="table table-dark table-striped-columns">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">TEAM NAME</th>
-                                    <th scope="col">W/L RATIO</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container" style="display: flex; justify-content: center;">
-            <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to ' ----------- I tuoi utenti preferiti ----------- ',  preferitos_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
-        </div>
-        <br>
-    <% end %>
-    <% if current_user.teamLeader? %>
-        <div class="card text-center" style="background-color: #ffffffb3;">
-            <div class="card-header">
-                STATISTICHE TEAM
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-striped-columns">
-                    <thead>
-                        <tr>
-                        <th scope="col">Nome Team</th>
-                        <th scope="col">Total Games</th>
-                        <th scope="col">wins 1vs1</th>
-                        <th scope="col">wins 2vs2</th>
-                        <th scope="col">wins 3vs3</th>
-                        <th scope="col">wins 4vs4</th>
-                        <th scope="col">Achievements</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <%puts "_______________________________  #{statisticheTeam != nil}"%>
-                        <%if statisticheTeam.length != 0%>
-                            <% Team.all.each do |team|%>
-                                <tr class="table-light">
-                                <td><%= team.nome_team %></td>
-                                <% teamStats = TeamStat.find_by(team_id: team.id) %>
-                                <% if teamStats.careertotalgames != nil%>
-                                    <td><%= teamStats.careertotalgames %></td>
-                                    <td><%= teamStats.wins1vs1 %></td>
-                                    <td><%= teamStats.wins2vs2 %></td>
-                                    <td><%= teamStats.wins3vs3 %></td>
-                                    <td><%= teamStats.wins4vs4 %></td>
-                                    <td><%= teamStats.totalpointsachievements %></td>
-                                <%else%>
-                                    <td colspan=10 >
-                                        <div class=container style="background-color:#f8d7da; color:red; ">
-                                            Gli utenti di questo team non hanno un account per il gioco !
-                                        </div>
-                                    </td>
-                                <%end%>
-                                </tr>
-                            <%end%>
-                        <%else%>
-                            <tr class="table-light">
-                                <td>null</td>
-                                <td>null</td>
-                                <td>null</td>
-                                <td>null</td>
-                                <td>null</td>
-                                <td>null</td>
-                                <td>null</td>
-                            </tr>
-                        <%end%>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <br>
-        <div class="container" style="display: flex; justify-content: center;">
-            <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to '----------- Team in cui sei il Leader -----------', teams_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
-        </div>
-        <br>
-    <% end %>
-    
-    <% if current_user.teamLeaderAbbonato? %>
-        <div class="card text-center" style="background-color: #ffffffb3;">
-            <div class="card-header">
-                STATISTICHE TEAM
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-striped-columns">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome Team</th>
-                            <th scope="col">Total Games</th>
-                            <th scope="col">Total Wins</th>
-                            <th scope="col">Total Losses</th>
-                            <th scope="col">WL Ratio</th>
-                            <th scope="col">Games 1vs1</th>
-                            <th scope="col">wins 1vs1</th>
-                            <th scope="col">Games 2vs2</th>
-                            <th scope="col">wins 2vs2</th>
-                            <th scope="col">Games 3vs3</th>
-                            <th scope="col">wins 3vs3</th>
-                            <th scope="col">Games 4vs4</th>
-                            <th scope="col">wins 4vs4</th>
-                            <th scope="col">Achievements</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <% if statisticheTeam.length != 0%>
-                            <% Team.all.each do |team|%>
-                                <tr class="table-light">
-                                <td><%= team.nome_team %></td>
-                                <% teamStats = TeamStat.find_by(team_id: team.id) %>
-                                <% if teamStats.careertotalgames != nil%>
-                                    <td><%= teamStats.careertotalgames %></td>
-                                    <td><%= teamStats.totalwins %></td>
-                                    <td><%= teamStats.totallosses %></td>
-                                    <td><%= teamStats.wlratio %></td>
-                                    <td><%= teamStats.games1vs1 %></td>
-                                    <td><%= teamStats.wins1vs1 %></td>
-                                    <td><%= teamStats.games2vs2 %></td>
-                                    <td><%= teamStats.wins2vs2 %></td>
-                                    <td><%= teamStats.games3vs3 %></td>
-                                    <td><%= teamStats.wins3vs3 %></td>
-                                    <td><%= teamStats.games4vs4 %></td>
-                                    <td><%= teamStats.wins4vs4 %></td>
-                                    <td><%= teamStats.totalpointsachievements %></td>
-                                <%else%>
-                                    <td colspan=10 >
-                                        <div class=container style="background-color:#f8d7da; color:red; ">
-                                            Gli utenti di questo team non hanno un account per il gioco !
-                                        </div>
-                                    </td>
-                                <%end%>
-                                </tr>
-                            <%end%>
-                        <%else%>
-                            <tr class="table-light">
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                    <td>null</td>
-                                </tr>
-                        <%end%>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <br>
-
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <div class="card text-center" style="background-color: #ffffffb3;">
-                        <div class="card-header">
-                            TEAM WL RATIO
-                        </div>
-                        <div class="card-body">
-                            <% if Team.all.length != 0 %>
-                                <% data = {} %>
-                                <% Team.all.each do |team_tmp| %>
-                                    <% if team_tmp.giocatore1.to_i == current_user.uid %>
-                                        <% data[team_tmp.nome_team] = TeamStat.find_by(team_id: team_tmp.id).wlratio %>   
-                                    <% end %>
-                                <% end %>
-                                
-                                <% if data.any? %>
-                                    <%= column_chart [name: 'wl ratio comparison', data: data] %>
-                                <% else %>
-                                    Nessun dato da rappresentare
-                                <% end %>
-                            <% else %>
-                                Nessun dato da rappresentare
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container" style="display: flex; justify-content: center;">
-            <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to ' ----------- Team in cui sei il Leader ----------- ', teams_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
-        </div>
-        <br>
-    <% end %>
-
-    <% if current_user.abbonato? || current_user.user? || current_user.teamLeader? || current_user.teamLeaderAbbonato? %>
-        <div class="container" style="display: flex; justify-content: center;">
-            <div class="card text-center" style="width: 50vw; background-color: #ffffffb3;">
+<% if current_user != nil%>
+    <% id_prova = current_user.uid %>
+    <% #id_prova = 1712 %>
+    <% if user_signed_in? || current_user.uid != nil %>
+        <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
+        <% statistiche = Stat.find_by(uid: id_prova) %>
+        <% statisticheTeam = Team.all %>
+        <% if current_user.user? || current_user.teamLeader? %>
+            <div class="card text-center" style="background-color: #ffffffb3;">
                 <div class="card-header">
-                    TEAM DI CUI FAI PARTE SENZA ESSERE IL TEAM LEADER
+                    STATISTICHE PERSONALI
                 </div>
                 <div class="card-body">
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
-                            <th scope="col">NOME TEAM</th>
-                            <th scope="col" style="width: 25vw">VUOI ABBANDONARE IL TEAM ?</th>
+                            <th scope="col">Games this season</th>
+                            <th scope="col">Wins 1vs1</th>
+                            <th scope="col">Wins 2vs2</th>
+                            <th scope="col">Wins 3vs3</th>
+                            <th scope="col">Wins 4vs4</th>
+                            <th scope="col">Achievements</th>
+                            </tr>
+                        </thead>
+                        <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
+                        <% #statistiche = Stat.find_by(uid: current_user.uid) %>
+                        <% if statistiche!= nil%>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td><%= statistiche.seasonTotalGames %></td>
+                                <td><%= statistiche.wins1vs1 %></td>
+                                <td><%= statistiche.wins2vs2 %></td>
+                                <td><%= statistiche.wins3vs3 %></td>
+                                <td><%= statistiche.wins4vs4 %></td>
+                                <td><%= statistiche.totalPointsAchievements %></td>
+                                </tr>
+                            </tbody>
+                        <% else %>
+                            <div class="alert alert-danger" role="alert">
+                                L'utente non ha un account per questo gioco
+                                <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                </tr>
+                            </tbody>
+                        <% end %>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="card text-center" style="background-color: #ffffffb3;">
+                <div class="card-header">
+                    WL RATIO
+                </div>
+                <div class="card-body">
+                    <table class="table table-dark table-striped-columns">
+                        <% if statistiche!= nil%>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td class="d-flex justify-content-center"><%= pie_chart [['Wins', statistiche.totalWinsThisSeason],['Losses', statistiche.totalLossesThisSeason]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %></td>
+                                </tr>
+                            </tbody>
+                        <% else %>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td>Nessun dato da rappresentare</td>
+                                </tr>
+                            </tbody>
+                        <% end %>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="container text-center" style="background-color: #ffffff00;">
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                STATISTICHE UTENTI
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-dark table-striped-columns">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">NICKNAME</th>
+                                        <th scope="col">W/L RATIO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    <%
+                                        #if(Stat.find_by(uid: current_user.uid) != nil)
+                                            #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatioThisSeason
+                                        if(Stat.find_by(uid: id_prova) != nil)
+                                            wl_ratio_base = Stat.find_by(uid: id_prova).wlRatioThisSeason
+                                            closest_values = Stat.order(Arel.sql("ABS(wlRatioThisSeason - #{wl_ratio_base})")).limit(5)
+                                            lista_utenti = closest_values.pluck(:displayName, :wlRatioThisSeason)
+                                            lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
+                                        else
+                                            lista_utenti = []
+                                        end
+                                    %>
+                                        <tr class="table-light">
+                                        <% if lista_utenti.length != 0 %>
+                                            <% lista_utenti.each do |nome, wlthisseason| %>
+                                                <tr class="table-light">
+                                                    <td><%= nome %></td>
+                                                    <td><%= wlthisseason %></td>
+                                                </tr>
+                                            <% end %>
+                                        <%else%>
+                                            <tr class="table-light">
+                                                <td>
+                                                    null
+                                                </td>
+                                                <td>
+                                                    null
+                                                </td>
+                                            </tr>
+                                        <%end%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                CLASSIFICA TEAM
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-dark table-striped-columns">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">TEAM NAME</th>
+                                        <th scope="col">W/L RATIO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        <%
+                                            if(TeamStat.all.length != 0)
+                                                closest_values = TeamStat.order("wlratio DESC").limit(3)
+                                                lista_gruppi = closest_values.pluck(:team_id, :wlratio)
+                                            else
+                                                lista_gruppi = []
+                                            end
+                                        %>
+                                        <tr class="table-light">
+                                        <% if lista_gruppi.length != 0 %>
+                                            <% lista_gruppi.each do |id, wl| %>
+                                                <%if wl != nil%>
+                                                    <% nometeam = Team.find_by(id: id).nome_team%>
+                                                    <tr class="table-light">
+                                                        <td><%= nometeam %></td>
+                                                        <td><%= wl %></td>
+                                                    </tr>
+                                                <% end %>
+                                            <% end %>
+                                        <%else%>
+                                            <tr class="table-light">
+                                                <td>
+                                                    null
+                                                </td>
+                                                <td>
+                                                    null
+                                                </td>
+                                            </tr>
+                                        <%end%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        <% end %>
+        <% if current_user.abbonato? ||  current_user.teamLeaderAbbonato? %>
+            <div class="card text-center" style="background-color: #ffffffb3;">
+                <div class="card-header">
+                    STATISTICHE PERSONALI
+                </div>
+                <div class="card-body">
+                    <table class="table table-dark table-striped-columns">
+                        <thead>
+                            <tr>
+                            <th scope="col">Total Games</th>
+                            <th scope="col">Season Games</th>
+                            <th scope="col">Highest 1v1 Rank</th>
+                            <th scope="col">Terran wins</th>
+                            <th scope="col">XP Terran</th>
+                            <th scope="col">Protoss wins</th>
+                            <th scope="col">XP Protoss</th>
+                            <th scope="col">Zerg wins</th>
+                            <th scope="col">XP Zerg</th>
+                            <th scope="col">Achievements</th>
+                            </tr>
+                        </thead>
+                        <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
+                        <% #statistiche = Stat.find_by(uid: current_user.uid) %>
+                        <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
+                        <% statistiche = Stat.find_by(uid: id_prova) %>
+                        <% if statistiche!= nil%>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td><%= statistiche.careerTotalGames %></td>
+                                <td><%= statistiche.seasonTotalGames %></td>
+                                <td><%= statistiche.highest1v1Rank %></td>
+                                <td><%= statistiche.terranWins %></td>
+                                <td><%= statistiche.totalLevelXPTerran %></td>
+                                <td><%= statistiche.protossWins %></td>
+                                <td><%= statistiche.totalLevelXPProtoss %></td>
+                                <td><%= statistiche.zergWins %></td>
+                                <td><%= statistiche.totalLevelXPZerg %></td>
+                                <td><%= statistiche.totalPointsAchievements %></td>
+                                </tr>
+                            </tbody>
+                        <% else %>
+                            <div class="alert alert-danger" role="alert">
+                                L'utente non ha un account per questo gioco
+                                <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                </tr>
+                            </tbody>
+                        <% end %>
+                    </table>
+                    <table class="table table-dark table-striped-columns">
+                        <thead>
+                            <tr>
+                            <th scope="col">Games 1vs1</th>
+                            <th scope="col">Wins 1vs1</th>
+                            <th scope="col">Games 2vs2</th>
+                            <th scope="col">Wins 2vs2</th>
+                            <th scope="col">Games 3vs3</th>
+                            <th scope="col">Wins 3vs3</th>
+                            <th scope="col">Games 4vs4</th>
+                            <th scope="col">Wins 4vs4</th>
+                            <th scope="col">Games Archon</th>
+                            <th scope="col">Wins Archon</th>
+                            </tr>
+                        </thead>
+                        <% if statistiche!= nil%>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td><%= statistiche.games1vs1 %></td>
+                                <td><%= statistiche.wins1vs1 %></td>
+                                <td><%= statistiche.games2vs2 %></td>
+                                <td><%= statistiche.wins2vs2 %></td>
+                                <td><%= statistiche.games3vs3 %></td>
+                                <td><%= statistiche.wins3vs3 %></td>
+                                <td><%= statistiche.games4vs4 %></td>
+                                <td><%= statistiche.wins4vs4 %></td>
+                                <td><%= statistiche.gamesArchon %></td>
+                                <td><%= statistiche.winsArchon %></td>
+                                </tr>
+                            </tbody>
+                        <% else %>
+                            <tbody class="table-group-divider">
+                                <tr class="table-light">
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                <td>null</td>
+                                </tr>
+                            </tbody>
+                        <% end %>
+                    </table>
+                </div>
+            </div>
+            
+            <br>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                WL RATIO 
+                            </div>
+                            <div class="card-body">
+                                <% if statistiche != nil %>
+                                    <%= pie_chart [['Wins', statistiche.totalWins],['Losses', statistiche.totalLosses]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %> 
+                                <% else %>
+                                    Nessun dato da rappresentare  
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                WINS AND LEVEL COMPARISON
+                            </div>
+                            <div class="card-body">
+                                <% if statistiche != nil %>
+                                    <%= column_chart [{ name: 'career wins', data: { 'Terran' => statistiche.terranWins, 'Zerg' => statistiche.zergWins, 'Protoss' => statistiche.protossWins } }, { name: 'career level', data: { 'Terran' => statistiche.levelTerran, 'Zerg' => statistiche.levelZerg, 'Protoss' => statistiche.levelProtoss }}], legend: 'bottom', height: '350px', width: '600px', library: { backgroundColor: 'transparent' } %>
+                                <% else %>
+                                    Nessun dato da rappresentare  
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                CAREER WINS 
+                            </div>
+                            <div class="card-body">
+                                <% if statistiche != nil %>
+                                    <%= column_chart [{ name: 'career wins', data: { '1vs1' => statistiche.wins1vs1, '2vs2' => statistiche.wins2vs2, '3vs3' => statistiche.wins3vs3, '4vs4' => statistiche.wins4vs4, 'archon' => statistiche.winsArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
+                                <% else %>
+                                    Nessun dato da rappresentare  
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                CAREER GAMES
+                            </div>
+                            <div class="card-body">
+                                <% if statistiche != nil %>
+                                    <%= column_chart [{ name: 'career games', data: { '1vs1' => statistiche.games1vs1, '2vs2' => statistiche.games2vs2, '3vs3' => statistiche.games3vs3, '4vs4' => statistiche.games4vs4, 'archon' => statistiche.gamesArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
+                                <% else %>
+                                    Nessun dato da rappresentare  
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                STATISTICHE UTENTI
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-dark table-striped-columns">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">NICKNAME</th>
+                                        <th scope="col">WL RATIO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    <%
+                                        if(Stat.find_by(uid: id_prova) != nil)
+                                            wl_ratio_base = Stat.find_by(uid: id_prova).wlRatio
+                                            closest_values = Stat.order(Arel.sql("ABS(wlRatio - #{wl_ratio_base})")).limit(8)
+                                            lista_utenti = closest_values.pluck(:displayName, :wlRatio)
+                                            lista_utenti = lista_utenti.sort_by { |lista| lista[1] }.reverse
+                                        else
+                                            lista_utenti = []
+                                        end
+                                    %>
+                                    <% if lista_utenti.length != 0 %>
+                                            <% lista_utenti.each do |nome, wl| %>
+                                                <tr class="table-light">
+                                                    <td><%= nome %></td>
+                                                    <td><%= wl %></td>
+                                                </tr>
+                                            <% end %>
+                                        <%else%>
+                                            <tr class="table-light">
+                                                <td>
+                                                    null
+                                                </td>
+                                                <td>
+                                                    null
+                                                </td>
+                                            </tr>
+                                        <%end%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                CLASSIFICA TEAM
+                                <br>
+                                <br>
+                                <button id="bestTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Migliori Team</button>
+                                <button id="worstTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Peggiori Team</button>
+                            </div>
+                            <div class="card-body">
+                                <table id="teamTable" class="table table-dark table-striped-columns">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">TEAM NAME</th>
+                                        <th scope="col">W/L RATIO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container" style="display: flex; justify-content: center;">
+                <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to ' ----------- I tuoi utenti preferiti ----------- ',  preferitos_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
+            </div>
+            <br>
+        <% end %>
+        <% if current_user.teamLeader? %>
+            <div class="card text-center" style="background-color: #ffffffb3;">
+                <div class="card-header">
+                    STATISTICHE TEAM
+                </div>
+                <div class="card-body">
+                    <table class="table table-dark table-striped-columns">
+                        <thead>
+                            <tr>
+                            <th scope="col">Nome Team</th>
+                            <th scope="col">Total Games</th>
+                            <th scope="col">wins 1vs1</th>
+                            <th scope="col">wins 2vs2</th>
+                            <th scope="col">wins 3vs3</th>
+                            <th scope="col">wins 4vs4</th>
+                            <th scope="col">Achievements</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <% Team.all.each do |team| %>
-                                <% if current_user.uid.to_s == team.giocatore2 || current_user.uid.to_s == team.giocatore3 || current_user.uid.to_s == team.giocatore4  %>
+                            <%puts "_______________________________  #{statisticheTeam != nil}"%>
+                            <%if statisticheTeam.length != 0%>
+                                <% Team.all.each do |team|%>
                                     <tr class="table-light">
                                     <td><%= team.nome_team %></td>
-                                    <td style="width: 25vw">
-                                        <%= form_for @team=team, url: abbandona_team_path(team.id), method: :patch do |f| %>
-                                            <%= f.text_field :nome_team, value: team.nome_team, type: :hidden %>
-                                            <%= f.text_field :giocatore1, value: team.giocatore1, type: :hidden %>
-                                            <% if current_user.uid.to_s == team.giocatore2 %>
-                                                <%= f.text_field :giocatore2, value: "", type: :hidden %>
-                                                <%= f.text_field :giocatore3, value: team.giocatore3, type: :hidden %>
-                                                <%= f.text_field :giocatore4, value: team.giocatore4, type: :hidden %>
-                                            <% end %>
-
-                                            <% if current_user.uid.to_s == team.giocatore3 %>
-                                                <%= f.text_field :giocatore2, value: team.giocatore2, type: :hidden %>
-                                                <%= f.text_field :giocatore3, value: "", type: :hidden %>
-                                                <%= f.text_field :giocatore4, value: team.giocatore4, type: :hidden %>
-                                            <% end %>
-
-                                            <% if current_user.uid.to_s == team.giocatore4 %>
-                                                <%= f.text_field :giocatore2, value: team.giocatore2, type: :hidden %>
-                                                <%= f.text_field :giocatore3, value: team.giocatore3, type: :hidden %>
-                                                <%= f.text_field :giocatore4, value: "", type: :hidden %>
-                                            <% end %>
-
-                                            <%= f.submit "Abbandona", class: "btn btn-danger" %>
-                                        <% end %>
-                                    </td>
+                                    <% teamStats = TeamStat.find_by(team_id: team.id) %>
+                                    <% if teamStats.careertotalgames != nil%>
+                                        <td><%= teamStats.careertotalgames %></td>
+                                        <td><%= teamStats.wins1vs1 %></td>
+                                        <td><%= teamStats.wins2vs2 %></td>
+                                        <td><%= teamStats.wins3vs3 %></td>
+                                        <td><%= teamStats.wins4vs4 %></td>
+                                        <td><%= teamStats.totalpointsachievements %></td>
+                                    <%else%>
+                                        <td colspan=10 >
+                                            <div class=container style="background-color:#f8d7da; color:red; ">
+                                                Gli utenti di questo team non hanno un account per il gioco !
+                                            </div>
+                                        </td>
+                                    <%end%>
                                     </tr>
-                                <% end %>    
-                            <% end %>        
+                                <%end%>
+                            <%else%>
+                                <tr class="table-light">
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                </tr>
+                            <%end%>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-        <br>        
+            <br>
+            <div class="container" style="display: flex; justify-content: center;">
+                <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to '----------- Team in cui sei il Leader -----------', teams_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
+            </div>
+            <br>
+        <% end %>
+        
+        <% if current_user.teamLeaderAbbonato? %>
+            <div class="card text-center" style="background-color: #ffffffb3;">
+                <div class="card-header">
+                    STATISTICHE TEAM
+                </div>
+                <div class="card-body">
+                    <table class="table table-dark table-striped-columns">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome Team</th>
+                                <th scope="col">Total Games</th>
+                                <th scope="col">Total Wins</th>
+                                <th scope="col">Total Losses</th>
+                                <th scope="col">WL Ratio</th>
+                                <th scope="col">Games 1vs1</th>
+                                <th scope="col">wins 1vs1</th>
+                                <th scope="col">Games 2vs2</th>
+                                <th scope="col">wins 2vs2</th>
+                                <th scope="col">Games 3vs3</th>
+                                <th scope="col">wins 3vs3</th>
+                                <th scope="col">Games 4vs4</th>
+                                <th scope="col">wins 4vs4</th>
+                                <th scope="col">Achievements</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <% if statisticheTeam.length != 0%>
+                                <% Team.all.each do |team|%>
+                                    <tr class="table-light">
+                                    <td><%= team.nome_team %></td>
+                                    <% teamStats = TeamStat.find_by(team_id: team.id) %>
+                                    <% if teamStats.careertotalgames != nil%>
+                                        <td><%= teamStats.careertotalgames %></td>
+                                        <td><%= teamStats.totalwins %></td>
+                                        <td><%= teamStats.totallosses %></td>
+                                        <td><%= teamStats.wlratio %></td>
+                                        <td><%= teamStats.games1vs1 %></td>
+                                        <td><%= teamStats.wins1vs1 %></td>
+                                        <td><%= teamStats.games2vs2 %></td>
+                                        <td><%= teamStats.wins2vs2 %></td>
+                                        <td><%= teamStats.games3vs3 %></td>
+                                        <td><%= teamStats.wins3vs3 %></td>
+                                        <td><%= teamStats.games4vs4 %></td>
+                                        <td><%= teamStats.wins4vs4 %></td>
+                                        <td><%= teamStats.totalpointsachievements %></td>
+                                    <%else%>
+                                        <td colspan=10 >
+                                            <div class=container style="background-color:#f8d7da; color:red; ">
+                                                Gli utenti di questo team non hanno un account per il gioco !
+                                            </div>
+                                        </td>
+                                    <%end%>
+                                    </tr>
+                                <%end%>
+                            <%else%>
+                                <tr class="table-light">
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                        <td>null</td>
+                                    </tr>
+                            <%end%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center" style="background-color: #ffffffb3;">
+                            <div class="card-header">
+                                TEAM WL RATIO
+                            </div>
+                            <div class="card-body">
+                                <% if Team.all.length != 0 %>
+                                    <% data = {} %>
+                                    <% Team.all.each do |team_tmp| %>
+                                        <% if team_tmp.giocatore1.to_i == current_user.uid %>
+                                            <% data[team_tmp.nome_team] = TeamStat.find_by(team_id: team_tmp.id).wlratio %>   
+                                        <% end %>
+                                    <% end %>
+                                    
+                                    <% if data.any? %>
+                                        <%= column_chart [name: 'wl ratio comparison', data: data] %>
+                                    <% else %>
+                                        Nessun dato da rappresentare
+                                    <% end %>
+                                <% else %>
+                                    Nessun dato da rappresentare
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="container" style="display: flex; justify-content: center;">
+                <button type="button" class="btn " style="width:30vw; background-color: #4682b4; "><%= link_to ' ----------- Team in cui sei il Leader ----------- ', teams_path, style:"color:white;", class:"link-offset-2 link-underline link-underline-opacity-0" %></button>
+            </div>
+            <br>
+        <% end %>
+
+        <% if current_user.abbonato? || current_user.user? || current_user.teamLeader? || current_user.teamLeaderAbbonato? %>
+            <div class="container" style="display: flex; justify-content: center;">
+                <div class="card text-center" style="width: 50vw; background-color: #ffffffb3;">
+                    <div class="card-header">
+                        TEAM DI CUI FAI PARTE SENZA ESSERE IL TEAM LEADER
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-dark table-striped-columns">
+                            <thead>
+                                <tr>
+                                <th scope="col">NOME TEAM</th>
+                                <th scope="col" style="width: 25vw">VUOI ABBANDONARE IL TEAM ?</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <% Team.all.each do |team| %>
+                                    <% if current_user.uid.to_s == team.giocatore2 || current_user.uid.to_s == team.giocatore3 || current_user.uid.to_s == team.giocatore4  %>
+                                        <tr class="table-light">
+                                        <td><%= team.nome_team %></td>
+                                        <td style="width: 25vw">
+                                            <%= form_for @team=team, url: abbandona_team_path(team.id), method: :patch do |f| %>
+                                                <%= f.text_field :nome_team, value: team.nome_team, type: :hidden %>
+                                                <%= f.text_field :giocatore1, value: team.giocatore1, type: :hidden %>
+                                                <% if current_user.uid.to_s == team.giocatore2 %>
+                                                    <%= f.text_field :giocatore2, value: "", type: :hidden %>
+                                                    <%= f.text_field :giocatore3, value: team.giocatore3, type: :hidden %>
+                                                    <%= f.text_field :giocatore4, value: team.giocatore4, type: :hidden %>
+                                                <% end %>
+
+                                                <% if current_user.uid.to_s == team.giocatore3 %>
+                                                    <%= f.text_field :giocatore2, value: team.giocatore2, type: :hidden %>
+                                                    <%= f.text_field :giocatore3, value: "", type: :hidden %>
+                                                    <%= f.text_field :giocatore4, value: team.giocatore4, type: :hidden %>
+                                                <% end %>
+
+                                                <% if current_user.uid.to_s == team.giocatore4 %>
+                                                    <%= f.text_field :giocatore2, value: team.giocatore2, type: :hidden %>
+                                                    <%= f.text_field :giocatore3, value: team.giocatore3, type: :hidden %>
+                                                    <%= f.text_field :giocatore4, value: "", type: :hidden %>
+                                                <% end %>
+
+                                                <%= f.submit "Abbandona", class: "btn btn-danger" %>
+                                            <% end %>
+                                        </td>
+                                        </tr>
+                                    <% end %>    
+                                <% end %>        
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>        
+        <% end %>
     <% end %>
-<% end %>
 
-<script>
-  document.getElementById("bestTeamsButton").addEventListener("click", function() {
-    fetch('/best_teams')
-      .then(response => response.json())
-      .then(data => updateTeamTable(data));
-  });
+    <script>
+    document.getElementById("bestTeamsButton").addEventListener("click", function() {
+        fetch('/best_teams')
+        .then(response => response.json())
+        .then(data => updateTeamTable(data));
+    });
 
-  document.getElementById("worstTeamsButton").addEventListener("click", function() {
-    fetch('/worst_teams')
-      .then(response => response.json())
-      .then(data => updateTeamTable(data));
-  });
+    document.getElementById("worstTeamsButton").addEventListener("click", function() {
+        fetch('/worst_teams')
+        .then(response => response.json())
+        .then(data => updateTeamTable(data));
+    });
 
-  function updateTeamTable(data) {
-    const teamTableBody = document.querySelector("#teamTable tbody");
-    teamTableBody.innerHTML = "";
+    function updateTeamTable(data) {
+        const teamTableBody = document.querySelector("#teamTable tbody");
+        teamTableBody.innerHTML = "";
 
-    if (data.length !== 0) {
-      data.forEach(team => {
+        if (data.length !== 0) {
+        data.forEach(team => {
+            const row = document.createElement("tr");
+            row.classList.add("table-light");
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = team.name;
+            row.appendChild(nameCell);
+
+            const wlCell = document.createElement("td");
+            wlCell.textContent = team.wlRatio;
+            row.appendChild(wlCell);
+
+            teamTableBody.appendChild(row);
+        });
+        } else {
         const row = document.createElement("tr");
         row.classList.add("table-light");
 
-        const nameCell = document.createElement("td");
-        nameCell.textContent = team.name;
-        row.appendChild(nameCell);
+        const nullCell1 = document.createElement("td");
+        nullCell1.textContent = "null";
+        row.appendChild(nullCell1);
 
-        const wlCell = document.createElement("td");
-        wlCell.textContent = team.wlRatio;
-        row.appendChild(wlCell);
+        const nullCell2 = document.createElement("td");
+        nullCell2.textContent = "null";
+        row.appendChild(nullCell2);
 
         teamTableBody.appendChild(row);
-      });
-    } else {
-      const row = document.createElement("tr");
-      row.classList.add("table-light");
-
-      const nullCell1 = document.createElement("td");
-      nullCell1.textContent = "null";
-      row.appendChild(nullCell1);
-
-      const nullCell2 = document.createElement("td");
-      nullCell2.textContent = "null";
-      row.appendChild(nullCell2);
-
-      teamTableBody.appendChild(row);
+        }
     }
-  }
-</script>
+    </script>
+<% else %>
+    <div class="container" style="justify:center; text-align:center; font-size: 2.7vw; background-color:#ffffffb3; color:red">
+        Per poter accedere a questa pagina devi effettuare prima il login
+    </div>
+<% end %>

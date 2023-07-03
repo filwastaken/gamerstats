@@ -15,7 +15,7 @@ class HomeController < ApplicationController
 
     #User.delete_all
     #Stat.delete_all
-
+    
   
 
     #BattlenetOauthService.ottieniProfilo(session[:access_token], 10548078)

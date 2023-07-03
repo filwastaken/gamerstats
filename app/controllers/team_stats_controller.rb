@@ -3,24 +3,29 @@ class TeamStatsController < ApplicationController
 
   # GET /team_stats or /team_stats.json
   def index
+    redirect_to root_path
     @team_stats = TeamStat.all
   end
 
   # GET /team_stats/1 or /team_stats/1.json
   def show
+    redirect_to root_path
   end
 
   # GET /team_stats/new
   def new
+    redirect_to root_path
     @team_stat = TeamStat.new
   end
 
   # GET /team_stats/1/edit
   def edit
+    redirect_to root_path
   end
 
   # POST /team_stats or /team_stats.json
   def create
+    redirect_to root_path
     @team_stat = TeamStat.new(team_stat_params)
 
     respond_to do |format|
@@ -36,6 +41,7 @@ class TeamStatsController < ApplicationController
 
   # PATCH/PUT /team_stats/1 or /team_stats/1.json
   def update
+    redirect_to root_path
     respond_to do |format|
       if @team_stat.update(team_stat_params)
         format.html { redirect_to team_stat_url(@team_stat), notice: "Team stat was successfully updated." }
@@ -49,6 +55,7 @@ class TeamStatsController < ApplicationController
 
   # DELETE /team_stats/1 or /team_stats/1.json
   def destroy
+    redirect_to root_path
     @team_stat.destroy
 
     respond_to do |format|
@@ -60,11 +67,13 @@ class TeamStatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team_stat
+      redirect_to root_path
       @team_stat = TeamStat.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def team_stat_params
+      redirect_to root_path
       params.require(:team_stat).permit(:team_id, :uid, :terranwins, :protosswins, :zergwins, :careertotalgames, :totalwins, :totallosses, :wlratio, :level, :levelterran, :totallevelxpterran, :currentlevelxpterran, :levelzerg, :totallevelxpzerg, :currentlevelxpzerg, :levelprotoss, :totallevelxpprotoss, :currentlevelxpprotoss, :wins1vs1, :games1vs1, :wins2vs2, :games2vs2, :wins3vs3, :games3vs3, :wins4vs4, :games4vs4, :winsarchon, :gamesarchon, :totalpointsachievements, :seasontotalgames, :totalgamesthisseason)
     end
 end
