@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 2023_06_30_214324) do
     t.integer "to", null: false
     t.boolean "isuser"
     t.string "body", null: false
-    t.boolean "seen", default: false
+    t.boolean "isinvitation", default: false
+    t.boolean "accept"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   delete '/adminpage/:id/delete_team', to: 'admin#delete_team', as: 'delete_team_admin'
   delete '/adminpage/:id/delete_user', to: 'admin#delete_user', as: 'delete_user_admin'
   post '/adminpage/:id/gift', to: 'admin#gift', as: 'gift_admin'
-  post '/adminpage/:id/notification', to: 'admin#notification', as: 'notification'
+  post '/adminpage/:id/notification', to: 'notification#adminnotification', as: 'adminnotification'
   post '/adminpage/start_maintenance', to: 'admin#start_maintenance', as: 'start_maintenance'
   post '/adminpage/stop_maintenance', to: 'admin#stop_maintenance', as: 'stop_maintenance'
   

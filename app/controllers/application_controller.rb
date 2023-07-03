@@ -22,7 +22,9 @@ class ApplicationController < ActionController::Base
         url = URI.parse(url)
 
         if url.path != '/' && url.path != "/adminpage" && url.path != "/adminpage/stop_maintenance" && url.path != "/admins/sign_in"
+          flash[:notice] = "Il sito e' al momento in manutenzione, alcune azioni non sono disponibili"
           redirect_to root_path
+          return
         end
       end
     end
