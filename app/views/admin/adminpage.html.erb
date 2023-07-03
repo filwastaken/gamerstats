@@ -74,7 +74,7 @@
 
 <!-- TODO: Continue here -->
 <div class="card text-center" style="background-color: #ffffffb3;">
-  <%= form_for(@notification, url: notification_path(current_admin.id), html: { method: :post }) do |f| %>
+  <%= form_for(@notification, url: adminnotification_path(current_admin.id), html: { method: :post }) do |f| %>
 
     <div class="card-header"> INVIA COMUNICAZIONE </div>
 
@@ -102,7 +102,7 @@
 </div>
 
 <% if Maintenance.find_by(to: nil).equal? nil %>
-  <%= button_to "Inizia il mantenimento", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
+  <%= button_to "Inizia la manutenzione", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
 <% else %>
-  <%= button_to "Interrompi il mantenimento", stop_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
+  <%= button_to "Interrompi la manutenzione", stop_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
 <% end %>

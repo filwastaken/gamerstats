@@ -32,42 +32,6 @@ class AdminController < ApplicationController
 
     redirect_to adminpage_path
   end
-  
-  # POST /adminpage#notification
-  def notification
-    @notification = Notification.new
-    @notification.body = params[:notification][:body]
-    @notification.from = params[:id]
-    @notification.to = params[:notification][:to]
-
-    @notification.isuser = params[:notification][:isuser]
-    @notification.save
-
-    if @notification.to == Notification::DEFAULT_CASES[:toall]
-      User.all.each do |user|
-        user.bell = true
-        user.save
-      end
-
-      Admin.all.each do |admin|
-        admin.bell = true
-        admin.save
-      end
-    elsif @notification.to == Notification::DEFAULT_CASES[:toadmins]
-      Admin.all.each do |admin|
-        admin.bell = true
-        admin.save
-      end
-    else
-      if @notification.isuser?
-        User.find(@notification.to).bell = true
-      else
-        Admin.find(@notification.to).bell = true
-      end
-    end
-
-    redirect_to adminpage_path
-  end
 
   # POST /adminpage#start_mainstanace
   def start_maintenance
