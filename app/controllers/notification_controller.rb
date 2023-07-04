@@ -2,9 +2,10 @@ class NotificationController < ApplicationController
   before_action :authenticate_admin!, only: [:adminnotification]
 
   def notification
+
     @notification = []
     Notification.all.each do |n|
-      if n.to == Notification::DEFAULT_CASES[:toall] || (current_admin != nil && (n.to == Notification::DEFAULT_CASES[:toadmins] || current_admin.id == n.id)) || (current_user != nil && current_user.id == n.id && n.isuser)
+      if n.to == Notification::DEFAULT_CASES[:toall] || (current_admin != nil && (n.to == Notification::DEFAULT_CASES[:toadmins] || current_admin.id == n.to)) || (current_user != nil && current_user.id == n.to && n.isuser)
         @notification.append(n)
       end
     end
@@ -15,9 +16,9 @@ class NotificationController < ApplicationController
     @notification = Notification.new
     @notification.body = params[:notification][:body]
     @notification.from = params[:id]
-    @notification.to = params[:notification][:to]
+    @notification.to = params[:notification][:to].split("|")[0].to_i
+    @notification.isuser = params[:notification][:to].split("|")[1]
 
-    @notification.isuser = params[:notification][:isuser]
     @notification.save
 
     if @notification.to == Notification::DEFAULT_CASES[:toall]
@@ -27,17 +28,17 @@ class NotificationController < ApplicationController
       Admin.update_all(bell: true)
     else
       if @notification.isuser?
-        User.find(@notification.to).bell = true
+        to_user = User.find(@notification.to)
+        to_user.bell = true
+        to_user.save
       else
-        Admin.find(@notification.to).bell = true
+        to_admin = Admin.find(@notification.to)
+        to_admin.bell = true
+        to_admin.save
       end
     end
 
     redirect_to adminpage_path
     return
-  end
-
-  def usernotification
-    puts "Ciao"
   end
 end
