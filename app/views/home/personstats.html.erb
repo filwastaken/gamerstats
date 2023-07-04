@@ -317,11 +317,11 @@
                     <div class="col">
                         <div class="card text-center" style="background-color: #ffffffb3;">
                             <div class="card-header">
-                                WINS AND LEVEL COMPARISON
+                                CAREER WINS 
                             </div>
                             <div class="card-body">
                                 <% if statistiche != nil %>
-                                    <%= column_chart [{ name: 'career wins', data: { 'Terran' => statistiche.terranWins, 'Zerg' => statistiche.zergWins, 'Protoss' => statistiche.protossWins } }, { name: 'career level', data: { 'Terran' => statistiche.levelTerran, 'Zerg' => statistiche.levelZerg, 'Protoss' => statistiche.levelProtoss }}], legend: 'bottom', height: '350px', width: '600px', library: { backgroundColor: 'transparent' } %>
+                                    <%= column_chart [{ name: 'career wins', data: { '1vs1' => statistiche.wins1vs1, '2vs2' => statistiche.wins2vs2, '3vs3' => statistiche.wins3vs3, '4vs4' => statistiche.wins4vs4, 'archon' => statistiche.winsArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
                                 <% else %>
                                     Nessun dato da rappresentare  
                                 <% end %>
@@ -335,32 +335,16 @@
 
             <div class="container text-center">
                 <div class="row">
-                    <div class="col">
-                        <div class="card text-center" style="background-color: #ffffffb3;">
-                            <div class="card-header">
-                                CAREER WINS 
+                    <div class="card text-center" style="background-color: #ffffffc3;">
+                        <div class="card-header">
+                                WINS AND LEVEL COMPARISON
                             </div>
-                            <div class="card-body">
+                            <div class="card-body d-flex justify-content-center">
                                 <% if statistiche != nil %>
-                                    <%= column_chart [{ name: 'career wins', data: { '1vs1' => statistiche.wins1vs1, '2vs2' => statistiche.wins2vs2, '3vs3' => statistiche.wins3vs3, '4vs4' => statistiche.wins4vs4, 'archon' => statistiche.winsArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
+                                    <%= column_chart [{ name: 'career wins', data: { 'Terran' => statistiche.terranWins, 'Zerg' => statistiche.zergWins, 'Protoss' => statistiche.protossWins } }, { name: 'career level', data: { 'Terran' => statistiche.levelTerran, 'Zerg' => statistiche.levelZerg, 'Protoss' => statistiche.levelProtoss }}], legend: 'bottom', height: '370px', width: '620px', library: { backgroundColor: 'transparent' } %>
                                 <% else %>
                                     Nessun dato da rappresentare  
                                 <% end %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-center" style="background-color: #ffffffb3;">
-                            <div class="card-header">
-                                CAREER GAMES
-                            </div>
-                            <div class="card-body">
-                                <% if statistiche != nil %>
-                                    <%= column_chart [{ name: 'career games', data: { '1vs1' => statistiche.games1vs1, '2vs2' => statistiche.games2vs2, '3vs3' => statistiche.games3vs3, '4vs4' => statistiche.games4vs4, 'archon' => statistiche.gamesArchon }}], legend: 'bottom', height: '350px', width: '500px', library: { backgroundColor: 'transparent' } %>
-                                <% else %>
-                                    Nessun dato da rappresentare  
-                                <% end %>
-                            </div>
                         </div>
                     </div>
                 </div>
