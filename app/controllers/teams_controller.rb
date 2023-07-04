@@ -363,44 +363,49 @@ class TeamsController < ApplicationController
       body = "#{giocatore1} ti ha invitato al team #{nometeam}"
       from = User.find_by(uid: giocatore1).id
 
-      @giocatore2 = User.find_by(uid: giocatore2)
-      @giocatore3 = User.find_by(uid: giocatore3)
-      @giocatore4 = User.find_by(uid: giocatore4)
+      if(@giocatore2!=nil)
+        @giocatore2 = User.find_by(uid: giocatore2)
+        @notification = Notification.new
+        @notification.body = body
+        @notification.from = from
+        @notification.to = @giocatore2.id
+        @notification.isuser = true
+        @notification.isinvitation = true
+        @notification.teamid = teamid
+        @notification.save
 
-      @notification = Notification.new
-      @notification.body = body
-      @notification.from = from
-      @notification.to = @giocatore2.id
-      @notification.isuser = true
-      @notification.isinvitation = true
-      @notification.teamid = teamid
-      @notification.save
+        @giocatore2.bell = true
+        @giocatore2.save
+      end
 
-      @giocatore2.bell = true
-      @giocatore2.save
+      if(@giocatore3!=nil)
+        @giocatore3 = User.find_by(uid: giocatore3)
+        @notification = Notification.new
+        @notification.body = body
+        @notification.from = from
+        @notification.to = @giocatore3.id
+        @notification.isuser = true
+        @notification.isinvitation = true
+        @notification.teamid = teamid
+        @notification.save
 
-      @notification = Notification.new
-      @notification.body = body
-      @notification.from = from
-      @notification.to = @giocatore3.id
-      @notification.isuser = true
-      @notification.isinvitation = true
-      @notification.teamid = teamid
-      @notification.save
+        @giocatore3.bell = true
+        @giocatore3.save
+      end
 
-      @giocatore3.bell = true
-      @giocatore3.save
+      if(@giocatore4!=nil)
+        @giocatore4 = User.find_by(uid: giocatore4)
+        @notification = Notification.new
+        @notification.body = body
+        @notification.from = from
+        @notification.to = @giocatore4.id
+        @notification.isuser = true
+        @notification.isinvitation = true
+        @notification.teamid = teamid
+        @notification.save
 
-      @notification = Notification.new
-      @notification.body = body
-      @notification.from = from
-      @notification.to = @giocatore4.id
-      @notification.isuser = true
-      @notification.isinvitation = true
-      @notification.teamid = teamid
-      @notification.save
-
-      @giocatore4.bell = true
-      @giocatore4.save
+        @giocatore4.bell = true
+        @giocatore4.save
+      end
     end
 end

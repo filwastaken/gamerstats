@@ -114,6 +114,7 @@ Stat.create!(
     seasonTotalGames:5
 )
 
+
 TeamStat.create!(
       team_id:1,
       terranwins:0,
@@ -148,7 +149,6 @@ TeamStat.create!(
       totalgamesthisseason: 0
 )
 
-
 Team.create!(
     nome_team: "nomeTeam",
     giocatore1: "1",
@@ -156,6 +156,16 @@ Team.create!(
     giocatore3: "",
     giocatore4: ""
 )
+
+
+Team.create!(
+    nome_team: "myTeamB",
+    giocatore1: "10548078",
+    giocatore2: "51",
+    giocatore3: "",
+    giocatore4: ""
+)
+
 
 TeamStat.create!(
       team_id:2,
@@ -190,7 +200,6 @@ TeamStat.create!(
       seasontotalgames:0,
       totalgamesthisseason: 0
 )
-=end
 
 Stat.create!(
     uid: 151,
@@ -224,3 +233,4 @@ Stat.create!(
     totalPointsAchievements:10000,
     seasonTotalGames:5
 )
+=end
