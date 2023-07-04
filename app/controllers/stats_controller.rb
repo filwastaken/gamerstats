@@ -3,24 +3,29 @@ class StatsController < ApplicationController
 
   # GET /stats or /stats.json
   def index
+    redirect_to root_path
     @stats = Stat.all
   end
 
   # GET /stats/1 or /stats/1.json
   def show
+    redirect_to root_path
   end
 
   # GET /stats/new
   def new
+    redirect_to root_path
     @stat = Stat.new
   end
 
   # GET /stats/1/edit
   def edit
+    redirect_to root_path
   end
 
   # POST /stats or /stats.json
   def create
+    redirect_to root_path
     @stat = Stat.new(stat_params)
 
     respond_to do |format|
@@ -36,6 +41,7 @@ class StatsController < ApplicationController
 
   # PATCH/PUT /stats/1 or /stats/1.json
   def update
+    redirect_to root_path
     respond_to do |format|
       if @stat.update(stat_params)
         format.html { redirect_to stat_url(@stat), notice: "Stat was successfully updated." }
@@ -49,6 +55,7 @@ class StatsController < ApplicationController
 
   # DELETE /stats/1 or /stats/1.json
   def destroy
+    redirect_to root_path
     @stat.destroy
 
     respond_to do |format|
@@ -60,11 +67,13 @@ class StatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stat
+      redirect_to root_path
       @stat = Stat.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def stat_params
+      redirect_to root_path
       params.require(:stat).permit(:uid, :region, :realm, :displayName, :terranWins, :protossWins, :zergWins, :careerTotalGames, :totalWins, :totalLosses, :wlRatio, :level, :levelTerran, :totalLevelXPTerran, :currentLevelXPTerran, :levelZerg, :totalLevelXPZerg, :currentLevelXPZerg, :levelProtoss, :totalLevelXPProtoss, :currentLevelXPProtoss, :wins1vs1, :games1vs1, :wins2vs2, :games2vs2, :wins3vs3, :games3vs3, :wins4vs4, :games4vs4, :winsArchon, :gamesArchon, :totalPointsAchievements, :highest1v1Rank, :highestTeamRank, :clanName, :clanTag, :profilePath, :primaryRace, :seasonId, :seasonNumber, :seasonYear, :seasonTotalGames, :totalWinsThisSeason, :totalLossesThisSeason, :wlRatioThisSeason)
     end
 end

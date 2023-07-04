@@ -5,20 +5,51 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+   def new
+    if session[:battletag] == nil
+      redirect_to root_path
+    end
+    @battletag = params[:battletag]
+    @access_token = params[:access_token]
+    @user = User.new
+   end
 
   # POST /resource
   def create
-    BattlenetOauthService.ottieniProfilo(session[:access_token], params["user"]["uid"])
-    if(Stat.find_by(uid: params["user"]["uid"]) == nil)
-      flash[:notice] = "Non esiste un account con il seguente id: #{params["user"]["uid"]} nel gioco, inserire un altro id"
-      redirect_to new_user_registration_path
-      return
-    end
+    if session[:battletag] == nil
+      redirect_to root_path
+    else
+      tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], session[:id].to_i)
+      #tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], 5)
 
-    super
+      if tmp.length != 0
+        newuser = User.create!(
+          email: params[:user][:email],
+          password: params[:user][:password],
+          created_at: Time.now,
+          updated_at: Time.now,
+          battlenetId: tmp["idBattlenet"].to_i,
+          uid: tmp["uid"].to_i,
+          nickname: tmp["nome"],
+          role: 0, 
+          bell: FALSE
+        )
+      else
+        newuser = User.create!(
+          email: params[:user][:email],
+          password: params[:user][:password],
+          created_at: Time.now,
+          updated_at: Time.now,
+          battlenetId: session[:id],
+          uid: -1,
+          nickname: "",
+          role: 0, 
+          bell: FALSE
+        )
+      end
+        sign_in(newuser, scope: :user)
+        redirect_to root_path
+    end
   end
 
   # GET /resource/edit
