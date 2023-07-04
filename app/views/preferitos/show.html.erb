@@ -1,14 +1,26 @@
-<div class="container" style="background-color: #ffffffd8; margin-top:15vh; padding-top:12px; padding-bottom:12px; width:20vw; text-align:center;"> 
-  <p>
-    <strong>Nome</strong>
-    <%= @preferito.nome_dest %>
-  </p>
+<% if current_user != nil %>
+  <% if current_user.abbonato? || current_user.teamLeaderAbbonato? %>
+    <div class="container" style="background-color: #ffffffd8; margin-top:15vh; padding-top:12px; padding-bottom:12px; width:20vw; text-align:center;"> 
+      <p>
+        <strong>Nome</strong>
+        <%= @preferito.nome_dest %>
+      </p>
 
-  <p>
-    <strong>Uid:</strong>
-    <%= @preferito.dest_id %>
-  </p>
+      <p>
+        <strong>Uid:</strong>
+        <%= @preferito.dest_id %>
+      </p>
 
-  <%= link_to 'Edit', edit_preferito_path(@preferito), class:"link-body-emphasis link-offset-2" %> |
-  <%= link_to 'Back', preferitos_path, class:"link-body-emphasis link-offset-2" %>
-</div>
+      <%= link_to 'Edit', edit_preferito_path(@preferito), class:"link-body-emphasis link-offset-2" %> |
+      <%= link_to 'Back', preferitos_path, class:"link-body-emphasis link-offset-2" %>
+    </div>
+  <% else %>
+    <div class="container" style="justify:center; text-align:center; font-size: 2.7vw; background-color:#ffffffb3; color:red">
+      Per poter accedere a questa pagina devi essere abbonato
+    </div>
+  <% end %>
+<% else %>
+  <div class="container" style="justify:center; text-align:center; font-size: 2.7vw; background-color:#ffffffb3; color:red">
+    Per poter accedere a questa pagina devi effettuare prima il login
+  </div>
+<% end %>

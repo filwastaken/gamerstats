@@ -33,7 +33,7 @@ class DeviseCreateAdmins < ActiveRecord::Migration[6.1]
       t.datetime :locked_at
 
       # Custom records
-      t.string :full_name
+      t.string :nickname, default: ""
       t.boolean :bell, default: false
 
       t.timestamps null: false

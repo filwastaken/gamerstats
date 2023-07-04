@@ -1,6 +1,7 @@
 class PreferitosController < ApplicationController
   before_action :set_preferito, only: %i[ show edit update destroy ]
-
+  
+  
   # GET /preferitos or /preferitos.json
   def index
     @preferitos = Preferito.all
@@ -22,6 +23,33 @@ class PreferitosController < ApplicationController
   # POST /preferitos or /preferitos.json
   def create
     @preferito = Preferito.new(preferito_params)
+    
+    if Preferito.exists?(nome_dest: @preferito.nome_dest, dest_id: @preferito.dest_id)
+      flash[:notice] = "Esiste già questo preferito!"
+      redirect_to new_preferito_path
+      return
+    end
+
+    if Preferito.exists?(dest_id: @preferito.dest_id)
+      flash[:notice] = "Esiste già questo preferito!"
+      redirect_to new_preferito_path
+      return
+    end
+
+    if @preferito.dest_id == @preferito.mitt_id
+        flash[:notice] = "Non puoi inserire te stesso tra i preferiti"
+        redirect_to new_preferito_path
+        return
+    end
+
+    if User.find_by(uid: @preferito.dest_id.to_i) == nil
+      BattlenetOauthService.ottieniProfilo(session[:access_token], @preferito.dest_id)
+      if(Stat.find_by(uid: @preferito.dest_id.to_i) == nil)
+        flash[:notice] = "Il giocatore con id #{@preferito.dest_id} non ha un account nel gioco, inserire un altro id"
+        redirect_to new_preferito_path
+        return
+      end
+    end
 
     respond_to do |format|
       if @preferito.save
@@ -36,6 +64,29 @@ class PreferitosController < ApplicationController
 
   # PATCH/PUT /preferitos/1 or /preferitos/1.json
   def update
+    @preferito1 = Preferito.new(preferito_params)
+
+    if Preferito.exists?(nome_dest: @preferito1.nome_dest, dest_id: @preferito1.dest_id)
+      flash[:notice] = "Esiste già questo amico!"
+      redirect_to edit_preferito_path
+      return
+    end
+    
+    if Preferito.exists?(dest_id: @preferito1.dest_id)
+      flash[:notice] = "Esiste già questo amico!"
+      redirect_to edit_preferito_path
+      return
+    end
+
+    if User.find_by(uid: @preferito1.dest_id.to_i) == nil
+      BattlenetOauthService.ottieniProfilo(session[:access_token], @preferito1.dest_id)
+      if(Stat.find_by(uid: @preferito1.dest_id) == nil)
+        flash[:notice] = "Il giocatore con id #{@preferito1.dest_id} non ha un account nel gioco, inserire un altro id"
+        redirect_to edit_preferito_path
+        return
+      end
+    end  
+
     respond_to do |format|
       if @preferito.update(preferito_params)
         format.html { redirect_to preferito_url(@preferito), notice: "Preferito was successfully updated." }
