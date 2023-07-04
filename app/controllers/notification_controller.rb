@@ -2,7 +2,6 @@ class NotificationController < ApplicationController
   before_action :authenticate_admin!, only: [:adminnotification]
 
   def notification
-
     @notification = []
     Notification.all.each do |n|
       if n.to == Notification::DEFAULT_CASES[:toall] || (current_admin != nil && (n.to == Notification::DEFAULT_CASES[:toadmins] || current_admin.id == n.to)) || (current_user != nil && current_user.id == n.to && n.isuser)
