@@ -626,7 +626,7 @@
                                 <th scope="col" style="width: 25vw">VUOI ABBANDONARE IL TEAM ?</th>
                                 </tr>
                             </thead>
-                            <tbody class="table-group-divider">
+                            <tbody id = "viewteam" class="table-group-divider">
                                 <% Team.all.each do |team| %>
                                     <% if current_user.uid.to_s == team.giocatore2 || current_user.uid.to_s == team.giocatore3 || current_user.uid.to_s == team.giocatore4  %>
                                         <tr class="table-light">

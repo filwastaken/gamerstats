@@ -16,7 +16,7 @@
     <a> <%= n.body %> </a>
 
     <% if n.isinvitation? %>
-      <button> Rifiuta invito </button>
+      <button onclick="location.href = '<%= personstats_path %>#viewteam'" class="btn btn-dark"> View </button>
     <% end %>
   </div>
 <% end %>

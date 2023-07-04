@@ -311,9 +311,47 @@ class TeamsController < ApplicationController
 
   # abbandona
   def abbandona
+
+    if @team.giocatore2 != team_params[:giocatore2]
+      uscente = @team.giocatore2
+    elsif @team.giocatore3 != team_params[:giocatore3]
+      uscente = @team.giocatore3
+    elsif @team.giocatore4 != team_params[:giocatore4]
+      uscente = @team.giocatore4
+    end
+
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to  personstats_url, notice: "Team was successfully abandoned." }
+
+        # Notification in case everything works out
+        to_user = User.find_by(uid: team_params[:giocatore1])
+        from_user = User.find_by(uid: uscente)
+    
+        notification = Notification.new
+        notification.from = from_user.id
+        notification.to = to_user.id
+        notification.isuser = true
+        notification.body = "L'utente #{from_user.nickname} ha abbandonato il team #{team_params[:nome_team]}."
+        notification.save
+    
+        to_user.bell = true
+        to_user.save
+
+        if @team.giocatore2 == "" && @team.giocatore3 == "" && @team.giocatore4 == ""
+          notification = Notification.new
+          notification.from = Admin.first.id
+          notification.to = to_user.id
+          notification.isuser = true
+          notification.body = "Il team #{team_params[:nome_team]} non ha piu' giocatori e per questo e' stato eliminato."
+          notification.save
+      
+          to_user.bell = true
+          to_user.save
+
+          @team.destroy
+        end
+
+        format.html { redirect_to personstats_url, notice: "Team was successfully abandoned." }
         format.json { render :show, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -324,6 +362,51 @@ class TeamsController < ApplicationController
 
   # DELETE /teams/1 or /teams/1.json
   def destroy
+
+    # Notification in case everything works out
+    from_user = User.find_by(uid: @team.giocatore1)
+    body = "L'utente #{from_user.nickname} ha eliminato il team #{@team.nome_team} di cui facevi parte."
+
+    if @team.giocatore2 != ""
+      to_user = User.find_by(uid: @team.giocatore2)
+
+      notification = Notification.new
+      notification.from = from_user.id
+      notification.to = to_user.id
+      notification.isuser = true
+      notification.body = body
+      notification.save
+          
+      to_user.bell = true
+      to_user.save
+    end
+
+    if @team.giocatore3 != ""
+      to_user = User.find_by(uid: @team.giocatore3)
+
+      notification = Notification.new
+      notification.from = from_user.id
+      notification.to = to_user.id
+      notification.isuser = true
+      notification.body = body
+          
+      to_user.bell = true
+      to_user.save
+    end
+
+    if @team.giocatore4 != ""
+      to_user = User.find_by(uid: @team.giocatore4)
+
+      notification = Notification.new
+      notification.from = from_user.id
+      notification.to = to_user.id
+      notification.isuser = true
+      notification.body = body
+          
+      to_user.bell = true
+      to_user.save
+    end
+
     @team.destroy
 
     respond_to do |format|
