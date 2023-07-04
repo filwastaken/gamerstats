@@ -8,7 +8,7 @@ class CreateNotification < ActiveRecord::Migration[6.1]
       t.string :body, null: false
 
       t.boolean :isinvitation, default: false
-      t.boolean :accept
+      t.integer :teamid
 
       t.timestamps
     end
