@@ -9,9 +9,13 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    if(session[:access_token] == nil)
+      session[:access_token] = BattlenetOauthService.ottieniAccessToken()
+    end
+
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

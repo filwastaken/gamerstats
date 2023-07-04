@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   # resources routes
+
+  root 'home#index'
+
+  get '/search', to: 'home#search'
+
   resources :preferitos
   resources :stats
   resources :team_stats
@@ -19,7 +24,7 @@ Rails.application.routes.draw do
   get '/preferitos/:id/destroy', to: 'preferitos#destroy', as: 'destroy_preferitos'
 
   devise_scope :user do  
-    get '/users/sign_out' => 'devise/sessions#destroy'     
+    get '/users/sign_out' => 'devise/sessions#destroy'   
   end
 
   devise_scope :admin do
@@ -50,8 +55,6 @@ Rails.application.routes.draw do
   
   # Notification routes
   get '/notification', to: 'notification#notification', as: 'view_notification'
-
-  root 'home#index'
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

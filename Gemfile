@@ -48,14 +48,6 @@ group :development do
   gem 'spring'
 end
 
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-end
-
 # Fix already initialized error
 gem 'net-http'
 
@@ -67,4 +59,13 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-bnet', '~> 2.0'
 gem 'sidekiq', '~> 6.2'
 gem 'chartkick'
+gem 'httparty'
 
+
+group :test do
+  gem 'cucumber-rails', require:false
+  gem 'database_cleaner'
+  gem 'capybara', '>= 3.26'
+  gem 'selenium-webdriver', '>= 4.0.0.rc1'
+  gem 'webdrivers'
+end
