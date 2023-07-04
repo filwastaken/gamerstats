@@ -125,6 +125,8 @@ class TeamsController < ApplicationController
       flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
       redirect_to new_team_path
     end
+
+    send_notificaiton(@team.id, team_params[:nome_team], team_params[:giocatore1], team_params[:giocatore2], team_params[:giocatore3], team_params[:giocatore4])
   end
 
   def calculate_averages(team)
@@ -355,5 +357,50 @@ class TeamsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def team_params
       params.require(:team).permit(:nome_team, :giocatore1, :giocatore2, :giocatore3, :giocatore4)
+    end
+
+    def send_notificaiton(teamid, nometeam, giocatore1, giocatore2, giocatore3, giocatore4)
+      body = "#{giocatore1} ti ha invitato al team #{nometeam}"
+      from = User.find_by(uid: giocatore1).id
+
+      @giocatore2 = User.find_by(uid: giocatore2)
+      @giocatore3 = User.find_by(uid: giocatore3)
+      @giocatore4 = User.find_by(uid: giocatore4)
+
+      @notification = Notification.new
+      @notification.body = body
+      @notification.from = from
+      @notification.to = @giocatore2.id
+      @notification.isuser = true
+      @notification.isinvitation = true
+      @notification.teamid = teamid
+      @notification.save
+
+      @giocatore2.bell = true
+      @giocatore2.save
+
+      @notification = Notification.new
+      @notification.body = body
+      @notification.from = from
+      @notification.to = @giocatore3.id
+      @notification.isuser = true
+      @notification.isinvitation = true
+      @notification.teamid = teamid
+      @notification.save
+
+      @giocatore3.bell = true
+      @giocatore3.save
+
+      @notification = Notification.new
+      @notification.body = body
+      @notification.from = from
+      @notification.to = @giocatore4.id
+      @notification.isuser = true
+      @notification.isinvitation = true
+      @notification.teamid = teamid
+      @notification.save
+
+      @giocatore4.bell = true
+      @giocatore4.save
     end
 end
