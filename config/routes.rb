@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  get '/search', to: 'home#search'
+
   resources :preferitos
   resources :stats
   resources :team_stats

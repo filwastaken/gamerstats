@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @result=[]
     #reset_session
 
     ###PER FAR FUNZIONARE TUTTO BISOGNA SCRIVERE SUL TERMINALE :
@@ -117,5 +118,12 @@ class HomeController < ApplicationController
     else
       render :edit, alert: 'Si è verificato un errore durante l\'aggiornamento del ruolo.'
     end
+  end
+
+  def search
+    uid = params[:uid]
+    BattlenetOauthService.ottieniProfilo(session[:access_token], uid)
+    @results = Stat.find_by(uid: uid)
+    render :index
   end
 end
