@@ -638,6 +638,7 @@
                             <thead>
                                 <tr>
                                 <th scope="col">NOME TEAM</th>
+                                <th scope="col">W/L</th>
                                 <th scope="col" style="width: 25vw">VUOI ABBANDONARE IL TEAM ?</th>
                                 </tr>
                             </thead>
@@ -646,6 +647,7 @@
                                     <% if current_user.uid.to_s == team.giocatore2 || current_user.uid.to_s == team.giocatore3 || current_user.uid.to_s == team.giocatore4  %>
                                         <tr class="table-light">
                                         <td><%= team.nome_team %></td>
+                                        <td><%= TeamStat.find_by(team_id: team.id).wlratio %></td>
                                         <td style="width: 25vw">
                                             <%= form_for @team=team, url: abbandona_team_path(team.id), method: :patch do |f| %>
                                                 <%= f.text_field :nome_team, value: team.nome_team, type: :hidden %>
