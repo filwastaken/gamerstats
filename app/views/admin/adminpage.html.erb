@@ -16,7 +16,7 @@
       <tbody class="table-group-divider">
         <% @savedusers.each do |user| %>
           <tr class="table-light">
-            <th scope="row"> <%= user.uid %> </th>
+            <th scope="row"> <%= user.nickname %> </th>
             <td><%= user.email %></td>
             <td><%= user.role %></td>
             
@@ -87,12 +87,18 @@
       <%= f.label :to %>
 
       <!-- Creating the queries needed -->
-      <% all_users = User.all %>
-      <% selectedadmins = Admin.where.not(id: current_admin.id) %>
-      <% custom_options = [CustomNotification.new(Notification::DEFAULT_CASES[:toall], 'All'), CustomNotification.new(Notification::DEFAULT_CASES[:toadmins], 'All Admins')] %>
-      <% merged_collection = custom_options + selectedadmins + all_users %>
+      <% merged_collection = [CustomNotification.new(Notification::DEFAULT_CASES[:toall], 'All', false), CustomNotification.new(Notification::DEFAULT_CASES[:toadmins], 'All Admins', false)] %>
+      <%
+        Admin.where.not(id: current_admin.id).each do |admin|
+          merged_collection.append(CustomNotification.new(admin.id, admin.email, false))
+        end
 
-      <%= f.collection_select :to, merged_collection, :id, :email %>
+        User.all.each do |user|
+          merged_collection.append(CustomNotification.new(user.id, user.email, true))
+        end
+      %>
+
+      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.isuser}" }, :email %>
     </div>
 
     <div class="actions">

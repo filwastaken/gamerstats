@@ -10,6 +10,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+
     if(session[:access_token] == nil)
       session[:access_token] = BattlenetOauthService.ottieniAccessToken()
     end

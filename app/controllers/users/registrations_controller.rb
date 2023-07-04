@@ -20,7 +20,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to root_path
     else
       tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], session[:id].to_i)
-      #tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], 5)
 
       if tmp.length != 0
         newuser = User.create!(
@@ -30,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           updated_at: Time.now,
           battlenetId: tmp["idBattlenet"].to_i,
           uid: tmp["uid"].to_i,
-          nickname: tmp["nome"],
+          nickname: session[:battletag],
           role: 0, 
           bell: FALSE
         )
@@ -42,7 +41,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           updated_at: Time.now,
           battlenetId: session[:id],
           uid: -1,
-          nickname: "",
+          nickname: session[:battletag],
           role: 0, 
           bell: FALSE
         )

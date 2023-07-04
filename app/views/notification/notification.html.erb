@@ -14,5 +14,9 @@
     <a> <%= n.from %> </a>
     <a> <%= n.to %> </a>
     <a> <%= n.body %> </a>
+
+    <% if n.isinvitation? %>
+      <button> Rifiuta invito </button>
+    <% end %>
   </div>
 <% end %>

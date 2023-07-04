@@ -363,22 +363,26 @@ class TeamsController < ApplicationController
       body = "#{giocatore1} ti ha invitato al team #{nometeam}"
       from = User.find_by(uid: giocatore1).id
 
-      if(@giocatore2!=nil)
+      if(giocatore2 != "")
         @giocatore2 = User.find_by(uid: giocatore2)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore2.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
+        @notification = Notification.create!(from: from, to: @giocatore2.id, body: body, isuser: true, isinvitation: true, teamid: teamid)
+        #@notification.body = body
+        #@notification.from = from
+        #@notification.to = @giocatore2.id
+        #@notification.isuser = true
+        #@notification.isinvitation = true
+        #@notification.teamid = teamid
+        #@notification.save
+
+        puts "-------------"
+        puts @notification
+        puts "-------------"
 
         @giocatore2.bell = true
         @giocatore2.save
       end
 
-      if(@giocatore3!=nil)
+      if(giocatore3 != "")
         @giocatore3 = User.find_by(uid: giocatore3)
         @notification = Notification.new
         @notification.body = body
@@ -393,7 +397,7 @@ class TeamsController < ApplicationController
         @giocatore3.save
       end
 
-      if(@giocatore4!=nil)
+      if(giocatore4 != "")
         @giocatore4 = User.find_by(uid: giocatore4)
         @notification = Notification.new
         @notification.body = body

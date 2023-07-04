@@ -1,9 +1,9 @@
 class CustomNotification
   attr_accessor :id, :email, :isuser
 
-  def initialize(id, email)
+  def initialize(id, email, isuser)
     @id = id
     @email = email
-    @isuser = true
+    @isuser = isuser
   end
 end

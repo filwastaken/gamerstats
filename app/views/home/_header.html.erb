@@ -30,9 +30,9 @@
                     </li>
                     <li class="nav-item">
                         <% if current_user.bell %>
-                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-unread-line.svg', size: '30x30'), view_notification_path, class:"nav-link link-light"%>
+                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-unread-line.svg', size: '30x30'), view_notification_path, style: "filter: invert(100%);", class:"nav-link link-light"%>
                         <% else %>
-                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, class:"nav-link link-light"%>
+                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, style: "filter: invert(100%);", class:"nav-link link-light"%>
                         <% end %>
                     </li>
                     <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.nickname%></li>
@@ -100,9 +100,9 @@
                     </li>
                     <li class="nav-item">
                         <% if current_admin.bell %>
-                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-unread-line.svg', size: '30x30'), view_notification_path, class:"nav-link link-light"%>
+                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-unread-line.svg', size: '30x30'), view_notification_path, tyle: "filter: invert(100%);", class:"nav-link link-light mailbox"%>
                         <% else %>
-                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, class:"nav-link link-light"%>
+                            <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, tyle: "filter: invert(100%);", class:"nav-link link-light mailbox"%>
                         <% end %>
                     </li>
                     <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_admin.nickname%> </li>
