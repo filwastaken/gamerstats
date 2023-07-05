@@ -1,7 +1,5 @@
 <div class="card text-center" style="background-color: #ffffffb3;">
-  <div class="card-header">
-      LISTA UTENTI
-  </div>
+  <div class="card-header"> LISTA UTENTI </div>
   <div class="card-body">
     <table class="table table-dark table-striped-columns">
       <thead>
@@ -52,15 +50,32 @@
       </thead>
       <tbody class="table-group-divider">
         <% @savedteams.each do |team| %>
+        <%
+          if team.giocatore1 != ""
+            nick1 = User.find_by(uid: team.giocatore1).nickname
+          end
+
+          if team.giocatore2 != ""
+            nick2 = User.find_by(uid: team.giocatore2).nickname
+          end
+
+          if team.giocatore3 != ""
+            nick3 = User.find_by(uid: team.giocatore3).nickname
+          end
+
+          if team.giocatore4 != ""
+            nick4 = User.find_by(uid: team.giocatore4).nickname
+          end
+        %>
           <tr class="table-light">
             <th scope="row"> <%= team.nome_team %> </th>
             <td>
               <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center">
                 <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
-                  <a> <%= team.giocatore1 %> </a> <a> <%= team.giocatore3 %> </a>
+                  <a> <%= nick1 %> </a> <a> <%= nick3 %> </a>
                 </div>
                 <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
-                  <a> <%= team.giocatore2 %> </a> <a> <%= team.giocatore4 %> </a>
+                  <a> <%= nick2 %> </a> <a> <%= nick4 %> </a>
                 </div>
               </div>
             </td>
@@ -98,7 +113,7 @@
         end
       %>
 
-      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.isuser}" }, :email %>
+      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.touser}" }, :email %>
     </div>
 
     <div class="actions">
