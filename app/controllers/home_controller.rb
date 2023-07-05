@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def index
     @result=[]
     #reset_session
+    
 
     ###PER FAR FUNZIONARE TUTTO BISOGNA SCRIVERE SUL TERMINALE :
       #1) redis-server su un terminale
