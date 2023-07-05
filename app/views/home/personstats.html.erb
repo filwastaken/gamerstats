@@ -22,8 +22,6 @@
                             <th scope="col">Achievements</th>
                             </tr>
                         </thead>
-                        <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
-                        <% #statistiche = Stat.find_by(uid: current_user.uid) %>
                         <% if statistiche!= nil%>
                             <tbody class="table-group-divider">
                                 <tr class="table-light">
@@ -99,8 +97,6 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                     <%
-                                        #if(Stat.find_by(uid: current_user.uid) != nil)
-                                            #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatioThisSeason
                                         if(Stat.find_by(uid: id_prova) != nil)
                                             wl_ratio_base = Stat.find_by(uid: id_prova).wlRatioThisSeason
                                             closest_values = Stat.order(Arel.sql("ABS(wlRatioThisSeason - #{wl_ratio_base})")).limit(5)
@@ -206,9 +202,6 @@
                             <th scope="col">Achievements</th>
                             </tr>
                         </thead>
-                        <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
-                        <% #statistiche = Stat.find_by(uid: current_user.uid) %>
-                        <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
                         <% statistiche = Stat.find_by(uid: id_prova) %>
                         <% if statistiche!= nil%>
                             <tbody class="table-group-divider">
@@ -451,7 +444,6 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <%puts "_______________________________  #{statisticheTeam != nil}"%>
                             <%if statisticheTeam.length != 0%>
                                 <% Team.all.each do |team|%>
                                     <tr class="table-light">
