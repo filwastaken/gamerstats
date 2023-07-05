@@ -11,6 +11,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <style>
+      #loadingScreen{
+        display: none;
+      }
+    </style>
   </head>
   <body  style="background-image: url('<%= asset_path("sfondo3.png") %>'); background-repeat: no-repeat; background-size: 85%; background-position: 50% 15%; background-attachment:fixed;">
     <%= render 'home/header' %>
