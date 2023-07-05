@@ -81,8 +81,27 @@ User.create!(
     bell: FALSE
 )
 
+Team.create!(
+    nome_team: "nomeTeam",
+    giocatore1: "1",
+    giocatore2: "10548078",
+    giocatore3: "",
+    giocatore4: ""
+)
+
+
+Team.create!(
+    nome_team: "myTeamB",
+    giocatore1: "10548078",
+    giocatore2: "51",
+    giocatore3: "",
+    giocatore4: ""
+)
+
 Stat.create!(
     uid: 10548078,
+    displayName: "ninjabippo",
+    wlRatioThisSeason: 1,
     terranWins: 6,
     protossWins: 0,
     zergWins:0,
@@ -149,23 +168,6 @@ TeamStat.create!(
       totalgamesthisseason: 0
 )
 
-Team.create!(
-    nome_team: "nomeTeam",
-    giocatore1: "1",
-    giocatore2: "10548078",
-    giocatore3: "",
-    giocatore4: ""
-)
-
-
-Team.create!(
-    nome_team: "myTeamB",
-    giocatore1: "10548078",
-    giocatore2: "51",
-    giocatore3: "",
-    giocatore4: ""
-)
-
 
 TeamStat.create!(
       team_id:2,
@@ -203,6 +205,8 @@ TeamStat.create!(
 
 Stat.create!(
     uid: 151,
+    displayName: "giocatore151",
+    wlRatioThisSeason: 0,
     terranWins: 6,
     protossWins: 0,
     zergWins:0,
@@ -232,5 +236,12 @@ Stat.create!(
     gamesArchon:0,
     totalPointsAchievements:10000,
     seasonTotalGames:5
+)
+
+Admin.create!(
+    email:"adminemail@placeholder.com",
+    password:"0123456789",
+    created_at:Time.now,
+    updated_at:Time.now
 )
 =end

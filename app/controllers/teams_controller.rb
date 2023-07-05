@@ -20,6 +20,10 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def loading_image
+    send_file Rails.root.join('app', 'assets', 'images', 'loadingPiccola.gif'), type: 'image/gif', disposition: 'inline'
+  end
+
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
@@ -365,51 +369,53 @@ class TeamsController < ApplicationController
 
       if(giocatore2 != "")
         @giocatore2 = User.find_by(uid: giocatore2)
-        @notification = Notification.create!(from: from, to: @giocatore2.id, body: body, isuser: true, isinvitation: true, teamid: teamid)
-        #@notification.body = body
-        #@notification.from = from
-        #@notification.to = @giocatore2.id
-        #@notification.isuser = true
-        #@notification.isinvitation = true
-        #@notification.teamid = teamid
-        #@notification.save
+        if(@giocatore2!=nil)
+          @notification = Notification.create!(from: from, to: @giocatore2.id, body: body, isuser: true, isinvitation: true, teamid: teamid)
+          #@notification.body = body
+          #@notification.from = from
+          #@notification.to = @giocatore2.id
+          #@notification.isuser = true
+          #@notification.isinvitation = true
+          #@notification.teamid = teamid
+          #@notification.save
 
-        puts "-------------"
-        puts @notification
-        puts "-------------"
-
-        @giocatore2.bell = true
-        @giocatore2.save
+          @giocatore2.bell = true
+          @giocatore2.save
+        end
       end
 
       if(giocatore3 != "")
         @giocatore3 = User.find_by(uid: giocatore3)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore3.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
+        if(@giocatore3!=nil)
+          @notification = Notification.new
+          @notification.body = body
+          @notification.from = from
+          @notification.to = @giocatore3.id
+          @notification.isuser = true
+          @notification.isinvitation = true
+          @notification.teamid = teamid
+          @notification.save
 
-        @giocatore3.bell = true
-        @giocatore3.save
+          @giocatore3.bell = true
+          @giocatore3.save
+        end
       end
 
       if(giocatore4 != "")
         @giocatore4 = User.find_by(uid: giocatore4)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore4.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
+        if(@giocatore4!=nil)
+          @notification = Notification.new
+          @notification.body = body
+          @notification.from = from
+          @notification.to = @giocatore4.id
+          @notification.isuser = true
+          @notification.isinvitation = true
+          @notification.teamid = teamid
+          @notification.save
 
-        @giocatore4.bell = true
-        @giocatore4.save
+          @giocatore4.bell = true
+          @giocatore4.save
+        end
       end
     end
 end

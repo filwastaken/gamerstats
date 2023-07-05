@@ -1,5 +1,3 @@
-#clear && bundle exec cucumber
-
 Given("I am logged in as a user with uid {int}") do |uid|
     user = User.find_by(uid: uid.to_i)
     assert_not_nil user, "User with UID #{uid} not found"
@@ -52,3 +50,33 @@ And("I am on the personstats page") do
     visit personstats_path
 end
 
+Given ("I am logged in as an Admin") do
+    admin = Admin.find_by(id: 1)
+    assert_not_nil admin, "Admin with ID 1 not found"
+  
+    visit '/admins/sign_in'
+    fill_in "admin_email", :with => "adminemail@placeholder.com"
+    fill_in "admin_password", :with => "0123456789"
+    click_button "Log in"
+end
+
+And("I am on the admin page") do 
+    visit adminpage_path
+end
+  
+When("I select {string} in {string}") do |email, field|
+    select(email, from: field)
+end
+
+
+Then("Non dovrebbe essere presente l'elemento con id {string}") do |element_id|
+    if !(page.has_no_selector?("#" + element_id))
+      raise "L'elemento con ID #{element_id} è presente nella pagina"
+    end
+end
+
+Then("Dovrebbe essere presente l'elemento con id {string}") do |element_id|
+    if page.has_no_selector?("#" + element_id)
+      raise "L'elemento con ID #{element_id} non è presente nella pagina"
+    end
+end
