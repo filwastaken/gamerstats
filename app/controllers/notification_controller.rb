@@ -1,11 +1,11 @@
 class NotificationController < ApplicationController
   before_action :authenticate_admin!, only: [:adminnotification]
+  before_action :someone_logged, only: [:notification]
 
   def notification
-
     @notification = []
     Notification.all.each do |n|
-      if n.to == Notification::DEFAULT_CASES[:toall] || (current_admin != nil && (n.to == Notification::DEFAULT_CASES[:toadmins] || current_admin.id == n.to)) || (current_user != nil && current_user.id == n.to && n.isuser)
+      if n.to == Notification::DEFAULT_CASES[:toall] || (current_admin != nil && (n.to == Notification::DEFAULT_CASES[:toadmins] || current_admin.id == n.to)) || (current_user != nil && current_user.id == n.to && n.touser)
         @notification.append(n)
       end
     end
@@ -17,7 +17,7 @@ class NotificationController < ApplicationController
     @notification.body = params[:notification][:body]
     @notification.from = params[:id]
     @notification.to = params[:notification][:to].split("|")[0].to_i
-    @notification.isuser = params[:notification][:to].split("|")[1]
+    @notification.touser = params[:notification][:to].split("|")[1]
 
     if(@notification.body != "")
       @notification.save
@@ -28,7 +28,7 @@ class NotificationController < ApplicationController
       elsif @notification.to == Notification::DEFAULT_CASES[:toadmins]
         Admin.update_all(bell: true)
       else
-        if @notification.isuser?
+        if @notification.touser?
           to_user = User.find(@notification.to)
           to_user.bell = true
           to_user.save
@@ -45,5 +45,15 @@ class NotificationController < ApplicationController
       redirect_to adminpage_path
     end
     return
+  end
+
+  private
+  def someone_logged
+    if current_admin == nil && current_user == nil
+      flash[:notice] = "E' necessario fare l'accesso per poter accedere alle proprie notifiche"
+      redirect_to root_path
+    end
+
+    return true
   end
 end
