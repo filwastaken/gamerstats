@@ -233,4 +233,11 @@ Stat.create!(
     totalPointsAchievements:10000,
     seasonTotalGames:5
 )
+
+Admin.create!(
+    email:"adminemail@placeholder.com",
+    password:"0123456789",
+    created_at:Time.now,
+    updated_at:Time.now
+)
 =end
