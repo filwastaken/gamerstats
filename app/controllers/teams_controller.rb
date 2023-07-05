@@ -21,6 +21,10 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def loading_image
+    send_file Rails.root.join('app', 'assets', 'images', 'loadingPiccola.gif'), type: 'image/gif', disposition: 'inline'
+  end
+
   # POST /teams or /teams.json
   def create
     giocatori = [team_params[:giocatore1]]

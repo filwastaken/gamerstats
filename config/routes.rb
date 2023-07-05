@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/search', to: 'home#search'
 
+  get '/teams/assets/loadingPiccola.gif', to: 'teams#loading_image'
+  get '/teams/:id/assets/loadingPiccola.gif', to: 'teams#loading_image', as: 'team_loading_image'
+  get '/preferitos/assets/loadingPiccola.gif', to: 'preferitos#loading_image'
+  get '/preferitos/:id/assets/loadingPiccola.gif', to: 'preferitos#loading_image', as: 'preferito_loading_image'
+
+
   # resources routes
   resources :preferitos
   resources :stats
