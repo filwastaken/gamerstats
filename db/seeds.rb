@@ -9,7 +9,6 @@
 
 #rails db:seed RAILS_ENV=test
 
-=begin
 User.create!(
     email: 'pinco.pallino@gmail.com',
     password: '111111',
@@ -134,23 +133,6 @@ Stat.create!(
     seasonTotalGames:5
 )
 
-Team.create!(
-    nome_team: "nomeTeam",
-    giocatore1: "1",
-    giocatore2: "10548078",
-    giocatore3: "",
-    giocatore4: ""
-)
-
-
-Team.create!(
-    nome_team: "myTeamB",
-    giocatore1: "10548078",
-    giocatore2: "51",
-    giocatore3: "",
-    giocatore4: ""
-)
-
 TeamStat.create!(
       team_id:1,
       terranwins:0,
@@ -261,4 +243,3 @@ Admin.create!(
     created_at:Time.now,
     updated_at:Time.now
 )
-=end
