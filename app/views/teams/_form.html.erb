@@ -38,7 +38,13 @@
   
   <div class="container" style="display: flex; justify-content: center;">
     <div class="actions">
-      <%= form.submit "submit", class:"btn btn-dark"%>
+      <%= form.submit "submit", class: "btn btn-dark", onclick: "mostra(); event.preventDefault(); form.submit();" %>
     </div>
   </div>
 <% end %>
+
+<script>
+    function mostra(){
+        document.getElementById("loadingScreen").style.display = "flex";
+    }
+</script>

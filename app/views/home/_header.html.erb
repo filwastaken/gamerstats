@@ -1,5 +1,13 @@
 <%soglia_vittorie = 0%>
 <%soglia_achievements = 0%>
+
+<div id="loadingScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); align-items:center; justify-content:center;">
+    <div id="contentLoadingScreen" style="background-color: #1b1b1b; width:350px; text-align:center; color:white; font-size:16px">
+        <img id="imgLoading" src="assets/loadingPiccola.gif" alt="Stiamo contattanto i server di Battlenet per ottenere i dati" style="vertical-align: center">
+    </div>
+</div>
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <%= link_to 'GamerStats', root_path, class:"navbar-brand"%>
@@ -26,7 +34,8 @@
                         <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link link-light"%>    
                     </li>
                     <li class="nav-item">
-                        <%= link_to 'Personal', personstats_path, class:"nav-link link-light"%>    
+                        <% #link_to 'Personal', personstats_path, class:"nav-link link-light"%>  
+                        <div class="nav-link btn" onclick="mostra();" style="text-align:left; color:RGBA(var(--bs-light-rgb,var(--bs-link-opacity,1)));">Personal</div>  
                     </li>
                     <li class="nav-item">
                         <% if current_user.bell %>
@@ -35,7 +44,7 @@
                             <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, style: "filter: invert(100%);", class:"nav-link link-light"%>
                         <% end %>
                     </li>
-                    <li style="display: flex; color:white; justify-content: center; width: 50vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.nickname%></li>
+                    <li style="display: flex; color:white; justify-content: center; width: 45vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.nickname%></li>
                     <li class="nav-item position-absolute end-0" style="border: solid 1px white; color: white; padding: 6px; border-radius: 5px; margin-right:390px; min-width:60px">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
                             <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z"/>
@@ -125,3 +134,10 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function mostra(){
+        document.getElementById("loadingScreen").style.display = "flex";
+        window.location.href = "/personstats";
+    }
+</script>
