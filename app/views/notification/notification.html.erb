@@ -1,22 +1,53 @@
-<% @notification.each do |n| %>
-  
-  <%
-    if current_admin != nil
-      current_admin.bell = false
-      current_admin.save
-    elsif current_user != nil
-      current_user.bell = false
-      current_user.save
-    end
-  %>
+<%
+if current_admin != nil
+  current_admin.bell = false
+  current_admin.save
+elsif current_user != nil
+  current_user.bell = false
+  current_user.save
+end
+%>
 
-  <div style="text-align: center">
-    <a> <%= n.from %> </a>
-    <a> <%= n.to %> </a>
-    <a> <%= n.body %> </a>
+<div class="card text-center" style="background-color: #ffffffb3;">
+  <div class="card-header"> NOTIFICHE </div>
+  <div class="card-body">
+    <table class="table table-dark table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col"> DA </th>
+          <th scope="col"> A </th>
+          <th scope="col"> TESTO </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @notification.each do |n| %>
 
-    <% if n.isinvitation? %>
-      <button onclick="location.href = '<%= personstats_path %>#viewteam'" class="btn btn-dark"> View </button>
-    <% end %>
+          <%
+            if n.fromuser?
+              from = User.find(n.from)
+            else
+              from = Admin.find(n.from)
+            end
+
+            if current_user != nil
+              to = current_user
+            elsif current_admin != nil
+              to = current_admin
+            end
+          %>
+
+          <tr class="table-light">
+            <th scope="row" style="vertical-align: middle" > <%= from.nickname %> </th>
+            <td style="vertical-align: middle" > <%= to.nickname %> </td>
+            <td style="vertical-align: middle" > <%= n.body %> </td>
+
+            <% if n.isinvitation? %>
+              <td style="vertical-align: middle" > <button onclick="location.href = '<%= personstats_path %>#viewteam'" class="btn btn-dark"> View </button> </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
+</div>
