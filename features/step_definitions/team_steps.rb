@@ -69,3 +69,16 @@ end
 When("I select {string} in {string}") do |email, field|
     select(email, from: field)
 end
+
+
+Then("Non dovrebbe essere presente l'elemento con id {string}") do |element_id|
+    if !(page.has_no_selector?("#" + element_id))
+      raise "L'elemento con ID #{element_id} è presente nella pagina"
+    end
+end
+
+Then("Dovrebbe essere presente l'elemento con id {string}") do |element_id|
+    if page.has_no_selector?("#" + element_id)
+      raise "L'elemento con ID #{element_id} non è presente nella pagina"
+    end
+end
