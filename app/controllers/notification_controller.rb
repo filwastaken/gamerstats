@@ -19,26 +19,31 @@ class NotificationController < ApplicationController
     @notification.to = params[:notification][:to].split("|")[0].to_i
     @notification.isuser = params[:notification][:to].split("|")[1]
 
-    @notification.save
+    if(@notification.body != "")
+      @notification.save
 
-    if @notification.to == Notification::DEFAULT_CASES[:toall]
-      User.update_all(bell: true)
-      Admin.update_all(bell: true)
-    elsif @notification.to == Notification::DEFAULT_CASES[:toadmins]
-      Admin.update_all(bell: true)
-    else
-      if @notification.isuser?
-        to_user = User.find(@notification.to)
-        to_user.bell = true
-        to_user.save
+      if @notification.to == Notification::DEFAULT_CASES[:toall]
+        User.update_all(bell: true)
+        Admin.update_all(bell: true)
+      elsif @notification.to == Notification::DEFAULT_CASES[:toadmins]
+        Admin.update_all(bell: true)
       else
-        to_admin = Admin.find(@notification.to)
-        to_admin.bell = true
-        to_admin.save
+        if @notification.isuser?
+          to_user = User.find(@notification.to)
+          to_user.bell = true
+          to_user.save
+        else
+          to_admin = Admin.find(@notification.to)
+          to_admin.bell = true
+          to_admin.save
+        end
       end
+      flash[:notice] = "La comunicazione è stata inviata correttamente"
+      redirect_to adminpage_path
+    else
+      flash[:notice] = "Non puoi inviare una comunicazione vuota!"
+      redirect_to adminpage_path
     end
-
-    redirect_to adminpage_path
     return
   end
 end
