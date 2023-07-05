@@ -15,9 +15,9 @@ class HomeController < ApplicationController
 
 
     #User.delete_all
-    Stat.delete_all
-    TeamStat.delete_all
-    Team.delete_all
+    #Stat.delete_all
+    #TeamStat.delete_all
+    #Team.delete_all
 
   
 
