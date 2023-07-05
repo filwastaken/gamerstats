@@ -23,19 +23,17 @@ class TeamsController < ApplicationController
 
   # POST /teams or /teams.json
   def create
-    @team = Team.new(team_params)
-
-    giocatori = [@team.giocatore1]
-    if @team.giocatore2 != ""
-      giocatori.append(@team.giocatore2)
+    giocatori = [team_params[:giocatore1]]
+    if team_params[:giocatore2] != ""
+      giocatori.append(team_params[:giocatore2])
     end
 
-    if @team.giocatore3 != ""
-      giocatori.append(@team.giocatore3)
+    if team_params[:giocatore3] != ""
+      giocatori.append(team_params[:giocatore3])
     end
 
-    if @team.giocatore4 != ""
-      giocatori.append(@team.giocatore4)
+    if team_params[:giocatore4] != ""
+      giocatori.append(team_params[:giocatore4])
     end
 
     if(giocatori.length != giocatori.uniq.length)
@@ -51,13 +49,17 @@ class TeamsController < ApplicationController
 
     # Removing the first element from the array
     giocatori.shift
-    
     giocatori.sort!
+
     while giocatori.length < 3
       giocatori.append("")
     end
 
-    if Team.exists?(giocatore1: @team.giocatore1, giocatore2: giocatori[0], giocatore3: giocatori[1], giocatore4: giocatori[2])
+    teamparams = {"nome_team" => team_params[:nome_team], "giocatore1" => team_params[:giocatore1], "giocatore2" => giocatori[0], "giocatore3" => giocatori[1], "giocatore4" => giocatori[2]}
+
+    @team = Team.new(teamparams)
+
+    if Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore2, giocatore3: @team.giocatore3, giocatore4: @team.giocatore4)
       flash[:notice] = "Esiste già un team con gli stessi giocatori!"
       redirect_to new_team_path
       return
@@ -111,16 +113,17 @@ class TeamsController < ApplicationController
         format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
 
+        from = User.find_by(uid: @team.giocatore1)
         if giocatore2 != nil
-          send_notification(giocatore1, giocatore2, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
+          send_notification(from, giocatore2, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
         end
           
         if giocatore3 != nil
-          send_notification(giocatore1, giocatore3, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
+          send_notification(from, giocatore3, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
         end
           
         if giocatore4 != nil
-          send_notification(giocatore1, giocatore4, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
+          send_notification(from, giocatore4, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
         end
 
       else
@@ -172,19 +175,17 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
-    @team1 = Team.new(team_params)
-
-    giocatori = [@team1.giocatore1]
-    if @team1.giocatore2 != ""
-      giocatori.append(@team1.giocatore2)
+    giocatori = [team_params[:giocatore1]]
+    if team_params[:giocatore2] != ""
+      giocatori.append(team_params[:giocatore2])
     end
 
-    if @team1.giocatore3 != ""
-      giocatori.append(@team1.giocatore3)
+    if team_params[:giocatore3] != ""
+      giocatori.append(team_params[:giocatore3])
     end
 
-    if @team1.giocatore4 != ""
-      giocatori.append(@team1.giocatore4)
+    if team_params[:giocatore4] != ""
+      giocatori.append(team_params[:giocatore4])
     end
 
     if(giocatori.length != giocatori.uniq.length)
@@ -221,14 +222,17 @@ class TeamsController < ApplicationController
       byebye.append(giocatori[2])
       welcome.append(@team.giocatore4)
     end
-
     
     giocatori.sort!
     while giocatori.length < 3
       giocatori.append("")
     end
 
-    if Team.exists?(giocatore1: @team.giocatore1, giocatore2: giocatori[0], giocatore3: giocatori[1], giocatore4: giocatori[2])
+    teamparams = {"nome_team" => team_params[:nome_team], "giocatore1" => team_params[:giocatore1], "giocatore2" => giocatori[0], "giocatore3" => giocatori[1], "giocatore4" => giocatori[2]}
+
+    @team1 = Team.new(teamparams)
+
+    if Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore2, giocatore3: @team1.giocatore3, giocatore4: @team1.giocatore4)
       flash[:notice] = "Esiste già un team con gli stessi giocatori!"
       redirect_to edit_team_path
       return
@@ -270,7 +274,7 @@ class TeamsController < ApplicationController
     end
     
     respond_to do |format|
-      if @team.update(team_params)
+      if @team.update(teamparams)
         calculate_averages_update(@team)
         format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
