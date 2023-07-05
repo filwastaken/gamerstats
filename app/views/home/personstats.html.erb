@@ -10,7 +10,7 @@
                 <div class="card-header">
                     STATISTICHE PERSONALI
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="tableContainer">
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
@@ -61,7 +61,7 @@
                 <div class="card-header">
                     WL RATIO
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="tableContainer">
                     <table class="table table-dark table-striped-columns">
                         <% if statistiche!= nil%>
                             <tbody class="table-group-divider">
@@ -89,7 +89,7 @@
                             <div class="card-header">
                                 STATISTICHE UTENTI
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="tableContainer">
                                 <table class="table table-dark table-striped-columns">
                                     <thead>
                                         <tr>
@@ -138,7 +138,7 @@
                             <div class="card-header">
                                 CLASSIFICA TEAM
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="tableContainer">
                                 <table class="table table-dark table-striped-columns">
                                     <thead>
                                         <tr>
@@ -190,7 +190,7 @@
                 <div class="card-header">
                     STATISTICHE PERSONALI
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="tableContainer">
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
@@ -305,7 +305,7 @@
                             <div class="card-header">
                                 WL RATIO 
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" >
                                 <% if statistiche != nil %>
                                     <%= pie_chart [['Wins', statistiche.totalWins],['Losses', statistiche.totalLosses]], legend: 'bottom', height: '350px', width: '550px', library: { backgroundColor: 'transparent' } %> 
                                 <% else %>
@@ -359,7 +359,7 @@
                             <div class="card-header">
                                 STATISTICHE UTENTI
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="tableContainer">
                                 <table class="table table-dark table-striped-columns">
                                     <thead>
                                         <tr>
@@ -409,7 +409,7 @@
                                 <button id="bestTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Migliori Team</button>
                                 <button id="worstTeamsButton" class="btn " style="background-color: #4682b4; color:white;">Peggiori Team</button>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="tableContainer">
                                 <table id="teamTable" class="table table-dark table-striped-columns">
                                     <thead>
                                         <tr>
@@ -437,7 +437,7 @@
                 <div class="card-header">
                     STATISTICHE TEAM
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="tableContainer">
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
@@ -500,7 +500,7 @@
                 <div class="card-header">
                     STATISTICHE TEAM
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="tableContainer">
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
@@ -580,7 +580,7 @@
                             <div class="card-header">
                                 TEAM WL RATIO
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="tableContainer">
                                 <% if Team.all.length != 0 %>
                                     <% data = {} %>
                                     <% Team.all.each do |team_tmp| %>
@@ -617,7 +617,7 @@
                     <div class="card-header">
                         TEAM DI CUI FAI PARTE SENZA ESSERE IL TEAM LEADER
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="tableContainer">
                         <table class="table table-dark table-striped-columns">
                             <thead>
                                 <tr>
