@@ -16,6 +16,8 @@ class HomeController < ApplicationController
 
     #User.delete_all
     #Stat.delete_all
+    #TeamStat.delete_all
+    #Team.delete_all
 
   
 
@@ -109,6 +111,7 @@ class HomeController < ApplicationController
 
   def personstats
   end
+
   
   def update_role
     @user = User.find(params[:id])

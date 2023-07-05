@@ -22,8 +22,6 @@
                             <th scope="col">Achievements</th>
                             </tr>
                         </thead>
-                        <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
-                        <% #statistiche = Stat.find_by(uid: current_user.uid) %>
                         <% if statistiche!= nil%>
                             <tbody class="table-group-divider">
                                 <tr class="table-light">
@@ -205,9 +203,6 @@
                             <th scope="col">Achievements</th>
                             </tr>
                         </thead>
-                        <% #BattlenetOauthService.ottieniProfilo(session[:access_token], current_user.uid)%>
-                        <% #statistiche = Stat.find_by(uid: current_user.uid) %>
-                        <% BattlenetOauthService.ottieniProfilo(session[:access_token], id_prova)%>
                         <% statistiche = Stat.find_by(uid: id_prova) %>
                         <% if statistiche!= nil%>
                             <tbody class="table-group-divider">
