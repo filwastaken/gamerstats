@@ -126,7 +126,7 @@ class TeamsController < ApplicationController
       redirect_to new_team_path
     end
 
-    send_notificaiton(@team.id, team_params[:nome_team], team_params[:giocatore1], team_params[:giocatore2], team_params[:giocatore3], team_params[:giocatore4])
+    send_notificaiton(team_params[:nome_team], team_params[:giocatore1], team_params[:giocatore2], team_params[:giocatore3], team_params[:giocatore4])
   end
 
   def calculate_averages(team)
@@ -330,7 +330,8 @@ class TeamsController < ApplicationController
         notification = Notification.new
         notification.from = from_user.id
         notification.to = to_user.id
-        notification.isuser = true
+        notification.touser = true
+        notification.fromuser = true
         notification.body = "L'utente #{from_user.nickname} ha abbandonato il team #{team_params[:nome_team]}."
         notification.save
     
@@ -341,7 +342,7 @@ class TeamsController < ApplicationController
           notification = Notification.new
           notification.from = Admin.first.id
           notification.to = to_user.id
-          notification.isuser = true
+          notification.touser = true
           notification.body = "Il team #{team_params[:nome_team]} non ha piu' giocatori e per questo e' stato eliminato."
           notification.save
       
@@ -373,7 +374,8 @@ class TeamsController < ApplicationController
       notification = Notification.new
       notification.from = from_user.id
       notification.to = to_user.id
-      notification.isuser = true
+      notification.touser = true
+      notification.fromuser = true
       notification.body = body
       notification.save
           
@@ -387,7 +389,8 @@ class TeamsController < ApplicationController
       notification = Notification.new
       notification.from = from_user.id
       notification.to = to_user.id
-      notification.isuser = true
+      notification.touser = true
+      notification.fromuser = true
       notification.body = body
           
       to_user.bell = true
@@ -400,7 +403,8 @@ class TeamsController < ApplicationController
       notification = Notification.new
       notification.from = from_user.id
       notification.to = to_user.id
-      notification.isuser = true
+      notification.touser = true
+      notification.fromuser = true
       notification.body = body
           
       to_user.bell = true
@@ -442,57 +446,32 @@ class TeamsController < ApplicationController
       params.require(:team).permit(:nome_team, :giocatore1, :giocatore2, :giocatore3, :giocatore4)
     end
 
-    def send_notificaiton(teamid, nometeam, giocatore1, giocatore2, giocatore3, giocatore4)
+    def send_notificaiton(nometeam, giocatore1, giocatore2, giocatore3, giocatore4)
       body = "#{giocatore1} ti ha invitato al team #{nometeam}"
       from = User.find_by(uid: giocatore1).id
 
       if(giocatore2 != "")
-        @giocatore2 = User.find_by(uid: giocatore2)
-        @notification = Notification.create!(from: from, to: @giocatore2.id, body: body, isuser: true, isinvitation: true, teamid: teamid)
-        #@notification.body = body
-        #@notification.from = from
-        #@notification.to = @giocatore2.id
-        #@notification.isuser = true
-        #@notification.isinvitation = true
-        #@notification.teamid = teamid
-        #@notification.save
+        giocatore2 = User.find_by(uid: giocatore2)
+        notification = Notification.create!(from: from, to: giocatore2.id, body: body, fromuser: true, touser: true, isinvitation: true)
 
-        puts "-------------"
-        puts @notification
-        puts "-------------"
-
-        @giocatore2.bell = true
-        @giocatore2.save
+        giocatore2.bell = true
+        giocatore2.save
       end
 
       if(giocatore3 != "")
-        @giocatore3 = User.find_by(uid: giocatore3)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore3.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
+        giocatore3 = User.find_by(uid: giocatore3)
+        notification = Notification.create!(from: from, to: giocatore3.id, body: body, fromuser: true, touser: true, isinvitation: true)
 
-        @giocatore3.bell = true
-        @giocatore3.save
+        giocatore3.bell = true
+        giocatore3.save
       end
 
       if(giocatore4 != "")
-        @giocatore4 = User.find_by(uid: giocatore4)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore4.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
+        giocatore4 = User.find_by(uid: giocatore4)
+        notification = Notification.create!(from: from, to: giocatore4.id, body: body, fromuser: true, touser: true, isinvitation: true)
 
-        @giocatore4.bell = true
-        @giocatore4.save
+        giocatore4.bell = true
+        giocatore4.save
       end
     end
 end

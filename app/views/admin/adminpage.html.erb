@@ -1,7 +1,5 @@
 <div class="card text-center" style="background-color: #ffffffb3;">
-  <div class="card-header">
-      LISTA UTENTI
-  </div>
+  <div class="card-header"> LISTA UTENTI </div>
   <div class="card-body">
     <table class="table table-dark table-striped-columns">
       <thead>
@@ -115,7 +113,7 @@
         end
       %>
 
-      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.isuser}" }, :email %>
+      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.touser}" }, :email %>
     </div>
 
     <div class="actions">
