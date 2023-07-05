@@ -14,7 +14,7 @@
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
-                            <th scope="col">Games this season</th>
+                            <th scope="col" id="NONabbonatoStats">Games this season</th>
                             <th scope="col">Wins 1vs1</th>
                             <th scope="col">Wins 2vs2</th>
                             <th scope="col">Wins 3vs3</th>
@@ -99,9 +99,8 @@
                                     </thead>
                                     <tbody class="table-group-divider">
                                     <%
-                                        #if(Stat.find_by(uid: current_user.uid) != nil)
-                                            #wl_ratio_base = Stat.find_by(uid: current_user.uid).wlRatioThisSeason
                                         if(Stat.find_by(uid: id_prova) != nil)
+                                            lista_utenti = []
                                             wl_ratio_base = Stat.find_by(uid: id_prova).wlRatioThisSeason
                                             closest_values = Stat.order(Arel.sql("ABS(wlRatioThisSeason - #{wl_ratio_base})")).limit(5)
                                             lista_utenti = closest_values.pluck(:displayName, :wlRatioThisSeason)
@@ -194,7 +193,7 @@
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
-                            <th scope="col">Total Games</th>
+                            <th scope="col" id="abbonatoStats">Total Games</th>
                             <th scope="col">Season Games</th>
                             <th scope="col">Highest 1v1 Rank</th>
                             <th scope="col">Terran wins</th>
@@ -451,7 +450,6 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <%puts "_______________________________  #{statisticheTeam != nil}"%>
                             <%if statisticheTeam.length != 0%>
                                 <% Team.all.each do |team|%>
                                     <tr class="table-light">
@@ -505,7 +503,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nome Team</th>
-                                <th scope="col">Total Games</th>
+                                <th scope="col" id="teamAbbonatoStats">Total Games</th>
                                 <th scope="col">Total Wins</th>
                                 <th scope="col">Total Losses</th>
                                 <th scope="col">WL Ratio</th>
