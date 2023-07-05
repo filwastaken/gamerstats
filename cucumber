@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Creating cucumber fifo
+fifo=/tmp/cucumberfifo
+
+trap "rm -f $fifo" EXIT
+
+if [[ ! -p $fifo ]]; then
+    mkfifo $fifo
+fi
+
+echo "-------------------"
+echo "cucumber fifo created"
+
+# Calling server, stdin is fifo, stdout is discarded
+./server 0<$fifo 1>/dev/null &
+T=${!}
+
+sleep 3
+echo "server started"
+echo "starting cucumber"
+echo "-------------------"
+
+bundle exec cucumber
+
+
+echo "\n" 1>$fifo &
+echo "-------------------"
+echo "Cucumber exited"
+
+kill ${T} >/dev/null # Should fail, making sure I don't leave processes unmanaged 
+wait ${T}
+
+echo "Server closed"
+echo "-------------------"
+rm $fifo
