@@ -47,7 +47,7 @@
   
   <div class="container" style="display: flex; justify-content: center;">
     <div class="actions">
-      <%= form.submit "Submit", class: "btn btn-dark", onclick: "mostra(); event.preventDefault(); form.submit();" %>
+      <%= form.submit "submit", class: "btn btn-dark", onclick: "mostra(); event.preventDefault(); form.submit();" %>
     </div>
   </div>
 <% end %>
@@ -55,6 +55,5 @@
 <script>
     function mostra(){
         document.getElementById("loadingScreen").style.display = "flex";
-        //window.location.href = "/personstats";
     }
 </script>
