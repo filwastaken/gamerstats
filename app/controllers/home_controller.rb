@@ -121,7 +121,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    uid = params[:uid]
+    uid = params[:user][:uid]
     BattlenetOauthService.ottieniProfilo(session[:access_token], uid)
     @results = Stat.find_by(uid: uid)
     render :index
