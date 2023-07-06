@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2023_06_30_214324) do
   create_table "notifications", force: :cascade do |t|
     t.integer "from", null: false
     t.integer "to", null: false
+    t.boolean "fromUser"
+    t.boolean "toUser"
     t.boolean "isuser"
     t.string "body", null: false
     t.boolean "isinvitation", default: false
