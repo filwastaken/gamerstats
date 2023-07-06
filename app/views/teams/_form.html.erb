@@ -15,7 +15,6 @@
     <%= form.label :nome_team, class:"form-label" %>
     <%= form.text_field :nome_team, class:"form-control", style:"max-width: 400px;", required: true %>
   </div>
-  
   <div class="field">
     <%= form.label :"Team Leader", class:"form-label" %>
       <%= form.text_field :giocatore1, value: current_user.uid, class:"form-control", readonly: true, style:"max-width: 400px;" %>

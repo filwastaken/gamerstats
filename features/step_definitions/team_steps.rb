@@ -1,5 +1,3 @@
-#clear && bundle exec cucumber
-
 Given("I am logged in as a user with uid {int}") do |uid|
     user = User.find_by(uid: uid.to_i)
     assert_not_nil user, "User with UID #{uid} not found"

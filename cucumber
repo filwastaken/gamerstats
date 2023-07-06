@@ -1,36 +1,65 @@
 #!/bin/bash
+if [ -z "$1" ]
+then
+    # Creating cucumber fifo
+    fifo=/tmp/cucumberfifo
 
-# Creating cucumber fifo
-fifo=/tmp/cucumberfifo
+    trap "rm -f $fifo" EXIT
 
-trap "rm -f $fifo" EXIT
-
-if [[ ! -p $fifo ]]; then
+    if [[ ! -p $fifo ]]; then
     mkfifo $fifo
+    fi
+
+    echo "-------------------"
+    echo "cucumber fifo created"
+
+    # Calling server, stdin is fifo, stdout is discarded
+    ./server 0<$fifo 1>/dev/null &
+    T=${!}
+
+    sleep 3
+    echo "server started"
+    echo "starting cucumber"
+    echo "-------------------"
+
+    bundle exec cucumber
+
+    echo "\n" 1>$fifo &
+    echo "-------------------"
+    echo "Cucumber exited"
+
+    kill ${T} >/dev/null # Should fail, making sure I don't leave processes unmanaged 
+    wait ${T}
+
+    echo "Server closed"
+    echo "-------------------"
+    rm $fifo
+elif [ $1 == "-database" ] || [ $1 == "-D" ]
+then
+    sed -i "s/config.cache_classes = true/config.cache_classes = false/" ./config/environments/test.rb > /dev/null
+    echo "Changed settings file"
+
+    rails db:drop db:create > /dev/null
+    rails db:migrate RAILS_ENV=test > /dev/null
+    rails db:migrate > /dev/null
+    echo "Recreated databases"
+
+
+    sed -zi "s/=begin\n//" ./db/seeds.rb
+    sed -zi "s/=end\n//" ./db/seeds.rb
+    echo "Removed comment from seed.rb"
+
+    rails db:seed RAILS_ENV=test > /dev/null
+    echo "Seeded test database"
+
+    bundle exec cucumber > /dev/null
+    echo "Let cucumber do its thing... Test database unpopulated (for some reason?)"
+    
+    rails db:seed RAILS_ENV=test
+    echo "Repopulated test database"
+    
+    sed -i "s/config.cache_classes = false/config.cache_classes = true/" ./config/environments/test.rb > /dev/null
+    sed -zi "s/#rails db:seed RAILS_ENV=test/#rails db:seed RAILS_ENV=test\n=begin/" ./db/seeds.rb > /dev/null
+    echo "=end" >> ./db/seeds.rb
+    echo "Changed settings back to default"
 fi
-
-echo "-------------------"
-echo "cucumber fifo created"
-
-# Calling server, stdin is fifo, stdout is discarded
-./server 0<$fifo 1>/dev/null &
-T=${!}
-
-sleep 3
-echo "server started"
-echo "starting cucumber"
-echo "-------------------"
-
-bundle exec cucumber
-
-
-echo "\n" 1>$fifo &
-echo "-------------------"
-echo "Cucumber exited"
-
-kill ${T} >/dev/null # Should fail, making sure I don't leave processes unmanaged 
-wait ${T}
-
-echo "Server closed"
-echo "-------------------"
-rm $fifo

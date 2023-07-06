@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   def index
     @result=[]
     #reset_session
+    
 
     ###PER FAR FUNZIONARE TUTTO BISOGNA SCRIVERE SUL TERMINALE :
       #1) redis-server su un terminale
@@ -15,7 +16,9 @@ class HomeController < ApplicationController
     #Sidekiq::ScheduledSet.new.clear
     #Sidekiq::DeadSet.new.clear
 
-
+    #Notification.delete_all
+    #TeamStat.delete_all
+    #Team.delete_all
     #User.delete_all
     #Stat.delete_all
     #TeamStat.delete_all
