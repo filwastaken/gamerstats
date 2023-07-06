@@ -10,7 +10,67 @@ class AdminController < ApplicationController
 
   # DELETE /adminpage#delete_team
   def delete_team
-    Team.find(params[:id]).destroy
+    
+    team = Team.find(params[:id])
+
+    # Notification in case everything works out
+    body = "L'admin #{current_admin.nickname} ha eliminato il team #{team.nome_team} di cui facevi parte."
+
+    if team.giocatore1 != ""
+      to_user = User.find_by(uid: team.giocatore1)
+    
+      notification = Notification.new
+      notification.from = current_admin.id
+      notification.to = to_user.id
+      notification.toUser = true
+      notification.body = body
+      notification.save
+              
+      to_user.bell = true
+      to_user.save
+    end
+
+    if team.giocatore2 != ""
+      to_user = User.find_by(uid: team.giocatore2)
+    
+      notification = Notification.new
+      notification.from = current_admin.id
+      notification.to = to_user.id
+      notification.toUser = true
+      notification.body = body
+      notification.save
+              
+      to_user.bell = true
+      to_user.save
+    end
+    
+    if team.giocatore3 != ""
+      to_user = User.find_by(uid: team.giocatore3)
+    
+      notification = Notification.new
+      notification.from = current_admin.id
+      notification.to = to_user.id
+      notification.toUser = true
+      notification.body = body
+              
+      to_user.bell = true
+      to_user.save
+    end
+    
+    if team.giocatore4 != ""
+      to_user = User.find_by(uid: team.giocatore4)
+    
+      notification = Notification.new
+      notification.from = current_admin.id
+      notification.to = to_user.id
+      notification.toUser = true
+      notification.body = body
+              
+      to_user.bell = true
+      to_user.save
+    end
+
+    team.destroy
     redirect_to adminpage_path
   end
 
@@ -29,6 +89,17 @@ class AdminController < ApplicationController
     elsif user.user?
       user.abbonato!
     end
+
+    notification = Notification.new
+    notification.body = "L'admin #{current_admin.nickname} ti ha regalato l'abbonamento🎉🍾"
+    notification.from = current_admin.id
+    notification.to = user.id
+    notification.toUser = true
+
+    notification.save
+
+    user.bell = true
+    user.save
 
     redirect_to adminpage_path
   end

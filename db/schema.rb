@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2023_06_30_214324) do
   create_table "notifications", force: :cascade do |t|
     t.integer "from", null: false
     t.integer "to", null: false
-    t.boolean "isuser"
+    t.boolean "fromUser"
+    t.boolean "toUser"
     t.string "body", null: false
     t.boolean "isinvitation", default: false
-    t.integer "teamid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

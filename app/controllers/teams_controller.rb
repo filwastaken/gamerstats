@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy abbandona ]
+  before_action :authenticate_user!
 
   # GET /teams or /teams.json
   def index
@@ -20,31 +21,49 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def loading_image
+    send_file Rails.root.join('app', 'assets', 'images', 'loadingPiccola.gif'), type: 'image/gif', disposition: 'inline'
+  end
+
   # POST /teams or /teams.json
   def create
-    @team = Team.new(team_params)
+    giocatori = [team_params[:giocatore1]]
+    if team_params[:giocatore2] != ""
+      giocatori.append(team_params[:giocatore2])
+    end
+
+    if team_params[:giocatore3] != ""
+      giocatori.append(team_params[:giocatore3])
+    end
+
+    if team_params[:giocatore4] != ""
+      giocatori.append(team_params[:giocatore4])
+    end
+
+    if(giocatori.length != giocatori.uniq.length)
+      flash[:notice] = "Non puoi mettere due volte lo stesso id"
+      redirect_to new_team_path
+      return
+    end
+
+    if(giocatori.length < 2)
+      flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
+      redirect_to new_team_path
+    end
+
+    # Removing the first element from the array
+    giocatori.shift
+    giocatori.sort!
+
+    while giocatori.length < 3
+      giocatori.append("")
+    end
+
+    teamparams = {"nome_team" => team_params[:nome_team], "giocatore1" => team_params[:giocatore1], "giocatore2" => giocatori[0], "giocatore3" => giocatori[1], "giocatore4" => giocatori[2]}
+
+    @team = Team.new(teamparams)
 
     if Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore2, giocatore3: @team.giocatore3, giocatore4: @team.giocatore4)
-      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-      redirect_to new_team_path
-      return
-    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore3, giocatore3: @team.giocatore2, giocatore4: @team.giocatore4)
-      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-      redirect_to new_team_path
-      return
-    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore4, giocatore3: @team.giocatore3, giocatore4: @team.giocatore2)
-      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-      redirect_to new_team_path
-      return
-    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore3, giocatore3: @team.giocatore4, giocatore4: @team.giocatore2)
-      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-      redirect_to new_team_path
-      return
-    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore2, giocatore3: @team.giocatore4, giocatore4: @team.giocatore3)
-      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-      redirect_to new_team_path
-      return
-    elsif Team.exists?(giocatore1: @team.giocatore1, giocatore2: @team.giocatore4, giocatore3: @team.giocatore2, giocatore4: @team.giocatore3)
       flash[:notice] = "Esiste già un team con gli stessi giocatori!"
       redirect_to new_team_path
       return
@@ -56,77 +75,66 @@ class TeamsController < ApplicationController
       return
     end
 
-    giocatori = []
-    if(@team.giocatore1 != "")
-      giocatori.append(@team.giocatore1)
-    end
     if(@team.giocatore2 != "")
-      giocatori.append(@team.giocatore2)
+      giocatore2 = User.find_by(uid: @team.giocatore2)
+      if giocatore2 == nil
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
+        if(Stat.find_by(uid: @team.giocatore2) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore2} non ha un account nel gioco, inserire un altro id"
+          redirect_to new_team_path
+          return
+        end
+      end
     end
+
     if(@team.giocatore3 != "")
-      giocatori.append(@team.giocatore3)
+      giocatore3 = User.find_by(uid: @team.giocatore3)
+      if giocatore3 == nil
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore3)
+        if(Stat.find_by(uid: @team.giocatore3) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore3} non ha un account nel gioco, inserire un altro id"
+          redirect_to new_team_path
+          return
+        end
+      end
     end
+
     if(@team.giocatore4 != "")
-      giocatori.append(@team.giocatore4)
+      giocatore4 = User.find_by(uid: @team.giocatore4)
+      if giocatore4 == nil
+        BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore4)
+        if(Stat.find_by(uid: @team.giocatore4) == nil)
+          flash[:notice] = "Il giocatore con id #{@team.giocatore4} non ha un account nel gioco, inserire un altro id"
+          redirect_to new_team_path
+          return
+        end
+      end
     end
 
-    if( @team.giocatore2 != "" || @team.giocatore3 != "" || @team.giocatore4 != "")
-      
-      a = giocatori.length
-      b = giocatori.uniq.length
-      
-      if(a != b)
-        flash[:notice] = "Non puoi mettere due volte lo stesso id"
-        redirect_to new_team_path
-        return
-      end
+    respond_to do |format|
+      if @team.save
+        calculate_averages(@team)
+        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
+        format.json { render :show, status: :created, location: @team }
 
-      if(@team.giocatore2 != "")
-        if User.find_by(uid: @team.giocatore2) == nil
-          BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore2)
-          if(Stat.find_by(uid: @team.giocatore2) == nil)
-            flash[:notice] = "Il giocatore con id #{@team.giocatore2} non ha un account nel gioco, inserire un altro id"
-            redirect_to new_team_path
-            return
-          end
+        from = User.find_by(uid: @team.giocatore1)
+        if giocatore2 != nil
+          send_notification(from, giocatore2, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
         end
-      end
-      if(@team.giocatore3 != "")
-        if User.find_by(uid: @team.giocatore3) == nil
-          BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore3)
-          if(Stat.find_by(uid: @team.giocatore3) == nil)
-            flash[:notice] = "Il giocatore con id #{@team.giocatore3} non ha un account nel gioco, inserire un altro id"
-            redirect_to new_team_path
-            return
-          end
+          
+        if giocatore3 != nil
+          send_notification(from, giocatore3, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
         end
-      end
-      if(@team.giocatore4 != "")
-        if User.find_by(uid: @team.giocatore4) == nil
-          BattlenetOauthService.ottieniProfilo(session[:access_token], @team.giocatore4)
-          if(Stat.find_by(uid: @team.giocatore4) == nil)
-            flash[:notice] = "Il giocatore con id #{@team.giocatore4} non ha un account nel gioco, inserire un altro id"
-            redirect_to new_team_path
-            return
-          end
+          
+        if giocatore4 != nil
+          send_notification(from, giocatore4, "#{@team.giocatore1} ti ha invitato al team #{@team.nome_team}")
         end
+
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
-      respond_to do |format|
-        if @team.save
-          calculate_averages(@team)
-          format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
-          format.json { render :show, status: :created, location: @team }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @team.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
-      redirect_to new_team_path
     end
-
-    send_notificaiton(@team.id, team_params[:nome_team], team_params[:giocatore1], team_params[:giocatore2], team_params[:giocatore3], team_params[:giocatore4])
   end
 
   def calculate_averages(team)
@@ -171,101 +179,128 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
-    @team1 = Team.new(team_params)
-    if( @team1.giocatore2!="" || @team1.giocatore3!="" || @team1.giocatore4!="")
+    giocatori = [team_params[:giocatore1]]
+    if team_params[:giocatore2] != ""
+      giocatori.append(team_params[:giocatore2])
+    end
 
-      if Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore2, giocatore3: @team1.giocatore3, giocatore4: @team1.giocatore4)
-        flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-        redirect_to edit_team_path
-        return
-      elsif Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore3, giocatore3: @team1.giocatore2, giocatore4: @team1.giocatore4)
-        flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-        redirect_to edit_team_path
-        return
-      elsif Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore4, giocatore3: @team1.giocatore3, giocatore4: @team1.giocatore2)
-        flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-        redirect_to edit_team_path
-        return
-      elsif Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore3, giocatore3: @team1.giocatore4, giocatore4: @team1.giocatore2)
-        flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-        redirect_to edit_team_path
-        return
-      elsif Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore2, giocatore3: @team1.giocatore4, giocatore4: @team1.giocatore3)
-        flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-        redirect_to edit_team_path
-        return
-      elsif Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore4, giocatore3: @team1.giocatore2, giocatore4: @team1.giocatore3)
-        flash[:notice] = "Esiste già un team con gli stessi giocatori!"
-        redirect_to edit_team_path
-        return
-      end
+    if team_params[:giocatore3] != ""
+      giocatori.append(team_params[:giocatore3])
+    end
 
-      if(Team.exists?(nome_team: @team1.nome_team) && @team1.nome_team != @team.nome_team)
-        flash[:notice] = "Esiste già un team con lo stesso nome"
-        redirect_to edit_team_path
-        return
-      end
+    if team_params[:giocatore4] != ""
+      giocatori.append(team_params[:giocatore4])
+    end
 
-      giocatori = []
-      if(@team1.giocatore1 != "")
-        giocatori.append(@team1.giocatore1)
-      end
-      if(@team1.giocatore2 != "")
-        giocatori.append(@team1.giocatore2)
-      end
-      if(@team1.giocatore3 != "")
-        giocatori.append(@team1.giocatore3)
-      end
-      if(@team1.giocatore4 != "")
-        giocatori.append(@team1.giocatore4)
-      end
-  
-      a = giocatori.length
-      b = giocatori.uniq.length
-      
-      if(a != b)
-        flash[:notice] = "Non puoi mettere due volte lo stesso id"
-        redirect_to edit_team_path
-        return
-      end
+    if(giocatori.length != giocatori.uniq.length)
+      flash[:notice] = "Non puoi mettere due volte lo stesso id"
+      redirect_to edit_team_path
+      return
+    end
 
-      if(@team1.giocatore2!="")
-        BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore2)
-        if(Stat.find_by(uid: @team1.giocatore2) == nil)
-          flash[:notice] = "Il giocatore con id #{@team1.giocatore2} non ha un account nel gioco, inserire un altro id"
-          redirect_to edit_team_path
-          return
-        end
-      end
-      if(@team1.giocatore3!="")
-        BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore3)
-        if(Stat.find_by(uid: @team1.giocatore3) == nil)
-          flash[:notice] = "Il giocatore con id #{@team1.giocatore3} non ha un account nel gioco, inserire un altro id"
-          redirect_to edit_team_path
-          return
-        end
-      end
-      if(@team1.giocatore4!="")
-        BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore4)
-        if(Stat.find_by(uid: @team1.giocatore4) == nil)
-          flash[:notice] = "Il giocatore con id #{@team1.giocatore4} non ha un account nel gioco, inserire un altro id"
-          redirect_to edit_team_path
-          return
-        end
-      end
-      respond_to do |format|
-        if @team.update(team_params)
-          calculate_averages_update(@team)
-          format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
-          format.json { render :show, status: :ok, location: @team }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @team.errors, status: :unprocessable_entity }
-        end
-      end
-    else
+    if(giocatori.length < 2)
       flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
       redirect_to edit_team_path
+    end
+
+    # Removing the first element from the array
+    giocatori.shift
+
+    # Now "giocatori" only holds each "giocatore" that is not "" and not the team leader.
+    # I need to check who's gone to send them a message
+    byebye = []
+    welcome = []
+    oldname = @team.nome_team
+
+    if giocatori[0] != @team.giocatore2
+      byebye.append(giocatori[0])
+      welcome.append(@team.giocatore2)
+    end
+
+    if giocatori.length > 1 && giocatori[1] != @team.giocatore3
+      byebye.append(giocatori[1])
+      welcome.append(@team.giocatore3)
+    end
+
+    if giocatori.length > 2 && giocatori[2] != @team.giocatore4
+      byebye.append(giocatori[2])
+      welcome.append(@team.giocatore4)
+    end
+    
+    giocatori.sort!
+    while giocatori.length < 3
+      giocatori.append("")
+    end
+
+    teamparams = {"nome_team" => team_params[:nome_team], "giocatore1" => team_params[:giocatore1], "giocatore2" => giocatori[0], "giocatore3" => giocatori[1], "giocatore4" => giocatori[2]}
+
+    @team1 = Team.new(teamparams)
+
+    if Team.exists?(giocatore1: @team1.giocatore1, giocatore2: @team1.giocatore2, giocatore3: @team1.giocatore3, giocatore4: @team1.giocatore4)
+      flash[:notice] = "Esiste già un team con gli stessi giocatori!"
+      redirect_to edit_team_path
+      return
+    end
+
+    if(Team.exists?(nome_team: @team1.nome_team) && @team1.nome_team != @team.nome_team)
+      flash[:notice] = "Esiste già un team con lo stesso nome"
+      redirect_to edit_team_path
+      return
+    end
+
+    giocatori.append(@team.giocatore1)
+
+    if(@team1.giocatore2!="")
+      BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore2)
+      if(Stat.find_by(uid: @team1.giocatore2) == nil)
+        flash[:notice] = "Il giocatore con id #{@team1.giocatore2} non ha un account nel gioco, inserire un altro id"
+        redirect_to edit_team_path
+        return
+      end
+    end
+
+    if(@team1.giocatore3!="")
+      BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore3)
+      if(Stat.find_by(uid: @team1.giocatore3) == nil)
+        flash[:notice] = "Il giocatore con id #{@team1.giocatore3} non ha un account nel gioco, inserire un altro id"
+        redirect_to edit_team_path
+        return
+      end
+    end
+
+    if(@team1.giocatore4!="")
+      BattlenetOauthService.ottieniProfilo(session[:access_token], @team1.giocatore4)
+      if(Stat.find_by(uid: @team1.giocatore4) == nil)
+        flash[:notice] = "Il giocatore con id #{@team1.giocatore4} non ha un account nel gioco, inserire un altro id"
+        redirect_to edit_team_path
+        return
+      end
+    end
+    
+    respond_to do |format|
+      if @team.update(teamparams)
+        calculate_averages_update(@team)
+        format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
+        format.json { render :show, status: :ok, location: @team }
+
+        from = User.find_by(uid: @team1.giocatore1)
+        for user in byebye do
+          user = User.find_by(uid: user)
+          if user != nil
+            send_notification(from, user, "Il team leader #{from.nickname} ti ha rimosso dal team #{oldname}")
+          end
+        end
+
+        for user in welcome do
+          user = User.find_by(uid: user)
+          if user != nil
+            send_notification(from, user, "Il team leader #{from.nickname} ti ha aggiunto nel team #{@team.nome_team}")
+          end
+        end
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -311,9 +346,41 @@ class TeamsController < ApplicationController
 
   # abbandona
   def abbandona
+    if @team.giocatore2 != team_params[:giocatore2]
+      uscente = @team.giocatore2
+    elsif @team.giocatore3 != team_params[:giocatore3]
+      uscente = @team.giocatore3
+    elsif @team.giocatore4 != team_params[:giocatore4]
+      uscente = @team.giocatore4
+    end
+
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to  personstats_url, notice: "Team was successfully abandoned." }
+
+        # Notification in case everything works out
+        to_user = User.find_by(uid: @team.giocatore1)
+        from_user = User.find_by(uid: uscente)
+
+        send_notification(from_user, to_user, "L'utente #{from_user.nickname} ha abbandonato il team #{@team.nome_team}.")
+
+        if @team.giocatore2 == "" && @team.giocatore3 == "" && @team.giocatore4 == ""
+          notification = Notification.new
+          notification.from = Admin.first.id
+          notification.to = to_user.id
+
+          notification.toUser = true
+          
+          notification.body = "Il team #{@team.nome_team} non ha piu' giocatori e per questo e' stato eliminato."
+
+          notification.save
+      
+          to_user.bell = true
+          to_user.save
+
+          @team.destroy
+        end
+
+        format.html { redirect_to personstats_url, notice: "Team was successfully abandoned." }
         format.json { render :show, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -324,6 +391,31 @@ class TeamsController < ApplicationController
 
   # DELETE /teams/1 or /teams/1.json
   def destroy
+    # Notification in case everything works out
+    from_user = User.find_by(uid: @team.giocatore1)
+    body = "L'utente #{from_user.nickname} ha eliminato il team #{@team.nome_team} di cui facevi parte."
+
+    if @team.giocatore2 != ""
+      to_user = User.find_by(uid: @team.giocatore2)
+      if to_user != nil
+        send_notification(from_user, to_user, body)
+      end
+    end
+
+    if @team.giocatore3 != ""
+      to_user = User.find_by(uid: @team.giocatore3)
+      if to_user != nil
+        send_notification(from_user, to_user, body)
+      end
+    end
+
+    if @team.giocatore4 != ""
+      to_user = User.find_by(uid: @team.giocatore4)
+      if to_user != nil
+        send_notification(from_user, to_user, body)
+      end
+    end
+
     @team.destroy
 
     respond_to do |format|
@@ -359,57 +451,10 @@ class TeamsController < ApplicationController
       params.require(:team).permit(:nome_team, :giocatore1, :giocatore2, :giocatore3, :giocatore4)
     end
 
-    def send_notificaiton(teamid, nometeam, giocatore1, giocatore2, giocatore3, giocatore4)
-      body = "#{giocatore1} ti ha invitato al team #{nometeam}"
-      from = User.find_by(uid: giocatore1).id
+    def send_notification(from, to, body)
+      notification = Notification.create!(from: from.id, to: to.id, body: body, fromUser: true, toUser: true, isinvitation: true)
 
-      if(giocatore2 != "")
-        @giocatore2 = User.find_by(uid: giocatore2)
-        @notification = Notification.create!(from: from, to: @giocatore2.id, body: body, isuser: true, isinvitation: true, teamid: teamid)
-        #@notification.body = body
-        #@notification.from = from
-        #@notification.to = @giocatore2.id
-        #@notification.isuser = true
-        #@notification.isinvitation = true
-        #@notification.teamid = teamid
-        #@notification.save
-
-        puts "-------------"
-        puts @notification
-        puts "-------------"
-
-        @giocatore2.bell = true
-        @giocatore2.save
-      end
-
-      if(giocatore3 != "")
-        @giocatore3 = User.find_by(uid: giocatore3)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore3.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
-
-        @giocatore3.bell = true
-        @giocatore3.save
-      end
-
-      if(giocatore4 != "")
-        @giocatore4 = User.find_by(uid: giocatore4)
-        @notification = Notification.new
-        @notification.body = body
-        @notification.from = from
-        @notification.to = @giocatore4.id
-        @notification.isuser = true
-        @notification.isinvitation = true
-        @notification.teamid = teamid
-        @notification.save
-
-        @giocatore4.bell = true
-        @giocatore4.save
-      end
+      to.bell = true
+      to.save
     end
 end
