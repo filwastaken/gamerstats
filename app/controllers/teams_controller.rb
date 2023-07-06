@@ -365,7 +365,6 @@ class TeamsController < ApplicationController
 
         if @team.giocatore2 == "" && @team.giocatore3 == "" && @team.giocatore4 == ""
           notification = Notification.new
-          puts Admin.first.inspect
           notification.from = Admin.first.id
           notification.to = to_user.id
 
