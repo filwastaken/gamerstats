@@ -7,7 +7,6 @@ class NotificationController < ApplicationController
   end
 
   def notification
-
     @notification = []
     Notification.all.each do |n|
       if n.to == Notification::DEFAULT_CASES[:toall] || (current_admin != nil && (n.to == Notification::DEFAULT_CASES[:toadmins] || current_admin.id == n.to)) || (current_user != nil && current_user.id == n.to && n.toUser)
@@ -62,5 +61,4 @@ class NotificationController < ApplicationController
 
     return true
   end
-
 end

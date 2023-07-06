@@ -134,7 +134,6 @@ Stat.create!(
     seasonTotalGames:5
 )
 
-
 TeamStat.create!(
     team_id:1,
     terranwins:0,

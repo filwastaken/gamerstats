@@ -10,9 +10,7 @@ class AdminController < ApplicationController
 
   # DELETE /adminpage#delete_team
   def delete_team
-    #Team.find(params[:id]).destroy
-    #redirect_to adminpage_path
-        
+    
     team = Team.find(params[:id])
 
     # Notification in case everything works out
@@ -24,7 +22,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
       notification.save
               
@@ -38,7 +36,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
       notification.save
               
@@ -52,7 +50,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
               
       to_user.bell = true
@@ -65,7 +63,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
               
       to_user.bell = true
@@ -73,6 +71,7 @@ class AdminController < ApplicationController
     end
 
     team.destroy
+    redirect_to adminpage_path
   end
 
   # DELETE /adminpage#delete_user
@@ -95,13 +94,12 @@ class AdminController < ApplicationController
     notification.body = "L'admin #{current_admin.nickname} ti ha regalato l'abbonamento🎉🍾"
     notification.from = current_admin.id
     notification.to = user.id
-    notification.touser = true
+    notification.toUser = true
 
     notification.save
 
     user.bell = true
     user.save
-
 
     redirect_to adminpage_path
   end
