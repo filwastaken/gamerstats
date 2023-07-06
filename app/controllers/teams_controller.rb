@@ -453,7 +453,6 @@ class TeamsController < ApplicationController
 
     def send_notification(from, to, body)
       notification = Notification.create!(from: from.id, to: to.id, body: body, fromUser: true, toUser: true, isinvitation: true)
-      notification = Notification.create!(from: from.id, to: to.id, isuser: true, body: body, isinvitation: true, teamid: params[:id])
 
       to.bell = true
       to.save
