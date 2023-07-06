@@ -15,15 +15,6 @@
     <%= form.label :nome_team, class:"form-label" %>
     <%= form.text_field :nome_team, class:"form-control", style:"max-width: 400px;", required: true %>
   </div>
-
-  <!-- Creating the queries needed -->
-  <%# selected_users = [ current_user.uid ] %>
-  <%# selected_users << params[:team][:giocatore2] if params[:team] && params[:team][:giocatore2] %>
-  <%# selected_users << params[:team][:giocatore3] if params[:team] && params[:team][:giocatore3] %>
-  <%# selected_users << params[:team][:giocatore4] if params[:team] && params[:team][:giocatore4] %>
-
-  <%# selectable_users = User.where.not(uid: selected_users) %>
-  
   <div class="field">
     <%= form.label :"Team Leader", class:"form-label" %>
       <%= form.text_field :giocatore1, value: current_user.uid, class:"form-control", readonly: true, style:"max-width: 400px;" %>
@@ -32,7 +23,6 @@
   <div class="field">
     <%= form.label :"giocatore 2", class:"form-label" %>
     <%= form.text_field :giocatore2, class:"form-control", style:"max-width: 400px;" %>
-    <%# form.collection_select :giocatore2, selectable_users, :uid, :uid %>
   </div>
 
   <div class="field">
@@ -47,7 +37,13 @@
   
   <div class="container" style="display: flex; justify-content: center;">
     <div class="actions">
-      <%= form.submit "submit", class:"btn btn-dark"%>
+      <%= form.submit "submit", class: "btn btn-dark", onclick: "mostra(); event.preventDefault(); form.submit();" %>
     </div>
   </div>
 <% end %>
+
+<script>
+    function mostra(){
+        document.getElementById("loadingScreen").style.display = "flex";
+    }
+</script>

@@ -9,6 +9,7 @@
 
 #rails db:seed RAILS_ENV=test
 =begin
+
 User.create!(
     email: 'pinco.pallino@gmail.com',
     password: '111111',
@@ -81,8 +82,27 @@ User.create!(
     bell: FALSE
 )
 
+Team.create!(
+    nome_team: "nomeTeam",
+    giocatore1: "1",
+    giocatore2: "10548078",
+    giocatore3: "",
+    giocatore4: ""
+)
+
+
+Team.create!(
+    nome_team: "myTeamB",
+    giocatore1: "10548078",
+    giocatore2: "51",
+    giocatore3: "",
+    giocatore4: ""
+)
+
 Stat.create!(
     uid: 10548078,
+    displayName: "ninjabippo",
+    wlRatioThisSeason: 1,
     terranWins: 6,
     protossWins: 0,
     zergWins:0,
@@ -114,95 +134,79 @@ Stat.create!(
     seasonTotalGames:5
 )
 
-
 TeamStat.create!(
-      team_id:1,
-      terranwins:0,
-      protosswins:0,
-      zergwins:0,
-      careertotalgames:0,
-      totalwins:0,
-      totallosses:0,
-      wlratio:0,
-      level:0,
-      levelterran:0,
-      totallevelxpterran:0,
-      currentlevelxpterran:0,
-      levelzerg:0,
-      totallevelxpzerg:0,
-      currentlevelxpzerg:0,
-      levelprotoss:0,
-      totallevelxpprotoss:0,
-      currentlevelxpprotoss:0,
-      wins1vs1:0,
-      games1vs1:0,
-      wins2vs2:0,
-      games2vs2:0,
-      wins3vs3:0,
-      games3vs3:0,
-      wins4vs4:0,
-      games4vs4:0,
-      winsarchon:0,
-      gamesarchon:0,
-      totalpointsachievements:0,
-      seasontotalgames:0,
-      totalgamesthisseason: 0
-)
-
-Team.create!(
-    nome_team: "nomeTeam",
-    giocatore1: "1",
-    giocatore2: "10548078",
-    giocatore3: "",
-    giocatore4: ""
-)
-
-
-Team.create!(
-    nome_team: "myTeamB",
-    giocatore1: "10548078",
-    giocatore2: "51",
-    giocatore3: "",
-    giocatore4: ""
+    team_id:1,
+    terranwins:0,
+    protosswins:0,
+    zergwins:0,
+    careertotalgames:0,
+    totalwins:0,
+    totallosses:0,
+    wlratio:0,
+    level:0,
+    levelterran:0,
+    totallevelxpterran:0,
+    currentlevelxpterran:0,
+    levelzerg:0,
+    totallevelxpzerg:0,
+    currentlevelxpzerg:0,
+    levelprotoss:0,
+    totallevelxpprotoss:0,
+    currentlevelxpprotoss:0,
+    wins1vs1:0,
+    games1vs1:0,
+    wins2vs2:0,
+    games2vs2:0,
+    wins3vs3:0,
+    games3vs3:0,
+    wins4vs4:0,
+    games4vs4:0,
+    winsarchon:0,
+    gamesarchon:0,
+    totalpointsachievements:0,
+    seasontotalgames:0,
+    totalgamesthisseason: 0
 )
 
 
 TeamStat.create!(
-      team_id:2,
-      terranwins:0,
-      protosswins:0,
-      zergwins:0,
-      careertotalgames:0,
-      totalwins:0,
-      totallosses:0,
-      wlratio:0,
-      level:0,
-      levelterran:0,
-      totallevelxpterran:0,
-      currentlevelxpterran:0,
-      levelzerg:0,
-      totallevelxpzerg:0,
-      currentlevelxpzerg:0,
-      levelprotoss:0,
-      totallevelxpprotoss:0,
-      currentlevelxpprotoss:0,
-      wins1vs1:0,
-      games1vs1:0,
-      wins2vs2:0,
-      games2vs2:0,
-      wins3vs3:0,
-      games3vs3:0,
-      wins4vs4:0,
-      games4vs4:0,
-      winsarchon:0,
-      gamesarchon:0,
-      totalpointsachievements:0,
-      seasontotalgames:0,
-      totalgamesthisseason: 0
+    team_id:2,
+    terranwins:0,
+    protosswins:0,
+    zergwins:0,
+    careertotalgames:0,
+    totalwins:0,
+    totallosses:0,
+    wlratio:0,
+    level:0,
+    levelterran:0,
+    totallevelxpterran:0,
+    currentlevelxpterran:0,
+    levelzerg:0,
+    totallevelxpzerg:0,
+    currentlevelxpzerg:0,
+    levelprotoss:0,
+    totallevelxpprotoss:0,
+    currentlevelxpprotoss:0,
+    wins1vs1:0,
+    games1vs1:0,
+    wins2vs2:0,
+    games2vs2:0,
+    wins3vs3:0,
+    games3vs3:0,
+    wins4vs4:0,
+    games4vs4:0,
+    winsarchon:0,
+    gamesarchon:0,
+    totalpointsachievements:0,
+    seasontotalgames:0,
+    totalgamesthisseason: 0
 )
 
 Stat.create!(
     uid: 151,
+    displayName: "giocatore151",
+    wlRatioThisSeason: 0,
     terranWins: 6,
     protossWins: 0,
     zergWins:0,
@@ -232,5 +236,12 @@ Stat.create!(
     gamesArchon:0,
     totalPointsAchievements:10000,
     seasonTotalGames:5
+)
+
+Admin.create!(
+    email:"adminemail@placeholder.com",
+    password:"0123456789",
+    created_at:Time.now,
+    updated_at:Time.now
 )
 =end

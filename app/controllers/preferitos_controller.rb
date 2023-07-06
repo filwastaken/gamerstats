@@ -20,6 +20,10 @@ class PreferitosController < ApplicationController
   def edit
   end
 
+  def loading_image
+    send_file Rails.root.join('app', 'assets', 'images', 'loadingPiccola.gif'), type: 'image/gif', disposition: 'inline'
+  end
+
   # POST /preferitos or /preferitos.json
   def create
     @preferito = Preferito.new(preferito_params)
