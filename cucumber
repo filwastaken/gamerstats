@@ -44,10 +44,20 @@ then
     rails db:migrate > /dev/null
     echo "Recreated databases"
 
+    sed -zi "s/#beginmain\n=begin/#beginmain/" ./db/seeds.rb
+    sed -zi "s/#endmain\n=end/#endmain/" ./db/seeds.rb
+    echo "Removed main comment from seed.rb"
 
-    sed -zi "s/=begin\n//" ./db/seeds.rb
-    sed -zi "s/=end\n//" ./db/seeds.rb
-    echo "Removed comment from seed.rb"
+    rails db:seed > /dev/null
+    echo "Seeded main database"
+
+    sed -zi "s/#beginmain/#beginmain\n=begin/" ./db/seeds.rb
+    sed -zi "s/#endmain/#endmain\n=end/" ./db/seeds.rb
+    echo "Restored main comment in seed.rb"
+
+    sed -zi "s/#begintest\n=begin/#begintest/" ./db/seeds.rb
+    sed -zi "s/#endtest\n=end/#endtest/" ./db/seeds.rb
+    echo "Removed test comment from seed.rb"
 
     rails db:seed RAILS_ENV=test > /dev/null
     echo "Seeded test database"
@@ -58,8 +68,8 @@ then
     rails db:seed RAILS_ENV=test
     echo "Repopulated test database"
     
+    sed -zi "s/#begintest/#begintest\n=begin/" ./db/seeds.rb
+    sed -zi "s/#endtest/#endtest\n=end/" ./db/seeds.rb
     sed -i "s/config.cache_classes = false/config.cache_classes = true/" ./config/environments/test.rb > /dev/null
-    sed -zi "s/#rails db:seed RAILS_ENV=test/#rails db:seed RAILS_ENV=test\n=begin/" ./db/seeds.rb > /dev/null
-    echo "=end" >> ./db/seeds.rb
     echo "Changed settings back to default"
 fi
