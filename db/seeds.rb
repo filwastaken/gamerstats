@@ -9,6 +9,7 @@
 
 #rails db:seed RAILS_ENV=test
 =begin
+
 User.create!(
     email: 'pinco.pallino@gmail.com',
     password: '111111',
@@ -244,5 +245,4 @@ Admin.create!(
     created_at:Time.now,
     updated_at:Time.now
 )
-
 =end
