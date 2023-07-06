@@ -113,7 +113,7 @@
         end
       %>
 
-      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.touser}" }, :email %>
+      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.toUser}" }, :email %>
     </div>
 
     <div class="actions">
