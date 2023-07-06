@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get '/preferitos/assets/loadingPiccola.gif', to: 'preferitos#loading_image'
   get '/preferitos/:id/assets/loadingPiccola.gif', to: 'preferitos#loading_image', as: 'preferito_loading_image'
 
-
   # resources routes
   resources :preferitos
   resources :stats

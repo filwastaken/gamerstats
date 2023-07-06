@@ -7,6 +7,39 @@ elsif current_user != nil
   current_user.save
 end
 %>
+<div id="loadingScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); align-items:center; justify-content:center;">
+    <div id="contentLoadingScreen" style="background-color: #1b1b1b; width:350px; text-align:center; color:white; font-size:16px">
+        <img id="imgLoading" src="assets/loadingPiccola.gif" alt="Stiamo contattanto i server di Battlenet per ottenere i dati" style="vertical-align: center">
+    </div>
+</div>
+<div class="card text-center" style="background-color: #ffffffb3;">
+  <div class="card-header"> NOTIFICHE </div>
+  <div class="card-body">
+    <table class="table table-dark table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col"> DA </th>
+          <th scope="col"> A </th>
+          <th scope="col"> TESTO </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @notification.each do |n| %>
+            <%
+              if n.fromUser?
+              if n.from?
+                from = User.find(n.from)
+              else
+                from = Admin.find(n.from)
+              end
+
+              if current_user != nil
+                to = current_user
+              elsif current_admin != nil
+                to = current_admin
+              end
+            %>
 
 <div class="card text-center" style="background-color: #ffffffb3;">
   <div class="card-header"> NOTIFICHE </div>
@@ -22,9 +55,8 @@ end
       </thead>
       <tbody class="table-group-divider">
         <% @notification.each do |n| %>
-
           <%
-            if n.fromuser?
+            if n.fromUser?
               from = User.find(n.from)
             else
               from = Admin.find(n.from)

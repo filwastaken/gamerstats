@@ -367,8 +367,11 @@ class TeamsController < ApplicationController
           notification = Notification.new
           notification.from = Admin.first.id
           notification.to = to_user.id
-          notification.touser = true
+
+          notification.toUser = true
+          
           notification.body = "Il team #{@team.nome_team} non ha piu' giocatori e per questo e' stato eliminato."
+
           notification.save
       
           to_user.bell = true
@@ -449,7 +452,7 @@ class TeamsController < ApplicationController
     end
 
     def send_notification(from, to, body)
-      notification = Notification.create!(from: from.id, to: to.id, body: body, fromuser: true, touser: true, isinvitation: true)
+      notification = Notification.create!(from: from.id, to: to.id, body: body, fromUser: true, toUser: true, isinvitation: true)
 
       to.bell = true
       to.save

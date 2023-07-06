@@ -22,7 +22,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
       notification.save
               
@@ -36,7 +36,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
       notification.save
               
@@ -50,7 +50,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
               
       to_user.bell = true
@@ -63,7 +63,7 @@ class AdminController < ApplicationController
       notification = Notification.new
       notification.from = current_admin.id
       notification.to = to_user.id
-      notification.touser = true
+      notification.toUser = true
       notification.body = body
               
       to_user.bell = true
@@ -94,7 +94,7 @@ class AdminController < ApplicationController
     notification.body = "L'admin #{current_admin.nickname} ti ha regalato l'abbonamento🎉🍾"
     notification.from = current_admin.id
     notification.to = user.id
-    notification.touser = true
+    notification.toUser = true
 
     notification.save
 
