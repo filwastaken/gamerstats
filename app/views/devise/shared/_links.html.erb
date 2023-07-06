@@ -11,14 +11,7 @@
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' && resource_name.to_s != 'admin' %>
   <%= link_to "Sign up", new_registration_path(resource_name), class:"link-dark link-offset-3 link-underline-opacity-50 link-underline-opacity-100-hover" %><br />
-<% elsif !Admin.exists?(email: "adminemail@placeholder.com")
-      newuser = Admin.create!(
-        email:"adminemail@placeholder.com",
-        password:"0123456789",
-        created_at:Time.now,
-        updated_at:Time.now
-      )
-  end %>
+<% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <%= link_to "Forgot your password?", new_password_path(resource_name), class:"link-dark link-offset-3 link-underline-opacity-50 link-underline-opacity-100-hover" %><br />
