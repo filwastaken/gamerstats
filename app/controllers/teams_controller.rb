@@ -365,11 +365,11 @@ class TeamsController < ApplicationController
 
         if @team.giocatore2 == "" && @team.giocatore3 == "" && @team.giocatore4 == ""
           notification = Notification.new
+          puts Admin.first.inspect
           notification.from = Admin.first.id
           notification.to = to_user.id
 
-          #notification.touser = true   ------------------------L'HO COMMENTATO ALTRIMENTI NON VA IL TEST-----------------------
-          notification.isuser = true  #-------------------AGGIUNTO DA ME A CASO--------------------------
+          notification.toUser = true
           
           notification.body = "Il team #{@team.nome_team} non ha piu' giocatori e per questo e' stato eliminato."
 
@@ -453,7 +453,7 @@ class TeamsController < ApplicationController
     end
 
     def send_notification(from, to, body)
-      #notification = Notification.create!(from: from.id, to: to.id, body: body, fromuser: true, touser: true, isinvitation: true) ------------------------L'HO COMMENTATO ALTRIMENTI NON VA IL TEST-----------------------
+      notification = Notification.create!(from: from.id, to: to.id, body: body, fromUser: true, toUser: true, isinvitation: true)
       notification = Notification.create!(from: from.id, to: to.id, isuser: true, body: body, isinvitation: true, teamid: params[:id])
 
       to.bell = true

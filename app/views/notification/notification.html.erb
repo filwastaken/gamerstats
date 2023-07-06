@@ -26,20 +26,18 @@ end
       </thead>
       <tbody class="table-group-divider">
         <% @notification.each do |n| %>
-          <% if current_user.id == n.to #-------------------AGGIUNTO DA ME A CASO--------------------%>    
             <%
-              #if n.fromuser?       ----------------L'HO DOVUTO COMMENTARE ALTRIMENTI NON FUNZIONAVA-------------------------
-              #if n.from?
-              #  from = User.find(n.from)
-              #else
-              #  from = Admin.find(n.from)
-              #end
-              from = User.find(n.from)  #------------------AGGIUNTO DA ME A CASO---------------------
+              if n.fromUser?
+              if n.from?
+                from = User.find(n.from)
+              else
+                from = Admin.find(n.from)
+              end
 
               if current_user != nil
                 to = current_user
-              #elsif current_admin != nil
-              #  to = current_admin
+              elsif current_admin != nil
+                to = current_admin
               end
             %>
 
