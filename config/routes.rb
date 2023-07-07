@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   devise_scope :admin do
     get '/admins/sign_out' => 'devise/sessions#destroy'
+    get '/users/assets/loadingPiccola.gif', to: 'users/registrations#loading_image'
   end
 
   get '/best_teams', to: 'teams#best_teams'
