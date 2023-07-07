@@ -4,13 +4,11 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  #def new
+  #end
 
   # POST /resource/sign_in
   def create
-
     if(session[:access_token] == nil)
       session[:access_token] = BattlenetOauthService.ottieniAccessToken()
     end
