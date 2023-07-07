@@ -24,7 +24,6 @@ class BattlenetOauthService
         if response.code == "200"
             body = JSON.parse(response.body)
             access_token = body["access_token"]
-            session[:access_token] = access_token
             return access_token
         else
             return ""
