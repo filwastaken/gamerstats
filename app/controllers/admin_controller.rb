@@ -6,10 +6,19 @@ class AdminController < ApplicationController
     @savedusers = User.all
     @savedteams = Team.all
     @notification = Notification.new
+
+    @merged_collection = [CustomNotification.new(Notification::DEFAULT_CASES[:toall], 'Everyone', false), CustomNotification.new(Notification::DEFAULT_CASES[:toadmins], 'Every Admins', false)]
+    Admin.where.not(id: current_admin.id).each do |admin|
+      @merged_collection.append(CustomNotification.new(admin.id, admin.email, false))
+    end
+    User.all.each do |user|
+      @merged_collection.append(CustomNotification.new(user.id, user.email, true))
+    end
   end
 
   # DELETE /adminpage#delete_team
   def delete_team
+    # TODO: Check here
     puts "??????????"
     puts params.inspect
     puts params[:id]
