@@ -10,8 +10,12 @@ class AdminController < ApplicationController
 
   # DELETE /adminpage#delete_team
   def delete_team
-    
+    puts "??????????"
+    puts params.inspect
+    puts params[:id]
+    puts "??????????"
     team = Team.find(params[:id])
+    puts team.inspect
 
     # Notification in case everything works out
     body = "L'admin #{current_admin.nickname} ha eliminato il team #{team.nome_team} di cui facevi parte."
@@ -32,42 +36,47 @@ class AdminController < ApplicationController
 
     if team.giocatore2 != ""
       to_user = User.find_by(uid: team.giocatore2)
-    
-      notification = Notification.new
-      notification.from = current_admin.id
-      notification.to = to_user.id
-      notification.toUser = true
-      notification.body = body
-      notification.save
-              
-      to_user.bell = true
-      to_user.save
+      if to_user != nil
+        notification = Notification.new
+        notification.from = current_admin.id
+        notification.to = to_user.id
+        notification.toUser = true
+        notification.body = body
+        notification.save
+                
+        to_user.bell = true
+        to_user.save
+      end
     end
     
     if team.giocatore3 != ""
       to_user = User.find_by(uid: team.giocatore3)
     
-      notification = Notification.new
-      notification.from = current_admin.id
-      notification.to = to_user.id
-      notification.toUser = true
-      notification.body = body
-              
-      to_user.bell = true
-      to_user.save
+      if to_user != nil
+        notification = Notification.new
+        notification.from = current_admin.id
+        notification.to = to_user.id
+        notification.toUser = true
+        notification.body = body
+                
+        to_user.bell = true
+        to_user.save
+      end
     end
     
     if team.giocatore4 != ""
       to_user = User.find_by(uid: team.giocatore4)
     
-      notification = Notification.new
-      notification.from = current_admin.id
-      notification.to = to_user.id
-      notification.toUser = true
-      notification.body = body
-              
-      to_user.bell = true
-      to_user.save
+      if to_user != nil
+        notification = Notification.new
+        notification.from = current_admin.id
+        notification.to = to_user.id
+        notification.toUser = true
+        notification.body = body
+                
+        to_user.bell = true
+        to_user.save
+      end
     end
 
     team.destroy
@@ -76,7 +85,10 @@ class AdminController < ApplicationController
 
   # DELETE /adminpage#delete_user
   def delete_user
+    Notification.where(to: params[:id]).destroy_all
+
     User.find(params[:id]).destroy
+
     redirect_to adminpage_path
   end
 
