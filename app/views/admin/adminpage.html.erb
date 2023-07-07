@@ -1,7 +1,7 @@
 <div class="card text-center" style="background-color: #ffffffb3;">
   <div class="card-header"> LISTA UTENTI </div>
-  <div class="card-body" id="tableContainer">
-    <table class="table table-dark table-striped-columns" id="tableContainer">
+  <div class="card-body">
+    <table class="table table-dark table-striped-columns">
       <thead>
         <tr>
           <th scope="col">NICKNAME</th>
@@ -39,8 +39,8 @@
   <div class="card-header">
       LISTA TEAM
   </div>
-  <div class="card-body" id="tableContainer">
-    <table class="table table-dark table-striped-columns" id="tableContainer">
+  <div class="card-body">
+    <table class="table table-dark table-striped-columns">
       <thead>
         <tr>
           <th scope="col">NOME TEAM</th>
@@ -92,6 +92,8 @@
     </div>
 
     <div class="card-body">
+      <%= f.label :to, class:"form-label" %>&nbsp&nbsp&nbsp
+
       <!-- Creating the queries needed -->
       <% merged_collection = [CustomNotification.new(Notification::DEFAULT_CASES[:toall], 'All', false), CustomNotification.new(Notification::DEFAULT_CASES[:toadmins], 'All Admins', false)] %>
       <%
@@ -104,16 +106,8 @@
         end
       %>
 
-      <div style="display: flex; justify-content: center;">
-        <%= f.label :to, class: "form-label" %>&nbsp&nbsp&nbsp
-        <select class="form-select" name="to" style="max-width:500px;">
-          <% merged_collection.each do |item| %>
-            <option value="<%= "#{item.id}|#{item.toUser}" %>"><%= item.email %></option>
-          <% end %>
-        </select>
-      </div>
+      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.toUser}" }, :email %>
     </div>
-
 
     <div class="actions">
       <%= f.submit "Invia comunicazione", class: "btn btn-dark" %>
