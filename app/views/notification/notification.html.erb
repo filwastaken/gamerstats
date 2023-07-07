@@ -28,6 +28,7 @@ end
       <tbody class="table-group-divider">
         <% @notification.each do |n| %>
           <%
+            puts @notification.inspect
             if n.fromUser?
               from = User.find(n.from)
             else
@@ -40,8 +41,6 @@ end
               to = current_admin
             end
           %>
-          <% puts "from: #{from.nickname}  to: #{to.nickname}   n.from: #{n.from}"%>
-
           <tr class="table-light">
             <th scope="row" style="vertical-align: middle" > <%= from.nickname %> </th>
             <td style="vertical-align: middle" > <%= to.nickname %> </td>
