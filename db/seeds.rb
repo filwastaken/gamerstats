@@ -21,7 +21,7 @@ Admin.create!(
 
 Admin.create!(
     email:"olimpieri.1933529@studenti.uniroma1.it",
-    password:"0123456789",
+    password:"111111",
     created_at:Time.now,
     updated_at:Time.now
 )
