@@ -16,6 +16,7 @@ class HomeController < ApplicationController
     #Sidekiq::ScheduledSet.new.clear
     #Sidekiq::DeadSet.new.clear
 
+    #Admin.delete_all
     #Notification.delete_all
     #TeamStat.delete_all
     #Team.delete_all
@@ -129,7 +130,8 @@ class HomeController < ApplicationController
   end
 
   def search
-    uid = params[:user][:uid]
+    uid = params[:user_uid]
+    puts uid
     BattlenetOauthService.ottieniProfilo(session[:access_token], uid)
     @results = Stat.find_by(uid: uid)
     render :index

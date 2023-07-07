@@ -15,6 +15,7 @@
 Admin.create!(
     email:"giustini.1933541@studenti.uniroma1.it",
     password:"111111",
+    nickname: "noemi_admin",
     created_at:Time.now,
     updated_at:Time.now
 )
@@ -22,6 +23,7 @@ Admin.create!(
 Admin.create!(
     email:"olimpieri.1933529@studenti.uniroma1.it",
     password:"111111",
+    nickname: "filippo_admin",
     created_at:Time.now,
     updated_at:Time.now
 )
@@ -29,6 +31,7 @@ Admin.create!(
 Admin.create!(
     email:"garufi.1962596@studenti.uniroma1.it",
     password:"1234567890",
+    nickname: "ludovica_admin",
     created_at:Time.now,
     updated_at:Time.now
 )
@@ -36,6 +39,7 @@ Admin.create!(
 Admin.create!(
     email:"guerra.1931976@studenti.uniroma1.it",
     password:"9876543210",
+    nickname: "guerra_admin",
     created_at:Time.now,
     updated_at:Time.now
 )
