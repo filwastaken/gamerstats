@@ -29,8 +29,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         newuser = User.create!(
           email: params[:user][:email],
           password: params[:user][:password],
-          created_at: Time.now,
-          updated_at: Time.now,
+          created_at: Time.current,
+          updated_at: Time.current,
           battlenetId: tmp["idBattlenet"].to_i,
           uid: tmp["uid"].to_i,
           nickname: session[:battletag],
@@ -41,8 +41,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         newuser = User.create!(
           email: params[:user][:email],
           password: params[:user][:password],
-          created_at: Time.now,
-          updated_at: Time.now,
+          created_at: Time.current,
+          updated_at: Time.current,
           battlenetId: session[:id],
           uid: -1,
           nickname: session[:battletag],

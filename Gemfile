@@ -61,6 +61,7 @@ gem 'sidekiq', '~> 6.2'
 gem 'chartkick'
 gem 'httparty'
 gem 'selectize-rails'
+gem 'dotenv'
 
 
 
