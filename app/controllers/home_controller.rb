@@ -79,25 +79,32 @@ class HomeController < ApplicationController
     end
 =end
 
-    last_id = Stat.order(id: :desc).pluck(:uid).first
+    #Stat.where("uid > ?", 50000).delete_all
 
+
+    last_id = Stat.order(id: :desc).pluck(:uid).first
     a = last_id
-    interval = 1000
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "3")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "4")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "5")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "6")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "7")
-    a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "8")
+    interval = 100
+
+    for volte in 1..10
+  
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "3")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "4")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "5")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "6")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "7")
+      a = a + interval
+      BackgroundJob.perform_async(session[:access_token], a, a+interval, "8")
+      a = a + interval
+    end
 
 
     #valori = Stat.pluck(:uid, :realm, :region)
