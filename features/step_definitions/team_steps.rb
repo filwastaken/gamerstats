@@ -81,3 +81,12 @@ Then("Dovrebbe essere presente l'elemento con id {string}") do |element_id|
       raise "L'elemento con ID #{element_id} non è presente nella pagina"
     end
 end
+
+Then("I can't press button {string}") do |element_id|
+    if page.has_selector?("##{element_id}")
+        button = page.find("##{element_id}")
+        if button[:disabled] != "disabled"
+          raise "L'elemento con ID #{element_id} è presente nella pagina e NON è disabilitato"
+        end
+    end
+end
