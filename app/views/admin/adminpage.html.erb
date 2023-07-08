@@ -32,9 +32,9 @@
             <!-- Disabling sub gifting if the user is already subbed -->
             <td> <div class="form-label">
             <% if user.teamLeader? || user.user? %>
-              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger" %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success" %>
             <% else %>
-              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger", disabled:true %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success", disabled:true %>
             <% end %>
             </div> </td>
 

@@ -18,13 +18,7 @@ class AdminController < ApplicationController
 
   # DELETE /adminpage#delete_team
   def delete_team
-    # TODO: Check here
-    puts "??????????"
-    puts params.inspect
-    puts params[:id]
-    puts "??????????"
     team = Team.find(params[:id])
-    puts team.inspect
 
     # Notification in case everything works out
     body = "L'admin #{current_admin.nickname} ha eliminato il team #{team.nome_team} di cui facevi parte."
@@ -89,6 +83,7 @@ class AdminController < ApplicationController
     end
 
     team.destroy
+    flash[:notice] = "Team eliminato con successo."
     redirect_to adminpage_path
   end
 
@@ -98,6 +93,7 @@ class AdminController < ApplicationController
 
     User.find(params[:id]).destroy
 
+    flash[:notice] = "Utente eliminato con successo."
     redirect_to adminpage_path
   end
 
@@ -122,12 +118,14 @@ class AdminController < ApplicationController
     user.bell = true
     user.save
 
+    flash[:notice] = "Regalo inviato con successo!"
     redirect_to adminpage_path
   end
 
   # POST /adminpage#start_mainstanace
   def start_maintenance
     Maintenance.create!( from: DateTime.now )
+    flash[:notice] = "Manutenzione iniziata con successo."
     redirect_to adminpage_path
   end
 
@@ -136,6 +134,7 @@ class AdminController < ApplicationController
     m = Maintenance.find_by(to: nil)
     m.to = DateTime.now
     m.save
+    flash[:notice] = "Manutenzione interrotta con successo."
     redirect_to adminpage_path
   end
 end
