@@ -32,13 +32,13 @@
             <!-- Disabling sub gifting if the user is already subbed -->
             <td> <div class="form-label">
             <% if user.teamLeader? || user.user? %>
-              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success" %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success", id: "gift#{user.id}user" %>
             <% else %>
-              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success", disabled:true %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success", id: "gift#{user.id}user", disabled:true %>
             <% end %>
             </div> </td>
 
-            <td class="alignedtbl" > <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+            <td class="alignedtbl" > <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger", id: "delete#{user.id}user" %></div> </td>
           </tr>
         <% end %>
       </tbody>
@@ -143,7 +143,7 @@
               </div>
 
             </td>
-            <td class="alignedtbl"> <div class="form-label"> <%= button_to "Delete team", delete_team_admin_path(id: team.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+            <td class="alignedtbl"> <div class="form-label"> <%= button_to "Delete team", delete_team_admin_path(id: team.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger", id: "delete#{team.id}team" %></div> </td>
           </tr>
         <% end %>
       </tbody>
