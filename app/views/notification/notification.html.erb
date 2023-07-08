@@ -12,39 +12,11 @@ end
         <img id="imgLoading" src="assets/loadingPiccola.gif" alt="Stiamo contattanto i server di Battlenet per ottenere i dati" style="vertical-align: center">
     </div>
 </div>
-<div class="card text-center" style="background-color: #ffffffb3;">
-  <div class="card-header"> NOTIFICHE </div>
-  <div class="card-body">
-    <table class="table table-dark table-striped-columns">
-      <thead>
-        <tr>
-          <th scope="col"> DA </th>
-          <th scope="col"> A </th>
-          <th scope="col"> TESTO </th>
-          <th scope="col"> </th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        <% @notification.each do |n| %>
-            <%
-              if n.fromUser?
-              if n.from?
-                from = User.find(n.from)
-              else
-                from = Admin.find(n.from)
-              end
-
-              if current_user != nil
-                to = current_user
-              elsif current_admin != nil
-                to = current_admin
-              end
-            %>
 
 <div class="card text-center" style="background-color: #ffffffb3;">
   <div class="card-header"> NOTIFICHE </div>
   <div class="card-body">
-    <table class="table table-dark table-striped-columns">
+    <table class="table table-dark table-striped-columns" id="tableContainer">
       <thead>
         <tr>
           <th scope="col"> DA </th>
@@ -56,6 +28,7 @@ end
       <tbody class="table-group-divider">
         <% @notification.each do |n| %>
           <%
+            puts @notification.inspect
             if n.fromUser?
               from = User.find(n.from)
             else
@@ -68,7 +41,6 @@ end
               to = current_admin
             end
           %>
-
           <tr class="table-light">
             <th scope="row" style="vertical-align: middle" > <%= from.nickname %> </th>
             <td style="vertical-align: middle" > <%= to.nickname %> </td>

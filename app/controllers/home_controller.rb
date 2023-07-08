@@ -16,6 +16,7 @@ class HomeController < ApplicationController
     #Sidekiq::ScheduledSet.new.clear
     #Sidekiq::DeadSet.new.clear
 
+    #Admin.delete_all
     #Notification.delete_all
     #TeamStat.delete_all
     #Team.delete_all
@@ -129,9 +130,23 @@ class HomeController < ApplicationController
   end
 
   def search
-    uid = params[:user][:uid]
-    BattlenetOauthService.ottieniProfilo(session[:access_token], uid)
-    @results = Stat.find_by(uid: uid)
-    render :index
+    uid = -1
+    if params[:user_uid].to_i == 0
+      utente = User.find_by(nickname: params[:user_uid])
+      if utente != nil
+        uid = utente.uid
+        BattlenetOauthService.ottieniProfilo(session[:access_token], utente.uid)
+        @results = Stat.find_by(uid: uid)
+        render :index
+      else
+        @result = nil
+        render :index
+      end
+    else
+      uid = params[:user_uid]
+      BattlenetOauthService.ottieniProfilo(session[:access_token], uid)
+      @results = Stat.find_by(uid: uid)
+      render :index
+    end
   end
 end

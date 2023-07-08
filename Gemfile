@@ -60,6 +60,8 @@ gem 'omniauth-bnet', '~> 2.0'
 gem 'sidekiq', '~> 6.2'
 gem 'chartkick'
 gem 'httparty'
+gem 'selectize-rails'
+
 
 
 group :test do

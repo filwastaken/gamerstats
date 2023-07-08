@@ -1,4 +1,15 @@
-<div class="card text-center" style="background-color: #ffffffb3;">
+<style>
+  .section {
+    margin-bottom: 20px
+  }
+
+  .alignedtbl {
+    vertical-align: middle;
+    text-align: center;
+  }
+</style>
+
+<div class="card text-center section" style="background-color: #ffffffb3;">
   <div class="card-header"> LISTA UTENTI </div>
   <div class="card-body">
     <table class="table table-dark table-striped-columns">
@@ -14,20 +25,20 @@
       <tbody class="table-group-divider">
         <% @savedusers.each do |user| %>
           <tr class="table-light">
-            <th scope="row"> <%= user.nickname %> </th>
-            <td><%= user.email %></td>
-            <td><%= user.role %></td>
+            <th scope="row" class="alignedtbl" > <%= user.nickname %> </th>
+            <td class="alignedtbl" ><%= user.email %></td>
+            <td class="alignedtbl" ><%= user.role %></td>
             
             <!-- Disabling sub gifting if the user is already subbed -->
             <td> <div class="form-label">
             <% if user.teamLeader? || user.user? %>
-              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger" %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success" %>
             <% else %>
-              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-danger", disabled:true %>
+              <%= button_to "Gift subscription", gift_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class:"btn btn-success", disabled:true %>
             <% end %>
             </div> </td>
 
-            <td> <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+            <td class="alignedtbl" > <div class="form-label"> <%= button_to "Delete user", delete_user_admin_path(id: user.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
           </tr>
         <% end %>
       </tbody>
@@ -35,7 +46,7 @@
   </div>
 </div>
 
-<div class="card text-center" style="background-color: #ffffffb3;">
+<div class="card text-center section" style="background-color: #ffffffb3;">
   <div class="card-header">
       LISTA TEAM
   </div>
@@ -43,87 +54,129 @@
     <table class="table table-dark table-striped-columns">
       <thead>
         <tr>
-          <th scope="col">NOME TEAM</th>
-          <th scope="col">LISTA COMPONENTI</th>
-          <th scope="col">ELIMINA TEAM</th>
+          <th scope="col" class="alignedtbl">NOME TEAM</th>
+          <th scope="col" class="alignedtbl">LISTA COMPONENTI</th>
+          <th scope="col" class="alignedtbl">ELIMINA TEAM</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
+        <% disclaimer = false %>
         <% @savedteams.each do |team| %>
         <%
-          if team.giocatore1 != ""
-            nick1 = User.find_by(uid: team.giocatore1).nickname
+          nicks = [team.giocatore1, team.giocatore2, team.giocatore3, team.giocatore4]
+
+          if nicks[0] != ""
+            user = User.find_by(uid: nicks[0])
+            if user != nil
+              nicks[0] = user.nickname
+            else
+              nicks[0] += '*'
+              disclaimer = true
+            end
           end
 
-          if team.giocatore2 != ""
-            nick2 = User.find_by(uid: team.giocatore2).nickname
+          if nicks[1] != ""
+            user = User.find_by(uid: nicks[1])
+            if user != nil
+              nicks[1] = user.nickname
+            else
+              nicks[1] += '*'
+              disclaimer = true
+            end
           end
 
-          if team.giocatore3 != ""
-            nick3 = User.find_by(uid: team.giocatore3).nickname
+          if nicks[2] != ""
+            user = User.find_by(uid: nicks[2])
+            if user != nil
+              nicks[2] = user.nickname
+            else
+              nicks[2] += '*'
+              disclaimer = true
+            end
           end
 
-          if team.giocatore4 != ""
-            nick4 = User.find_by(uid: team.giocatore4).nickname
+          if nicks[3] != ""
+            user = User.find_by(uid: nicks[3])
+            if user != nil
+              nicks[3] = user.nickname
+            else
+              nicks[3] += '*'
+              disclaimer = true
+            end
           end
         %>
+
           <tr class="table-light">
-            <th scope="row"> <%= team.nome_team %> </th>
+            <th scope="row" class="alignedtbl"> <%= team.nome_team %> </th>
             <td>
               <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center">
                 <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
-                  <a> <%= nick1 %> </a> <a> <%= nick3 %> </a>
+                  
+                  <% if nicks[0][-1] == "*" && nicks[0] != "" %>
+                    <a style="color: red"> <%= nicks[0] %> </a>
+                  <% else %>
+                    <a> <%= nicks[0] %> </a>
+                  <% end %>
+
+                  <% if nicks[2][-1] == "*" && nicks[2] != "" %>
+                    <a style="color: red"> <%= nicks[2] %> </a>
+                  <% else %>
+                    <a> <%= nicks[2] %> </a>
+                  <% end %>
+
                 </div>
                 <div style="display: flex; flex-direction: column; flex-wrap: wrap; align-items: center"> 
-                  <a> <%= nick2 %> </a> <a> <%= nick4 %> </a>
+                  
+                  <% if nicks[1][-1] == "*" && nicks[1] != "" %>
+                    <a style="color: red"> <%= nicks[1] %> </a>
+                  <% else %>
+                    <a> <%= nicks[1] %> </a>
+                  <% end %>
+                  
+                  <% if nicks[3][-1] == "*" && nicks[3] != "" %>
+                    <a style="color: red"> <%= nicks[3] %> </a>
+                  <% else %>
+                    <a> <%= nicks[3] %> </a>
+                  <% end %>
+
                 </div>
               </div>
+
             </td>
-            <td> <div class="form-label"> <%= button_to "Delete team", delete_team_admin_path(id: team.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
+            <td class="alignedtbl"> <div class="form-label"> <%= button_to "Delete team", delete_team_admin_path(id: team.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger"%></div> </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <% if disclaimer %>
+      <div style="font-size: small; color: red"> Gli utenti segnati con * non sono registrati al nostro sito. Il nickname verrà aggiornato al loro primo accesso. </div>
+    <% end %>
   </div>
 </div>
 
-<!-- TODO: Continue here -->
-<div class="card text-center" style="background-color: #ffffffb3;">
+<div class="card text-center section" style="background-color: #ffffffb3;">
   <%= form_for(@notification, url: adminnotification_path(current_admin.id), html: { method: :post }) do |f| %>
 
     <div class="card-header"> INVIA COMUNICAZIONE </div>
 
-    <div class="card-body">
-      <%= f.label :body %>
-      <%= f.text_area :body, required: true %>
+    <div class="card-body" style="display: flex; justify-content: center; flex-direction: column; align-items: center">
+      <%= f.label :testo, class:"form-label" %>
+      <%= f.text_area :body, required: true, class: "form-control", style:"with: 75%; max-width: 900px; height: 15vh; margin-bottom: 25px" %>
+
+      <%= f.label :to, class:"form-label", style: "margin-bottom: 10px"%>
+      <%= f.collection_select :to, @merged_collection, ->(item) { "#{item.id}|#{item.toUser}" }, :email, {}, {style: "text-align: center;" } %>
     </div>
 
-    <div class="card-body">
-      <%= f.label :to %>
-
-      <!-- Creating the queries needed -->
-      <% merged_collection = [CustomNotification.new(Notification::DEFAULT_CASES[:toall], 'All', false), CustomNotification.new(Notification::DEFAULT_CASES[:toadmins], 'All Admins', false)] %>
-      <%
-        Admin.where.not(id: current_admin.id).each do |admin|
-          merged_collection.append(CustomNotification.new(admin.id, admin.email, false))
-        end
-
-        User.all.each do |user|
-          merged_collection.append(CustomNotification.new(user.id, user.email, true))
-        end
-      %>
-
-      <%= f.collection_select :to, merged_collection, ->(item) { "#{item.id}|#{item.toUser}" }, :email %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Invia comunicazione" %>
+    <div class="actions" style="margin-bottom: 20px">
+      <%= f.submit "Invia comunicazione", class: "btn btn-dark" %>
     </div>
   <% end %>
 </div>
 
-<% if Maintenance.find_by(to: nil).equal? nil %>
-  <%= button_to "Inizia la manutenzione", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
-<% else %>
-  <%= button_to "Interrompi la manutenzione", stop_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
-<% end %>
+<div class="container section" style="display: flex; justify-content: center;">
+  <% if Maintenance.find_by(to: nil).equal? nil %>
+    <%= button_to "Inizia la manutenzione", start_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
+  <% else %>
+    <%= button_to "Interrompi la manutenzione", stop_maintenance_path(), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :post, class: "btn btn-danger"%>
+  <% end %>
+</div>
