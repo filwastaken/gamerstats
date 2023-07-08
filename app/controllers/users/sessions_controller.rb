@@ -13,7 +13,25 @@ class Users::SessionsController < Devise::SessionsController
       session[:access_token] = BattlenetOauthService.ottieniAccessToken()
     end
 
-    super
+    user = User.find_by(email: params[:user][:email])
+
+    if user != nil
+      if user.valid_password?(params[:user][:password])
+        sign_in(user)
+        self.resource = warden.set_user(user, scope: :user)
+        redirect_to after_sign_in_path_for(user)
+      else
+        flash.now[:alert] = 'Credenziali di accesso non valide.'
+        self.resource = User.new
+        render :new
+      end
+    else
+      flash.now[:alert] = 'Non esiste un account con questa email.'
+      self.resource = User.new
+      render :new
+    end
+
+    #super
   end
 
   # DELETE /resource/sign_out
