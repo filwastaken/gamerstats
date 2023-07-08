@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users, controllers: { 
     registrations: 'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions'
   }
   
   put 'users' => 'user/registrations#update'
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'   
+    get '/users/assets/loadingPiccola.gif', to: 'users/registrations#loading_image'
   end
 
   devise_scope :admin do

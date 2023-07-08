@@ -1,5 +1,11 @@
 <h2>Log in</h2>
 <div class="container" style="background-color: #ffffffc8; padding-top:12px; padding-bottom:12px; width:30vw;  position:absolute; top:15wh; left:7vw;">
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+        <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :email, class:"form-label"%><br />
