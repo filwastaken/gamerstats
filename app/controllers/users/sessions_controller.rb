@@ -9,11 +9,31 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    puts "ENTRAAAAAAAAAAAAAAAAAAAAAA"
     if(session[:access_token] == nil)
       session[:access_token] = BattlenetOauthService.ottieniAccessToken()
     end
 
-    super
+    user = User.find_by(email: params[:user][:email])
+
+    if user != nil
+      if user.valid_password?(params[:user][:password])
+        sign_in(user)
+        self.resource = warden.set_user(user, scope: :user)
+        redirect_to after_sign_in_path_for(user)
+      else
+        puts "ENTRA"
+        flash.now[:alert] = 'Credenziali di accesso non valide.'
+        self.resource = User.new
+        render :new
+      end
+    else
+      puts "NON ESISTE L'ACCOUNT"
+      self.resource = User.new
+    end
+
+    puts "ESCEEEEEEEEEEEEEEEEEEEEEEE"
+    #super
   end
 
   # DELETE /resource/sign_out
