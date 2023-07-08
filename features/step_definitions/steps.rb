@@ -64,6 +64,12 @@ end
 And("I am on the admin page") do 
     visit adminpage_path
 end
+
+And("I click the button with id {string}") do |btnname|
+    button = find(:xpath, "//*[@id=\"#{btnname}\"]")
+    assert_not_nil button, "Button with id #{btnname} not found"
+    button.click
+end
   
 When("I select {string} in {string}") do |email, field|
     select(email, from: field)
@@ -79,5 +85,14 @@ end
 Then("Dovrebbe essere presente l'elemento con id {string}") do |element_id|
     if page.has_no_selector?("#" + element_id)
       raise "L'elemento con ID #{element_id} non è presente nella pagina"
+    end
+end
+
+Then("I can't press button {string}") do |element_id|
+    if page.has_selector?("##{element_id}")
+        button = page.find("##{element_id}")
+        if button[:disabled] != "disabled"
+          raise "L'elemento con ID #{element_id} è presente nella pagina e NON è disabilitato"
+        end
     end
 end
