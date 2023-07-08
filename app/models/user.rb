@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:bnet]
+         :confirmable, :lockable, :omniauthable, omniauth_providers: [:bnet]
+         
   
   enum role: { user: 0, teamLeader: 1, abbonato: 2, teamLeaderAbbonato: 3 }
   after_initialize :set_default_role, if: :new_record?

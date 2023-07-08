@@ -66,3 +66,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
 
 end
+
+# Default Mailer Host
+Rails.application.routes.default_url_options[:host] = 'localhost'

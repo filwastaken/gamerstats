@@ -124,7 +124,7 @@ class AdminController < ApplicationController
 
   # POST /adminpage#start_mainstanace
   def start_maintenance
-    Maintenance.create!( from: DateTime.now )
+    Maintenance.create!( from: Time.current )
     flash[:notice] = "Manutenzione iniziata con successo."
     redirect_to adminpage_path
   end
@@ -132,7 +132,7 @@ class AdminController < ApplicationController
   # POST /adminpage#stop_maintanace
   def stop_maintenance
     m = Maintenance.find_by(to: nil)
-    m.to = DateTime.now
+    m.to = Time.current
     m.save
     flash[:notice] = "Manutenzione interrotta con successo."
     redirect_to adminpage_path
