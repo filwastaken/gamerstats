@@ -31,6 +31,11 @@ class BattlenetOauthService
     end
 
     def self.ottieniIdGioco(access_token, accountId)
+
+        if access_token == nil
+            access_token = ottieniAccessToken()
+        end
+
         url = URI.parse("https://us.api.blizzard.com/sc2/player/#{accountId}")
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = (url.scheme == "https")
@@ -58,6 +63,11 @@ class BattlenetOauthService
     end
 
     def self.ottieniProfilo(access_token, profileId)
+
+        if access_token == nil
+            access_token = ottieniAccessToken()
+        end
+
         if Stat.exists?(uid: profileId)   
             tupla = Stat.find_by(uid: profileId)   
             regionIds = [tupla.region]
