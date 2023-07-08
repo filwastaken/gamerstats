@@ -64,6 +64,12 @@ end
 And("I am on the admin page") do 
     visit adminpage_path
 end
+
+And("I click the button with id {string}") do |btnname|
+    button = find(:xpath, "//*[@id=\"#{btnname}\"]")
+    assert_not_nil button, "Button with id #{btnname} not found"
+    button.click
+end
   
 When("I select {string} in {string}") do |email, field|
     select(email, from: field)
