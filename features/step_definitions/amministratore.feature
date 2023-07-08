@@ -1,4 +1,4 @@
-Feature: Controlli di eliminazione team, eliminazione utente, regalo abbonamento e manutenzione da parte dell'
+Feature: Controlli di eliminazione team, eliminazione utente, regalo abbonamento e manutenzione da parte dell'amministratore
   Scenario: Eliminazione di un team da parte dell'amministratore
     Given I am logged in as an Admin
     And I am on the admin page
