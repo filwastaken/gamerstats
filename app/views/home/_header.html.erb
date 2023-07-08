@@ -1,5 +1,5 @@
-<%soglia_vittorie = 0 %>
-<%soglia_achievements = 0 %>
+<%soglia_vittorie = 9 %>
+<%soglia_achievements = 100 %>
 
 <div id="loadingScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); align-items:center; justify-content:center;">
     <div id="contentLoadingScreen" style="background-color: #1b1b1b; width:350px; text-align:center; color:white; font-size:16px">
@@ -69,7 +69,7 @@
                             <li class="nav-item">
                                 <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "abbonato"), method: :patch do |f| %>
                                     <% if achivements >= soglia_achievements %>
-                                        <%= f.submit "Abbonati", class: "btn btn-light end-0", style: "margin-right: 5px" %>
+                                        <%= f.submit "Abbonati", class: "btn btn-light end-0", style: "margin-right: 5px", id:"bottoneAbbonati" %>
                                     <% else %>
                                         <%= f.submit "Abbonati", class: "btn btn-light end-0", id:"bottoneAbbonati", title:"devi aver accumulato 100 achivements", style: "margin-right: 5px", disabled:true%>
                                     <% end %>
@@ -78,7 +78,7 @@
                             <li class="nav-item">
                                 <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeader"), method: :patch do |f| %>
                                     <% if wins >= soglia_vittorie %>
-                                        <%= f.submit "Diventa Team Leader", class: "btn btn-light end-0", style: "margin-right: 5px" %>
+                                        <%= f.submit "Diventa Team Leader", class: "btn btn-light end-0", style: "margin-right: 5px", id:"bottoneTeamLeader" %>
                                     <% else %>
                                         <%= f.submit "Diventa Team Leader", class: "btn btn-light end-0", id:"bottoneTeamLeader", title:"devi aver accumulato 50 vittorie", style: "margin-right: 5px", disabled:true%>
                                     <% end %>
@@ -88,7 +88,7 @@
                             <li class="nav-item">
                                 <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeaderAbbonato"), method: :patch do |f| %>
                                     <% if achivements >= soglia_achievements %>
-                                        <%= f.submit "Abbonati", class: "btn btn-light end-0", style: "margin-right: 5px" %>
+                                        <%= f.submit "Abbonati", class: "btn btn-light end-0", style: "margin-right: 5px", id:"bottoneAbbonati" %>
                                     <% else %>
                                         <%= f.submit "Abbonati", class: "btn btn-light end-0", id:"bottoneAbbonati", title:"devi aver accumulato 100 achivements", style: "margin-right: 5px", disabled:true%>
                                     <% end %>
@@ -98,7 +98,7 @@
                             <li class="nav-item">
                                 <%= form_for @user=current_user, url: update_role_home_path(current_user, role: "teamLeaderAbbonato"), method: :patch do |f| %>
                                     <% if wins >= soglia_vittorie %>
-                                        <%= f.submit "Diventa Team Leader", class: "btn btn-light end-0", style: "margin-right: 5px" %>
+                                        <%= f.submit "Diventa Team Leader", class: "btn btn-light end-0", style: "margin-right: 5px", id:"bottoneTeamLeader" %>
                                     <% else %>
                                         <%= f.submit "Diventa Team Leader", class: "btn btn-light end-0", id:"bottoneTeamLeader", title:"devi aver accumulato 50 vittorie", style: "margin-right: 5px", disabled:true%>
                                     <% end %>

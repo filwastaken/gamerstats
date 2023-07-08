@@ -286,4 +286,52 @@ Admin.create!(
 )
 
 #endtest
+
+
+User.create!(
+    email: '1962596@gmail.com',
+    password: '111111',
+    created_at: Time.now,
+    updated_at: Time.now,
+    battlenetId: 123456,
+    uid: 1962596,
+    nickname: 'Ludo',
+    role: 0, 
+    bell: FALSE
+)
+
+Stat.create!(
+    uid: 1962596,
+    displayName: "giocatore1962596",
+    wlRatioThisSeason: 0,
+    terranWins: 0,
+    protossWins: 0,
+    zergWins:0,
+    careerTotalGames:0,
+    totalWins:0,
+    totalLosses:0,
+    wlRatio:6,
+    level:6,
+    levelTerran:0,
+    totalLevelXPTerran:0,
+    currentLevelXPTerran:0,
+    levelZerg:0,
+    totalLevelXPZerg:0,
+    currentLevelXPZerg:1,
+    levelProtoss:0,
+    totalLevelXPProtoss:0,
+    currentLevelXPProtoss:0,
+    wins1vs1:0,
+    games1vs1:0,
+    wins2vs2:0,
+    games2vs2:0,
+    wins3vs3:0,
+    games3vs3:0,
+    wins4vs4:0,
+    games4vs4:0,
+    winsArchon:0,
+    gamesArchon:0,
+    totalPointsAchievements:0,
+    seasonTotalGames:0
+)
 =end
