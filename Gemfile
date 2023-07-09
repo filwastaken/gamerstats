@@ -61,9 +61,6 @@ gem 'sidekiq', '~> 6.2'
 gem 'chartkick'
 gem 'httparty'
 gem 'selectize-rails'
-gem 'dotenv'
-
-
 
 group :test do
   gem 'cucumber-rails', require:false
