@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  has_many :preferitos
+  has_many :teams
+  has_many :notifications
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :omniauthable, omniauth_providers: [:bnet]
