@@ -3,9 +3,13 @@ require 'uri'
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :site_isusable
+    before_action :set_cookie
   
     protected
-  
+    def set_cookie
+      cookies.signed[:user_id] = current_user.id if current_user.present?
+    end
+
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
     end
