@@ -62,8 +62,6 @@ gem 'chartkick'
 gem 'httparty'
 gem 'selectize-rails'
 
-
-
 group :test do
   gem 'cucumber-rails', require:false
   gem 'database_cleaner'

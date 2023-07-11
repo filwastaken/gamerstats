@@ -40,8 +40,9 @@ then
     echo "Changed settings file"
 
     rails db:drop db:create > /dev/null
-    rails db:migrate RAILS_ENV=test > /dev/null
     rails db:migrate > /dev/null
+    rails db:test:prepare > /dev/null
+    rails db:migrate RAILS_ENV=test > /dev/null
     echo "Recreated databases"
 
     sed -zi "s/#beginmain\n=begin/#beginmain/" ./db/seeds.rb
@@ -61,12 +62,6 @@ then
 
     rails db:seed RAILS_ENV=test > /dev/null
     echo "Seeded test database"
-
-    bundle exec cucumber > /dev/null
-    echo "Let cucumber do its thing... Test database unpopulated (for some reason?)"
-    
-    rails db:seed RAILS_ENV=test
-    echo "Repopulated test database"
     
     sed -zi "s/#begintest/#begintest\n=begin/" ./db/seeds.rb
     sed -zi "s/#endtest/#endtest\n=end/" ./db/seeds.rb

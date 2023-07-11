@@ -16,32 +16,36 @@ Admin.create!(
     email:"giustini.1933541@studenti.uniroma1.it",
     password:"111111",
     nickname: "noemi_admin",
-    created_at:Time.now,
-    updated_at:Time.now
+    created_at:Time.current,
+    updated_at:Time.current,
+    confirmed_at:Time.current
 )
 
 Admin.create!(
     email:"olimpieri.1933529@studenti.uniroma1.it",
     password:"111111",
     nickname: "filippo_admin",
-    created_at:Time.now,
-    updated_at:Time.now
+    created_at:Time.current,
+    updated_at:Time.current,
+    confirmed_at:Time.current
 )
 
 Admin.create!(
     email:"garufi.1962596@studenti.uniroma1.it",
     password:"1234567890",
     nickname: "ludovica_admin",
-    created_at:Time.now,
-    updated_at:Time.now
+    created_at:Time.current,
+    updated_at:Time.current,
+    confirmed_at:Time.current
 )
 
 Admin.create!(
     email:"guerra.1931976@studenti.uniroma1.it",
     password:"9876543210",
     nickname: "guerra_admin",
-    created_at:Time.now,
-    updated_at:Time.now
+    created_at:Time.current,
+    updated_at:Time.current,
+    confirmed_at:Time.current
 )
 
 #endmain
@@ -53,73 +57,93 @@ Admin.create!(
 User.create!(
     email: 'pinco.pallino@gmail.com',
     password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
+    created_at: Time.current,
+    updated_at: Time.current,
     battlenetId: 483181335,
     uid: 10548078,
     nickname: 'Ninjabippo',
-    role: 3, 
-    bell: FALSE
+    role: 3,
+    confirmed_at:Time.current
 )
 
 User.create!(
     email: '51@gmail.com',
     password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
+    created_at: Time.current,
+    updated_at: Time.current,
     battlenetId: 123456,
     uid: 51,
     nickname: 'SCARTA',
-    role: 3, 
-    bell: FALSE
+    role: 3,
+    confirmed_at:Time.current
 )
 
 User.create!(
     email: '1@gmail.com',
     password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
+    created_at: Time.current,
+    updated_at: Time.current,
     battlenetId: 123456,
     uid: 1,
     nickname: 'SCARTA',
-    role: 3, 
-    bell: FALSE
+    role: 3,
+    confirmed_at:Time.current
 )
 
 User.create!(
     email: '151@gmail.com',
     password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
+    created_at: Time.current,
+    updated_at: Time.current,
     battlenetId: 123456,
     uid: 151,
     nickname: 'Paoli',
-    role: 0, 
-    bell: FALSE
+    role: 0,
+    confirmed_at:Time.current
 )
 
 User.create!(
     email: '101@gmail.com',
     password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
+    created_at: Time.current,
+    updated_at: Time.current,
     battlenetId: 123456,
     uid: 101,
     nickname: 'Gino',
-    role: 1, 
-    bell: FALSE
+    role: 1,
+    confirmed_at:Time.current
 )
 
 User.create!(
     email: '1354@gmail.com',
     password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
+    created_at: Time.current,
+    updated_at: Time.current,
     battlenetId: 123456,
     uid: 1354,
     nickname: 'BELLO',
-    role: 2, 
-    bell: FALSE
+    role: 2,
+    confirmed_at:Time.current
+)
+
+User.create!(
+    email: '1962596@gmail.com',
+    password: '111111',
+    created_at: Time.current,
+    updated_at: Time.current,
+    battlenetId: 123456,
+    uid: 1962596,
+    nickname: 'Ludo',
+    role: 0,
+    confirmed_at:Time.current
+)
+
+Admin.create!(
+    email:"adminemail@placeholder.com",
+    password:"0123456789",
+    created_at:Time.current,
+    updated_at:Time.current,
+    confirmed_at:Time.current
 )
 
 Team.create!(
@@ -129,7 +153,6 @@ Team.create!(
     giocatore3: "",
     giocatore4: ""
 )
-
 
 Team.create!(
     nome_team: "myTeamB",
@@ -278,28 +301,6 @@ Stat.create!(
     seasonTotalGames:5
 )
 
-Admin.create!(
-    email:"adminemail@placeholder.com",
-    password:"0123456789",
-    created_at:Time.now,
-    updated_at:Time.now
-)
-
-#endtest
-
-
-User.create!(
-    email: '1962596@gmail.com',
-    password: '111111',
-    created_at: Time.now,
-    updated_at: Time.now,
-    battlenetId: 123456,
-    uid: 1962596,
-    nickname: 'Ludo',
-    role: 0, 
-    bell: FALSE
-)
-
 Stat.create!(
     uid: 1962596,
     displayName: "giocatore1962596",
@@ -334,4 +335,6 @@ Stat.create!(
     totalPointsAchievements:0,
     seasonTotalGames:0
 )
+
+#endtest
 =end
