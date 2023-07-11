@@ -88,22 +88,22 @@ class HomeController < ApplicationController
 
     for volte in 1..10
   
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "3")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "4")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "5")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "6")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "7")
-      a = a + interval
-      BackgroundJob.perform_async(session[:access_token], a, a+interval, "8")
-      a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "3")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "4")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "5")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "6")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "7")
+      #a = a + interval
+      #BackgroundJob.perform_async(session[:access_token], a, a+interval, "8")
+      #a = a + interval
     end
 
 
