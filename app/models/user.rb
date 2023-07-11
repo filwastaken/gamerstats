@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  #belongs_to :stats
   has_many :preferitos
   has_many :teams
   has_many :notifications

@@ -227,7 +227,7 @@
               </datalist>
             </div>
             <div class="col">
-              <%= submit_tag "Cerca", class: "btn btn-dark", onclick: "mostra(); event.preventDefault(); form.submit();" %>
+              <%= submit_tag "Cerca", class: "btn btn-dark", onclick: "mostra3(); event.preventDefault(); form.submit();" %>
             </div>
           </div>
         <% end %>
@@ -278,7 +278,7 @@
 <%end%>
 
 <script>
-    function mostra(){
+    function mostra3(){
         document.getElementById("loadingScreen").style.display = "flex";
         window.location.href = "/personstats";
     }
