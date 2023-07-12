@@ -1,22 +1,9 @@
-<h2>Sign up</h2>
 <div class="container" style="background-color: #ffffffc8; padding-top:12px; padding-bottom:12px; width:30vw;  position:absolute; top:15wh; left:7vw;">
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
+<h2> Aggiungi amministratori </h2>
+  <%= form_with(model: @admin, url: admins_path) do |f| %>
     <div class="field">
       <%= f.label :email, class:"form-label" %><br>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :battletag, class:"form-label" %><br>
-      <%= f.email_field :battletag, value: session[:battletag], autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true, readonly:true%>
-    </div>
-
-    <div class="field">
-      <%= f.label :battlenetId, class:"form-label" %><br>
-      <%= f.email_field :battlenetId, value: session[:id], autofocus: true, autocomplete: "email", class:"form-control", style:"max-width: 400px;", required: true, readonly: true %>
     </div>
 
     <div class="field">
@@ -33,11 +20,8 @@
     </div>
     <br/>
     <div class="actions">
-      <%= f.submit "Sign up", class:"btn btn-dark" %>
+      <%= f.submit "Aggiungi", class:"btn btn-dark" %>
     </div>
     <br>
-    <% if controller_name != 'sessions' && session[:id] == ""%>
-      <%= link_to "Log in", new_session_path(resource_name), class:"link-dark link-offset-3 link-underline-opacity-50 link-underline-opacity-100-hover" %><br />
-    <% end %>
   <% end %>
 </div>

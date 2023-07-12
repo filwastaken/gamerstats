@@ -70,6 +70,14 @@ And("I click the button with id {string}") do |btnname|
     assert_not_nil button, "Button with id #{btnname} not found"
     button.click
 end
+
+And("a admin exists with admin_email: {string}") do |email|
+    Admin.create!(email: email, password: "0123456789", password_confirmation: "0123456789", created_at:Time.current, confirmed_at:Time.current)
+end
+
+And("I am on the new_admin page") do
+    visit new_admin_path
+end
   
 When("I select {string} in {string}") do |email, field|
     select(email, from: field)
