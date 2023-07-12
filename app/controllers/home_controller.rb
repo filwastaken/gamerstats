@@ -83,7 +83,9 @@ class HomeController < ApplicationController
 
 
     last_id = Stat.order(id: :desc).pluck(:uid).first
-    a = last_id
+
+    last_id == nil ? a = 0 : a = last_id
+
     interval = 100
 
     for volte in 1..10

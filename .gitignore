@@ -8,3 +8,4 @@ node_modules
 .browserslistrc
 .gitattributes
 .ruby-version
+/config/master.key
