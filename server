@@ -9,7 +9,7 @@ function ctrl_c() {
   kill -9 ${T3}
   echo ""
   echo "closing sidekiq"
-  kill -9 ${T2}
+  kill ${T2}
   echo ""
   echo "closing redis"
   kill -9 ${T1}

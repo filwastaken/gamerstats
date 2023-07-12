@@ -17,11 +17,11 @@ class HomeController < ApplicationController
 
     last_id == nil ? a = 0 : a = last_id
 
-    interval = 10
+    interval = 3
     BackgroundJob.perform_async(session[:access_token], a, a+interval, "1")
     a = a + interval
-    BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
-    a = a + interval
+    #BackgroundJob.perform_async(session[:access_token], a, a+interval, "2")
+    #a = a + interval
     #BackgroundJob.perform_async(session[:access_token], a, a+interval, "3")
     #a = a + interval
     #BackgroundJob.perform_async(session[:access_token], a, a+interval, "4")
