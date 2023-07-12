@@ -42,7 +42,7 @@
                             <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, style: "filter: invert(100%);", class:"nav-link link-light"%>
                         <% end %>
                     </li>
-                    <li style="display: flex; color:white; justify-content: center; width: 53%; flex-direction: row;" class="navbar-brand " >Ciao <%=current_user.nickname%></li>
+                    <li style="display: flex; color:white; justify-content: center; width: 53%; flex-direction: row;" class="navbar-brand " > Hi <%=current_user.nickname%></li>
                     
                     <% if current_user.user? %>
                         <div style= "display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; width: 42%;">
@@ -120,10 +120,11 @@
                             <%= link_to image_tag('https://cdn.jsdelivr.net/npm/remixicon@3.4.0/icons/Business/mail-line.svg', size: '30x30'), view_notification_path, style: "filter: invert(100%);", class:"nav-link link-light mailbox"%>
                         <% end %>
                     </li>
-                    <li style="display: flex; color:white; justify-content: center; width: 40vw; flex-direction: row;" class="navbar-brand " >Ciao <%=current_admin.nickname%> </li>
+                    <li style="display: flex; color:white; justify-content: center; width: 40vw; flex-direction: row;" class="navbar-brand " >Hi <%=current_admin.nickname%> </li>
                     <li class="nav-item">
-                        <%= link_to 'Admin Account', adminpage_path, class:"nav-link link-light"%>    
+                        <%= link_to 'Managment', adminpage_path, class:"nav-link link-light"%>    
                     </li>
+                    <li> <%= link_to 'Create admin', new_admin_path, class:"nav-link link-light" %> </li>
                 <% else %>
                     <li class="nav-item">
                         <%= button_to "Registrati", omniauth_authorize_path("user", "bnet"), data: { turbo: false }, class:"btn btn-dark" %>

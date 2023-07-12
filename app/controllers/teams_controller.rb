@@ -49,6 +49,7 @@ class TeamsController < ApplicationController
     if(giocatori.length < 2)
       flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
       redirect_to new_team_path
+      return
     end
 
     # Removing the first element from the array
@@ -201,6 +202,7 @@ class TeamsController < ApplicationController
     if(giocatori.length < 2)
       flash[:notice] = "Un team deve essere composto da almeno due giocatori!"
       redirect_to edit_team_path
+      return
     end
 
     # Removing the first element from the array

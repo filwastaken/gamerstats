@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   resources :stats
   resources :team_stats
   resources :teams
+  resources :admins, only: [:new, :create]
 
   # devise routes
   devise_for :admins
+
   devise_for :users, controllers: { 
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks',
@@ -51,13 +53,13 @@ Rails.application.routes.draw do
   get '/personstats', to: 'home#personstats'
 
   # Admin routes
-  get '/adminpage', to: 'admin#adminpage'
-  delete '/adminpage/:id/delete_team', to: 'admin#delete_team', as: 'delete_team_admin'
-  delete '/adminpage/:id/delete_user', to: 'admin#delete_user', as: 'delete_user_admin'
-  post '/adminpage/:id/gift', to: 'admin#gift', as: 'gift_admin'
+  get '/adminpage', to: 'admins#adminpage'
+  delete '/adminpage/:id/delete_team', to: 'admins#delete_team', as: 'delete_team_admin'
+  delete '/adminpage/:id/delete_user', to: 'admins#delete_user', as: 'delete_user_admin'
+  post '/adminpage/:id/gift', to: 'admins#gift', as: 'gift_admin'
   post '/adminpage/:id/notification', to: 'notification#adminnotification', as: 'adminnotification'
-  post '/adminpage/start_maintenance', to: 'admin#start_maintenance', as: 'start_maintenance'
-  post '/adminpage/stop_maintenance', to: 'admin#stop_maintenance', as: 'stop_maintenance'
+  post '/adminpage/start_maintenance', to: 'admins#start_maintenance', as: 'start_maintenance'
+  post '/adminpage/stop_maintenance', to: 'admins#stop_maintenance', as: 'stop_maintenance'
   
   # Notification routes
   get '/notification', to: 'notification#notification', as: 'view_notification'

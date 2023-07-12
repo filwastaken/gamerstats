@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminsController < ApplicationController
   before_action :authenticate_admin!
 
   # GET /adminpage or /admin.json
@@ -136,5 +136,40 @@ class AdminController < ApplicationController
     m.save
     flash[:notice] = "Manutenzione interrotta con successo."
     redirect_to adminpage_path
+  end
+
+  def new
+    @admin = Admin.new
+    @minimum_password_length = 6
+  end
+
+  def create
+    @admin = Admin.new(admin_params)
+    
+    if admin_params[:password] != admin_params[:password_confirmation]
+      flash[:notice] = "Le password non corrispondono!"
+      redirect_to new_admin_path
+      return
+    elsif admin_params[:password].length < 6
+      flash[:notice] = "La password deve contenere almeno 6 caratteri"
+      redirect_to new_admin_path
+      return
+    elsif Admin.find_by(email: admin_params[:email]) != nil
+      flash[:notice] = "Esiste gia' un utente con questa email"
+      redirect_to new_admin_path
+      return
+    end
+
+    if @admin.save
+      redirect_to adminpage_path, notice: "Admin was successfully created."
+    else
+      render :new
+    end
+  end
+
+  private
+  # Only allow a list of trusted parameters through.
+  def admin_params
+    params.require(:admin).permit(:email, :password, :password_confirmation)
   end
 end
