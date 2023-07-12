@@ -28,7 +28,6 @@ end
       <tbody class="table-group-divider">
         <% @notification.each do |n| %>
           <%
-            puts @notification.inspect
             if n.fromUser?
               from = User.find(n.from)
             else

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# trap ctrl-c and call ctrl_c()
+trap ctrl_c INT
+
+function ctrl_c() {
+  echo ""
+  echo "closing rails"
+  kill -9 ${T3}
+  echo ""
+  echo "closing sidekiq"
+  kill -9 ${T2}
+  echo ""
+  echo "closing redis"
+  kill -9 ${T1}
+  echo ""
+  wait ${T3}
+  echo "rails closed"
+  wait ${T2}
+  echo "sidekiq closed"
+  wait ${T1}
+  echo "redis closed, exiting"
+  exit 0
+}
+
+echo "------------------"
+echo "starting redis"
+redis-server > /dev/null &
+T1=${!}
+echo "redis started"
+echo "starting sidekiq"
+bundle exec sidekiq > /dev/null &
+T2=${!}
+echo "sidekiq started"
+echo "starting rails"
+rails s > /dev/null &
+T3=${!}
+echo "rails started"
+echo "------------------"
+echo "The website is now online, to close it, use Ctrl+C"
+wait ${T1}
+wait ${T2}
+wait ${T3}

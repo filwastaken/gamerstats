@@ -42,16 +42,23 @@ then
   rails db:migrate RAILS_ENV=test > /dev/null
   echo "Recreated databases"
 
-  sed -zi "s/#beginmain\n=begin/#beginmain/" ./db/seeds.rb
-  sed -zi "s/#endmain\n=end/#endmain/" ./db/seeds.rb
-  echo "Removed main comment from seed.rb"
+  if [ ! -z "$2" ] && ( [ $2 == "-restore" ] || [ $2 == "-R" ] )
+  then
+    rm ./db/development.sqlite3
+    cp ./db/db_backup.sqlite3 ./db/development.sqlite3
+    echo "Restored primary database backup"
+  else
+    sed -zi "s/#beginmain\n=begin/#beginmain/" ./db/seeds.rb
+    sed -zi "s/#endmain\n=end/#endmain/" ./db/seeds.rb
+    echo "Removed main comment from seed.rb"
 
-  rails db:seed > /dev/null
-  echo "Seeded main database"
+    rails db:seed > /dev/null
+    echo "Seeded main database"
 
-  sed -zi "s/#beginmain/#beginmain\n=begin/" ./db/seeds.rb
-  sed -zi "s/#endmain/#endmain\n=end/" ./db/seeds.rb
-  echo "Restored main comment in seed.rb"
+    sed -zi "s/#beginmain/#beginmain\n=begin/" ./db/seeds.rb
+    sed -zi "s/#endmain/#endmain\n=end/" ./db/seeds.rb
+    echo "Restored main comment in seed.rb"
+  fi
 
   sed -zi "s/#begintest\n=begin/#begintest/" ./db/seeds.rb
   sed -zi "s/#endtest\n=end/#endtest/" ./db/seeds.rb
@@ -64,4 +71,8 @@ then
   sed -zi "s/#endtest/#endtest\n=end/" ./db/seeds.rb
   sed -i "s/config.cache_classes = false/config.cache_classes = true/" ./config/environments/test.rb > /dev/null
   echo "Changed settings back to default"
+elif [ $1 == "-create" ] || [ $1 == "-C" ]
+then
+  rm ./db/db_backup.sqlite3
+  cp ./db/development.sqlite3 ./db/db_backup.sqlite3
 fi
