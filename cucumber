@@ -73,6 +73,9 @@ then
   echo "Changed settings back to default"
 elif [ $1 == "-create" ] || [ $1 == "-C" ]
 then
+  echo "The backup process will start soon. You can use Ctrl+C to stop it now."
+  sleep 6
+  echo "Backup started, please wait."
   rm ./db/db_backup.sqlite3
   cp ./db/development.sqlite3 ./db/db_backup.sqlite3
 fi
