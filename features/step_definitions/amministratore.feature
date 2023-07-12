@@ -23,7 +23,7 @@ Feature: Controlli di eliminazione team, eliminazione utente, regalo abbonamento
     And I press "Inizia la manutenzione"
     Then I should see "Manutenzione iniziata con successo."
   
-  Scenario: Inizio manutenzione da parte di un amministratore
+  Scenario: Interruzione manutenzione da parte di un amministratore
     Given I am logged in as an Admin
     And I am on the admin page
     And I press "Inizia la manutenzione"
@@ -38,15 +38,6 @@ Feature: Controlli di eliminazione team, eliminazione utente, regalo abbonamento
     And I fill in "admin_password_confirmation" with "1"
     And I press "Aggiungi"
     Then I should see "La password deve contenere almeno 6 caratteri"
-  
-  Scenario: Inserimento amministratore con password diverse
-    Given I am logged in as an Admin
-    And I am on the new_admin page
-    When I fill in "admin_email" with "guerra.1931976@studenti.uniroma1.it"
-    And I fill in "admin_password" with "10000000"
-    And I fill in "admin_password_confirmation" with "20000000"
-    And I press "Aggiungi"
-    Then I should see "Le password non corrispondono!"
   
   Scenario: Inserimento amministratore con password diverse
     Given I am logged in as an Admin
