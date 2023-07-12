@@ -1,32 +1,67 @@
 #!/bin/bash
-sed -i "s/config.cache_classes = true/config.cache_classes = false/" ./config/environments/test.rb > /dev/null
-echo "Changed settings file"
+if [ -z "$1" ]
+then
+    # Starting server
+    echo "-------------------"
+    redis-server > /dev/null &
+    T1=${!}
+    echo "redis started"
+    sleep 3
 
-rails db:drop db:create > /dev/null
-rails db:migrate > /dev/null
-rails db:test:prepare > /dev/null
-rails db:migrate RAILS_ENV=test > /dev/null
-echo "Recreated databases"
+    rails s > /dev/null &
+    T2=${!}
+    echo "rails started"
+    sleep 3
 
-sed -zi "s/#beginmain\n=begin/#beginmain/" ./db/seeds.rb
-sed -zi "s/#endmain\n=end/#endmain/" ./db/seeds.rb
-echo "Removed main comment from seed.rb"
+    echo "starting cucumber"
+    echo "-------------------"
 
-rails db:seed > /dev/null
-echo "Seeded main database"
+    bundle exec cucumber
 
-sed -zi "s/#beginmain/#beginmain\n=begin/" ./db/seeds.rb
-sed -zi "s/#endmain/#endmain\n=end/" ./db/seeds.rb
-echo "Restored main comment in seed.rb"
+    echo "-------------------"
+    echo "Cucumber exited"
 
-sed -zi "s/#begintest\n=begin/#begintest/" ./db/seeds.rb
-sed -zi "s/#endtest\n=end/#endtest/" ./db/seeds.rb
-echo "Removed test comment from seed.rb"
+    echo ""
+    kill -9 ${T1}
+    echo ""
+    kill -9 ${T2}
+    echo ""
+    wait ${T1}
+    wait ${T2}
 
-rails db:seed RAILS_ENV=test > /dev/null
-echo "Seeded test database"
+    echo "rails and redis closed"
+    echo "-------------------"
+elif [ $1 == "-database" ] || [ $1 == "-D" ]
+then
+  sed -i "s/config.cache_classes = true/config.cache_classes = false/" ./config/environments/test.rb > /dev/null
+  echo "Changed settings file"
+
+  rails db:drop db:create > /dev/null
+  rails db:migrate > /dev/null
+  rails db:test:prepare > /dev/null
+  rails db:migrate RAILS_ENV=test > /dev/null
+  echo "Recreated databases"
+
+  sed -zi "s/#beginmain\n=begin/#beginmain/" ./db/seeds.rb
+  sed -zi "s/#endmain\n=end/#endmain/" ./db/seeds.rb
+  echo "Removed main comment from seed.rb"
+
+  rails db:seed > /dev/null
+  echo "Seeded main database"
+
+  sed -zi "s/#beginmain/#beginmain\n=begin/" ./db/seeds.rb
+  sed -zi "s/#endmain/#endmain\n=end/" ./db/seeds.rb
+  echo "Restored main comment in seed.rb"
+
+  sed -zi "s/#begintest\n=begin/#begintest/" ./db/seeds.rb
+  sed -zi "s/#endtest\n=end/#endtest/" ./db/seeds.rb
+  echo "Removed test comment from seed.rb"
+
+  rails db:seed RAILS_ENV=test > /dev/null
+  echo "Seeded test database"
     
-sed -zi "s/#begintest/#begintest\n=begin/" ./db/seeds.rb
-sed -zi "s/#endtest/#endtest\n=end/" ./db/seeds.rb
-sed -i "s/config.cache_classes = false/config.cache_classes = true/" ./config/environments/test.rb > /dev/null
-echo "Changed settings back to default"
+  sed -zi "s/#begintest/#begintest\n=begin/" ./db/seeds.rb
+  sed -zi "s/#endtest/#endtest\n=end/" ./db/seeds.rb
+  sed -i "s/config.cache_classes = false/config.cache_classes = true/" ./config/environments/test.rb > /dev/null
+  echo "Changed settings back to default"
+fi
