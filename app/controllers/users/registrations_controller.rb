@@ -25,7 +25,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       tmp = BattlenetOauthService.ottieniIdGioco(session[:access_token], session[:id].to_i)
 
+      if params[:user][:password].length < 6
+        flash[:notice] = "Password troppo corta! Scegline una piu' lunga"
+        redirect_to new_user_registration_path
+        return
+      end
+
+      if params[:user][:password] != params[:user][:password_confirmation]
+        flash[:notice] = "Le password non corrispondono!"
+        redirect_to new_user_registration_path
+        return
+      end
+
       if tmp.length != 0
+        if User.find_by(email: params[:user][:email]) != nil
+          flash[:notice] = "Email already taken"
+          redirect_to new_user_registration_path
+          return
+        end
+
         newuser = User.create!(
           email: params[:user][:email],
           password: params[:user][:password],
