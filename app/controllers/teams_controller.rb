@@ -362,8 +362,10 @@ class TeamsController < ApplicationController
         # Notification in case everything works out
         to_user = User.find_by(uid: @team.giocatore1)
         from_user = User.find_by(uid: uscente)
-
-        send_notification(from_user, to_user, "L'utente #{from_user.nickname} ha abbandonato il team #{@team.nome_team}.")
+        
+        if from_user != nil
+          send_notification(from_user, to_user, "L'utente #{from_user.nickname} ha abbandonato il team #{@team.nome_team}.")
+        end
 
         if @team.giocatore2 == "" && @team.giocatore3 == "" && @team.giocatore4 == ""
           notification = Notification.new
