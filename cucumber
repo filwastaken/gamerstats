@@ -21,16 +21,14 @@ then
     echo "-------------------"
     echo "Cucumber exited"
 
-    echo ""
-    kill -9 ${T1}
-    echo ""
-    kill -9 ${T2}
-    echo ""
+    kill -INT ${T1}
+    kill -INT ${T2}
     wait ${T1}
     wait ${T2}
 
     echo "rails and redis closed"
     echo "-------------------"
+    exit 0
 elif [ $1 == "-database" ] || [ $1 == "-D" ]
 then
   sed -i "s/config.cache_classes = true/config.cache_classes = false/" ./config/environments/test.rb > /dev/null
@@ -78,4 +76,5 @@ then
   echo "Backup started, please wait."
   rm ./db/db_backup.sqlite3
   cp ./db/development.sqlite3 ./db/db_backup.sqlite3
+  echo "Backup completed :)"
 fi

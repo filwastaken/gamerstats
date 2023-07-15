@@ -6,7 +6,10 @@ elsif current_user != nil
   current_user.bell = false
   current_user.save
 end
+
+disclaimer = false
 %>
+
 <div id="loadingScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); align-items:center; justify-content:center;">
     <div id="contentLoadingScreen" style="background-color: #1b1b1b; width:350px; text-align:center; color:white; font-size:16px">
         <img id="imgLoading" src="assets/loadingPiccola.gif" alt="Stiamo contattanto i server di Battlenet per ottenere i dati" style="vertical-align: center">
@@ -29,9 +32,9 @@ end
         <% @notification.each do |n| %>
           <%
             if n.fromUser?
-              from = User.find(n.from)
+              from = User.find_by(id: n.from)
             else
-              from = Admin.find(n.from)
+              from = Admin.find_by(id: n.from)
             end
 
             if current_user != nil
@@ -41,7 +44,12 @@ end
             end
           %>
           <tr class="table-light">
-            <th scope="row" style="vertical-align: middle" > <%= from.nickname %> </th>
+            <% if from != nil %>
+              <th scope="row" style="vertical-align: middle" > <%= from.nickname %> </th>
+            <% else %>
+              <% disclaimer = true %>
+              <th scope="row" style="vertical-align: middle; color: red" > <%= n.from %>* </th>
+            <% end %>
             <td style="vertical-align: middle" > <%= to.nickname %> </td>
             <td style="vertical-align: middle" > <%= n.body %> </td>
 
@@ -52,5 +60,9 @@ end
         <% end %>
       </tbody>
     </table>
+
+    <% if disclaimer %>
+      <div style="font-size: small; color: red"> Gli utenti segnati con * sono stati eliminati. </div>
+    <% end %>
   </div>
 </div>

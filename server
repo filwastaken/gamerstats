@@ -6,18 +6,15 @@ trap ctrl_c INT
 function ctrl_c() {
   echo ""
   echo "closing rails"
-  kill -9 ${T3}
-  echo ""
+  kill -INT ${T3}
   echo "closing sidekiq"
-  kill -9 ${T2}
-  echo ""
-  echo "closing redis"
-  kill -9 ${T1}
-  echo ""
+  kill -INT ${T2}
   wait ${T3}
   echo "rails closed"
   wait ${T2}
   echo "sidekiq closed"
+  echo "closing redis"
+  kill -INT ${T1}
   wait ${T1}
   echo "redis closed, exiting"
   exit 0
