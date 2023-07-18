@@ -26,6 +26,12 @@ class PreferitosController < ApplicationController
 
   # POST /preferitos or /preferitos.json
   def create
+    if preferito_params[:nome_dest] == ""
+      flash[:notice] = "Non puoi lasciare il nome vuoto"
+      redirect_to new_preferito_path
+      return
+    end
+
     @preferito = Preferito.new(preferito_params)
     
     if Preferito.exists?(nome_dest: @preferito.nome_dest, dest_id: @preferito.dest_id)
@@ -68,6 +74,12 @@ class PreferitosController < ApplicationController
 
   # PATCH/PUT /preferitos/1 or /preferitos/1.json
   def update
+    if preferito_params[:nome_dest] == ""
+      flash[:notice] = "Non puoi rimuovere il nome ad un amico!"
+      redirect_to edit_preferito_path
+      return
+    end
+
     @preferito1 = Preferito.new(preferito_params)
 
     if Preferito.exists?(nome_dest: @preferito1.nome_dest, dest_id: @preferito1.dest_id)

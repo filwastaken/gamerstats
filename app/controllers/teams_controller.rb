@@ -27,6 +27,12 @@ class TeamsController < ApplicationController
 
   # POST /teams or /teams.json
   def create
+    if team_params[:nome_team] == ""
+      flash[:notice] = "Non puoi create un team senza nome"
+      redirect_to new_team_path
+      return
+    end
+
     giocatori = [team_params[:giocatore1]]
     if team_params[:giocatore2] != ""
       giocatori.append(team_params[:giocatore2])
@@ -180,6 +186,12 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
+    if team_params[:nome_team] == ""
+      flash[:notice] = "Non puoi rimuovere il nome ai team"
+      redirect_to edit_team_path
+      return
+    end
+
     giocatori = [team_params[:giocatore1]]
     if team_params[:giocatore2] != ""
       giocatori.append(team_params[:giocatore2])
